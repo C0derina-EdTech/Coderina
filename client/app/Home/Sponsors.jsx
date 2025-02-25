@@ -22,7 +22,6 @@ const Sponsors = ({ sponsor }) => {
   const partnerLogos = [
     sap,
     first,
-    cater,
     dow,
     fme,
     lego,
