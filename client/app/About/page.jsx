@@ -3,20 +3,18 @@ import React from "react";
 import AboutHeader from "./components/AboutHeader";
 import AboutMV from "./components/AboutMV";
 import Impact from "./components/Impact";
-import Navbar from "../Home/Navbar";
+
 import Team from "./components/Team";
-import CoreValues from "./components/CoreValues";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Subscribers from "../Home/Subscribers";
+
 import Footer from "../Home/Footer";
 
-import SubscribeForm from "../Home/SubscribeForm";
-import Testimonial from "./components/Testimonial";
 
 import Sponsors from "../Home/Sponsors";
 import { blackCard, headerBackground, whiteColor } from "../utils/constants";
-import AboutTS from "./components/aboutTS";
+import AboutTS from "./components/AboutTS";
 
 const page = () => {
 
