@@ -9,16 +9,16 @@ import { FaRegCommentDots } from "react-icons/fa6";
 import { FiSend } from "react-icons/fi";
 import { IoTrash, IoTrashBin } from "react-icons/io5";
 import { VscReply } from "react-icons/vsc";
-import { MdOutlineExpandMore } from "react-icons/md";
+
 import toast, { Toaster } from "react-hot-toast";
 import EmailModal from "../component/EmailModal";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 import LikeAndComment from "../component/Likes";
-import CommentPopup from "../component/Commentpopup";
+
 import CommentInput from "../component/CommentInpute";
 import Footer from "../../Home/Footer";
 import md5 from "md5";
-import Spinner from "../../lib/spinner";
+
 import SubscribeForm from "../../Home/SubscribeForm";
 export default function BlogDetails() {
   const pathname = usePathname();
