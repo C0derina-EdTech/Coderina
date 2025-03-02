@@ -117,7 +117,7 @@ const Footer = () => {
             <h3>Email & Phone Number</h3>
             <div className="flex space-x-2 items-center">
               <FaPhoneAlt color={darkGreenColor} />
-              <p> +234 9093307353 (Call and WhatsApp)</p>
+              <p className="text-white"> +234 9093307353 (Call and WhatsApp)</p>
             </div>
             <div className="flex items-center space-x-2">
               <RiMailFill color={blueColor} />
