@@ -9,7 +9,7 @@ export async function GET() {
     await connectDB();
 
     // Retrieve all blog posts
-    const blogs = await Blog.find({});
+    const blogs = await Blog.find({}).sort({ createdAt: -1 });
 
     // Return the response with the blogs and their total count
     return NextResponse.json(

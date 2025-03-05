@@ -4,15 +4,14 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import { CiEdit, CiHeart } from "react-icons/ci";
-import { FaRegCommentDots } from "react-icons/fa6";
+
 import { FiSend } from "react-icons/fi";
-import { IoTrash, IoTrashBin } from "react-icons/io5";
+
 import { VscReply } from "react-icons/vsc";
-import { MdOutlineExpandMore } from "react-icons/md";
+
 import toast, { Toaster } from "react-hot-toast";
 import EmailModal from "../component/EmailModal";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 import LikeAndComment from "../component/Likes";
 
 import CommentInput from "../component/CommentInpute";
