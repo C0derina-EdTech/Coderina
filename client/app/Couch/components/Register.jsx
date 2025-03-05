@@ -26,7 +26,7 @@ const Register = () => {
       </h1>
       <div className="grid gap-4 md:grid-cols-3 items-start justify-start">
         {regCard.map((card, i) => (
-          <div className="w-[270px] md:w-[300px] h-[200px] md:h-[350px]  flex flex-col items-center justify-center">
+          <div key={i} className="w-[270px] md:w-[300px] h-[200px] md:h-[350px]  flex flex-col items-center justify-center">
             <div className="w-1/2 h-[130px]">
               <Image
                 src={card.image}
