@@ -52,8 +52,7 @@ const Experience = () => {
     <Box className="px-2 md:px-4 lg:px-16 lg:py-20">
       <Grid
         container
-        data-aos="fade-up"
-        data-aos-anchor-placement="bottom-bottom"
+       data-aos="fade-up"
         className="justify-between space-y-5 md:space-y-0 lg:gap-3"
       >
         {expCard.map((card, i) => (
