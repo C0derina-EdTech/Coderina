@@ -8,11 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomButton from "./CustomButton";
 import expCard1 from "../../public/experience-card1.png";
 import expCard2 from "../../public/experience-card2.png";
-import couch1 from "../../public/couch1.png"
+import couch1 from "../../public/couch1.png";
 import {
   greenBg2,
   headerBackground,
@@ -21,6 +21,7 @@ import {
 } from "../utils/constants";
 import Image from "next/image";
 import Link from "next/link";
+import Aos from "aos";
 
 const Experience = () => {
   const expCard = [
@@ -41,11 +42,18 @@ const Experience = () => {
       image: expCard1,
     },
   ];
+   useEffect(() => {
+        Aos.init({
+          duration: 500,
+        });
+      }, []);
 
   return (
     <Box className="px-2 md:px-4 lg:px-16 lg:py-20">
       <Grid
         container
+        data-aos="fade-up"
+        data-aos-anchor-placement="bottom-bottom"
         className="justify-between space-y-5 md:space-y-0 lg:gap-3"
       >
         {expCard.map((card, i) => (

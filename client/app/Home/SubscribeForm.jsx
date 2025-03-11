@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stack, Typography } from "@mui/material";
 import { Input, Spin } from "antd";
 import CustomButton from "./CustomButton";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 import MessageModal from "../generalcomponents/MessageModal";
+import Aos from "aos";
 
 const SubscribeForm = ({ register }) => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,12 @@ const SubscribeForm = ({ register }) => {
 
   const [isSuccess, setIsSuccess] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    Aos.init({
+      duration: 500,
+    });
+  }, []);
 
   // Handle form submission
   const handleSubscribe = async (e) => {
@@ -45,8 +52,6 @@ const SubscribeForm = ({ register }) => {
       // setMessage("An error occurred. Please try again.");
       console.log("An error occurred. Please try again.");
       setIsSuccess(false);
-
-     
     } finally {
       setLoading(false);
       setIsModalOpen(true);
@@ -72,7 +77,11 @@ const SubscribeForm = ({ register }) => {
     );
   } else {
     return (
-      <div className="w-full bg-[#00a859] font-Geist p-5 text-[#fff] flex flex-col md:flex-row items-center justify-between mb-8 rounded-2xl gap-y-4 md:gap-y-0 md:gap-x-8 mt-4">
+      <div
+        data-aos="fade-up"
+        data-aos-anchor-placement="bottom-center"
+        className="w-full bg-[#00a859] font-Geist p-5 text-[#fff] flex flex-col md:flex-row items-center justify-between mb-8 rounded-2xl gap-y-4 md:gap-y-0 md:gap-x-8 mt-4"
+      >
         <div className="w-full lg:w-[50%]">
           <h4 className="text-[26px] md:text-[26px]">
             Sign up for our Newsletter to receive news and updates.

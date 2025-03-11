@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
@@ -7,6 +7,7 @@ import aboutSecImg from "../../public/aboutSec.png";
 import aboutSecImg1 from "../../public/aboutSec1.png";
 import Image from "next/image";
 import Link from "next/link";
+import Aos from "aos";
 const AboutSection = () => {
   const aboutCard = [
     {
@@ -22,9 +23,15 @@ const AboutSection = () => {
       img: aboutSecImg1,
     },
   ];
+
+   useEffect(() => {
+      Aos.init({
+        duration: 500,
+      });
+    }, []);
   return (
     <div className="w-full font-Geist px-2 md:px-4 lg:px-16 py-10 md:py-16">
-      <div className="flex flex-col  md:flex-row items-start md:items-end justify-start gap-y-7 md:gap-x-3 md:justify-between">
+      <div data-aos="fade-up" className="flex flex-col  md:flex-row items-start md:items-end justify-start gap-y-7 md:gap-x-3 md:justify-between">
         <h2 className="font-medium text-[16px] md:text-[32px] leading-9 md:leading-[48px] w-full md:w-[70%]">
           Coderina is an independent Non-profit organisation Ed-Tech that works
           to promote ICT development, Youth Innovation and Entrepreneurship in
