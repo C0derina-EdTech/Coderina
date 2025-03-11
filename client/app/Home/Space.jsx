@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import newsLgImg from "../../public/news-ImgLg.png";
+import newsLgImg from "../../public/space.png";
 import CustomButton from "./CustomButton";
 import Link from "next/link";
 import { HiOutlineMail } from "react-icons/hi";

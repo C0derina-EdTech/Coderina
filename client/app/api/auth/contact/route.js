@@ -1,5 +1,5 @@
 import ContactUs from "../../../models/contactModal";
-import dbConnect from "../../../lib/dbConnect"; // Utility for DB connection
+import connectDB from "../../../lib/dbConnect"; // Utility for DB connection
 import { ObjectId } from "mongodb";
 
 import { NextResponse } from "next/server";
@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     // Ensure the database connection is established
-    await dbConnect();
+    await connectDB();
 
     const { name, email, subject, message, reason, otherReason} =
       await req.json();
@@ -44,7 +44,7 @@ export async function POST(req) {
 
 export async function GET() {
   try {
-    await dbConnect();
+    await connectDB();
     const contact = await ContactUs.find({});
     return NextResponse.json({ success: true, data: contact }, { status: 200 });
   } catch (error) {
@@ -69,7 +69,7 @@ export async function DELETE(req) {
       );
     }
 
-    await dbConnect();
+    await connectDB();
 
     const result = await ContactUs.deleteOne({ _id: new ObjectId(id) });
 

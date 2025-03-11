@@ -12,7 +12,8 @@ import Experience from "./Home/Experience";
 import News from "./Home/News";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import "aos/dist/aos.css";
+import Aos from "aos";
 import Activities from "./Home/Activities";
 import Subscribers from "./Home/Subscribers";
 import {
@@ -25,6 +26,7 @@ import {
   whiteColor,
 } from "./utils/constants";
 import MediaBlog from "./Media/component/MediaBlog";
+import Welcome from "./Home/Welcome";
 
 const page = () => {
   const homeContents1 = [
@@ -52,6 +54,10 @@ const page = () => {
     {
       color: whiteColor,
       section: <Experience />,
+    },
+    {
+      color: whiteColor,
+      section: <Welcome />,
     },
     {
       color: headerBackground,

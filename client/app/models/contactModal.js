@@ -31,27 +31,19 @@ const contactUsSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-     
+
       maxlength: 1000, // Maximum message length
     },
-
 
     reason: {
       type: String,
       enum: ["Sponsorship", "Volunteer", "Other"],
-     
     },
     otherReason: {
       type: String,
       trim: true,
       default: null, // Only populated if "Other" is selected
     },
-
-
-   
-
-    
-   
   },
   {
     timestamps: true, // This will add createdAt and updatedAt automatically
