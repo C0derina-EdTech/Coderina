@@ -120,19 +120,7 @@ useEffect(() => {
           (a, b) => new Date(b.date) - new Date(a.date)
         );
 
-        // // Get the current date/time in Nigeria's timezone
-        // const now = DateTime.now().setZone("Africa/Lagos");
-
-        // // Categorize into upcoming and past events
-        // const upcoming = sortedEvents.filter((event) => {
-        //   const eventDate = DateTime.fromISO(event.date, { zone: "Africa/Lagos" });
-        //   return eventDate >= now;
-        // });
-
-        // const past = sortedEvents.filter((event) => {
-        //   const eventDate = DateTime.fromISO(event.date, { zone: "Africa/Lagos" });
-        //   return eventDate < now;
-        // });
+      
 
         setEvents(sortedEvents);
         setUpcomingEvents(upcoming);

@@ -48,7 +48,14 @@ html {
 }
 
 
-
+input {
+  outline:none;
+  background:transparent;
+}
+select {
+  background:transparent;
+  outline:none;
+}
 
 a {
   text-decoration: none;

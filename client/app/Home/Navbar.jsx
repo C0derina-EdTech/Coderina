@@ -53,7 +53,8 @@ const Navbar = () => {
       pathname === "/About" ||
       pathname === "/formData" ||
       pathname === "/contactUs" ||
-      pathname === "/projectFair"
+      pathname === "/projectFair"||
+      pathname ==="/Bootcamp"
     ) {
       setDisplay(true);
     } else {

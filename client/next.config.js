@@ -21,6 +21,11 @@ const nextConfig = {
         hostname: "www.gravatar.com", // Use full domain
         pathname: "/**", // Matches all paths
       },
+      {
+        protocol: "https", // Corrected this line
+        hostname: "res.cloudinary.com", // Use full domain
+        pathname: "/**", // Matches all paths
+      },
     ],
 
     domains: ["*", "randomuser.me"],
