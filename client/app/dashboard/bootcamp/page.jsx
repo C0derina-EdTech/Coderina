@@ -9,12 +9,14 @@ import { HiDownload } from "react-icons/hi";
 import { FiClock, FiDatabase } from "react-icons/fi";
 import { IoMail } from "react-icons/io5";
 import { TbListDetails } from "react-icons/tb";
+import Image from "next/image";
 const Page = () => {
   const [messages, setMessages] = useState([]);
   const [loadingId, setLoadingId] = useState(null); // Track the ID being deleted
   const [SelectedMessages, setSelectedMessages] = useState(null); // Modal state
   const [showMenu, setShowMenu] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [fullScreenImage, setFullScreenImage] = useState(null);
   const handleOpenModal = (message) => {
     setSelectedMessages(message);
   };
@@ -27,7 +29,7 @@ const Page = () => {
   const fetchMessages = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/auth/contact", { method: "GET" });
+      const res = await fetch("/api/boot", { method: "GET" });
       const data = await res.json();
       if (data.success) {
         setMessages(data.data);
@@ -45,7 +47,7 @@ const Page = () => {
   const deleteMessages = async (id) => {
     try {
       setLoadingId(id); // Set loading state for the current registration
-      const res = await fetch("/api/auth/contact", {
+      const res = await fetch("/api/boot", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
@@ -66,12 +68,19 @@ const Page = () => {
 
   // Download individual messages details
   const downloadDetails = (message) => {
-    const fileName = `${message.name}_${message.email}_details.txt`;
+    const fileName = `${message.studentName}_${message.parentEmail}_details.txt`;
     const details = `
-      Name: ${message.name}
-       Email: ${message.email}
-      Subject: ${message.subject}
-      message: ${message.message}
+      Name: ${message.studentName}
+       Email: ${message.parentEmail}
+       ParentName: ${message.parentName}
+      Program: ${message.program}
+      LearningMode: ${message.learningMode}
+       Age: ${message.age}
+        Phone: ${message.phone}
+     Gender: ${message.gender}
+      Grade: ${message.grade}
+    Address: ${message.address}
+    AdditionalInfo: ${message.additionalInfo}
      
      
     `;
@@ -90,6 +99,21 @@ const Page = () => {
     URL.revokeObjectURL(url);
   };
 
+
+  const downloadImage = (imageUrl) => {
+    fetch(imageUrl)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "image.jpg";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch(() => toast.error("Failed to download image"));
+  };
+
   // Convert registrations to CSV
   const downloadCSV = () => {
     if (messages.length === 0) {
@@ -97,13 +121,19 @@ const Page = () => {
       return;
     }
 
-    const headers = ["Name", "Email", "Subject", "Message"];
+    const headers = ["Name", "ParentName","Email", "Program", "LearningMode", "Gender","Age", "Grade","Address","AdditionalInfo"];
 
     const rows = messages.map((msg) => [
-      msg.name,
-      msg.email,
-      msg.message,
-      msg.subject,
+      msg.studentName,
+      msg.parentName,
+      msg.parentEmail,
+      msg.program,
+      msg.learningMode,
+      msg.gender,
+      msg.age,
+      msg.grade,
+      msg.address,
+      msg.additionalInfo,
 
       new Date(msg.createdAt).toLocaleString(),
     ]);
@@ -135,22 +165,22 @@ const Page = () => {
  
 
   return (
-    <div className="w-full  md:px-2 lg:px-4 py-6 overflow-hidden h-full">
+    <div className="max-w-[100rem]  md:px-2 lg:px-4 py-6 overflow-hidden h-full">
       <Toaster />
 
       <div>
-        <h1 className="text-2xl font-bold mb-4">Messages</h1>
+        <h1 className="text-2xl font-bold mb-4">Bootcamp</h1>
 
         {loading ? (
           <div className="flex justify-center items-center h-screen">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
           </div>
         ) : messages.length === 0 ? (
-          <p  className="text-center text-grey-300 py-4 h-screen">No message found</p>
+          <p  className="text-center text-grey-300 py-4 h-screen">No details found</p>
         ) : (
           <div className="md:max-w-lg lg:max-w-3xl">
             <div className="mb-4 text-right font-medium">
-              Total Messages: {messages.length}
+              Total Form: {messages.length}
             </div>
 
             <div className="flex justify-between items-center mb-4">
@@ -167,11 +197,11 @@ const Page = () => {
                   <tr className="bg-gray-200">
                     <th className="border border-gray-300 p-2">#</th>
                     <th className="border border-gray-300 p-2 text-nowrap"> Name</th>
-
-                    <th className="border border-gray-300 p-2">Email</th>
-                    <th className="border border-gray-300 p-2">Subject</th>
-                    <th className="border border-gray-300 p-2">Reason</th>
-                    <th className="border border-gray-300 p-2">Space Type</th>
+                    <th className="border border-gray-300 p-2">parentEmail</th>
+                    <th className="border border-gray-300 p-2">Program</th>
+                    
+                    <th className="border border-gray-300 p-2">Gender</th>
+                    <th className="border border-gray-300 p-2">Age</th>
                     <th className="border border-gray-300 p-2">Time sent</th>
 
 <th className=" border p-2" >Actions</th>
@@ -181,11 +211,12 @@ const Page = () => {
                   {messages.map((message, index) => (
                    <tr key={message._id} className="odd:bg-gray-50 even:bg-gray-100 hover:bg-gray-200 transition">
                    <td className="p-3 text-center border border-gray-300">{index + 1}</td>
-                   <td className="p-3 border border-gray-300 text-nowrap">{message.name}</td>
-                   <td className="p-3 border border-gray-300">{message.email}</td>
-                   <td className="p-3 border border-gray-300">{message.subject}</td>
-                   <td className="p-3 border border-gray-300">{message.reason}</td>
-                   <td className="p-3 border border-gray-300">{message.spaceType}</td>
+                   <td className="p-3 border border-gray-300 text-nowrap">{message.studentName}</td>
+                   <td className="p-3 border border-gray-300">{message.parentEmail}</td>
+                   <td className="p-3 border border-gray-300">{message.program}</td>
+                   
+                   <td className="p-3 border border-gray-300">{message.gender}</td>
+                   <td className="p-3 border border-gray-300">{message.age}</td>
                    <td className="p-3 border border-gray-300">{new Date(message.createdAt).toLocaleString()}</td>
                    <td className="p-3 border border-gray-300">
 
@@ -207,26 +238,7 @@ const Page = () => {
                            </div>
                          </div>
                        </div>
-                     {/* <CiMenuKebab className="cursor-pointer hover:text-green-600" onClick={() => setShowMenu(!showMenu)} />
-                     {showMenu && (
-                       <div className="absolute right-0 mt-2 w-36 bg-white shadow-lg rounded-md p-2 z-10">
-                         <div className="flex flex-col gap-2">
-                           {loadingId === message._id ? (
-                             <IoIosSync className="animate-spin text-gray-500 text-xl" />
-                           ) : (
-                             <div className="flex items-center gap-2 text-red-600 cursor-pointer hover:text-red-800" onClick={() => deleteMessages(message._id)}>
-                               <IoTrash /> <span>Delete</span>
-                             </div>
-                           )}
-                           <div className="flex items-center gap-2 text-blue-500 cursor-pointer hover:text-blue-800" onClick={() => downloadDetails(message)}>
-                             <HiDownload /> <span>Download</span>
-                           </div>
-                           <div className="flex items-center gap-2 text-green-500 cursor-pointer hover:text-green-800" onClick={() => handleOpenModal(message)}>
-                             <HiDownload /> <span>Details</span>
-                           </div>
-                         </div>
-                       </div>
-                     )} */}
+                    
                    </td>
                  </tr>
                   ))}
@@ -244,19 +256,19 @@ const Page = () => {
                   <div className="border cursor-pointer border-gray-200 p-2 space-y-1 rounded-lg w-[300px] hover:bg-gray-100 ">
                     <div className="flex items-center justify-start space-x-1">
                       <IoPerson />
-                      <p className="">{message.name}</p>
+                      <p className="">{message.studentName}</p>
                     </div>
                     <div className="flex items-center justify-start space-x-1">
                       <IoMail />
-                      <p>{message.email}</p>
+                      <p>{message.parentEmail}</p>
                     </div>
                     <div className="flex items-center justify-start space-x-1">
                       <IoSchool />
-                      <p>{message.subject}</p>
+                      <p>{message.program}</p>
                     </div>
                     <div className="flex items-center justify-start space-x-1">
                       <IoSchool />
-                      <p>{message.reason}</p>
+                      <p>{message.learningMode}</p>
                     </div>
                     <div className="flex items-center justify-start space-x-1">
                       <FiClock />
@@ -304,7 +316,7 @@ const Page = () => {
                     colSpan={8}
                     className="text-center border border-gray-300 p-2"
                   >
-                    No message found
+                    No details found
                   </h2>
                 </div>
               )}
@@ -312,21 +324,73 @@ const Page = () => {
 
             {/* Modal */}
             {SelectedMessages && (
-              <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+              <div  onClick={handleCloseModal} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div onClick={(e) => e.stopPropagation()} className="bg-white pt-[2rem] text-[15px] max-h-[80vh] overflow-y-auto max-w-[40rem] p-6 rounded-lg shadow-lg max-w-md w-full">
                   <h2 className="text-lg font-bold mb-4">Meassage Details</h2>
                   <p>
-                    <strong> Name:</strong> {SelectedMessages.name}
+                    <strong> Name:</strong> {SelectedMessages.studentName}
                   </p>
                   <p>
-                    <strong>Email:</strong> {SelectedMessages.email}
+                    <strong>Parent Name:</strong> {SelectedMessages.parentName}
                   </p>
                   <p>
-                    <strong>Subject:</strong> {SelectedMessages.subject}
+                    <strong>Email:</strong> {SelectedMessages.parentEmail}
+                  </p>
+                
+                <div className="flex items-center space-x-3">
+                <p>
+                    <strong>Age:</strong> {SelectedMessages.age}
                   </p>
                   <p>
-                    <strong>Message:</strong> {SelectedMessages.message}
+                    <strong>Grade:</strong> {SelectedMessages.grade}
                   </p>
+                  <p>
+                    <strong>Gender:</strong> {SelectedMessages.gender}
+                  </p>
+                </div>
+
+                <div className="flex items-center space-x-3">
+
+                <p>
+                    <strong>Program:</strong> {SelectedMessages.program}
+                  </p>
+                  <p>
+                    <strong>LearningMode:</strong> {SelectedMessages.learningMode}
+                  </p>
+                </div>
+                  <p>
+                    <strong>Phone:</strong> {SelectedMessages.phone}
+                  </p>
+                  <p>
+                    <strong>Address:</strong> {SelectedMessages.address}
+                  </p>
+                  <p>
+                    <strong>Additional Info:</strong> {SelectedMessages.additionalInfo}
+                  </p>
+
+                  <h1 className="font-bold">Proof of Payment</h1>
+
+                  <div className="relative mt-4">
+        {/* Image Display */}
+        <Image
+          src={SelectedMessages.paymentProof}
+          alt="Payment Proof"
+          width={400}
+          height={150}
+          className="rounded-lg object-contain cursor-pointer"
+          onClick={() => setFullScreenImage(SelectedMessages.paymentProof)}
+        />
+
+        {/* Floating Download Button */}
+        <button
+          className="absolute top-2 right-2 bg-black text-white p-2 rounded-full shadow-lg hover:bg-gray-700"
+          onClick={() => downloadImage(SelectedMessages.paymentProof)}
+          title="Download Image"
+        >
+          <HiDownload className="text-xl" />
+        </button>
+      </div>
+
 
                   <p>
                     <strong>Submitted At:</strong>
@@ -335,7 +399,7 @@ const Page = () => {
                   <div className="mt-4 text-right">
                     <button
                       onClick={handleCloseModal}
-                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                      className="bg-black text-white px-4 py-2 rounded hover:bg-red-600"
                     >
                       Close
                     </button>
@@ -343,9 +407,34 @@ const Page = () => {
                 </div>
               </div>
             )}
+
+
+
+{fullScreenImage && (
+  <div  onClick={() => setFullScreenImage(null)} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90">
+    <Image
+      src={fullScreenImage}
+      alt="Full Screen Image"
+      width={600}
+      height={600}
+      className="rounded-lg object-contain"
+      onClick={(e) => e.stopPropagation()} // Prevent click inside from closing
+    />
+    <button
+      className="absolute top-4 right-4 text-white text-xl font-bold bg-red-500 p-2 rounded-full"
+      onClick={() => setFullScreenImage(null)}
+    >
+      Close
+    </button>
+  </div>
+)}
+
           </div>
         )}
       </div>
+
+
+
     </div>
   );
 };

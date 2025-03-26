@@ -113,7 +113,7 @@ const Page = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 pl-10 rounded-lg text-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter your email"
               required
             />
@@ -129,7 +129,7 @@ const Page = () => {
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 pl-10 rounded-lg border text-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter your password"
               required
             />

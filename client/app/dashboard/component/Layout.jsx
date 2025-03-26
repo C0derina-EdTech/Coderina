@@ -68,6 +68,17 @@ const Layout = ({ children }) => {
       name: "Messages",
       path: "/dashboard/messages",
     },
+    {
+      icon: <RiMessage2Line />,
+      name: "Bootcamp",
+      path: "/dashboard/bootcamp",
+    },
+    
+    {
+      icon: <CiFolderOn />,
+      name: "FLL",
+      path: "/dashboard/roboticsForm",
+    },
 
     {
       icon: <CiFolderOn />,
