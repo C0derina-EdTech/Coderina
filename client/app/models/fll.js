@@ -9,64 +9,55 @@ const fllSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    age: {
+      type: String,
+      required: true,
+    },
+    grade: {
+      type: String,
+      required: true,
+    },
+    gender: {
+      type: String,
+    
+      required: true,
+    },
     parentName: {
       type: String,
       required: true,
       trim: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      trim: true,
-      lowercase: true,
-      validate: {
-        validator: validator.isEmail,
-        message: (props) => `${props.value} is not a valid email!`,
-      },
     },
     parentEmail: {
       type: String,
       required: true,
       trim: true,
       lowercase: true,
-      validate: {
-        validator: validator.isEmail,
-        message: (props) => `${props.value} is not a valid email!`,
-      },
+      match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"],
     },
-    age: {
-      type: Number,
-      required: true,
-      min: 3, // Assuming minimum age requirement
-      max: 18, // Assuming maximum age limit for students
-    },
-    class: {
+    studentEmail: {
       type: String,
       required: true,
       trim: true,
-    },
-    sessions: {
-      type: String,
-      enum: ["Yes", "No"],
-    },
-    gender: {
-      type: String,
-      enum: ["Male", "Female"],
-    },
-    device: {
-      type: String,
-      enum: ["Laptop", "iPad", "Tablet"],
+      lowercase: true,
+      match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"],
     },
     phone: {
       type: String,
       required: true,
-      trim: true,
-      validate: {
-        validator: function (v) {
-          return /^\+?[1-9]\d{1,14}$/.test(v); // Regex for phone number validation (E.164 format)
-        },
-        message: (props) => `${props.value} is not a valid phone number!`,
-      },
+    },
+    program: {
+      type: String,
+      required: true,
+    },
+ 
+    address: {
+      type: String,
+      required: true,
+    },
+  
+    device: {
+      type: String,
+      required: true,
     },
   },
   {

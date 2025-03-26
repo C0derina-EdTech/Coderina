@@ -54,7 +54,8 @@ const Navbar = () => {
       pathname === "/formData" ||
       pathname === "/contactUs" ||
       pathname === "/projectFair"||
-      pathname ==="/Bootcamp"
+      pathname ==="/Bootcamp" ||
+      pathname === "/firstLegoLeaque"
     ) {
       setDisplay(true);
     } else {
