@@ -29,7 +29,8 @@ import { LoadingSkeleton } from "@/app/shared/Spinner";
 import { CiFolderOn, CiMenuBurger } from "react-icons/ci";
 import { useNotifications } from "../../context/NotificationContext";
 import { useAuth } from "../../context/AuthContext";
-
+import { FaBandcamp } from "react-icons/fa6";
+import { GiTrackedRobot } from "react-icons/gi";
 const Layout = ({ children }) => {
   const { user, loading } = useAuth();
   const pathname = usePathname();
@@ -69,13 +70,13 @@ const Layout = ({ children }) => {
       path: "/dashboard/messages",
     },
     {
-      icon: <RiMessage2Line />,
+      icon: <FaBandcamp />,
       name: "Bootcamp",
       path: "/dashboard/bootcamp",
     },
     
     {
-      icon: <CiFolderOn />,
+      icon: <GiTrackedRobot />,
       name: "FLL",
       path: "/dashboard/roboticsForm",
     },

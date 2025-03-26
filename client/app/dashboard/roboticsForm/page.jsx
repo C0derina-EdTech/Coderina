@@ -155,7 +155,7 @@ const Page = () => {
       <Toaster />
 
       <div>
-        <h1 className="text-2xl font-bold mb-4">Bootcamp</h1>
+        <h1 className="text-2xl font-bold mb-4">First Robotics</h1>
 
         {loading ? (
           <div className="flex justify-center items-center h-screen">
