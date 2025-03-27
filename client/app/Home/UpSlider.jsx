@@ -20,7 +20,7 @@ const UpSlider = ({ slider }) => {
 
     // Categorize events based on startDate
     const upcoming = events.filter((event) => {
-      const eventDate = new Date(event.startDate); // Use startDate for comparison
+      const eventDate = new Date(event.endDate); // Use endDate for comparison
       return eventDate >= nigeriaTime;
     });
 

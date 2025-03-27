@@ -3,14 +3,14 @@ import Link from "next/link";
 
 const Programs = () => {
   return (
-    <div className="flex flex-col md:flex-row gap-6 p-8  text-white">
+    <div className="flex flex-col md:flex-row gap-6 px-2 md:px-4 lg:px-16 py-8  text-white">
       {/* Easter Bootcamp Registration Card */}
       <div
-        className="relative bg-green-800 p-6 w-full md:w-1/2 rounded-lg flex flex-col justify-between"
+        className="relative bg-[#fff5ef] p-6 w-full md:w-1/2 rounded-lg flex flex-col justify-between"
         style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 12% 100%)" }}
       >
-        <h2 className="text-lg font-bold">EASTER BOOTCAMP REGISTRATION</h2>
-        <p className="text-white font-medium mb-4">
+        <h2 className="text-lg text-black font-bold">EASTER BOOTCAMP REGISTRATION</h2>
+        <p className="text-black font-medium mb-4">
           📅 <strong>April 2nd - 17th, 2025</strong> | 🕘 Monday-Wednesday | ⏰ 11AM - 1PM
         </p>
         <div className="bg-[#f3fdf6] ml-10 border-l-4 border-[#0a5d23] p-5 rounded-md shadow-md">
@@ -21,6 +21,7 @@ const Programs = () => {
           </p>
 
           <ul className="mt-3 space-y-1 text-gray-800 list-disc list-inside">
+          <li>Python/Scratch Programming</li>
             <li>Python/Scratch Programming</li>
             <li>App Development</li>
             <li>Web Design</li>
@@ -33,11 +34,11 @@ const Programs = () => {
 
       {/* FIRST Robotics Registration Card */}
       <div
-        className="relative bg-blue-600 p-6 w-full md:w-1/2 rounded-lg flex flex-col justify-between"
+        className="relative bg-[#d0f3ff] p-6 w-full md:w-1/2 rounded-lg flex flex-col justify-between"
         style={{ clipPath: "polygon(0% 0%, 100% 0%, 88% 100%, 0% 100%)" }}
       >
-        <h2 className="text-lg font-bold">FIRST ROBOTICS REGISTRATION</h2>
-        <p className="text-white font-medium mb-4">
+        <h2 className="text-lg text-black font-bold">FIRST ROBOTICS REGISTRATION</h2>
+        <p className="text-black font-medium mb-4">
           📅 <strong>Ongoing</strong> | 🕘 Saturdays | ⏰ 10AM - 12PM
         </p>
         <div className="bg-[#f3fdf6] mr-10 border-l-4 border-[#0a5d23] p-5 rounded-md shadow-md">
@@ -66,7 +67,7 @@ const DynamicLink = ({ href, children }) => {
   return (
     <Link
       href={href}
-      className="mt-4 max-w-[12rem] mx-auto relative border-[1.3px] border-green-800 bg-green-800 text-white cursor-pointer hover:bg-white hover:text-green-800 transition-all duration-500 rounded-3xl py-2 px-6 text-[14px] md:text-[16px] font-medium group overflow-hidden flex items-center justify-center"
+      className="mt-4 max-w-[11rem] mx-auto relative border-[1.3px] border-black bg-black text-white cursor-pointer hover:bg-white hover:text-black transition-all duration-500 rounded-3xl py-2 px-6 text-[14px]  font-medium group overflow-hidden flex items-center justify-center"
     >
       {/* Default Text */}
       <span className="relative z-10 transition-all duration-500 group-hover:translate-y-[-100%] group-hover:opacity-0">

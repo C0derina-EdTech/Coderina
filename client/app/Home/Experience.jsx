@@ -1,24 +1,10 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Container,
-  Stack,
-  Typography,
-} from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import CustomButton from "./CustomButton";
 import expCard1 from "../../public/experience-card1.png";
 import expCard2 from "../../public/experience-card2.png";
 import couch1 from "../../public/couch1.png";
-import {
-  greenBg2,
-  headerBackground,
-  pinkBgR,
-  textColor,
-} from "../utils/constants";
+import { greenBg2, headerBackground, textColor } from "../utils/constants";
 import Image from "next/image";
 import Link from "next/link";
 import Aos from "aos";
@@ -42,46 +28,51 @@ const Experience = () => {
       image: expCard1,
     },
   ];
-   useEffect(() => {
-        Aos.init({
-          duration: 500,
-        });
-      }, []);
+
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  }, []);
 
   return (
-    <Box className="px-2 md:px-4 lg:px-16 lg:py-20">
+    <Box className="px-4 lg:px-16 py-10 lg:py-20">
       <Grid
         container
-       data-aos="fade-up"
-        className="justify-between space-y-5 md:space-y-0 lg:gap-3"
+        data-aos="fade-up"
+        spacing={4}
+        justifyContent="center"
+        className="gap-6"
       >
         {expCard.map((card, i) => (
           <Grid
             key={i}
-            className="rounded-2xl flex justify-center items-center"
+            item
+            xs={12}
+            md={5.7}
+            className="rounded-2xl overflow-hidden transition-transform transform hover:scale-105"
             bgcolor={card.color}
-            size={{ xs: 12, md: 5.7 }}
           >
             <Stack className="space-y-10 p-7">
               <Stack className="space-y-4">
-                <h1 className="text-[27px] font-semibold leading-[37.6px]">
+                <Typography
+                  variant="h5"
+                  className="font-semibold leading-tight"
+                >
                   {card.title}
-                </h1>
-                <Stack>
-                  <span className="text-[14px] md:[17px]" color={textColor}>
-                    {card.text}
-                  </span>
-                </Stack>
-                <Link href={card.link}>
+                </Typography>
+                <Typography variant="body1" color={textColor}>
+                  {card.text}
+                </Typography>
+                <Link href={card.link} passHref>
                   <CustomButton>{card.button}</CustomButton>
                 </Link>
               </Stack>
-              <Stack className="rounded-3xl relative h-full w-full md:h-[350px] md:w-[360px] lg:w-[450px]">
+              <Stack className="relative h-72 w-full rounded-3xl overflow-hidden">
                 <Image
                   src={card.image}
-                  alt="imagecard"
-                  className=" object-cover rounded-3xl w-full "
-                  layout="responsive"
+                  alt="Experience Image"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-3xl transition-transform transform hover:scale-110"
                 />
               </Stack>
             </Stack>

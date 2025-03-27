@@ -79,8 +79,8 @@ const SubscribeForm = ({ register }) => {
     return (
       <div
         data-aos="fade-up"
-        data-aos-anchor-placement="bottom-center"
-        className="w-full bg-[#00a859] font-Geist p-5 text-[#fff] flex flex-col md:flex-row items-center justify-between mb-8 rounded-2xl gap-y-4 md:gap-y-0 md:gap-x-8 mt-4"
+       
+        className="w-full bg-[#00a859] font-Geist p-5 md::p-8 lg:p-10 text-[#fff] flex flex-col md:flex-row items-center justify-between mb-8 rounded-2xl gap-y-4 md:gap-y-0 md:gap-x-8 mt-4"
       >
         <div className="w-full lg:w-[50%]">
           <h4 className="text-[26px] md:text-[26px]">
