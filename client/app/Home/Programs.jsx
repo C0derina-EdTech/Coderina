@@ -76,7 +76,7 @@ const DynamicLink = ({ href, children }) => {
 
       {/* Hover Text */}
       <span className="absolute inset-0 flex items-center justify-center text-green-800 font-medium scale-0 group-hover:scale-100 transition-transform duration-500">
-        🚀 Let's Go!
+        🚀 Let`s Go!
       </span>
 
       {/* Underline Swipe Effect */}
