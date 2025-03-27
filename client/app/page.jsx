@@ -18,15 +18,12 @@ import Activities from "./Home/Activities";
 import Subscribers from "./Home/Subscribers";
 import {
   blackCard,
-  blackColor,
-  blueColor,
-  greenBg,
   headerBackground,
-  pinkBg,
   whiteColor,
 } from "./utils/constants";
 import MediaBlog from "./Media/component/MediaBlog";
 import Welcome from "./Home/Welcome";
+import Programs from "./Home/Programs";
 
 const page = () => {
   const homeContents1 = [
@@ -49,6 +46,10 @@ const page = () => {
     {
       color: whiteColor,
       section: <News />,
+    },
+    {
+      color: blackCard,
+      section: <Programs/>,
     },
 
     {

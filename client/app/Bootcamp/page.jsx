@@ -137,14 +137,14 @@ const BootcampForm = () => {
 
           <div className="bg-[#f3fdf6] border-l-4 border-[#0a5d23] p-5 rounded-md shadow-md">
             <p className="text-gray-800 font-medium leading-relaxed">
-              🚀 Register your child for our exciting{" "}
+              🚀 Register your child for our exciting
               <strong>Easter Bootcamp!</strong>
-              We offer both{" "}
+              We offer both
               <span className="text-[#0a5d23] font-semibold">physical</span> and
               <span className="text-[#0a5d23] font-semibold">
-                {" "}
+                
                 virtual
-              </span>{" "}
+              </span>
               classes in:
             </p>
 
