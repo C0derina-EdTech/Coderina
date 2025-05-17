@@ -36,8 +36,8 @@ export async function POST(req) {
     await collection.insertOne({ email, subscribedAt: new Date() });
 
     // Send welcome email
-    const subject = "Welcome to Coderina Newsletter!";
-    const message = `Hello ${email},\n\nThank you for subscribing to the Coderina's Newsletter! We're thrilled to have you on board.\n\nAt Coderina Education and Technology Foundation, we are committed to empowering students and educators by providing access to cutting-edge STEM education, technology skills, and innovative learning opportunities. Our mission is to inspire the next generation of tech leaders and problem-solvers through programs, workshops, and collaborative initiatives designed to bridge the digital divide.\n\nAs a subscriber, you will receive the latest updates on our projects, upcoming events, workshops, and new educational resources. Stay tuned for exciting content that will help you stay ahead in the ever-evolving world of technology.\n\nBest regards,\nThe Coderina Team`;
+    const subject = "Welcome to coderina Newsletter!";
+    const message = `Hello ${email},\n\nThank you for subscribing to the coderina's Newsletter! We're thrilled to have you on board.\n\nAt coderina Education and Technology Foundation, we are committed to empowering students and educators by providing access to cutting-edge STEM education, technology skills, and innovative learning opportunities. Our mission is to inspire the next generation of tech leaders and problem-solvers through programs, workshops, and collaborative initiatives designed to bridge the digital divide.\n\nAs a subscriber, you will receive the latest updates on our projects, upcoming events, workshops, and new educational resources. Stay tuned for exciting content that will help you stay ahead in the ever-evolving world of technology.\n\nBest regards,\nThe coderina Team`;
 
     const emailResponse = await sendEmail([email], subject, message);
 

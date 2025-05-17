@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
-import ImageModal from "../..//Media/component/ImageModal";
+import ImageModal from "../../components/mediacomponent/ImageModal";
 
 export default function CreatePost() {
   const [formData, setFormData] = useState({
@@ -293,8 +293,6 @@ export default function CreatePost() {
           </div>
         ))}
       </div>
-
-      
 
       <ImageModal
         images={selectedImages}

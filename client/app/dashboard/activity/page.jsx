@@ -5,7 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BlogBanner1 from "../../../public/blog-banner.jpg";
-import DateConvert from "../component/DateConvert";
+import DateConvert from "../dashboardcomponent/DateConvert";
 
 const Activity = () => {
   const activity = [

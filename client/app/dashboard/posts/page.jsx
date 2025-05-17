@@ -9,9 +9,9 @@ import { LuImage, LuMessageCircle } from "react-icons/lu";
 import { CiEdit, CiHeart } from "react-icons/ci";
 import { useEffect, useRef, useState } from "react";
 
-import DropdownButton from "../component/DropdownButton";
-import Pagination from "../component/PostPagnation";
-import ImageModal from "../../Media/component/ImageModal";
+import DropdownButton from "../dashboardcomponent/DropdownButton";
+import Pagination from "../dashboardcomponent/PostPagnation";
+import ImageModal from "../../components/mediacomponent/ImageModal";
 import Spinner, { LoadingSkeleton } from "../../shared/Spinner";
 import PostCard from "./PostCard";
 import Link from "next/link";
@@ -179,7 +179,10 @@ const Posts = () => {
         <h1 className="text-3xl font-bold">Posts</h1>
 
         <div className="relative inline-block text-left">
-          <Link href="/dashboard/createPost" className="bg-[#eccc5a] py-2 px-3 gap-1 rounded-md text-white hover:bg-[#f48d2d] flex items-center">
+          <Link
+            href="/dashboard/createPost"
+            className="bg-[#eccc5a] py-2 px-3 gap-1 rounded-md text-white hover:bg-[#f48d2d] flex items-center"
+          >
             New post
           </Link>
         </div>

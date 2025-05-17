@@ -1,10 +1,10 @@
 import { AuthProvider } from "../context/AuthContext";
 import { NotificationProvider } from "../context/NotificationContext";
-import Header from "./component/Header";
-import Layout from "./component/Layout";
+import Header from "./dashboardcomponent/Header";
+import Layout from "./dashboardcomponent/Layout";
 
 export const metadata = {
-  title: "Coderina/Admin/Dashboard",
+  title: "coderina/Admin/Dashboard",
 };
 
 export default function DashboardLayout({ children }) {

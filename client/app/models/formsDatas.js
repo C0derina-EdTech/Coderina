@@ -12,7 +12,7 @@ const FormDataSchema = new Schema({
 
   FLL: {
     category: {
-      type: String,
+      type:[String],
       enum: [
         "FIRST® LEGO® League Discover",
         "FIRST® LEGO® League Explore",
@@ -20,7 +20,7 @@ const FormDataSchema = new Schema({
         "FIRST® Tech Challenge",
       ],
       required: false,
-      default: "FIRST® LEGO® League Discover",
+      default: [],
     },
     coaches: [
       {

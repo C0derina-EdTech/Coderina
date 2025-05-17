@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { IoClose, IoSend, IoTrash } from "react-icons/io5";
 import { IoIosSync } from "react-icons/io"; // Loader icon
-import LineChart from "../component/LineChart";
+import LineChart from "../dashboardcomponent/LineChart";
 
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import SendMessage from "./SendMessage";

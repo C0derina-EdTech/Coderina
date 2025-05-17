@@ -6,7 +6,7 @@ import { MdArrowOutward } from "react-icons/md";
 import { LoadingSkeleton } from "../../shared/Spinner";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import DropdownButton from "../component/DropdownButton";
+import DropdownButton from "../dashboardcomponent/DropdownButton";
 import { RiMenu2Fill } from "react-icons/ri";
 import { SlEarphones } from "react-icons/sl";
 import { IoVideocamOutline } from "react-icons/io5";

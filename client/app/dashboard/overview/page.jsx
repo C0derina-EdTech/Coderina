@@ -12,7 +12,7 @@ import { CiHeart } from "react-icons/ci";
 import { LoadingSkeleton } from "../../shared/Spinner";
 import { GoDash } from "react-icons/go";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import DropdownButton from "../component/DropdownButton";
+import DropdownButton from "../dashboardcomponent/DropdownButton";
 import Link from "next/link";
 import BlogSum from "./BlogSum";
 import { IoIosArrowRoundForward } from "react-icons/io";
