@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coderina_comments",
+  "info": {
+    "singularName": "coderina-comment",
+    "pluralName": "coderina-comments",
+    "displayName": "coderinaComment",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "website": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "blocks"
+    },
+    "article": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::coderina.coderina"
+    }
+  }
+}

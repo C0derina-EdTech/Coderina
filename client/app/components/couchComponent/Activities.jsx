@@ -42,49 +42,7 @@ const Activities = () => {
           />
         </div>
       </div>
-    // <div className="text-[#648e38]  py-8 flex flex-col items-center justify-center   space-y-9">
-    //   <h1 className="lg:text-[70px] lg:px-16 font-extrabold tracking-[0.3rem]">
-    //     POST-EVENT ACTIVITIES
-    //   </h1>
-
-    //   <div className="grid gap-4 grid-cols-2 items-start justify-start">
-    //     {actCard.map((card, i) => (
-    //       <div className="border-[#648e38] border-2 w-full md:w-[500px] h-[130px]  rounded-3xl p-4 flex flex-col items-center justify-center space-y-2">
-    //         <div className="flex items-center justify-start space-x-2">
-    //           <div className="w-[50px] h-[40px]">
-    //             <Image
-    //               src={card.image}
-    //               alt="join"
-    //               className="w-full h-full object-cover"
-    //             />
-    //           </div>
-    //           <p className="text-center font-bold text-[20px] md:text-[28px]  text-nowrap">
-    //             {card.title}
-    //           </p>
-    //         </div>
-    //         <p className="text-center font-normal text-[16px]">{card.text}</p>
-    //       </div>
-    //     ))}
-    //   </div>
-
-    //   <div className="border-[#648e38] border-2 w-full md:w-[500px] h-[130px]  rounded-3xl p-4 flex flex-col items-center justify-center space-y-2">
-    //     <div className="flex items-center space-x-2 justify-start">
-    //       <div className="w-[50px] h-[40px]">
-    //         <Image
-    //           src={join1}
-    //           alt="join"
-    //           className="w-full h-full object-cover"
-    //         />
-    //       </div>
-    //       <p className="text-center font-bold text-[20px] md:text-[28px] text-nowrap">
-    //         Phases of The Challenge
-    //       </p>
-    //     </div>
-    //     <p className="text-center font-normal text-[16px]">
-    //       Broad publicity inviting applications from individuals and teams.
-    //     </p>
-    //   </div>
-    // </div>
+    
   );
 };
 

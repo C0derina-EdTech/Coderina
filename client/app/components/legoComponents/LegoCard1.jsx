@@ -1,35 +1,35 @@
-import { Box, Stack, Typography } from "@mui/material";
+"use client";
+
 import React from "react";
-import Grid from "@mui/material/Grid2";
-import CustomButton from "../CustomButton";
-import legoCard from "../../../public/lego-card1.png";
 import Image from "next/image";
 import Link from "next/link";
+import legoCard from "../../../public/lego-card1.png";
+import CustomButton from "../CustomButton";
 
 const LegoCard1 = () => {
   return (
-    <Grid container className="lego__card py-6 md:py-10 px-2 md:px-4 lg:px-16">
-      <Grid size={{ xs: 12, md: 5.6 }}>
-        <Typography variant="h4" fontSize={{ xs: "24px", md: "36px" }}>
+    <div className="flex flex-col-reverse md:flex-row justify-between items-start gap-4  px-2 md:px-4 lg:px-16 py-10 md:py-16">
+      <div className="flex flex-col items-start gap-4 md:w-[47%]">
+        <h4 className="text-[24px] md:text-[36px] font-semibold">
           FIRST® LEGO® League guides youth through STEM learning and exploration
-          at an early age.{" "}
-        </Typography>
-        <Typography fontSize={{ xs: "14px", md: "17px" }}>
+          at an early age.
+        </h4>
+        <p className="text-[14px] md:text-[17px]">
           From Discover, to Explore, and then to Challenge, students will
           understand the basics of STEM and apply their skills in an exciting
           competition while building habits of learning, confidence, and
           teamwork skills along the way.
-        </Typography>
-        <Link href="/formdata" className="mt-3">
-          <CustomButton orange bold>
-            Let`s go!
+        </p>
+        <div className="mt-3">
+          <CustomButton href="/form" label={"Let`s go!"}>
+           
           </CustomButton>
-        </Link>
-      </Grid>
-      <Grid size={{ xs: 12, md: 5.4 }}>
-        <Image src={legoCard} alt="lego" />
-      </Grid>
-    </Grid>
+        </div>
+      </div>
+      <div className="md:w-[47%]">
+        <Image src={legoCard} alt="lego" className="w-full" />
+      </div>
+    </div>
   );
 };
 

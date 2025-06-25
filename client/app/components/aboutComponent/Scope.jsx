@@ -1,12 +1,11 @@
+"use client";
 import React from "react";
 import scopeImg1 from "../../../public/scope-img1.png";
 import scopeImg2 from "../../../public/scope-img2.png";
 import scopeImg3 from "../../../public/scope-img3.png";
 import scopeImg4 from "../../../public/scope-img4.png";
-import Grid from "@mui/material/Grid2";
-import Image from "next/image";
-import { Box, Typography } from "@mui/material";
-import SolutionCards from "@/app/components/SolutionCards";
+
+import SolutionCards from "../../components/SolutionCards";
 
 const Scope = () => {
   const scopeCards = [
@@ -37,20 +36,21 @@ const Scope = () => {
   ];
 
   return (
-    <Box className="w-full  px-2 md:px-4 lg:px-8 py-10 ">
-      <h4 className="py-5 font-bold text-[30px] leading-10"> Our Services</h4>
-      <Grid container spacing={3} className="w-full justify-between">
+    <div className="w-full py-10">
+      <h4 className="py-5 font-bold text-[30px] leading-10">Our Services</h4>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {scopeCards.map((scopeCard, i) => (
           <SolutionCards
             key={i}
             {...scopeCard}
-            height={"250px"}
+            height="250px"
             childern1={scopeCard.title}
             childern3={scopeCard.details}
           />
         ))}
-      </Grid>
-    </Box>
+      </div>
+    </div>
   );
 };
 

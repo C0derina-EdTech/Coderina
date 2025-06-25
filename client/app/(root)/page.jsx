@@ -1,82 +1,109 @@
 "use client";
-import React from "react";
-import { Box, Container } from "@mui/material";
-import "../globals.css";
-import Navbar from "../components/Navbar";
-import Header from "../components/Header";
-import AboutSection from "../components/AboutSection";
-import Upcoming from "../components/Upcoming";
 
-import Footer from "../components/Footer";
-import Experience from "../components/Experience";
-import News from "../components/News";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "aos/dist/aos.css";
 import Aos from "aos";
+
+import { useEffect } from "react";
+import Footer from "../components/Footer";
+import Follow from "../components/Follow";
+import Subscribe from "../components/Subscribe";
+import FirstRoboticsRegistration from "../components/FirstRoboticsRegistration";
+import Book from "../components/Book";
+import General from "../components/General";
+import Hero from "../components/Hero";
+import AboutSection from "../components/Us";
+import Experience from "../components/Experience";
 import Activities from "../components/Activities";
-import Subscribers from "../components/Subscribers";
-import { blackCard, headerBackground, whiteColor } from "../utils/constants";
+import Space from "../components/Space";
+import Sponsors from "../components/Sponsors";
 
-import Welcome from "../components/Welcome";
-import Programs from "../components/Programs";
-
-const page = () => {
+import UpSlider from "../components/Upslider";
+export default function Home() {
   const homeContents1 = [
     {
-      color: headerBackground,
-      section: <Header />,
+      bgColor: "",
+      section: <Hero />,
     },
     {
-      // color: greenBg,
+      bgColor: "#ffffff",
       section: <AboutSection />,
     },
     {
-      color: blackCard,
-      section: <Upcoming />,
-    },
-    {
-      // color: blueColor,
-      section: <Activities />,
-    },
-    {
-      color: whiteColor,
-      section: <News />,
-    },
-    {
-      color: blackCard,
-      section: <Programs />,
+      bgColor: "#000000",
+      section: <UpSlider />,
     },
 
     {
-      color: whiteColor,
+      bgColor: "#ffffff",
+      section: <Activities />,
+    },
+    {
+      bgColor: "#ffffff",
+      section: <General />,
+    },
+
+    {
+      bgColor: "#ffffff",
+      section: <FirstRoboticsRegistration />,
+    },
+    {
+      bgColor: "#ffffff",
       section: <Experience />,
     },
+    // {
+    //   bgColor: "#ffffff",
+    //   section: <Book />,
+    // },
     {
-      color: whiteColor,
-      section: <Welcome />,
+      bgColor: "#000000",
+      section: <Space />,
+    },
+
+    {
+      bgColor: "#ffffff",
+      section: <Sponsors />,
     },
     {
-      color: headerBackground,
-      section: <Subscribers />,
+      bgColor: "#ffffff",
+      section: <Follow />,
     },
     {
-      color: "#1a1a1a",
+      bgImage:
+        "https://images.unsplash.com/photo-1551001626-86e913f8baf7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      section: <Subscribe />,
+    },
+    {
+      bgColor: "#000000",
       section: <Footer />,
     },
   ];
 
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   return (
-    <div className=" overflow-hidden bg-white ">
-      {homeContents1.map(({ color, section }, index) => (
-        // <div  style={{ border: "1px solid red" }}>
-        <div style={{ background: color }} key={`${section}-${index}`}>
-          <div className="max-w-[100rem] mx-auto">{section}</div>
-        </div>
-        // </div>
-      ))}
+    <div className="">
+      {homeContents1.map((content, index) => {
+        // Define background styles based on content
+        const bgStyle = content.bgImage
+          ? { backgroundImage: `url(${content.bgImage})` }
+          : { backgroundColor: content.bgColor || "" }; // Fallback to a default color
+
+        return (
+          <div
+            key={index}
+            className="w-full"
+            style={{
+              ...bgStyle,
+              backgroundSize: "cover", // Ensure the image covers the section
+            }}
+          >
+            <div className="max-w-[410px] sm:max-w-[80rem] mx-auto lg:gap-y-[4rem] overflow-hidden">
+              {content.section}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
-};
-
-export default page;
+}

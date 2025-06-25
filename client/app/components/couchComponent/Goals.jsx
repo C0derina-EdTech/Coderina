@@ -38,61 +38,7 @@ const Goals = () => {
         />
       </div>
     </div>
-    // <div className="text-[#648e38]  py-8 flex flex-col items-center justify-center   space-y-9">
-    //   <h1 className="lg:text-[70px] lg:px-16 font-extrabold tracking-[0.3rem]">
-    //     OUR GOALS
-    //   </h1>
-
-    //   <div className="grid gap-y-4 md:gap-10 grid-cols-2 items-start justify-start">
-    //     {goCard.map((card, i) => (
-    //       <div className=" text-white bg-[#648e38] w-full md:w-[460px] h-[140px]  rounded-3xl p-4 flex  items-center justify-center space-y-2">
-    //         <p className="px-3  font-extrabold text-[24px] md:text-[32px] text-white ">
-    //           {card.num}
-    //         </p>
-    //         <div className="border-white border-2 h-12"></div>
-    //         <div className="flex flex-col items-center justify-start px-2 space-y-1">
-    //           <p className="text-center font-bold text-[20px] md:text-[28px] text-nowrap">
-    //             {card.title}
-    //           </p>
-    //           <p className="text-center font-normal text-[16px]">{card.text}</p>
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </div>
-
-    //   <div className=" text-white bg-[#648e38] w-full md:w-[460px] h-[140px]  rounded-3xl p-4 flex  items-center justify-center space-y-2">
-    //     <p className="px-3  font-extrabold text-[24px] md:text-[32px] text-white ">
-    //       03
-    //     </p>
-    //     <div className="border-white border-2 h-12"></div>
-    //     <div className="flex flex-col items-center justify-start px-2 space-y-1">
-    //       <p className="text-center font-bold text-[20px] md:text-[28px] text-nowrap">
-    //         Stimulate Entrepreneurship
-    //       </p>
-    //       <p className="text-center font-normal text-[16px]">
-    //         cultivate Entrepreneurial skills and help participants turn ideas
-    //         into viable business ventures.
-    //       </p>
-    //     </div>
-    //   </div>
-
-    //   <div className="grid gap-y-4 md:gap-10 grid-cols-2 items-start justify-start">
-    //     {goCar.map((card, i) => (
-    //       <div className=" text-white bg-[#648e38] w-full md:w-[460px] h-[140px]  rounded-3xl p-4 flex  items-center justify-center space-y-2">
-    //         <p className="px-3  font-extrabold text-[24px] md:text-[32px] text-white ">
-    //           {card.num}
-    //         </p>
-    //         <div className="border-white border-2 h-12"></div>
-    //         <div className="flex flex-col items-center justify-start px-2 space-y-1">
-    //           <p className="text-center font-bold text-[20px] md:text-[28px] text-nowrap">
-    //             {card.title}
-    //           </p>
-    //           <p className="text-center font-normal text-[16px]">{card.text}</p>
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
+    
   );
 };
 

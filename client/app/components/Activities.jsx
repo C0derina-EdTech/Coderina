@@ -1,19 +1,10 @@
 "use client";
 
 import React from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Stack,
-  Typography,
-} from "@mui/material";
-import Grid from "@mui/material/Grid2";
-import activeImg from "../../public/activityImg.png";
-import { FaArrowRightLong } from "react-icons/fa6";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { FaArrowRightLong } from "react-icons/fa6";
+import activeImg from "../../public/activityImg.png";
 
 const Activities = () => {
   const textContent1 = [
@@ -32,75 +23,80 @@ const Activities = () => {
   ];
 
   return (
-    <Box className="activity__container px-2 md:px-4 lg:px-16 flex flex-col space-y-5 mt-5 sec__container">
-      <Typography variant="h5" fontSize={{ xs: "20px", md: "40px" }}>
+    <section className="px-4 md:px-8 lg:px-16 pt-16   space-y-10">
+      <h2 className="text-2xl md:text-4xl font-bold text-gray-800">
         Our Programs, Projects and Initiatives
-      </Typography>
-      <Stack>
-        <Grid container className="activity__cards">
-          <Grid size={{ xs: 12, sm: 5.8, md: 5.9 }} className="activity__grid ">
-            <Card className="relative w-full h-[250px] md:h-[318px]">
-              <Image className="w-full absolute h-[250px] md:h-[318px] top-0 left-0" src={activeImg} alt="name" />
+      </h2>
 
-              <h1 className="absolute bottom-4 px-2 font-bold text-[16px]">
-                FIRST LEGO League Programs
-              </h1>
-            </Card>
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Left Column */}
+        <div className="flex-1 space-y-6">
+          {/* Image Card */}
+          <div className="relative rounded-lg overflow-hidden shadow-lg">
+            <Image
+              src={activeImg}
+              alt="FIRST LEGO League Programs"
+              className="w-full h-auto object-cover"
+            />
+            <h3 className="absolute bottom-4 left-4 text-white font-bold text-lg md:text-xl bg-black/60 px-3 py-1 rounded">
+              FIRST LEGO League Programs
+            </h3>
+          </div>
 
-            <Card>
-              <CardContent>
-                <Stack gap={2}>
-                  <Typography variant="h6">Other Programs</Typography>
-                  {textContent1.map((text1) => (
-                    <Typography
-                      fontSize={{ xs: "18px", md: "20px" }}
-                      key={text1}
-                    >
-                      {text1}
-                    </Typography>
-                  ))}
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid size={{ xs: 12, sm: 5.8, md: 5.9 }} className="activity__grid">
-            <Card>
-              <CardContent>
-                <Stack gap={2}>
-                  <Typography variant="h6">Projects</Typography>
-                  {textContent2.map((text2) => (
-                    <Typography
-                      fontSize={{ xs: "18px", md: "20px" }}
-                      key={text2}
-                    >
-                      {text2}
-                    </Typography>
-                  ))}
-                </Stack>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent>
-                <Stack gap={1}>
-                  <Typography variant="h6">Initiatives</Typography>
-                  {textContent3.map((text3) => (
-                    <Typography
-                      fontSize={{ xs: "18px", md: "20px" }}
-                      key={text3}
-                    >
-                      {text3}
-                    </Typography>
-                  ))}
-                </Stack>
-                <Link href="">
-                  See other iniatives <FaArrowRightLong />
-                </Link>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Stack>
-    </Box>
+          {/* Other Programs */}
+          <div className="bg-[#FDEFD9] p-5 rounded-lg shadow-md">
+            <h4 className="text-lg font-semibold mb-3 text-gray-900">
+              Other Programs
+            </h4>
+            <ul className="space-y-2 text-gray-700">
+              {textContent1.map((item) => (
+                <li key={item} className="text-base md:text-lg">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Right Column */}
+        <div className="flex-1 space-y-6">
+          {/* Projects */}
+          <div className="bg-[#FDEFD9] p-5 rounded-lg shadow-md">
+            <h4 className="text-lg font-semibold mb-3 text-gray-900">
+              Projects
+            </h4>
+            <ul className="space-y-2 text-gray-700">
+              {textContent2.map((item) => (
+                <li key={item} className="text-base md:text-lg">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Initiatives */}
+          <div className="bg-[#FDEFD9] p-5 rounded-lg shadow-md">
+            <h4 className="text-lg font-semibold mb-3 text-gray-900">
+              Initiatives
+            </h4>
+            <ul className="space-y-2 text-gray-700">
+              {textContent3.map((item) => (
+                <li key={item} className="text-base md:text-lg">
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              href="/what"
+              className="mt-4 inline-flex items-center text-primary font-semibold hover:underline"
+            >
+              See other initiatives <FaArrowRightLong className="ml-2" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

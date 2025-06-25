@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_links",
+  "info": {
+    "displayName": "Links"
+  },
+  "options": {},
+  "attributes": {
+    "twitter": {
+      "type": "string"
+    },
+    "linkedin": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "youtube": {
+      "type": "string"
+    },
+    "facebook": {
+      "type": "string"
+    }
+  }
+}

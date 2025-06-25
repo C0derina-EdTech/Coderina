@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 import Slider from "react-slick";
@@ -60,8 +62,8 @@ const LegoImpact = () => {
     ],
   };
   return (
-    <div className="px-2 md:px-4 lg:px-16 aboutImpact__container lego__impact bg-[#FDEFD9] text-black font-Geist py-10">
-      <h4 className="text-black font-medium ">
+    <div className="px-2 md:px-4 lg:px-16 aboutImpact__container lego__impact bg-[#FDEFD9] text-black font-Geist py-10 md:py-16">
+      <h4 className="text-black font-medium 3xl lg:text-5xl tracking-[4px] mb-6 lg:leading-[60.5px] text-center ">
         Inspiring Generations of Global Citizens and Helping Them Realize Their
         Power to Build a Better Future
       </h4>

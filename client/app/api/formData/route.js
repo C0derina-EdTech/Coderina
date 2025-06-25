@@ -1,5 +1,5 @@
-import connectDB from "../../lib/dbConnect";
-import FormData from "../../models/formsDatas";
+import connectDB from "../../utlity/dbConnect";
+import FormData from "../../utlity/models/programs";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 

@@ -1,43 +1,17 @@
-"use client";
-
 import React from "react";
+import WhatPage from "./WhatPage";
+export const metadata = {
+  title: "What we do",
+  description:
+    "Discover how Coderina Education and Technology Foundation empowers African youth through STEM education, coding programs, and digital literacy initiatives.",
+};
 
-import { Box, Container } from "@mui/material";
-
-import { blackColor, pinkBg } from "../../utils/constants";
-import WhatBody from "./WhatBody";
-import Subscribers from "../../components/Subscribers";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Footer from "../../components/Footer";
-const Page = () => {
-  const whatWedoContent = [
-    {
-      color: pinkBg,
-      section: <WhatBody />,
-    },
-
-    {
-      color: pinkBg,
-      section: <Subscribers />,
-    },
-    {
-      color: ["#1a1a1a"],
-      section: <Footer />,
-    },
-  ];
-
+const page = () => {
   return (
-    <>
-      <div>
-        {whatWedoContent.map(({ color, section }, index) => (
-          <div style={{ background: color }} className="p-4" key={`${section}-${index}`}>
-            <div div className="max-w-[100rem] mx-auto">{section}</div>
-          </div>
-        ))}
-      </div>
-    </>
+    <div>
+      <WhatPage />
+    </div>
   );
 };
 
-export default Page;
+export default page;

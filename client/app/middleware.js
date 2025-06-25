@@ -1,88 +1,88 @@
-// // import { NextResponse } from "next/server";
-// import jwt from "jsonwebtoken";
-
-// // // This is the JWT secret key used to verify the token
-// const JWT_SECRET = process.env.ACCESS_TOKEN_SECRET || "your-jwt-secret";
-
-// // // Middleware function to protect routes
-// // export async function middleware(req) {
-// //   // Check if the user is trying to access the dashboard
-// //   if (req.nextUrl.pathname.startsWith("/dashboard/overview")) {
-// //     const token = req.cookies.get("token");
-
-// //     if (!token) {
-// //       // If there's no token, redirect to the login page
-// //       return NextResponse.redirect(new URL("/login", req.url));
-// //     }
-
-// //     try {
-// //       // Verify the token using the JWT secret
-// //       const decoded = jwt.verify(token, JWT_SECRET);
-// //       req.user = decoded; // Attach user info to the request
-// //       return NextResponse.next(); // Allow access to the dashboard
-// //     } catch (error) {
-// //       // If the token is invalid or expired, redirect to login page
-// //       return NextResponse.redirect(new URL("/login", req.url));
-// //     }
-// //   }
-
-// //   // Allow other routes to pass through (e.g., public pages)
-// //   return NextResponse.next();
-// // }
-
-// // // Define paths where the middleware will be applied
-// // export const config = {
-// //   matcher: ["/dashboard/overview"], // Protect these paths
-// //};
-
-// import { NextResponse } from "next/server";
-
-// export function middleware(req) {
-//   const token = req.cookies.get("token");
-//   console.log("token string", token);
-//   const isLoginPage = req.nextUrl.pathname === "/login";
-
-//   if (!token) {
-//     const redirectUrl = new URL("/login", req.url);
-//     redirectUrl.searchParams.set("redirect", req.nextUrl.pathname);
-//     return NextResponse.redirect(redirectUrl);
-//   }
-//   _;
-//   if (token && isLoginPage) {
-//     return NextResponse.redirect(new URL("/dashboard/overview", req.url));
-//   }
-
-//   return NextResponse.next();
-// }
-
-// export const config = {
-//   matcher: ["/dashboard/:path*", "/profile/:path*", "/login"],
-// };
-
 import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-export function middleware(req) {
-  const token = req.cookies.get("token"); // Get the token from cookies
-  const { pathname } = req.nextUrl; // Extract pathname from the request URL
-  const isLoginPage = pathname === "/login";
+const PUBLIC_ROUTES = [
+  "/",
+  "/about",
+  "/privacy",
+  "/sign-in",
+  "/sign-up",
+  "/contact",
+  "/posts",
+  "/[year]",
+  "/category",
+  "/couch",
+  "/events",
+  "/what",
+  "/project-fair",
+  "/form",
+  "/firstlego",
+  "/api/webhooks",
+  "/api/public",
+];
 
-  console.log("Token:", token);
+const ROLE_DASHBOARDS = {
+  admin: "/admincodeboard/overview",
+  viewer: "/",
+};
 
-  if (!token && pathname.startsWith("/dashboard")) {
-    // Immediately return a redirect to the login page, avoiding route processing
-    const redirectUrl = new URL("/login", req.url);
-    return NextResponse.redirect(redirectUrl);
+const PROTECTED_PATHS = {
+  "/admincodeboard": "admin",
+};
+
+export async function middleware(req) {
+  const { pathname } = req.nextUrl;
+  const isPublicRoute = PUBLIC_ROUTES.some(
+    (route) => pathname === route || pathname.startsWith(route)
+  );
+
+  try {
+    const token = await getToken({ req, secret: process.env.API_SECRET });
+
+    // 1. Not logged in & not on a public route → redirect
+    if (!token && !isPublicRoute) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+
+    // 2. Logged in but no role info
+    if (token && !token.role) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+
+    // 3. Redirect /board to appropriate dashboard
+    if (token && pathname === "/board") {
+      const target = ROLE_DASHBOARDS[token.role] || "/";
+      return NextResponse.redirect(new URL(target, req.url));
+    }
+
+    // 4. Prevent logged-in users from visiting sign-in or sign-up
+    if (
+      token &&
+      ["/sign-in", "/sign-up"].includes(pathname)
+    ) {
+      const target = ROLE_DASHBOARDS[token.role] || "/";
+      return NextResponse.redirect(new URL(target, req.url));
+    }
+
+    // 5. Check role-based route protections
+    for (const protectedPath in PROTECTED_PATHS) {
+      if (
+        pathname.startsWith(protectedPath) &&
+        token?.role !== PROTECTED_PATHS[protectedPath]
+      ) {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
+    }
+
+    return NextResponse.next();
+  } catch (error) {
+    console.error("Middleware error:", error);
+    return NextResponse.redirect(new URL("/", req.url));
   }
-
-  if (token && isLoginPage) {
-    // Redirect logged-in users away from the login page to the dashboard
-    return NextResponse.redirect(new URL("/dashboard/overview", req.url));
-  }
-
-  // Allow access to other routes
-  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login"], // Match protected and login routes
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(css|js|png|jpg|jpeg|svg|woff|woff2|ttf|eot)).*)",
+  ],
 };

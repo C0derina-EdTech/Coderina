@@ -14,19 +14,7 @@ const Description = () => {
           />
         </div>
       </div>
-    // <div className="text-[#648e38] md:px-4 md:max-w-[800px] mx-auto py-8 flex flex-col items-center justify-center  md:py-16 space-y-6">
-    //   <h1 className="lg:text-[70px] font-extrabold tracking-[0.5rem]">WHAT IS COUCH</h1>
-    //   <p className="tracking-[0.1rem] text-center text-[16px] md:text-[28px] leading-9">
-    //     The Coderina University Challenge (COUCH) is an innovative platform
-    //     designed to inspire creativity, foster entrepreneurial mindsets, and
-    //     encourage the practical application of academic research among students
-    //     in tertiary education. By bridging the gap between theoretical knowledge
-    //     and real-world application, COUCH empowers students to develop solutions
-    //     that address pressing societal challenges. Open to participants across
-    //     Nigeria, the challenge offers a dynamic environment for collaboration,
-    //     learning, and competition.
-    //   </p>
-    // </div>
+    
   );
 };
 

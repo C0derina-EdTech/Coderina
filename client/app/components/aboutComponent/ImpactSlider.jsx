@@ -1,180 +1,137 @@
-import { Box, CardContent, Container, Stack, Typography } from "@mui/material";
-import React from "react";
-import Slider from "react-slick";
-import personStar from "../../../public/person-star.svg";
-import smile from "../../../public/smile.svg";
-import robot from "../../../public/robot.svg";
-import plant from "../../../public/plant.svg";
-import gSmile from "../../../public/green-smile.png";
-import gPerson from "../../../public/green-person.png";
-import gBank from "../../../public/green-bank.png";
-import gHandShake from "../../../public/green-shake.png";
-import gBill from "../../../public/green-bill.png";
-import Image from "next/image";
+"use client";
 
+import React from "react";
+import CountUp from "react-countup";
+import Image from "next/image";
+import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const ImpactSlider = ({ lego }) => {
   const impactNums = [
     {
-      number: "28,372",
+      number: 28372,
       text: (
         <>
           Number of <br />
           Students trained
         </>
       ),
-      img: gSmile,
+      img: "/green-smile.png",
     },
     {
-      number: "7,362",
+      number: 7362,
       text: (
         <>
           Number of <br /> Teachers trained
         </>
       ),
-      img: gPerson,
+      img: "/green-person.png",
     },
     {
-      number: "12",
-      text: "Number of Governments & Ministry Relationships",
-      img: gBank,
+      number: 12,
+      text: (
+        <>
+           Number of Governments &  <br /> Ministry Relationships
+        </>
+      ),
+      img: "/green-bank.png",
     },
     {
-      number: "16",
+      number: 16,
       text: (
         <>
           Number of <br />
-          Partnerships{" "}
+          Partnerships
         </>
       ),
-      img: gHandShake,
+      img: "/green-shake.png",
     },
     {
-      number: "64",
+      number: 64,
       text: (
         <>
           New Businesses <br /> Incubated
         </>
       ),
-      img: gBill,
+      img: "/green-bill.png",
     },
   ];
 
   const legoImpact = [
     {
-      number: "5,600",
+      number: 5600,
       text: "Teachers trained",
-      img: personStar,
+      img: "/person-star.svg",
     },
     {
-      number: "12,749",
+      number: 12749,
       text: "Students Impacted",
-      img: smile,
+      img: "/smile.svg",
     },
     {
-      number: "1,185",
+      number: 1185,
       text: "Robots Built",
-      img: robot,
+      img: "/robot.svg",
     },
     {
-      number: "26",
+      number: 26,
       text: "Projects Incubated",
-      img: plant,
+      img: "/plant.svg",
     },
   ];
 
-  let settings = {
+  const settings = {
     dots: true,
     infinite: true,
-    speed: 400,
+    speed: 500,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
     responsive: [
       {
-        breakpoint: 600,
+        breakpoint: 1024,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 2,
+          slidesToShow: 2,
         },
       },
       {
-        breakpoint: 300,
+        breakpoint: 640,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
         },
       },
     ],
   };
 
-  if (lego)
-    return (
-      <Container maxWidth="lg">
-        <Box overflow={"hidden"} className="impact__carousel">
-          <Slider {...settings} slidesToShow={4}>
-            {legoImpact.map((slide, index) => (
-              <CardContent
-                key={index}
-                className="impact__card"
-                sx={{
-                  bgcolor: "#FFF9F0",
-                  borderRight: "1px solid #E69F22",
-                  height: { xs: "26vh", md: "30vh" },
-                }}
-              >
-                <Image src={slide.img} alt="slide" />
-                <Stack>
-                  <Typography
-                    variant="h4"
-                    fontSize={{ xs: "40px", md: "50px" }}
-                  >
-                    {slide.number}
-                  </Typography>
-                  <Typography fontSize={{ xs: "14px", md: "16px" }}>
-                    {slide.text}
-                  </Typography>
-                </Stack>
-              </CardContent>
-            ))}
-          </Slider>
-        </Box>
-      </Container>
-    );
+  const data = lego ? legoImpact : impactNums;
+
   return (
-    <Box
-      overflow={"hidden"}
-      className="impact__carousel"
-      border={"1px solid #3D3D3D"}
-    >
-      <Slider {...settings} slidesToShow={5}>
-        {impactNums.map((slide, index) => (
-          <CardContent
-            key={index}
-            className="impact__card"
-            sx={{
-              bgcolor: "#343232",
-              borderRight: "1px solid #3D3D3D",
-              height: { xs: "26vh", md: "40vh", lg: "40vh" },
-            }}
-          >
-            <Image
-              width={{ xs: "16px", md: "24px" }}
-              className="w-[20px] h-[24px]"
-              src={slide.img}
-              alt="slider"
-            />
-            <Stack>
-              <Typography variant="h4" fontSize={{ xs: "40px", md: "48px" }}>
-                {slide.number}
-              </Typography>
-              <Typography fontSize={{ xs: "14px", md: "16px" }}>
-                {slide.text}
-              </Typography>
-            </Stack>
-          </CardContent>
+    <div className="py-[1em] px-[3em] rounded-[1rem] border-2 border-[#4c4c4c]">
+      <Slider {...settings}>
+        {data.map((item, index) => (
+          <div key={index} className="">
+            <ImpactCard {...item} />
+          </div>
         ))}
       </Slider>
-    </Box>
+    </div>
+  );
+};
+
+const ImpactCard = ({ number, text, img }) => {
+  return (
+    <div className="w-full h-full p-4  text-center">
+      <div className="w-12 h-12 mb-4 mx-auto relative">
+        <Image src={img} alt="icon" fill className="object-contain" />
+      </div>
+      <h2 className="text-4xl font-bold mb-2 text-yellow-600 dark:text-yellow-400">
+        <CountUp start={0} end={number} duration={2.5} separator="," />
+      </h2>
+      <p className="text-sm leading-relaxed">{text}</p>
+    </div>
   );
 };
 

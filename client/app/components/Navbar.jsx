@@ -1,121 +1,226 @@
-import React, { useEffect, useState } from "react";
-import logo from "../../public/coderinaLogo.png";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { GiHamburgerMenu } from "react-icons/gi";
 import Image from "next/image";
-import SideBar from "./SideBar";
-import { usePathname, } from "next/navigation";
+import { GiHamburgerMenu } from "react-icons/gi";
+import {
+  FaSun,
+  FaMoon,
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+  FaInstagram,
+  FaTiktok,
+  FaYoutube,
+} from "react-icons/fa";
+import { TbMenu3 } from "react-icons/tb";
+import { usePathname, useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+
+import log2 from "../../public/coderinaLogo.png";
 const Navbar = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname(false);
+  const router = useRouter();
+  const pathname = usePathname();
   const id = pathname?.startsWith("/Media/")
     ? pathname.split("/Media/")[1]
     : null;
-  const [display, setDisplay] = useState();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const [display, setDisplay] = useState(false);
+
   const links = [
     { label: "Home", path: "/" },
-    { label: "About us", path: "/about" },
+    { label: "About Us", path: "/about" },
+    { label: "Contact", path: "/contact" },
     { label: "What we do", path: "/what" },
     { label: "Events", path: "/events" },
-    { label: "Media", path: "/media" },
   ];
-  const activeLink =
-    "text-[#FBB12F] flex items-center justify-center space-x-1 text-[16px] font-normal relative after:content-[''] after:bg-[#FBB12F] after:h-[4px] after:w-[100%] after:left-0 after:bottom-[-12px] after:rounded-xl after:absolute";
-  const normalLink =
-    "relative flex items-center justify-center space-x-1 tracking-[1px] text-[16px] font-normal leading-[20px] hover:text-[#6b4343] after:content-[''] after:bg-[#FBB12F] after:h-[4px] after:w-[0%] after:left-0 after:bottom-[-12px] after:rounded-xl after:absolute after:duration-300 hover:after:w-[100%]";
+  const link = [
+    { label: "Home", path: "/" },
+    { label: "About Us", path: "/about" },
+    { label: "Contact", path: "/contact" },
+    { label: "What we do", path: "/what" },
+    { label: "Events", path: "/events" },
+  ];
+
+  const socialLinks = [
+    { icon: <FaFacebookF />, url: "https://facebook.com/coderinaedu" },
+    { icon: <FaTwitter />, url: "https://twitter.com/coderina" },
+    {
+      icon: <FaLinkedinIn />,
+      url: "https://linkedin.com/in/coderina-edtech-foundation",
+    },
+    { icon: <FaInstagram />, url: "https://instagram.com/coderinaedu" },
+    { icon: <FaYoutube />, url: "https://www.youtube.com/@coderina5977" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10); // you can adjust the scroll threshold
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (
-      pathname === "/" ||
-      pathname === "/media" ||
-      (id && pathname === `/media/${id}`) ||
-      pathname === "/form" ||
-      pathname === "/couch" ||
-      pathname === "/what" ||
-      pathname === "/events" ||
-      pathname === "/firstlego" ||
-      pathname === "/about" ||
-      pathname === "/formData" ||
-      pathname === "/contactUs" ||
-      pathname === "/projectFair"||
-      pathname ==="/bootcamp" ||
-      pathname === "/firstlegoleaque"
-    ) {
-      setDisplay(true);
-    } else {
-      setDisplay(false);
-    }
-  }, [pathname]);
-  return display ? (
-    <div
-      className={`${isScrolled ? "bg-white sticky top-0" : "bg-transparent"
-        } w-full sticky top-0 z-50  flex items-center justify-center px-2 md:px-4 py-6 lg:px-16 lg:py-6 transition-colors duration-300`}
-    >
-      <div className=" max-w-[90rem] mx-auto flex items-center justify-between w-full ">
-        <Link href="/" className="">
-          <Image
-            src={logo}
-            alt="coderinalogo"
-            className=" object-cover w-[130px] sm:w-[90px] lg:w-[130px]"
-          />
-        </Link>
+    const validPaths = [
+      "/",
+      "/about",
+      "/contact",
+      "/posts",
+      "/category",
+      "/privacy-policy",
+      "/what",
+      "/events",
+      "/form",
+      "/firstlego",
+      "/couch",
+      "/project-fair",
+      "/programs",
+      "/firstlegoleague",
+      "/sign-in"
+    ];
 
-        <nav className="hidden md:flex items-center justify-center space-x-5 lg:space-x-8 ">
+    const isMediaPath = id && pathname === `/Media/${id}`;
+
+    const isPostSlugPath =
+      (pathname?.startsWith("/posts/") || pathname.startsWith("/category/")) &&
+      pathname.split("/").length === 3;
+
+    const archiveRegex = /^\/\d{4}\/\d{2}$/;
+    const isArchivePath = archiveRegex.test(pathname);
+
+    const isValid =
+      validPaths.includes(pathname) ||
+      isMediaPath ||
+      isPostSlugPath ||
+      isArchivePath;
+
+    setDisplay(isValid);
+  }, [pathname, id]);
+  const transparentPaths = ["/"];
+  const isTransparentPath = transparentPaths.includes(pathname);
+
+  const activeLink =
+    "text-[#FBB12F] flex items-center justify-center space-x-1 text-[16px] font-normal relative after:content-[''] after:bg-[#FBB12F] after:h-[4px] after:w-[100%] after:left-0 after:bottom-[-12px] after:rounded-xl after:absolute";
+  const normalLink =
+    "relative flex text-[#232323] items-center justify-center space-x-1 tracking-[1px] text-[16px] font-normal leading-[20px] hover:text-[#6b4343] after:content-[''] after:bg-[#FBB12F] after:h-[4px] after:w-[0%] after:left-0 after:bottom-[-12px] after:rounded-xl after:absolute after:duration-300 hover:after:w-[100%]";
+
+  return display ? (
+    <motion.div
+      initial={{ y: 0, opacity: 1 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`w-full z-50 sticky top-0 transition-all duration-300 ${
+        isTransparentPath
+          ? isScrolled
+            ? "bg-white text-black shadow-md"
+            : "bg-transparent text-white"
+          : "bg-white text-black shadow-md"
+      }`}
+    >
+      <div className="flex items-center  justify-between py-5 px-4 md:px-6 lg:px-12">
+        {/* Logo */}
+        <div className="relative h-14 w-24 sm:w-36 rounded-md">
+          <Image
+            src={log2}
+            alt="logo"
+            fill
+            className="rounded-lg object-contain"
+          />
+        </div>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex gap-6 items-center justify-center">
           {links.map(({ label, path }, index) => (
             <Link
-              key={`${label}-${index}`}
+              key={index}
               href={path}
-              className={`${pathname === path ? activeLink : normalLink}`}
+              className={pathname === path ? activeLink : normalLink}
             >
               {label}
             </Link>
           ))}
         </nav>
 
-        <Link
-          href="/contactUs"
-          className="relative border-[1.3px] border-[#fbb12f] bg-[#FBB12F] cursor-pointer text-black hover:bg-white hover:text-[#fbb12f] transition-all ease-in-out duration-700 rounded-3xl py-2 px-4 md:px-7 text-[14px] md:text-[17px] hidden md:flex font-medium group overflow-hidden"
-        >
-          {/* Default Text */}
-          <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-700 ease-in-out">
-            Get Involved
-          </span>
-
-          {/* Hover Text */}
-          <span className="absolute inset-0 flex items-center justify-center text-[#fbb12f]  font-medium translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out">
-            Go!
-          </span>
-        </Link>
-
-        <div className="md:hidden">
-          <div className="text-2xl" onClick={() => setIsDrawerOpen(true)}>
-            <GiHamburgerMenu />
+        {/* Right Section */}
+        <div className="flex items-center gap-3 md:gap-4">
+          {/* Social Links */}
+          <div className="flex gap-3">
+            {socialLinks.map(({ icon, url }, idx) => (
+              <Link
+                key={idx}
+                href={url}
+                target="_blank"
+                className="hover:text-blue-500 text-[#232323] text-[13px] sm:text-[15px] transition"
+              >
+                {icon}
+              </Link>
+            ))}
           </div>
 
-          <SideBar
-            isOpen={isDrawerOpen}
-            handleClose={() => setIsDrawerOpen(false)}
-            Links={links}
-          />
+          {/* Hamburger */}
+          <button
+            onClick={() => setIsDrawerOpen(true)}
+            className="md:hidden text-2xl text-color"
+          >
+            {/* <GiHamburgerMenu /> */}
+            <TbMenu3 />
+          </button>
         </div>
       </div>
-    </div>
+
+      {/* Sidebar */}
+      <AnimatePresence>
+        {isDrawerOpen && (
+          <motion.aside
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="fixed top-0 left-0 w-full sm:w-1/2 h-screen bg-background text-color shadow-lg z-[100] p-6"
+          >
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-lg font-semibold"></h2>
+              <button
+                onClick={() => setIsDrawerOpen(false)}
+                className="text-4xl"
+              >
+                x
+              </button>
+            </div>
+            <nav className="flex flex-col items-center justify-center space-y-5">
+              {link.map(({ label, path }, i) => (
+                <Link
+                  key={i}
+                  href={path}
+                  onClick={() => setIsDrawerOpen(false)}
+                  className="text-color text-xl transition"
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+            <div className="flex items-center justify-center gap-4 mt-10">
+              {socialLinks.map(({ icon, url }, idx) => (
+                <Link
+                  key={idx}
+                  href={url}
+                  target="_blank"
+                  className="text-color text-lg hover:text-blue-500"
+                >
+                  {icon}
+                </Link>
+              ))}
+            </div>
+          </motion.aside>
+        )}
+      </AnimatePresence>
+    </motion.div>
   ) : null;
 };
 

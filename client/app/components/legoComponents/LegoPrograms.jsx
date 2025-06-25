@@ -1,11 +1,12 @@
-import { Box, Stack, Typography } from "@mui/material";
+"use client";
+
 import React from "react";
+import Image from "next/image";
 import legoDiscover from "../../../public/lego-discover.png";
 import legoExplore from "../../../public/lego-explore.png";
 import legoChallenge from "../../../public/lego-challenge.png";
 import legoTech from "../../../public/lego-tech.png";
-import Grid from "@mui/material/Grid2";
-import Image from "next/image";
+
 const LegoPrograms = () => {
   const legoLeagues = [
     {
@@ -31,21 +32,19 @@ const LegoPrograms = () => {
   ];
 
   return (
-    <Box className="lego__program py-6 md:py-12 px-2 md:px-4 lg:px-16">
-      <Typography variant="h4" fontSize={{ xs: "24px", md: "36px" }}>
+    <div className="flex flex-col items-center justify-center gap-12 py-6 md:py-12 px-2 md:px-4 lg:px-16 py-6">
+      <h2 className="text-[24px] md:text-[36px] font-semibold text-center">
         FIRST LEGO League Programs
-      </Typography>
-      <Grid container>
-        {legoLeagues.map((league, i) => (
-          <Grid key={i} size={{ xs: 12, sm: 5.8, md: 2.85 }}>
-            <Stack>
-              <Image src={league.img} alt="leaqueimg" />
-              <Typography>{league.description}</Typography>
-            </Stack>
-          </Grid>
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+        {legoLeagues.map((league, index) => (
+          <div key={index} className="flex flex-col gap-4">
+            <Image src={league.img} alt="league image" className="w-full" />
+            <p className="text-[13px]">{league.description}</p>
+          </div>
         ))}
-      </Grid>
-    </Box>
+      </div>
+    </div>
   );
 };
 

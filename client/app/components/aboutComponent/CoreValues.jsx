@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Card,
@@ -22,10 +24,12 @@ const CoreValues = () => {
     <Box>
       <Card className="cv__container">
         {coreValues.map((cv, i) => (
-          <CardContent key={i}
+          <CardContent
+            key={i}
             sx={{
               justifyContent: { xs: "center", sm: "space-between !important" },
-            }}>
+            }}
+          >
             <Stack width={{ xs: "100%", sm: "25%" }}>
               <Typography variant="h3" fontSize={{ xs: "30px", md: "40px" }}>
                 {cv.title}

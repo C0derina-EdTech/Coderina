@@ -1,12 +1,14 @@
-import FLL from "../../models/fll";
-import connectDB from "../../lib/dbConnect"; // Utility for DB connection
+import FLL from "../../utlity/models/fll";
+import connectDB from "../../utlity/dbConnect";
+// Utility for DB connection
+
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
-// Create a new bootcamp registration
+// Create a new fll registration
 export async function POST(req) {
   try {
-    await connectDB(); // Ensure the database connection is established
+    await connectDB();
 
     const {
       studentName,

@@ -1,21 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { Box, Card, CardContent, Stack, Typography, Grid } from "@mui/material";
+
 import { AiOutlineCalendar } from "react-icons/ai";
 import { TbClockHour3 } from "react-icons/tb";
 import { FiSearch } from "react-icons/fi";
-import Input from "antd/es/input/Input";
-import { DateTime } from "luxon";
-import { DataContext } from "../../context/DataContext";
+import { useTheme } from "../contexts/ThemeContext";
 
 const EventPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
-  const { events, loading } = useContext(DataContext);
+  const themeContext = useTheme();
+  const { events, loading } = themeContext || {};
 
   useEffect(() => {
-    if (!events || !events.length) return;
+    if (!events || !events?.length) return;
 
     // Current date in Nigeria's timezone
     const now = new Date();
@@ -23,12 +24,12 @@ const EventPage = () => {
     const nigeriaTime = new Date(now.getTime() + offset);
 
     // Categorize events based on startDate
-    const upcoming = events.filter((event) => {
+    const upcoming = events?.filter((event) => {
       const eventDate = new Date(event.endDate); // Use endDate for comparison
       return eventDate >= nigeriaTime;
     });
 
-    const past = events.filter((event) => {
+    const past = events?.filter((event) => {
       const eventDate = new Date(event.endDate); // Use endDate for comparison
       return eventDate < nigeriaTime;
     });
@@ -50,13 +51,15 @@ const EventPage = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+        <div className=" col-span-full">
+          <div className="w-6 h-6 border-2 border-color border-t-transparent rounded-full animate-spin motion-safe:animate-bounce-slow" />
+        </div>
       </div>
     );
   }
 
   return (
-    <Box className="event__container pt-[6rem]">
+    <Box className="event__container py-[3rem] md:py-[6rem]">
       {!events || !events.length ? (
         <div className="flex justify-center items-center h-screen">
           <p className="text-gray-600 text-lg font-semibold">
@@ -69,11 +72,14 @@ const EventPage = () => {
           <Stack>
             <Stack
               className="event__upcoming mb-10"
-              justifyContent={["center", "space-between"]}
+              direction={{ base: "column", md: "row" }}
+              spacing={{ base: 0, md: 4 }}
+              align="center"
+              justify="space-between"
             >
               <Typography variant="h4">Upcoming Events</Typography>
               <form>
-                <Input
+                <input
                   width={{ xs: "100%", md: "300px" }}
                   type="text"
                   style={{ borderRadius: "2em" }}

@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coderinas",
+  "info": {
+    "singularName": "coderina",
+    "pluralName": "coderinas",
+    "displayName": "coderina",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "readTime": {
+      "type": "integer"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::coderina-category.coderina-category",
+      "inversedBy": "coderinas"
+    },
+    "links": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.links"
+    },
+    "views": {
+      "type": "integer"
+    }
+  }
+}

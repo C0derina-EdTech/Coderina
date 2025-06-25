@@ -4,8 +4,7 @@ import equality from "../../../public/equality.png";
 import growth from "../../../public/growth.png";
 import innovation from "../../../public/innovation.png";
 import Image from "next/image";
-import { Box, Stack } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+
 const Alignment = () => {
   const align = [
     {
@@ -25,31 +24,35 @@ const Alignment = () => {
       desc: "Building resilient infrastructure and fostering innovation through STEAM programs.",
     },
   ];
+
   return (
-    <Box className="space-y-10 py-10 md:py-14">
-      <Stack>
-        <h1 className="font-bold text-[28px] md:text-[32px] leading-[41.1px]">
+    <section className="space-y-10 py-10 md:py-14">
+      <div>
+        <h1 className="font-bold text-[28px] md:text-[32px] leading-[41.1px] text-center md:text-left">
           Alignment with the SDGs
         </h1>
-      </Stack>
-      <Grid container spacing={3} className="w-full justify-between" >
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-center">
         {align.map((sec, index) => (
-          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index} className="flex flex-col justify-center items-center space-y-2">
-            <Stack className="w-full md:w-[290px] h-[270px]">
+          <div
+            key={index}
+            className="flex flex-col items-center space-y-4 max-w-[290px] mx-auto"
+          >
+            <div className="w-full h-[270px] flex justify-center items-center">
               <Image
                 src={sec.img}
-                alt="innovate"
-                className="w-full h-full object-contain"
+                alt="alignment icon"
+                className="object-contain w-full h-full"
               />
-            </Stack>
-
+            </div>
             <p className="text-center font-normal text-[16px] leading-7">
               {sec.desc}
             </p>
-          </Grid>
+          </div>
         ))}
-      </Grid>
-    </Box>
+      </div>
+    </section>
   );
 };
 

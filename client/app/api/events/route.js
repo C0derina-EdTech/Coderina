@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import connectDB from "../../lib/dbConnect";
-import Events from "../../models/events";
+import connectDB from "../../utlity/dbConnect";
+import Events from "../../utlity/models/events";
 
 // GET method - Retrieve events
 export async function GET(req) {

@@ -2,15 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { TbClockHour3 } from "react-icons/tb";
-import { DataContext } from "../context/DataContext";
+import { useTheme } from "./contexts/ThemeContext";
 
 const UpSlider = ({ slider }) => {
-  // const { upCard, loading } = useContext(DataContext);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
-  const { events, loading } = useContext(DataContext);
+  const themeContext = useTheme();
+  const { events, loading } = themeContext || {};
 
   useEffect(() => {
-    if (!events || !events.length) return;
+    if (!events || !events?.length) return;
 
     // Current date in Nigeria's timezone
     const now = new Date();
@@ -18,7 +18,7 @@ const UpSlider = ({ slider }) => {
     const nigeriaTime = new Date(now.getTime() + offset);
 
     // Categorize events based on startDate
-    const upcoming = events.filter((event) => {
+    const upcoming = events?.filter((event) => {
       const eventDate = new Date(event.endDate); // Use endDate for comparison
       return eventDate >= nigeriaTime;
     });
@@ -52,7 +52,11 @@ const UpSlider = ({ slider }) => {
   };
 
   return (
-    <div className="overflow-hidden px-2">
+    <div className="overflow-hidden px-2 sm:px-4 lg:px-16 py-10">
+
+      <h1 className="text-2xl md:text-4xl font-bold text-white mb-6 lg:mb-10">
+        Upcoming Events
+      </h1>
       {loading ? (
         <p className="text-center text-gray-500">Loading events...</p>
       ) : upcomingEvents.length === 0 ? (

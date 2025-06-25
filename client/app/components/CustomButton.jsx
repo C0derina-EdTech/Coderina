@@ -1,38 +1,23 @@
-import { Button } from "@mui/material";
-import React from "react";
-import { fontStyle } from "../utils/constants";
+"use client";
 
-const CustomButton = ({ children, orange, styles, bold, isLarge }) => {
+import Link from "next/link";
+
+const CustomButton = ({ href, label }) => {
   return (
-    <div className="relative group w-[10.3rem] overflow-hidden">
-      <Button
-        variant="contained"
-        sx={{
-          padding: isLarge ? ".9em 1.8em" : "",
-          bgcolor: orange ? "#FBB12F" : "#201E1E",
-          borderRadius: 10,
-          fontSize: { xs: "10px", md: "13px" },
-          textTransform: "none",
-          fontWeight: bold ? 600 : 300,
-          color: orange ? "#080F12" : "#fff",
-          fontFamily: fontStyle,
-          whiteSpace: "nowrap",
-          gap: ".7em",
-          ...styles,
-        }}
-        className="w-full h-full flex items-center justify-center transition-all ease-in-out duration-700"
-      >
-        {/* Main Text */}
-        <p className="relative z-10 group-hover:opacity-0 transition-opacity duration-700 ease-in-out">
-          {children}
-        </p>
-      </Button>
+    <Link
+      href={href}
+      className="relative flex items-center justify-center  w-44  text-nowrap   bg-black text-white  rounded-3xl text-[14px]  cursor-pointer hover:bg-black hover:text-white transition-all ease-in-out duration-700  py-2 px-2    font-medium group overflow-hidden"
+    >
+      {/* Default Text */}
+      <span className="relative flex items-center justify-center z-10 group-hover:opacity-0 transition-opacity duration-700 ease-in-out">
+        <p>{label}</p>
+      </span>
 
       {/* Hover Text */}
-      <span className="absolute inset-0 flex items-center justify-center text-white font-medium translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out">
+      <span className="absolute inset-0 flex items-center justify-center text-white  font-medium translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out">
         Go!
       </span>
-    </div>
+    </Link>
   );
 };
 
