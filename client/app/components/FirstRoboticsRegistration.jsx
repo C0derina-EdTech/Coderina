@@ -39,7 +39,7 @@ const FirstRoboticsRegistration = () => {
         </div>
 
         <div className="mt-6">
-          <CustomButton href="http://bootcamp.ng" label="Register" />
+          <CustomButton href="http://bit.ly/4lczQH8" label="Register" />
         </div>
       </div>
 

@@ -160,7 +160,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\users\\VICTORY\\Documents\\codes\\coderina\\client\\prisma\\generated\\prisma",
+      "value": "C:\\Users\\VICTORY\\Documents\\codes\\coderina\\client\\prisma\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -174,7 +174,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\users\\VICTORY\\Documents\\codes\\coderina\\client\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\VICTORY\\Documents\\codes\\coderina\\client\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
