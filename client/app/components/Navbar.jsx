@@ -33,17 +33,17 @@ const Navbar = () => {
 
   const links = [
     { label: "Home", path: "/" },
-    { label: "About Us", path: "/about" },
+    { label: "About Us", path: "/About" },
     { label: "Contact", path: "/contact" },
-    { label: "What we do", path: "/what" },
-    { label: "Events", path: "/events" },
+    { label: "Programs", path: "/programs" },
+    { label: "Events", path: "/Events" },
   ];
   const link = [
     { label: "Home", path: "/" },
-    { label: "About Us", path: "/about" },
+    { label: "About Us", path: "/About" },
     { label: "Contact", path: "/contact" },
-    { label: "What we do", path: "/what" },
-    { label: "Events", path: "/events" },
+    { label: "Programs", path: "/programs" },
+    { label: "Events", path: "/Events" },
   ];
 
   const socialLinks = [
@@ -69,20 +69,22 @@ const Navbar = () => {
   useEffect(() => {
     const validPaths = [
       "/",
-      "/about",
+      "/About",
       "/contact",
       "/posts",
       "/category",
       "/privacy-policy",
       "/what",
-      "/events",
+      "/Events",
       "/form",
       "/firstlego",
-      "/couch",
+      "/Couch",
       "/project-fair",
       "/programs",
       "/firstlegoleague",
-      "/sign-in"
+      "/sign-in",
+      "/not-found",
+      "/404",
     ];
 
     const isMediaPath = id && pathname === `/Media/${id}`;
@@ -123,7 +125,7 @@ const Navbar = () => {
           : "bg-white text-black shadow-md"
       }`}
     >
-      <div className="flex items-center  justify-between py-5 px-4 md:px-6 lg:px-12">
+      <div className="flex items-center  justify-between py-4 md:py-3 px-4 md:px-6 lg:px-12">
         {/* Logo */}
         <div className="relative h-14 w-24 sm:w-36 rounded-md">
           <Image

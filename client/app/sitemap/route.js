@@ -13,16 +13,20 @@ export async function GET() {
   // Static routes
   const staticRoutes = [
     "",
-    "firstlegoleague",
-    "what",
-    "events",
-    "about",
-    "couch",
-    "form",
-    "firstlego",
-    "contact",
-    "posts",
-    "category/general",
+    "/About",
+    "/contact",
+    "/posts",
+    "/category",
+    "/privacy-policy",
+    "/what",
+    "/Events",
+    "/form",
+    "/firstlego",
+    "/Couch",
+    "/project-fair",
+    "/programs",
+    "/firstlegoleague",
+    "/sign-in",
   ];
 
   const staticUrls = staticRoutes.map((route) => {
@@ -38,8 +42,8 @@ export async function GET() {
   const categories = [
     "general",
     "tips",
-    "inspiration",
-    "books",
+    "tech",
+    "championship",
     "travels",
     "case-study",
   ];

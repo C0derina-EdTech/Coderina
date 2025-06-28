@@ -31,7 +31,7 @@ const AboutSection = () => {
         </h2>
 
         <Link
-          href="/about"
+          href="/About"
           className="relative flex items-center justify-center  w-44  text-nowrap   bg-black text-white  rounded-3xl text-[14px]  cursor-pointer hover:bg-black hover:text-white transition-all ease-in-out duration-700  py-2 px-2    font-medium group overflow-hidden"
         >
           {/* Default Text */}

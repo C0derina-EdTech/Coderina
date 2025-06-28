@@ -90,7 +90,7 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-2">
             <RiMailFill color={blueColor} />
-            <p>Planning@coderina.org</p>
+            <p>hello@coderina.org</p>
           </div>
         </div>
       </div>

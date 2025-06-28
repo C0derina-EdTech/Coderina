@@ -30,7 +30,8 @@ const Privacy = () => {
     },
   ];
   return (
-    <div className="mt-2 md:mt-10 bg-background text-color px-2 md:px-4 lg:px-8  py-8">
+    <div className=" bg-background text-color">
+       <div className="px-2 md:px-4 lg:px-8 py-10 md:py-24">
       <h1 className="text-3xl md:text-5xl text-center font-bold mb-6 capitalize">
         PRIVACY
       </h1>
@@ -181,7 +182,7 @@ const Privacy = () => {
           </p>
         </section>
       </div>
-
+</div>
       {/* downside */}
       {generalContents.map((content, index) => {
         // Define background styles based on content
@@ -198,7 +199,7 @@ const Privacy = () => {
               backgroundSize: "cover",
             }}
           >
-            <div className="max-w-[80rem] mx-auto lg:gap-y-[4rem]">
+            <div className="px-2 max-w-[80rem] mx-auto lg:gap-y-[4rem]">
               {content.section}
             </div>
           </div>

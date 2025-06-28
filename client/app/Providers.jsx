@@ -9,13 +9,11 @@ import { PostProvider } from "./components/contexts/PostContext";
 export function Providers({ children }) {
   return (
     <SessionProvider>
-    <AuthProvider>
-    <FormProvider>
-      <PostProvider>
-        <BlogProvider>{children}</BlogProvider>
-      </PostProvider>
-      </FormProvider>
-    </AuthProvider>
-  </SessionProvider>
+      <AuthProvider>
+        <FormProvider>
+          <BlogProvider>{children}</BlogProvider>
+        </FormProvider>
+      </AuthProvider>
+    </SessionProvider>
   );
 }

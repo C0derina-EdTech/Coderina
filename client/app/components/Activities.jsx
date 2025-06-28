@@ -88,7 +88,7 @@ const Activities = () => {
             </ul>
 
             <Link
-              href="/what"
+              href="/programs"
               className="mt-4 inline-flex items-center text-primary font-semibold hover:underline"
             >
               See other initiatives <FaArrowRightLong className="ml-2" />

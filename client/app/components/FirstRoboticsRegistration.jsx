@@ -35,7 +35,7 @@ const FirstRoboticsRegistration = () => {
           <p className="text-green-800 font-medium mt-4">
             Virtual and Physical Class Available
           </p>
-          <p className="text-sm text-gray-700">Registration closes soon</p>
+          <p className="text-sm text-gray-700 ">Registration closes soon</p>
         </div>
 
         <div className="mt-6">

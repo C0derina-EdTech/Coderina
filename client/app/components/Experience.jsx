@@ -16,7 +16,7 @@ const Experience = () => {
       textType: "li",
       divType: "ul",
       button: "Register",
-      link: "/couch",
+      link: "/Couch",
       color: greenBg2,
       image: expCard2,
       bg: greenBg2,
@@ -36,55 +36,57 @@ const Experience = () => {
   ];
 
   return (
-    <div className="w-full px-2 md:px-4 lg:px-16 py-6 md:py-16 lg:pt-20">
-      <div className="w-full">
-        <div className="grid md:grid-cols-2 items-center justify-between space-y-5 md:space-y-0 lg:gap-3">
-          {expCard.map((card, i) => (
-            <div
-              key={i}
-              className="space-y-10 rounded-2xl p-7   w-full md:w-[400px] lg:w-[565px] md:h-[650px]"
-              style={{ backgroundColor: card.bg }}
-              bgcolor={card.color}
-            >
-              <div className="space-y-4">
-                <h1 className="text-[25px] font-semibold leading-[37.6px]">
-                  {card.title}
-                </h1>
-                <div>
-                  {card.divType === "ul" ? (
-                    <ul className="list-disc">
-                      {card.text.map((t, index) => (
-                        <span key={index} className="text-[14px] md:text[17px]">
-                          {t}
-                        </span>
-                      ))}
-                    </ul>
-                  ) : (
-                    card.text.map((t, index) => (
-                      <span key={index} className="text-[14px] md:[17px]">
-                        {t}
-                      </span>
-                    ))
-                  )}
-                </div>
-                <div className="w-full py-3">
-                  <CustomButton href={card.link} label={card.button}></CustomButton>
-                </div>
-              </div>
-              <div className="relative w-full h-[200px] md:h-[270px] lg:h-[300px]">
-                <Image
-                  src={card.image}
-                  alt="cards pictures for couch and celebration"
-                  fill
-                  className="object-cover rounded-3xl"
-                 
-                />
-              </div>
+   <div className="w-full px-2 md:px-4 lg:px-16 py-6 md:py-16 lg:pt-20">
+  <div className="w-full">
+    <div className="grid md:grid-cols-2 gap-6">
+      {expCard.map((card, i) => (
+        <div
+          key={i}
+          className="flex flex-col justify-between h-full space-y-6 rounded-2xl p-7 w-full bg-white"
+          style={{ backgroundColor: card.bg }}
+        >
+          {/* Content */}
+          <div className="flex flex-col space-y-4 flex-grow">
+            <h1 className="text-[25px] font-semibold leading-[37.6px]">
+              {card.title}
+            </h1>
+            <div>
+              {card.divType === "ul" ? (
+                <ul className="list-disc pl-5">
+                  {card.text.map((t, index) => (
+                    <li key={index} className="text-[14px] md:text-[17px]">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                card.text.map((t, index) => (
+                  <span key={index} className="text-[14px] md:text-[17px] block">
+                    {t}
+                  </span>
+                ))
+              )}
             </div>
-          ))}
+            <div className="w-full pt-3">
+              <CustomButton href={card.link} label={card.button} />
+            </div>
+          </div>
+
+          {/* Image */}
+          <div className="relative w-full h-[250px] md:h-[270px] lg:h-[300px]">
+            <Image
+              src={card.image}
+              alt="Card image"
+              fill
+              className="object-cover rounded-2xl"
+            />
+          </div>
         </div>
-      </div>
+      ))}
     </div>
+  </div>
+</div>
+
   );
 };
 

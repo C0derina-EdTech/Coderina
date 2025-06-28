@@ -1,7 +1,7 @@
 import React from "react";
 import WhatPage from "./WhatPage";
 export const metadata = {
-  title: "What we do",
+  title: "programs",
   description:
     "Discover how Coderina Education and Technology Foundation empowers African youth through STEM education, coding programs, and digital literacy initiatives.",
 };

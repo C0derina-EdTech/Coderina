@@ -10,7 +10,7 @@ import { AuthProvider } from "./components/contexts/AuthContext"; // adjust the 
 import { Providers } from "./Providers";
 export const metadata = {
   title: {
-    default: "CODERINA",
+    default: "Coderina | Empowering STEAM Education across Africa",
     template: "%s - Coderina Foundation",
   },
   description:
