@@ -3,7 +3,7 @@ import { getToken } from "next-auth/jwt";
 
 const PUBLIC_ROUTES = [
   "/",
-  "/About",
+  "/about",
   "/privacy",
   "/sign-in",
   "/sign-up",
@@ -11,8 +11,8 @@ const PUBLIC_ROUTES = [
   "/posts",
   "/[year]",
   "/category",
-  "/Couch",
-  "/Events",
+  "/couch",
+  "/events",
   "/programs",
   "/project-fair",
   "/form",

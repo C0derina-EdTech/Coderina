@@ -16,7 +16,7 @@ const Experience = () => {
       textType: "li",
       divType: "ul",
       button: "Register",
-      link: "/Couch",
+      link: "/couch",
       color: greenBg2,
       image: expCard2,
       bg: greenBg2,

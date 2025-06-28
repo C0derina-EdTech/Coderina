@@ -33,17 +33,17 @@ const Navbar = () => {
 
   const links = [
     { label: "Home", path: "/" },
-    { label: "About Us", path: "/About" },
+    { label: "About Us", path: "/about" },
     { label: "Contact", path: "/contact" },
     { label: "Programs", path: "/programs" },
-    { label: "Events", path: "/Events" },
+    { label: "Events", path: "/events" },
   ];
   const link = [
     { label: "Home", path: "/" },
-    { label: "About Us", path: "/About" },
+    { label: "About Us", path: "/about" },
     { label: "Contact", path: "/contact" },
     { label: "Programs", path: "/programs" },
-    { label: "Events", path: "/Events" },
+    { label: "Events", path: "/events" },
   ];
 
   const socialLinks = [
@@ -69,16 +69,16 @@ const Navbar = () => {
   useEffect(() => {
     const validPaths = [
       "/",
-      "/About",
+      "/about",
       "/contact",
       "/posts",
       "/category",
       "/privacy-policy",
       "/what",
-      "/Events",
+      "/events",
       "/form",
       "/firstlego",
-      "/Couch",
+      "/couch",
       "/project-fair",
       "/programs",
       "/firstlegoleague",
