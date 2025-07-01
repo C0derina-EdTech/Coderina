@@ -36,11 +36,11 @@ const DashEvents = () => {
   const [showOptions, setShowOptions] = useState(null);
 
   const dropdownItems = [
-    { label: "Post", href: "/dashboard/postEvent", icon: RiMenu2Fill },
-    { label: "Audio", href: "#", icon: SlEarphones },
-    { label: "Video", href: "#", icon: IoVideocamOutline },
-    { label: "Thread", href: "#", icon: FiMessageSquare },
-    { label: "New note", href: "#", icon: SlNote },
+    { label: "Post", href: "/admincodeboard/post-event", icon: RiMenu2Fill },
+    // { label: "Audio", href: "#", icon: SlEarphones },
+    // { label: "Video", href: "#", icon: IoVideocamOutline },
+    // { label: "Thread", href: "#", icon: FiMessageSquare },
+    // { label: "New note", href: "#", icon: SlNote },
   ];
 
   const handleToggleOptions = (id) => {
@@ -76,7 +76,7 @@ const DashEvents = () => {
         <h1 className="text-3xl font-bold text-gray-700">Events</h1>
         <div className="flex gap-3">
           <Link
-            href="/"
+            href="/events"
             className="py-2 px-3 rounded-md hover:bg-[#ccce] bg-[#EEE]"
           >
             View site
