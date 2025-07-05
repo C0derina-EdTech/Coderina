@@ -48,7 +48,7 @@ const Sidebar = () => {
         <h2 className="font-bold mb-2">Recent Posts</h2>
         <ul className="text-sm space-y-1">
           {(searchTerm ? filteredPosts : blogs).map((post) => (
-            <li key={post.id}>
+            <li key={post._id}>
               <Link href={`/posts/${post?.slug?.current}`}>
                 <h2 className="hover:underline cursor-pointer">
                   {post?.title}

@@ -81,7 +81,7 @@ const GeneralPage = () => {
         {/* display blog section map out all blogs by default*/}
         <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-x-16 lg:gap-y-8 mt-16 2xl:mt-[8rem] max-w-[400px] sm:max-w-[80rem] mx-auto">
           {filtered.map((post) => (
-            <div key={post.id} className="">
+            <div key={post._id} className="">
               <Link href={`/posts/${post?.slug?.current}`}>
                 <div className="relative h-72 w-full">
                   <Image

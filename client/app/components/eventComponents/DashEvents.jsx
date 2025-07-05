@@ -37,10 +37,6 @@ const DashEvents = () => {
 
   const dropdownItems = [
     { label: "Post", href: "/admincodeboard/post-event", icon: RiMenu2Fill },
-    // { label: "Audio", href: "#", icon: SlEarphones },
-    // { label: "Video", href: "#", icon: IoVideocamOutline },
-    // { label: "Thread", href: "#", icon: FiMessageSquare },
-    // { label: "New note", href: "#", icon: SlNote },
   ];
 
   const handleToggleOptions = (id) => {
