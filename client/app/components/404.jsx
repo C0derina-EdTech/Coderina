@@ -5,10 +5,10 @@ import Link from "next/link";
 import Footer from "./Footer";
 import Follow from "./Follow";
 import Subscribe from "./Subscribe";
-import { usePostContext } from "./contexts/PostContext"; // adjust if needed
+import { useBlogContext } from "./contexts/BlogContext";
 const Custom404 = () => {
   const [search, setSearch] = useState("");
-  const { blogs = [] } = usePostContext();
+  const { blogs = [] } = useBlogContext();
 
   const filteredPosts = blogs.filter((post) =>
     post.title.toLowerCase().includes(search.toLowerCase())
