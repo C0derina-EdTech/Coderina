@@ -16,15 +16,15 @@ const Sidebar = () => {
     filteredPosts,
   } = useBlogContext();
 
-  blogs.forEach((post) => {
-    console.log(post?.category); // Log categories of each post
-  });
+  // blogs.forEach((post) => {
+  //   console.log(post?.category); // Log categories of each post
+  // });
 
   const cate = Array.from(
     new Set(blogs.flatMap((post) => post?.category || []).filter(Boolean))
   ).sort();
 
-  console.log(cate); // Check the categories array
+  // console.log(cate); // Check the categories array
 
   return (
     <aside className=" text-color2 mt-12 lg:mt-0">

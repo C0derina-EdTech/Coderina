@@ -14,14 +14,15 @@ import NotFound from "../not-found";
 import { urlFor } from "../lib/imageUrl";
 
 export default function PostsPage({ slug }) {
-  const { post, loading, blogId, formatTime } = useBlogContext();
+  const { post, loading, blogId, formatTime, updatedPost } = useBlogContext();
+
+  const displayedPost = updatedPost || post;
 
   useEffect(() => {
     if (post) {
       console.log("Fetched post views:", post?.views);
     }
   }, [post]);
-  console.log("Fetched slug:", slug);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -48,8 +49,7 @@ export default function PostsPage({ slug }) {
   const imageUrl = post?.image ? urlFor(post.image).url() : "";
   const link = post?.links || [];
   const comment = post?.comments || [];
-  const view = post?.views ?? 0;
-  console.log("Fetched slug views:", post?.views);
+  const view = displayedPost?.views ?? 0;
 
   return (
     <div className=" bg-background text-color ">

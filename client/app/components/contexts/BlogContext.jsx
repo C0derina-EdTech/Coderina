@@ -26,6 +26,8 @@ export function BlogProvider({ children }) {
   const [emailError, setEmailError] = useState("");
   const [commentError, setCommentError] = useState("");
   const [instagramPosts, setInstagramPosts] = useState([]);
+  const [updatedPost, setUpdatedPost] = useState(null);
+  // const displayedPost = updatedPost || post;
 
   // Fetch all blogs
   const fetchBlogs = async () => {
@@ -96,6 +98,33 @@ export function BlogProvider({ children }) {
     fetchBlogs();
   }, []);
 
+  // views
+
+   useEffect(() => {
+    const updateViews = async () => {
+      if (!post?.slug?.current) return;
+
+      // 1. Increment view
+      const res = await fetch(`/api/views/${post.slug.current}`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      console.log("Updated views response:", data);
+
+      // 2. Refetch the updated post
+      const response = await fetch(`/api/posts/${post.slug.current}`);
+      const updatedPost = await response.json();
+
+      // 3. Update the local post state if you have a setter
+      // If your useBlogContext() supports updatePost(), use that
+      if (updatedPost && updatedPost._id) {
+        setUpdatedPost(updatedPost); // OR update context if available
+      }
+    };
+
+    updateViews();
+  }, [post?.slug?.current]);
+
   useEffect(() => {
     const savedName = localStorage.getItem("commenterName");
     const savedEmail = localStorage.getItem("commenterEmail");
@@ -106,7 +135,7 @@ export function BlogProvider({ children }) {
     if (savedWebsite) setWebsite(savedWebsite);
   }, []);
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchInstagramPosts = async () => {
       setLoading(true);
       try {
@@ -119,14 +148,13 @@ export function BlogProvider({ children }) {
         setInstagramPosts(data);
       } catch (error) {
         console.error("Error fetching Instagram posts:", error);
-      }finally {
-      setLoading(false);
-    }
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchInstagramPosts();
   }, []);
-
 
   const handleComments = async (e) => {
     e?.preventDefault?.();
@@ -251,7 +279,6 @@ export function BlogProvider({ children }) {
     )
   ).sort((a, b) => (a > b ? -1 : 1));
 
- 
   return (
     <BlogContext.Provider
       value={{
@@ -287,6 +314,7 @@ export function BlogProvider({ children }) {
         emailError,
         commentError,
         instagramPosts,
+        updatedPost
       }}
     >
       {children}
