@@ -10,7 +10,7 @@ import AuthorCard from "./AuthorCard";
 import CommentForm from "./CommentForm";
 import { FaRegCalendarAlt, FaRegClock, FaEye } from "react-icons/fa";
 import { useBlogContext } from "./contexts/BlogContext";
-import Custom404 from "./404";
+import NotFound from "../not-found";
 import { urlFor } from "../lib/imageUrl";
 
 export default function PostsPage({ slug }) {
@@ -51,9 +51,6 @@ export default function PostsPage({ slug }) {
   const view = post?.views ?? 0;
   console.log("Fetched slug views:", post?.views);
 
-  // if (!post) {
-  //   return <Custom404/>; // Triggers the 404 page
-  // }
   return (
     <div className=" bg-background text-color ">
       {/* close of head */}
@@ -133,7 +130,7 @@ export default function PostsPage({ slug }) {
         </main>
       ) : (
         <div>
-          <Custom404 />
+          <NotFound />
         </div>
       )}
 
