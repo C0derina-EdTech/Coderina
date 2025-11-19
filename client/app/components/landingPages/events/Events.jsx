@@ -348,8 +348,6 @@ export default function Events() {
                                 Join <ExternalLink className="w-4 h-4" />
                               </a>
                             )}
-
-                            
                           </div>
                         </div>
                       </article>
@@ -451,15 +449,31 @@ export default function Events() {
                         <div className="text-sm text-gray-500 mb-2">
                           {eventDate.day} {eventDate.month} {eventDate.year}
                         </div>
+                         {/* <div className="text-sm text-gray-500 mb-2">
+                          {event.endDate} 
+                        </div> */}
+                        <div className="flex items-center gap-2 text-sm text-gray-700 mb-2">
+                          <Clock className="w-4 h-4 text-gray-700" />
+                          <h3 className="font-bold line-clamp-2 mb-2">
+                            {event.time}
+                          </h3>
+                        </div>
                         <h3 className="font-bold line-clamp-2 mb-2">
                           {event.title}
                         </h3>
-                        <Link
-                          href={`/events/${event.slug?.current || "#"}`}
-                          className="text-[#e29818] text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all"
-                        >
-                          View Details <ChevronRight className="w-4 h-4" />
-                        </Link>
+                        <div className="flex items-center gap-2">
+                          {event.isOnline ? (
+                            <>
+                              <Globe className="w-4 h-4 text-gray-700" />
+                              <span>Online Event</span>
+                            </>
+                          ) : (
+                            <>
+                              <MapPin className="w-4 h-4 text-gray-700" />
+                              <span>{event.location || "Location TBA"}</span>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </article>
                   );

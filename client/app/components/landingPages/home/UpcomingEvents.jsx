@@ -18,20 +18,16 @@ export default function UpcomingEvents() {
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   // ✅ Filter only valid upcoming events
-  const upcomingEvents = events.filter((event) => {
-    const eventDate = new Date(event.date);
-    const now = new Date();
+ const upcomingEvents = events.filter((event) => {
+  const now = new Date();
+  const startDate = new Date(event.date);
+  const endDate = event.endDate ? new Date(event.endDate) : null;
 
-    const hasLink =
-      event.registrationLink && event.registrationLink.trim() !== "";
-    const isUpcoming = eventDate > now;
+  const isUpcoming =
+    startDate > now || (endDate && endDate > now);
 
-    // valid if online + link OR physical + link
-    const validOnline = event.isOnline && hasLink;
-    const validPhysical = !event.isOnline && hasLink;
-
-    return isUpcoming && (validOnline || validPhysical);
-  });
+  return isUpcoming;
+});
 
 
   const checkScrollButtons = () => {
@@ -161,12 +157,20 @@ if (!upcomingEvents || upcomingEvents.length === 0) {
               >
                 {/* Image */}
                 <div className="relative h-48 sm:h-52 md:h-56 overflow-hidden">
-                  <Image
-                    src={urlFor(event.image).url()}
-                    alt={event.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
+                  
+                   {event.image ? (
+                    <Image
+                      src={urlFor(event.image).url()}
+                      alt={event.title}
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      fill
+                      priority
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-[#e29818] to-[#c27f0f] rounded-2xl flex items-center justify-center">
+                      <Calendar className="w-32 h-32 text-white/30" />
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
                   {/* Date Badge */}
@@ -191,24 +195,27 @@ if (!upcomingEvents || upcomingEvents.length === 0) {
                   <div className="space-y-2 mb-4">
                     
                     <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                      <Calendar className=""/>
+                      <Calendar className="w-4 h-4"/>
                       <span>{event.time}</span>
                     </div>
                     <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                      <MapPin className=""/>
+                      <MapPin className="w-4 h-4"/>
                       <span>{event.location}</span>
                     </div>
 
                   </div>
 
-                  <Link
-                    href={event.registrationLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full block text-center bg-[#e29818] hover:bg-[#c88416] text-white font-semibold py-3 rounded-lg transition-colors duration-200"
-                  >
-                    Join
-                  </Link>
+                  {event.registrationLink && (
+  <Link
+    href={event.registrationLink}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-full block text-center bg-[#e29818] hover:bg-[#c88416] text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+  >
+    Join
+  </Link>
+)}
+
                 </div>
               </div>
             ))}
