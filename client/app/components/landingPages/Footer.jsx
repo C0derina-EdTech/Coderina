@@ -171,7 +171,7 @@ const Footer = () => {
             <p
               className={`text-sm sm:text-base lg:text-lg ${subTextColor} leading-relaxed`}
             >
-              Our E-STEAM platform enables learners to build, create, and solve
+              Our platforms enables learners to build, create, and solve
               real-world problems while preparing for global opportunities.
             </p>
 
@@ -324,19 +324,19 @@ const Footer = () => {
             </p>
             <div className="flex flex-wrap gap-4 text-xs sm:text-sm">
               <Link
-                href="/terms"
+                href="#"
                 className={`${subTextColor} hover:${accentColor}`}
               >
                 Terms of Service
               </Link>
               <Link
-                href="/privacy"
+                href="#"
                 className={`${subTextColor} hover:${accentColor}`}
               >
                 Privacy Policy
               </Link>
               <Link
-                href="/cookies"
+                href="#"
                 className={`${subTextColor} hover:${accentColor}`}
               >
                 Cookie Policy
