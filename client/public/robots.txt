@@ -1,0 +1,16 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /_next
+Disallow: /_error
+Disallow: /404
+Disallow: /500
+
+# Host
+Host: https://www.coderina.org
+
+# Sitemaps
+Sitemap: https://www.coderina.org/sitemap.xml
+Sitemap: undefined/sitemap.xml

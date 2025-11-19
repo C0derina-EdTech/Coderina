@@ -1,0 +1,39 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "postbuild": "next-sitemap",
+    "start": "next start",
+    "lint": "eslint",
+    "analyze": "ANALYZE=true next build",
+    "sitemap": "node scripts/generate-sitemap.js"
+  },
+  "dependencies": {
+    "@portabletext/react": "^5.0.0",
+    "@sanity/client": "^7.12.1",
+    "@sanity/image-url": "^1.2.0",
+    "aos": "^2.3.4",
+    "heic-convert": "^2.1.0",
+    "lucide-react": "^0.553.0",
+    "next": "16.0.1",
+    "next-sanity": "^11.6.5",
+    "nodemailer": "^7.0.10",
+    "react": "19.2.0",
+    "react-countup": "^6.5.3",
+    "react-dom": "19.2.0",
+    "react-hot-toast": "^2.6.0",
+    "react-slick": "^0.31.0"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^16.0.1",
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.1",
+    "next-sitemap": "^4.2.3",
+    "tailwindcss": "^4"
+  }
+}
