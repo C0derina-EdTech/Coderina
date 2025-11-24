@@ -39,9 +39,10 @@ const fetchEvents = async () => {
     const query = `*[_type == "coderinaevents"] | order(date desc){
   _id,
   title,
-  slug,
+ 
   date,
   endDate,
+  status,
   time,
   location,
   isOnline,
@@ -55,8 +56,6 @@ const fetchEvents = async () => {
   category,
   registrationLink,
   isPast,
-  publishedAt,
-  views,
   _createdAt
 }`;
 
