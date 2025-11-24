@@ -153,17 +153,7 @@ export default function Events() {
 
   return (
     <>
-      <Head>
-        <meta
-          name="description"
-          content="Discover upcoming STEM events, workshops, competitions, and training programs by Coderina – empowering youth in Africa through technology and innovation."
-        />
-        <meta
-          name="keywords"
-          content="Coderina events, STEM programs, robotics workshops, coding competitions, technology training, Nigeria education events"
-        />
-      </Head>
-
+      
       <div className="min-h-screen bg-white">
         {/* Hero Section with Featured Event */}
         <section className="relative bg-black text-white py-24 overflow-hidden">
