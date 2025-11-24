@@ -18,15 +18,31 @@ export default function UpcomingEvents() {
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   // ✅ Filter only valid upcoming events
- const upcomingEvents = events.filter((event) => {
+//  const upcomingEvents = events.filter((event) => {
+//   const now = new Date();
+//   const startDate = new Date(event.date);
+//   const endDate = event.endDate ? new Date(event.endDate) : null;
+
+//   const isUpcoming =
+//     startDate > now || (endDate && endDate > now);
+
+//   return isUpcoming;
+// });
+
+
+const upcomingEvents = events.filter((event) => {
   const now = new Date();
-  const startDate = new Date(event.date);
+  const startDate = event.date ? new Date(event.date) : null;
   const endDate = event.endDate ? new Date(event.endDate) : null;
 
-  const isUpcoming =
-    startDate > now || (endDate && endDate > now);
+  // Always include these even without date
+  if (event.status === "on-hold" || event.status === "postponed") {
+    return true;
+  }
 
-  return isUpcoming;
+  if (!startDate) return false;
+
+  return startDate > now || (endDate && endDate > now);
 });
 
 
@@ -173,16 +189,25 @@ if (!upcomingEvents || upcomingEvents.length === 0) {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-                  {/* Date Badge */}
+                  {/* Date Badge or on hold or postponed */}
                   <div className="absolute top-4 left-4 bg-white text-black rounded-xl px-3 py-2 text-center shadow-lg">
-                    <div className="text-2xl font-bold leading-none">
-                      {new Date(event.date).getDate()}
-                    </div>
-                    <div className="text-xs font-semibold uppercase tracking-wide mt-0.5">
-                      {new Date(event.date).toLocaleString("default", {
-                        month: "short",
-                      })}
-                    </div>
+                   {event.status === "on-hold" || event.status === "postponed" ? (
+  <div className="text-xs font-bold uppercase leading-tight">
+    {event.status === "on-hold" ? "ON HOLD" : "POSTPONED"}
+  </div>
+) : (
+  <>
+    <div className="text-2xl font-bold leading-none">
+      {new Date(event.date).getDate()}
+    </div>
+    <div className="text-xs font-semibold uppercase tracking-wide mt-0.5">
+      {new Date(event.date).toLocaleString("default", {
+        month: "short",
+      })}
+    </div>
+  </>
+)}
+
                   </div>
                 </div>
 

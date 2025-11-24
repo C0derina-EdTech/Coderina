@@ -121,8 +121,8 @@ const Footer = () => {
     {
       icon: <Mail />,
       label: "Email",
-      value: "esteam@coderina.org",
-      href: "mailto:esteam@coderina.org",
+      value: "hello@coderina.org",
+      href: "mailto:hello@coderina.org",
     },
     {
       icon: <Phone />,
@@ -191,7 +191,7 @@ const Footer = () => {
                       pathname.startsWith("/programs") ||
                       pathname.startsWith("/events")
                         ? "bg-white/10 hover:bg-white/20 text-white"
-                        : "bg-gray-100 hover:bg-[#321414] text-gray-600 hover:text-white"
+                        : "bg-gray-100 hover:bg-[#000000] text-gray-600 hover:text-white"
                     }`}
                   >
                     {icon}
@@ -221,12 +221,12 @@ const Footer = () => {
                   <ul className="space-y-2">
                     {section.items.map((item, i) => (
                       <li key={i}>
-                        <Link
-                          href={item.href}
+                        <p
+                          
                           className={`text-sm sm:text-base ${subTextColor} hover:${accentColor} transition-colors duration-200 hover:underline`}
                         >
                           {item.label}
-                        </Link>
+                        </p>
                       </li>
                     ))}
                   </ul>
