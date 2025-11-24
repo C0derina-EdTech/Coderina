@@ -26,26 +26,57 @@ export default function Events() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      // true for small laptops, tablets, phones; false for desktops
+      setIsMobile(width < 1280);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const EVENTS_PER_PAGE = 6;
 
   // Separate upcoming vs past events
   const now = new Date();
-  const upcomingEvents = events.filter(
-    (evt) => !evt.isPast && new Date(evt.date) >= now
-  );
-  const pastEvents = events.filter(
-    (evt) => evt.isPast || new Date(evt.date) < now
-  );
 
-  // Filter by category and search
-  const filteredUpcoming = upcomingEvents.filter((evt) => {
-    const matchesCategory =
-      selectedCategory === "all" || evt.category === selectedCategory;
-    const matchesSearch =
-      evt.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      evt.description?.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const isEventPast = (evt) => {
+    const start = new Date(evt.date);
+    const end = evt.endDate ? new Date(evt.endDate) : null;
+
+    if (evt.status === "on-hold" || evt.status === "postponed") {
+      return false; // they always remain in upcoming
+    }
+
+    if (end) {
+      return end < now;
+    }
+
+    return start < now;
+  };
+
+  const upcomingEvents = events.filter((evt) => !isEventPast(evt));
+  const pastEvents = events.filter((evt) => isEventPast(evt));
+
+  const applyFilter = (list) =>
+    list.filter((evt) => {
+      const matchesCategory =
+        selectedCategory === "all" || evt.category === selectedCategory;
+
+      const matchesSearch =
+        evt.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        evt.description?.toLowerCase().includes(searchQuery.toLowerCase());
+
+      return matchesCategory && matchesSearch;
+    });
+
+  const filteredUpcoming = applyFilter(upcomingEvents);
+  const filteredPast = applyFilter(pastEvents);
 
   // Pagination
   const totalPages = Math.ceil(filteredUpcoming.length / EVENTS_PER_PAGE);
@@ -65,6 +96,45 @@ export default function Events() {
       month: date.toLocaleString("en-US", { month: "short" }).toUpperCase(),
       year: date.getFullYear(),
     };
+  };
+
+  // const getBadgeContent = (event) => {
+  //   if (event.status === "on hold") {
+  //     return { label: "ON HOLD", sub: "" };
+  //   }
+  //   if (event.status === "postponed") {
+  //     return { label: "POSTPONED", sub: "" };
+  //   }
+  //   const d = formatDate(event.date);
+  //   return { label: d.day, sub: d.month };
+  // };
+
+  const getBadgeContent = (event) => {
+    const now = new Date();
+    const start = new Date(event.date);
+    const end = event.endDate ? new Date(event.endDate) : null;
+
+    if (event.status === "on-hold") {
+      return { label: "ON HOLD", sub: "" };
+    }
+
+    if (event.status === "postponed") {
+      return { label: "POSTPONED", sub: "" };
+    }
+
+    // If event has an end date and is currently ongoing
+    if (end && start <= now && end >= now) {
+      return { label: "ONGOING", sub: "ENDS SOON" };
+    }
+
+    // Normal upcoming event date badge
+    const d = formatDate(event.date);
+    return { label: d.day, sub: d.month };
+  };
+
+  const isOngoing = (event) => {
+    if (!event.endDate) return false;
+    return new Date(event.date) <= now && new Date(event.endDate) >= now;
   };
 
   // Category options
@@ -103,92 +173,101 @@ export default function Events() {
 
           <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {featuredEvent ? (
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                  <div className="inline-flex items-center gap-2 bg-[#e29818]/20 text-[#e29818] px-4 py-2 rounded-full border border-[#e29818]/30">
-                    <Sparkles className="w-4 h-4" />
-                    <span className="text-sm font-medium">Featured Event</span>
-                  </div>
-
-                  <div className="flex items-center gap-4">
-                    <div className="bg-[#e29818] rounded-xl p-4 text-center min-w-[80px]">
-                      <div className="text-3xl font-bold">
-                        {formatDate(featuredEvent.date).day}
+              (() => {
+                const featuredBadge = getBadgeContent(featuredEvent);
+                return (
+                  <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="space-y-6">
+                      <div className="inline-flex items-center gap-2 bg-[#e29818]/20 text-[#e29818] px-4 py-2 rounded-full border border-[#e29818]/30">
+                        <Sparkles className="w-4 h-4" />
+                        <span className="text-sm font-medium">
+                          Featured Event
+                        </span>
                       </div>
-                      <div className="text-sm uppercase">
-                        {formatDate(featuredEvent.date).month}
+
+                      <div className="flex items-center gap-4">
+                        <div className="bg-[#e29818] rounded-xl p-4 text-center min-w-[80px]">
+                          <div className="text-lg md:text-3xl font-bold">
+                            {featuredBadge.label}
+                          </div>
+                          {featuredBadge.sub && (
+                            <div className="text-sm uppercase">
+                              {featuredBadge.sub}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                            {featuredEvent.title}
+                          </h1>
+                        </div>
+                      </div>
+
+                      <p className="text-xl text-gray-300 leading-relaxed">
+                        {featuredEvent.description ||
+                          "Join us for an exciting learning experience in technology and innovation."}
+                      </p>
+
+                      <div className="flex flex-wrap gap-4 text-gray-300">
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-5 h-5 text-[#e29818]" />
+                          <span>{featuredEvent.time || "TBA"}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {featuredEvent.isOnline ? (
+                            <>
+                              <Globe className="w-5 h-5 text-[#e29818]" />
+                              <span>Online Event</span>
+                            </>
+                          ) : (
+                            <>
+                              <MapPin className="w-5 h-5 text-[#e29818]" />
+                              <span>
+                                {featuredEvent.location || "Location TBA"}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-4 pt-4">
+                        {featuredEvent.registrationLink && (
+                          <a
+                            href={featuredEvent.registrationLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-[#e29818] text-white px-8 py-4 rounded-lg hover:bg-[#c27f0f] transition flex items-center gap-2 font-semibold"
+                          >
+                            Register Now <ArrowRight className="w-5 h-5" />
+                          </a>
+                        )}
+                        <Link
+                          href="/contact"
+                          className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-black transition font-semibold"
+                        >
+                          Contact Us for more Details
+                        </Link>
                       </div>
                     </div>
-                    <div>
-                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                        {featuredEvent.title}
-                      </h1>
-                    </div>
-                  </div>
 
-                  <p className="text-xl text-gray-300 leading-relaxed">
-                    {featuredEvent.description ||
-                      "Join us for an exciting learning experience in technology and innovation."}
-                  </p>
-
-                  <div className="flex flex-wrap gap-4 text-gray-300">
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-5 h-5 text-[#e29818]" />
-                      <span>{featuredEvent.time || "TBA"}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {featuredEvent.isOnline ? (
-                        <>
-                          <Globe className="w-5 h-5 text-[#e29818]" />
-                          <span>Online Event</span>
-                        </>
+                    <div className="relative h-[400px] lg:h-[600px]">
+                      {featuredEvent.image ? (
+                        <Image
+                          src={urlFor(featuredEvent.image).url()}
+                          alt={featuredEvent.title}
+                          className="rounded-2xl shadow-2xl object-cover"
+                          fill
+                          priority
+                        />
                       ) : (
-                        <>
-                          <MapPin className="w-5 h-5 text-[#e29818]" />
-                          <span>
-                            {featuredEvent.location || "Location TBA"}
-                          </span>
-                        </>
+                        <div className="w-full h-full bg-gradient-to-br from-[#e29818] to-[#c27f0f] rounded-2xl flex items-center justify-center">
+                          <Calendar className="w-32 h-32 text-white/30" />
+                        </div>
                       )}
                     </div>
                   </div>
-
-                  <div className="flex flex-wrap gap-4 pt-4">
-                    {featuredEvent.registrationLink && (
-                      <a
-                        href={featuredEvent.registrationLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-[#e29818] text-white px-8 py-4 rounded-lg hover:bg-[#c27f0f] transition flex items-center gap-2 font-semibold"
-                      >
-                        Register Now <ArrowRight className="w-5 h-5" />
-                      </a>
-                    )}
-                    <Link
-                      href="/contact"
-                      className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-black transition font-semibold"
-                    >
-                      Contact Us for more Details
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="relative h-[400px] lg:h-[600px]">
-                  {featuredEvent.image ? (
-                    <Image
-                      src={urlFor(featuredEvent.image).url()}
-                      alt={featuredEvent.title}
-                      className="rounded-2xl shadow-2xl object-cover"
-                      fill
-                      priority
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#e29818] to-[#c27f0f] rounded-2xl flex items-center justify-center">
-                      <Calendar className="w-32 h-32 text-white/30" />
-                    </div>
-                  )}
-                </div>
-              </div>
+                );
+              })()
             ) : (
               <div className="text-center py-20">
                 <h1 className="text-5xl md:text-6xl font-bold mb-6">
@@ -222,22 +301,42 @@ export default function Events() {
               {/* Category Filter */}
               <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto">
                 <Filter className="w-5 h-5 text-gray-600 flex-shrink-0" />
-                {categories.map((cat) => (
-                  <button
-                    key={cat.value}
-                    onClick={() => {
-                      setSelectedCategory(cat.value);
+
+                {isMobile ? (
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => {
+                      setSelectedCategory(e.target.value);
                       setPage(0);
                     }}
-                    className={`px-6 py-2 rounded-lg font-medium whitespace-nowrap transition ${
-                      selectedCategory === cat.value
-                        ? "bg-[#e29818] text-white"
-                        : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
-                    }`}
+                    className="w-full md:w-60 border border-gray-300 rounded-lg px-4 py-3"
                   >
-                    {cat.label}
-                  </button>
-                ))}
+                    {categories.map((cat) => (
+                      <option key={cat.value} value={cat.value}>
+                        {cat.label}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <div className="flex items-center gap-2 overflow-x-auto">
+                    {categories.map((cat) => (
+                      <button
+                        key={cat.value}
+                        onClick={() => {
+                          setSelectedCategory(cat.value);
+                          setPage(0);
+                        }}
+                        className={`px-6 py-2 rounded-lg font-medium whitespace-nowrap transition ${
+                          selectedCategory === cat.value
+                            ? "bg-[#e29818] text-white"
+                            : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
+                        }`}
+                      >
+                        {cat.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -261,6 +360,7 @@ export default function Events() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8">
                   {paginatedEvents.map((event, index) => {
                     const eventDate = formatDate(event.date);
+                    const badge = getBadgeContent(event);
                     return (
                       <article
                         key={event._id || index}
@@ -281,14 +381,16 @@ export default function Events() {
                             </div>
                           )}
 
-                          {/* Date Badge */}
+                          {/* Date Badge / onhold/ posponed*/}
                           <div className="absolute top-4 left-4 bg-black/80 backdrop-blur text-white rounded-lg p-3 text-center min-w-[70px]">
                             <div className="text-2xl font-bold">
-                              {eventDate.day}
+                              {badge.label}
                             </div>
-                            <div className="text-xs uppercase">
-                              {eventDate.month}
-                            </div>
+                            {badge.sub && (
+                              <div className="text-xs uppercase">
+                                {badge.sub}
+                              </div>
+                            )}
                           </div>
 
                           {/* Category Badge */}
@@ -424,7 +526,7 @@ export default function Events() {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
-                {pastEvents.slice(0, 8).map((event, index) => {
+                {filteredPast.slice(0, 8).map((event, index) => {
                   const eventDate = formatDate(event.date);
                   return (
                     <article
@@ -448,10 +550,16 @@ export default function Events() {
                       <div className="p-4">
                         <div className="text-sm text-gray-500 mb-2">
                           {eventDate.day} {eventDate.month} {eventDate.year}
+                          {event.endDate && (
+                            <>
+                              {" "}
+                              - {formatDate(event.endDate).day}{" "}
+                              {formatDate(event.endDate).month}{" "}
+                              {formatDate(event.endDate).year}
+                            </>
+                          )}
                         </div>
-                         {/* <div className="text-sm text-gray-500 mb-2">
-                          {event.endDate} 
-                        </div> */}
+
                         <div className="flex items-center gap-2 text-sm text-gray-700 mb-2">
                           <Clock className="w-4 h-4 text-gray-700" />
                           <h3 className="font-bold line-clamp-2 mb-2">
