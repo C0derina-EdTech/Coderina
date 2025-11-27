@@ -7,7 +7,7 @@ import "aos/dist/aos.css";
 // Import images
 import group from "../../../../public/group1.jpg";
 import founder2 from "../../../../public/founder2.jpg";
-import founder3 from "../../../../public/founder3.jpg";
+import founder3 from "../../../../public/couch/feminiyi.jpg";
 import daniel from "../../../../public/daniel.png";
 import christy from "../../../../public/christy.jpg";
 import prelumi from "../../../../public/prelumi.jpg";

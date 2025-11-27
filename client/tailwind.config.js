@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -19,14 +19,14 @@ export default {
       Lato: ["Lato", "sans-serif"],
     },
     extend: {
-      colors: {
-        "coderina-accent": "#fdefd9",
-        "coderina-blue": "#1a3a52",
-        "coderina-bluee": "#0b1324",
-        "coderina-dark": "#17171a",
-        "coderina-primary": "#5b21b6",
+      screens: {
+        "3xl": "1900px",
+        "4xl": "2200px",
       },
+     
     },
   },
   plugins: [],
 };
+
+export default config;
