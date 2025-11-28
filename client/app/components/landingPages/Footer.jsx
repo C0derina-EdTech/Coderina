@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useState } from "react";
 import {
@@ -16,6 +17,7 @@ import profile from "../../../public/coderinaLogo.png";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useFormContext } from "../contexts/FormContext";
+
 const Footer = () => {
   const {
     subscriberName,
@@ -27,10 +29,10 @@ const Footer = () => {
     subscriberError,
     addSubscriber,
   } = useFormContext();
+
   const [email, setEmail] = useState("");
   const pathname = usePathname();
 
-  // ✅ Dynamic color scheme by route
   let bgColor = "bg-white";
   let textColor = "text-gray-800";
   let subTextColor = "text-gray-600";
@@ -53,28 +55,14 @@ const Footer = () => {
     accentColor = "text-[#e29818]";
   }
 
-  // ✅ Social links
   const socialLinks = [
-    {
-      icon: <Linkedin size={20} />,
-      url: "https://www.linkedin.com/company/coderina-edtech-foundation",
-    },
-    {
-      icon: <Facebook size={20} />,
-      url: "https://web.facebook.com/coderinaedu",
-    },
-    {
-      icon: <Instagram size={20} />,
-      url: "https://www.instagram.com/coderinaedu/",
-    },
-    {
-      icon: <Youtube size={20} />,
-      url: "https://www.youtube.com/@coderina5977",
-    },
-    { icon: <Twitter size={20} />, url: "https://x.com/coderina" },
+    { icon: <Linkedin />, url: "https://www.linkedin.com/company/coderina-edtech-foundation" },
+    { icon: <Facebook />, url: "https://web.facebook.com/coderinaedu" },
+    { icon: <Instagram />, url: "https://www.instagram.com/coderinaedu/" },
+    { icon: <Youtube />, url: "https://www.youtube.com/@coderina5977" },
+    { icon: <Twitter />, url: "https://x.com/coderina" },
   ];
 
-  // ✅ Programs list (nowrap on large screens)
   const programs = [
     "FIRST LEGO League (FLL)",
     "FIRST Tech Challenge (FTC)",
@@ -83,7 +71,6 @@ const Footer = () => {
     "Web Development",
     "Mobile App Development",
     "Game Development",
-    "Cybersecurity & Ethical Hacking",
     "Robotics & IoT",
     "STEAM Teacher Training",
     "Girls in STEAM (Her e-STEAM)",
@@ -106,7 +93,6 @@ const Footer = () => {
     },
   ];
 
-  // ✅ Contact Info (Added Lagos address)
   const contactInfo = [
     {
       icon: <MapPin />,
@@ -116,7 +102,7 @@ const Footer = () => {
     {
       icon: <MapPin />,
       label: "Lagos Office",
-      value: " 4 Oye Balogun St, Lekki Peninsula II, Lekki, Lagos, Nigeria",
+      value: "4 Oye Balogun St, Lekki Peninsula II, Lekki, Lagos, Nigeria",
     },
     {
       icon: <Mail />,
@@ -134,99 +120,62 @@ const Footer = () => {
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
-    // set subscriber context values
     setSubscriberEmail(email);
-    setSubscriberName(""); // optional, no name field in footer
+    setSubscriberName("");
     await addSubscriber();
-    setEmail(""); // clear local input
+    setEmail("");
   };
 
   return (
-    <footer
-      role="contentinfo"
-      className={`${bgColor} ${textColor} border-t ${borderColor}`}
-    >
-      <div className="max-w-[130rem] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-10 sm:py-14 md:py-16">
+    <footer role="contentinfo" className={`${bgColor} ${textColor} border-t ${borderColor}`}>
+      <div className="overflow-hidden max-w-[130rem] mx-auto px-2 sm:px-4 md:px-6 py-10 sm:py-14 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16">
-          {/* ✅ Left Column */}
+
           <div className="sm:col-span-2 lg:col-span-5 space-y-6">
-            <div className="flex items-center space-x-3">
-              <div className="relative h-16 w-52 md:h-20 md:w-64 rounded-md overflow-hidden">
-                <Image
-                  src={profile}
-                  alt="Coderina Education and Technology Foundation logo"
-                  fill
-                  className="object-contain rounded-lg"
-                />
-              </div>
+            <div className="relative h-16 w-48 3xl:h-24 3xl:w-64 ">
+              <Image src={profile} alt="Coderina logo" fill className="object-contain" />
             </div>
 
-            <p
-              className={`text-sm sm:text-base lg:text-lg ${subTextColor} leading-relaxed`}
-            >
-              Coderina Education and Technology Foundation is a not-for-profit
-              organization that equips young Africans with 21st-century skills
-              through robotics, AI, coding, and digital learning programs.
+            <p className={`${subTextColor} text-sm sm:text-base md:text-lg lg:text-base xl:text-lg 2xl:text-xl 3xl:text-2xl leading-relaxed max-w-full`}>
+              Coderina Education and Technology Foundation is a not-for-profit organization that equips young Africans with 21st-century skills through robotics, AI, coding, and digital learning programs.
             </p>
-            <p
-              className={`text-sm sm:text-base lg:text-lg ${subTextColor} leading-relaxed`}
-            >
-              Our platforms enables learners to build, create, and solve
-              real-world problems while preparing for global opportunities.
+
+            <p className={`${subTextColor} text-sm sm:text-base md:text-lg lg:text-base xl:text-lg 2xl:text-xl 3xl:text-2xl leading-relaxed max-w-full`}>
+              Our platforms enable learners to build, create, and solve real-world problems while preparing for global opportunities.
             </p>
 
             <div>
-              <h4 className={`font-semibold ${accentColor} text-lg mb-3`}>
+              <h4 className={`font-semibold ${accentColor} text-base sm:text-lg lg:text-xl 2xl:text-2xl mb-3`}>
                 Follow Us
               </h4>
-              <div className="flex flex-wrap gap-3 sm:gap-4">
-                {socialLinks.map(({ icon, url, label }, index) => (
-                  <a
+
+              <div className="flex gap-3 sm:gap-4">
+                {socialLinks.map(({ icon, url }, index) => (
+                  <Link
                     key={index}
                     href={url}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 ${
-                      pathname.startsWith("/programs") ||
-                      pathname.startsWith("/events")
-                        ? "bg-white/10 hover:bg-white/20 text-white"
-                        : "bg-gray-100 hover:bg-[#000000] text-gray-600 hover:text-white"
-                    }`}
+                    className="flex items-center justify-center rounded-full w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 2xl:w-12 2xl:h-12 bg-gray-100 hover:bg-black transition"
                   >
-                    {icon}
-                  </a>
+                    <span className="[&>svg]:w-4 sm:[&>svg]:w-5 md:[&>svg]:w-5 lg:[&>svg]:w-6 2xl:[&>svg]:w-7">{icon}</span>
+                  </Link>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* ✅ Middle Column - Navigation & Programs (no wrapping) */}
           <div className="sm:col-span-2 lg:col-span-4">
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 whitespace-nowrap">
-              {[
-                ...footerSections,
-                {
-                  title: "Programs",
-                  items: programs.map((p) => ({
-                    label: p,
-                    href: `/programs/${p.toLowerCase().replace(/\s+/g, "-")}`,
-                  })),
-                },
-              ].map((section, idx) => (
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:whitespace-nowrap">
+              {[...footerSections, { title: "Programs", items: programs.map((p) => ({ label: p })) }].map((section, idx) => (
                 <div key={idx} className="space-y-3">
-                  <h4 className={`font-semibold ${accentColor} text-lg`}>
+                  <h4 className={`font-semibold ${accentColor} text-base sm:text-lg lg:text-xl 2xl:text-2xl`}>
                     {section.title}
                   </h4>
+
                   <ul className="space-y-2">
                     {section.items.map((item, i) => (
                       <li key={i}>
-                        <p
-                          
-                          className={`text-sm sm:text-base ${subTextColor} hover:${accentColor} transition-colors duration-200 hover:underline`}
-                        >
-                          {item.label}
-                        </p>
+                        <p className={`${subTextColor} text-xs sm:text-sm md:text-base lg:text-sm xl:text-base 2xl:text-lg`}>{item.label}</p>
                       </li>
                     ))}
                   </ul>
@@ -235,113 +184,60 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* ✅ Right Column - Contact & Newsletter */}
           <div className="sm:col-span-2 lg:col-span-3 space-y-8">
             <div>
-              <h4 className={`font-semibold ${accentColor} text-lg mb-4`}>
+              <h4 className={`font-semibold ${accentColor} text-base sm:text-lg lg:text-xl 2xl:text-2xl mb-4`}>
                 Contact Info
               </h4>
+
               <div className="space-y-4">
                 {contactInfo.map((contact, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <div className={`w-5 h-5 ${accentColor} mt-1`}>
-                      {contact.icon}
-                    </div>
-                    <div>
-                      {contact.href ? (
-                        <a
-                          href={contact.href}
-                          className={`text-sm sm:text-base ${subTextColor} hover:${accentColor} transition-colors duration-200`}
-                        >
-                          {contact.value}
-                        </a>
-                      ) : (
-                        <p className={`text-sm sm:text-base ${subTextColor}`}>
-                          {contact.value}
-                        </p>
-                      )}
-                    </div>
+                  <div key={index} className="flex gap-3">
+                    <span className="[&>svg]:w-4 sm:[&>svg]:w-5 lg:[&>svg]:w-6 2xl:[&>svg]:w-7">{contact.icon}</span>
+                    <p className={`${subTextColor} text-xs sm:text-sm md:text-base lg:text-sm xl:text-base 2xl:text-lg`}>
+                      {contact.value}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* ✅ Newsletter */}
-            {/* ✅ Newsletter */}
             <div>
-              <h4 className={`font-semibold ${accentColor} text-lg mb-3`}>
+              <h4 className={`font-semibold ${accentColor} text-base sm:text-lg lg:text-xl 2xl:text-2xl mb-3`}>
                 Newsletter
               </h4>
-              <p className={`${subTextColor} mb-3 text-sm sm:text-base`}>
+
+              <p className={`${subTextColor} text-xs sm:text-sm md:text-base lg:text-sm xl:text-base 2xl:text-lg mb-3`}>
                 Subscribe to get the latest updates.
               </p>
 
               <form onSubmit={handleSubscribe} className="flex">
                 <input
                   type="email"
-                  placeholder="Your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:border-[#e29818]"
-                  required
+                  placeholder="Your email"
+                  className="flex-1 px-3 py-2 text-sm sm:text-base lg:text-sm 2xl:text-lg rounded-l-lg border"
                 />
-                <button
-                  type="submit"
-                  disabled={subscriberSubmitting}
-                  className="bg-[#e29818] px-4 py-2 rounded-r-lg hover:bg-[#d48b16] transition disabled:opacity-50"
-                >
-                  <ChevronRight className="w-5 h-5 text-white" />
+                <button className="bg-[#e29818] px-4 py-2 rounded-r-lg">
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 2xl:w-6 2xl:h-6 text-white" />
                 </button>
               </form>
-
-              {/* ✅ Display subscriber messages */}
-              {subscriberSuccess && (
-                <p className="mt-2 text-green-600 text-sm">
-                  {subscriberSuccess}
-                </p>
-              )}
-              {subscriberError && (
-                <p className="mt-2 text-red-600 text-sm">{subscriberError}</p>
-              )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* ✅ Bottom Bar */}
-      <div
-        className={`${
-          pathname.startsWith("/programs") || pathname.startsWith("/events")
-            ? "border-t border-white/10 bg-black/90"
-            : "border-t border-gray-200 bg-gray-50"
-        }`}
-      >
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 md:px-8 py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
-            <p className={`text-xs sm:text-sm ${subTextColor}`}>
-              © 2025 Coderina Education and Technology Foundation. All rights
-              reserved.
-            </p>
-            <div className="flex flex-wrap gap-4 text-xs sm:text-sm">
-              <Link
-                href="#"
-                className={`${subTextColor} hover:${accentColor}`}
-              >
-                Terms of Service
-              </Link>
-              <Link
-                href="#"
-                className={`${subTextColor} hover:${accentColor}`}
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="#"
-                className={`${subTextColor} hover:${accentColor}`}
-              >
-                Cookie Policy
-              </Link>
-            </div>
+      <div className="border-t">
+        <div className="max-w-[130rem] mx-auto px-2 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className={`${subTextColor} text-xs sm:text-sm md:text-base lg:text-sm 2xl:text-lg`}>
+            © 2025 Coderina Education and Technology Foundation. All rights reserved.
+          </p>
+
+          <div className="flex flex-wrap gap-4 text-xs sm:text-sm md:text-base lg:text-sm 2xl:text-lg">
+            <Link href="#" className={`${subTextColor}`}>Terms of Service</Link>
+            <Link href="#" className={`${subTextColor}`}>Privacy Policy</Link>
+            <Link href="#" className={`${subTextColor}`}>Cookie Policy</Link>
           </div>
         </div>
       </div>

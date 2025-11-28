@@ -42,31 +42,7 @@ export default function CoderinaLanding() {
 
   return (
     <>
-      {/* ✅ SEO META TAGS */}
-      <Head>
-        <title>Coderina Foundation | Empowering Africa Through STEM & Robotics</title>
-        <meta
-          name="description"
-          content="Join Coderina Education and Technology Foundation — a leading nonprofit empowering African youth through STEM education, robotics, coding, and 21st-century skills. Learn, build, and innovate with us."
-        />
-        <meta
-          name="keywords"
-          content="Coderina, STEM Africa, robotics education, coding for kids, 3D printing, STEM foundation, Coderina.org, innovation, digital literacy, Africa"
-        />
-        <meta
-          property="og:title"
-          content="Coderina Foundation | Empowering Africa Through STEM & Robotics"
-        />
-        <meta
-          property="og:description"
-          content="Building the next generation of African innovators through hands-on STEM and robotics programs."
-        />
-        <meta
-          property="og:image"
-          content="https://coderina.org/images/og-banner.jpg"
-        />
-        <meta property="og:url" content="https://coderina.org" />
-      </Head>
+      
 
       <div className="bg-[#f9fafb]">
         {/* Hero Section with Form */}

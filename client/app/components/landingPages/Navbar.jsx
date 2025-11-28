@@ -23,7 +23,7 @@ export default function Navbar() {
   const menuRef = useRef(null);
   const pathname = usePathname();
 
-  // ✅ Hide top bar + detect scroll for navbar shadow/blur
+  // Hide top bar + scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setShowTopBar(window.scrollY <= 50);
@@ -33,7 +33,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Close menu when clicking outside
+  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -44,7 +44,16 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ✅ Updated nav links
+  // ✅ Dynamic navbar background by route
+  const getNavbarBg = () => {
+    if (pathname.startsWith("/events")) return "bg-[#FFF9F0]";
+    if (pathname.startsWith("/programs")) return "bg-[#F5F5F5]";
+    if (pathname.startsWith("/robotics-lab")) return "bg-[#eef6ff]";
+    return scrolled
+      ? "bg-white/80 backdrop-blur-md shadow-md"
+      : "bg-white";
+  };
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
@@ -54,91 +63,72 @@ export default function Navbar() {
   ];
 
   const socialLinks = [
-    {
-      icon: <Youtube />,
-      link: "https://www.youtube.com/@coderina",
-      label: "YouTube",
-    },
-    {
-      icon: <Twitter />,
-      link: "https://twitter.com/coderina",
-      label: "Twitter",
-    },
-    {
-      icon: <Linkedin />,
-      link: "https://www.linkedin.com/in/coderinaedu",
-      label: "LinkedIn",
-    },
-    {
-      icon: <Facebook />,
-      link: "https://www.facebook.com/coderinaedu",
-      label: "Facebook",
-    },
-    {
-      icon: <Instagram />,
-      link: "https://www.instagram.com/coderinaedu/",
-      label: "Instagram",
-    },
+    { icon: <Youtube />, link: "https://www.youtube.com/@coderina", label: "YouTube" },
+    { icon: <Twitter />, link: "https://twitter.com/coderina", label: "Twitter" },
+    { icon: <Linkedin />, link: "https://www.linkedin.com/in/coderinaedu", label: "LinkedIn" },
+    { icon: <Facebook />, link: "https://www.facebook.com/coderinaedu", label: "Facebook" },
+    { icon: <Instagram />, link: "https://www.instagram.com/coderinaedu/", label: "Instagram" },
   ];
 
   return (
-    <header
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? "backdrop-blur-md bg-white/80 shadow-md" : "bg-white"
-      }`}
-    >
-      {/*Top Info Bar*/}
+    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${getNavbarBg()}`}>
+      
+      {/* TOP INFO BAR */}
       <div
-        className={`bg-gray-800 text-white text-sm sm:text-base transition-all duration-500 ${
+        className={`bg-gray-800 text-white text-sm transition-all duration-500 ${
           showTopBar
             ? "opacity-100 translate-y-0 py-2"
             : "opacity-0 -translate-y-full py-0 pointer-events-none"
         }`}
       >
-        <div className="max-w-[130rem] mx-auto flex justify-between items-center px-4 sm:px-8">
+        <div className="max-w-full 3xl:max-w-[130rem] mx-auto flex justify-between items-center px-2 sm:px-8">
           <div className="flex items-center space-x-4">
-            <a
-              href="mailto:hello@coderina.org"
-              className="flex items-center hover:text-gray-200 transition"
-            >
-              <Mail size={18} className="mr-1" /> hello@coderina.org
+            <a href="mailto:hello@coderina.org" className="flex items-center hover:text-gray-200">
+              <Mail size={16} className="mr-1" /> hello@coderina.org
             </a>
-            <a
-              href="tel:+2349093307353"
-              className="flex items-center hover:text-gray-200 transition"
-            >
-              <Phone size={18} className="mr-1" /> +234 909 330 7353
+            <a href="tel:+2349093307353" className="flex items-center hover:text-gray-200">
+              <Phone size={16} className="mr-1" /> +234 909 330 7353
             </a>
           </div>
 
-          <div className="hidden md:flex space-x-5">
-            {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.link}
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-gray-200 transition-transform transform hover:scale-110"
-                aria-label={social.label}
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
+         <div className="hidden md:flex space-x-4 lg:space-x-5">
+  {socialLinks.map((social) => (
+    <Link
+      key={social.label}
+      href={social.link}
+      target="_blank"
+      rel="noreferrer"
+      className="
+        text-[#fff]
+        transition-all
+        duration-300
+        hover:scale-110
+        hover:text-[#e29818]
+      "
+    >
+      <span className="
+        [&>svg]:w-4 [&>svg]:h-4
+        md:[&>svg]:w-5 md:[&>svg]:h-5
+        lg:[&>svg]:w-6 lg:[&>svg]:h-6
+        3xl:[&>svg]:w-7 3xl:[&>svg]:h-7
+      ">
+        {social.icon}
+      </span>
+    </Link>
+  ))}
+</div>
+
         </div>
       </div>
 
-      {/* ✅ Main Navbar */}
-      <nav
-        className={`transition-all duration-500 ${
-          showTopBar ? "mt-0" : "mt-0"
-        }`}
-      >
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 sm:h-20">
-            {/* Logo */}
-            <div className="flex items-center space-x-2">
-              <div className="relative h-14 w-28 md:h-20 md:w-44">
+      {/* MAIN NAVBAR */}
+      <nav>
+        <div className="max-w-full 3xl:max-w-[130rem] mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-10 md:h-12 3xl:h-16">
+
+            {/* LOGO */}
+            <div className="flex items-center">
+              <div className="relative h-10 w-24 md:h-14 md:w-36">
                 <Image
                   src="/coderinaLogo.png"
                   alt="Coderina Logo"
@@ -148,17 +138,17 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-10">
+            {/* DESKTOP NAVIGATION (Now visible from tablets) */}
+            <div className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`transition-colors font-medium text-lg ${
+                    className={`font-medium text-base transition-colors ${
                       isActive
-                        ? "text-[#321414] font-semibold border-b-2 border-[#321414] pb-1"
+                        ? "text-[#321414] font-semibold border-b-2 border-[#321414]"
                         : "text-[#321414]/80 hover:text-[#321414]"
                     }`}
                   >
@@ -171,25 +161,25 @@ export default function Navbar() {
             {/* CTA */}
             <Link
               href="/contact"
-              className="hidden lg:block bg-[#e29818] text-black px-8 py-3 rounded-full hover:bg-[#FFF9F0] transition-all duration-300 text-lg font-semibold shadow-sm"
+              className="hidden md:block bg-[#e29818] px-6 py-2 rounded-full text-black font-semibold hover:bg-[#FFF9F0] transition"
             >
               Contact Us
             </Link>
 
-            {/* Mobile Toggle */}
+            {/* MOBILE TOGGLE */}
             <button
-              className="lg:hidden text-[#321414] hover:text-[#4a2020] transition"
+              className="md:hidden text-[#321414]"
               onClick={() => setMenuOpen(!menuOpen)}
             >
-              {menuOpen ? <X size={30} /> : <Menu size={30} />}
+              {menuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
-        {/* ✅ Mobile Dropdown */}
+        {/* MOBILE MENU */}
         <div
           ref={menuRef}
-          className={`lg:hidden bg-white shadow-md transition-all duration-300 overflow-hidden ${
+          className={`md:hidden bg-white shadow-md transition-all duration-300 overflow-hidden ${
             menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
@@ -198,39 +188,14 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-lg font-medium transition-colors ${
-                  pathname === link.href
-                    ? "text-[#321414] font-semibold"
-                    : "text-[#321414]/80 hover:text-[#321414]"
+                className={`text-base font-medium ${
+                  pathname === link.href ? "text-[#321414] font-semibold" : "text-[#321414]/80"
                 }`}
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-
-            <Link
-              href="/account-access"
-              onClick={() => setMenuOpen(false)}
-              className="bg-[#321414] text-white px-6 py-3 rounded-full hover:bg-[#4a2020] transition duration-300 font-semibold text-center"
-            >
-              Get Started Free
-            </Link>
-
-            {/* Socials for Mobile */}
-            <div className="flex justify-center space-x-5 mt-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-[#321414] hover:text-[#4a2020] transition-transform transform hover:scale-110"
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
           </div>
         </div>
       </nav>
