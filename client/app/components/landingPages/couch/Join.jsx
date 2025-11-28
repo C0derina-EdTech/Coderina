@@ -1,19 +1,62 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Instagram, Facebook, Linkedin, Send, Mail } from "lucide-react";
+import { Instagram, Facebook, Linkedin, Send, Mail, Loader2  } from "lucide-react";
 import { useFormContext } from "../../contexts/FormContext";
+import { Country } from "country-state-city";
 
 export default function JoinCouch() {
   const {
-    contactName, setContactName,
-    contactEmail, setContactEmail,
-    contactPhone, setContactPhone,
-    contactWebsite, setContactWebsite,
-    contactSubmitting,
-    sendContact,
+    universityName,
+    setUniversityName,
+    teamName,
+    setTeamName,
+    universityEmail,
+    setUniversityEmail,
+    universityPhone,
+    setUniversityPhone,
+    country,
+    setCountry,
+    sendCouchContact,
+    couchSubmitting,
+    couchError,
+    couchSuccess
   } = useFormContext();
+
+  const [countries, setCountries] = useState([]);
+  const [touched, setTouched] = useState(false);
+const [showSuccess, setShowSuccess] = useState(false);
+
+useEffect(() => {
+  if (couchSuccess) {
+    setShowSuccess(true);
+    const timer = setTimeout(() => {
+      setShowSuccess(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }
+}, [couchSuccess]);
+
+const isEmpty = (value) => touched && !value.trim();
+
+
+  useEffect(() => {
+    const allCountries = Country.getAllCountries();
+    setCountries(allCountries);
+  }, []);
+
+
+  const handleCountryChange = (e) => {
+    const isoCode = e.target.value;
+    const selectedCountry = countries.find(c => c.isoCode === isoCode);
+  
+    if (selectedCountry) {
+      setCountry(selectedCountry.name); 
+      setUniversityPhone(`+${selectedCountry.phonecode}`);
+    }
+  };
+  
 
   return (
     <section className="bg-gradient-to-b from-gray-900 to-black text-white relative overflow-hidden">
@@ -52,10 +95,10 @@ export default function JoinCouch() {
 
             {/* SEO HEADER */}
             <header className="text-center mb-10">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl 3xl:text-6xl font-bold mb-4">
                 Join COUCH 2026 Innovation Challenge
               </h1>
-              <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed max-w-lg mx-auto">
+              <p className="text-gray-300 text-sm sm:text-base 3xl:text-lg leading-relaxed max-w-lg mx-auto">
                 Are you ready to showcase your innovation and compete with
                 the brightest university teams across Nigeria? Register your
                 interest for the next COUCH edition and become part of the
@@ -65,58 +108,98 @@ export default function JoinCouch() {
 
             {/* FORM */}
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                sendContact();
-              }}
-              className="space-y-4"
-            >
-              <input
-                type="text"
-                placeholder="University Name"
-                value={contactWebsite}
-                onChange={(e) => setContactWebsite(e.target.value)}
-                className="w-full bg-white/5 border border-white/20 text-white px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0"
-                required
-              />
+  onSubmit={(e) => {
+    e.preventDefault();
+    setTouched(true);
+    sendCouchContact();
+  }}
+  className="space-y-4"
+>
 
-              <input
-                type="text"
-                placeholder="Team Name"
-                value={contactName}
-                onChange={(e) => setContactName(e.target.value)}
-                className="w-full bg-white/5 border border-white/20 text-white px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0"
-                required
-              />
+  <input
+    type="text"
+    placeholder="University Name"
+    value={universityName}
+    onChange={(e) => setUniversityName(e.target.value)}
+    className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
+    ${isEmpty(universityName) ? "border border-red-500/70" : "border border-white/20"}`}
+  />
 
-              <input
-                type="email"
-                placeholder="Team Email"
-                value={contactEmail}
-                onChange={(e) => setContactEmail(e.target.value)}
-                className="w-full bg-white/5 border border-white/20 text-white px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0"
-                required
-              />
+  <input
+    type="text"
+    placeholder="Team Name"
+    value={teamName}
+    onChange={(e) => setTeamName(e.target.value)}
+    className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
+    ${isEmpty(teamName) ? "border border-red-500/70" : "border border-white/20"}`}
+  />
 
-              <input
-                type="tel"
-                placeholder="+234XXXXXXXXXX"
-                pattern="^\+234\d{10}$"
-                value={contactPhone}
-                onChange={(e) => setContactPhone(e.target.value)}
-                className="w-full bg-white/5 border border-white/20 text-white px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0"
-                required
-              />
+  <input
+    type="email"
+    placeholder="Team Email"
+    value={universityEmail}
+    onChange={(e) => setUniversityEmail(e.target.value)}
+    className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
+    ${isEmpty(universityEmail) ? "border border-red-500/70" : "border border-white/20"}`}
+  />
 
-              <button
-                type="submit"
-                disabled={contactSubmitting}
-                className="w-full bg-white text-gray-900 py-3 rounded-full font-bold hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
-              >
-                <Send size={18} />
-                {contactSubmitting ? "Submitting..." : "Register Your Interest"}
-              </button>
-            </form>
+  {/* COUNTRY SELECT */}
+  <select
+  value={
+    countries.find(c => c.name === country)?.isoCode || ""
+  }
+  onChange={handleCountryChange}
+  className={`w-full bg-white/5 px-4 py-3 rounded-xl focus:outline-none focus:ring-0
+  ${isEmpty(country) ? "border border-red-500/70" : "border border-white/20"}`}
+>
+
+  <option value="" className="text-gray-400 bg-gray-900">
+    Select Country
+  </option>
+
+  {countries.map((c) => (
+    <option key={c.isoCode} value={c.isoCode} className="bg-gray-900 text-white">
+      {c.name}
+    </option>
+  ))}
+</select>
+
+
+  <input
+    type="tel"
+    placeholder="+298"
+    value={universityPhone}
+    onChange={(e) => setUniversityPhone(e.target.value)}
+    className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
+    ${isEmpty(universityPhone) ? "border border-red-500/70" : "border border-white/20"}`}
+  />
+
+  {/* ERROR MESSAGE */}
+  {couchError && (
+    <p className="text-red-400 text-sm text-center">
+      {couchError}
+    </p>
+  )}
+
+  <button
+    type="submit"
+    disabled={couchSubmitting}
+    className="w-full bg-white text-gray-900 py-3 rounded-full font-bold hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
+  >
+    {couchSubmitting ? (
+      <Loader2 className="animate-spin" />
+    ) : showSuccess ? (
+      "✅ Registration Sent!"
+    ) : (
+      <>
+        <Send size={18} />
+        Register Your Interest
+      </>
+    )}
+  </button>
+
+</form>
+
 
             {/* SOCIAL LINKS */}
             <div className="flex justify-center gap-6 mt-10">
@@ -130,8 +213,8 @@ export default function JoinCouch() {
                 <Linkedin className="hover:text-[#FFD700] transition" />
               </Link>
               <Link href="mailto:couch@coderina.org">
-  <Mail className="hover:text-[#FFD700] transition" />
-</Link>
+                <Mail className="hover:text-[#FFD700] transition" />
+              </Link>
 
             </div>
 
