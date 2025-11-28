@@ -56,7 +56,7 @@ export default function Programs() {
         "An annual event where tertiary students showcase their final year projects to industry experts. Bridging the gap between academic work and industry needs, aligning student projects with real-world requirements.",
       duration: "Annual Event",
       audience: "Final Year Students",
-      image: "/chess1.jpg",
+      image: "/couchch.jpeg",
       category: "Showcase",
       icon: GraduationCap,
       color: "from-blue-600 to-indigo-700",
