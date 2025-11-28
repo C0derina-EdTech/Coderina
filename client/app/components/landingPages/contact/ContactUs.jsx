@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React , {useEffect, useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import focus from "../../../../public/focus.jpg";
@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Head from "next/head";
 import { useFormContext } from "../../contexts/FormContext";
+import { Country } from "country-state-city";
 
 const ContactUs = () => {
   const {
@@ -39,6 +40,27 @@ const ContactUs = () => {
     contactSuccess,
     sendContact,
   } = useFormContext();
+
+
+  const [countries, setCountries] = useState([]);
+const [touched, setTouched] = useState(false);
+
+useEffect(() => {
+  const allCountries = Country.getAllCountries();
+  setCountries(allCountries);
+}, []);
+
+const handleCountryChange = (e) => {
+  const isoCode = e.target.value;
+  const selectedCountry = countries.find((c) => c.isoCode === isoCode);
+
+  if (selectedCountry) {
+    setContactCountry(selectedCountry.name);
+    setContactPhone(`+${selectedCountry.phonecode}`);
+  }
+};
+
+const isEmpty = (value) => touched && !value.trim();
 
   const socialLinks = [
     {
@@ -296,7 +318,9 @@ const ContactUs = () => {
                   value={contactName}
                   onChange={(e) => setContactName(e.target.value)}
                   required
-                  className="w-full px-5 py-4 bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all"
+                  className={`w-full px-5 py-4 bg-transparent border-b-2 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all ${
+                    isEmpty(contactCountry) ? "border-red-500/50" : "border-gray-600"
+                  }`}
                 />
 
                 <input
@@ -305,25 +329,45 @@ const ContactUs = () => {
                   value={contactEmail}
                   onChange={(e) => setContactEmail(e.target.value)}
                   required
-                  className="w-full px-5 py-4 bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all"
+                  className={`w-full px-5 py-4 bg-transparent border-b-2 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all ${
+                    isEmpty(contactCountry) ? "border-red-500/50" : "border-gray-600"
+                  }`}
                 />
 
-                <input
-                  type="text"
-                  placeholder="Country"
-                  value={contactCountry}
-                  onChange={(e) => setContactCountry(e.target.value)}
-                  required
-                  className="w-full px-5 py-4 bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all"
-                />
+                {/* COUNTRY SELECT */}
+<select
+  value={
+    countries.find((c) => c.name === contactCountry)?.isoCode || ""
+  }
+  onChange={handleCountryChange}
+  onBlur={() => setTouched(true)}
+  required
+  className={`w-full px-5 py-4 bg-transparent border-b-2 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all ${
+    isEmpty(contactCountry) ? "border-red-500/50" : "border-gray-600"
+  }`}
+>
+  <option value="" className="text-gray-400">
+    Select Country
+  </option>
+  {countries.map((c) => (
+    <option key={c.isoCode} value={c.isoCode} className="bg-gray-900 text-white">
+      {c.name}
+    </option>
+  ))}
+</select>
 
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  value={contactPhone}
-                  onChange={(e) => setContactPhone(e.target.value)}
-                  className="w-full px-5 py-4 bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all"
-                />
+{/* PHONE NUMBER */}
+<input
+  type="tel"
+  placeholder="Phone Number"
+  value={contactPhone}
+  onChange={(e) => setContactPhone(e.target.value)}
+  required
+  className={`w-full px-5 py-4 bg-transparent border-b-2 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all ${
+    isEmpty(contactPhone) ? "border-red-500/50" : "border-gray-600"
+  }`}
+/>
+
 
                 <textarea
                   rows={5}
@@ -331,7 +375,9 @@ const ContactUs = () => {
                   value={contactMessage}
                   onChange={(e) => setContactMessage(e.target.value)}
                   required
-                  className="w-full px-5 py-4 bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all resize-none"
+                  className={`w-full px-5 py-4 bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all resize-none ${
+                    isEmpty(contactPhone) ? "border-red-500/50" : "border-gray-600"
+                  }`}
                 />
 
                 {contactError && (

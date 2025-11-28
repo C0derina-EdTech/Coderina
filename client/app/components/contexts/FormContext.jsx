@@ -154,6 +154,70 @@ export function FormProvider({ children }) {
     }
   };
 
+
+
+  // ---------- CONTACT COUCH FORM ----------
+const [couchSubmitting, setCouchSubmitting] = useState(false);
+const [universityName, setUniversityName] = useState("");
+const [teamName, setTeamName] = useState("");
+const [universityEmail, setUniversityEmail] = useState("");
+const [universityPhone, setUniversityPhone] = useState("");
+const [country, setCountry] = useState("");
+const [couchError, setCouchError] = useState("");
+const [couchSuccess, setCouchSuccess] = useState("");
+
+const sendCouchContact = async () => {
+  setCouchSubmitting(true);
+  setCouchError("");
+  setCouchSuccess("");
+
+  // ALL FIELDS REQUIRED
+  if (
+    !universityName.trim() ||
+    !teamName.trim() ||
+    !universityEmail.trim() ||
+    !universityPhone.trim() ||
+    !country.trim()
+  ) {
+    setCouchError("All fields are required.");
+    setCouchSubmitting(false);
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/contactCouch", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        universityName,
+        teamName,
+        universityEmail,
+        universityPhone,
+        country,
+      }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Failed to submit");
+
+    setCouchSuccess("Form submitted successfully!");
+    setTimeout(() => setCouchSuccess(""), 10000);
+
+    // Reset
+    setUniversityName("");
+    setTeamName("");
+    setUniversityEmail("");
+    setUniversityPhone("");
+    setCountry("");
+  } catch (err) {
+    console.error("Couch form error:", err);
+    setCouchError(err.message || "Something went wrong.");
+  } finally {
+    setCouchSubmitting(false);
+  }
+};
+
+
   return (
     <FormContext.Provider
       value={{
@@ -197,6 +261,23 @@ export function FormProvider({ children }) {
         subscriberSuccess,
         subscriberError,
         addSubscriber,
+
+        // Couch Contact
+couchSubmitting,
+universityName,
+setUniversityName,
+teamName,
+setTeamName,
+universityEmail,
+setUniversityEmail,
+universityPhone,
+setUniversityPhone,
+country,
+setCountry,
+couchError,
+couchSuccess,
+sendCouchContact,
+
       }}
     >
       {children}

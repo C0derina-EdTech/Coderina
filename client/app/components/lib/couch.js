@@ -36,7 +36,7 @@ const couchData = {
           description:
             "SUNPOD is a portable solar-powered station designed to address Nigeria's significant energy deficit. It aims to provide affordable, clean, and off-grid electricity for lighting and device charging, benefiting rural homes, students, small businesses, and healthcare facilities.",
           category: "Clean Energy",
-          image: "/couch/generalpic1.jpg",
+          image: "/couch/teamgreen.jpg",
         },
         {
           id: 3,
@@ -121,7 +121,7 @@ const couchData = {
           description:
             "Wrap2Grow is an initiative which focuses on developing a biodegradable packaging material designed to convert into biofertilizer after use.",
           category: "Biodegradable Materials",
-          image: "/couch/generalpic2.jpg",
+          image: "/couch/regenx.jpg",
         },
         {
           id: 10,
@@ -132,7 +132,7 @@ const couchData = {
           description:
             "EcoCircular focused on transforming palm oil waste into a sustainable biofertilizer in Nigeria, specifically the Okada region. The core problem addressed is the severe environmental degradation caused by the improper disposal of Empty Fruit Bunches (EFB) and Palm Oil Mill Effluent (POME), which pollutes soil and water and contributes to greenhouse gas emissions. The proposed solution involves anaerobic co-digestion of these waste products to create nutrient-rich, pelletized biofertilizer, offering an alternative to costly inorganic fertilizers.",
           category: "Biofertilizer",
-          image: "/couch/generalpic3.jpg",
+          image: "/couch/ecocircular.jpg",
         },
       ],
   
@@ -160,7 +160,7 @@ const couchData = {
           image2: "/couch/drtopekaladefasua2.jpg",
         },
         {
-          name: "Asha Falandan",
+          name: "Mr Ashafa landan",
           title:
             "Acting Director, Skills Development and Entrepreneurship (National Universities Commission)",
           image: "/couch/ashafalandan.jpg",
@@ -174,12 +174,12 @@ const couchData = {
       ],
   
       gallery: [
-        { img: "/couch/teampupindustries.jpg", title: "Team imsu giving their presentation" },
+        { img: "/couch/teamscraplink.jpg", title: "Team ScrapLink receiving the people's choice Award" },
         { img: "/couch/puppresenting.jpg", title: "Team PUP giving their presentation" },
         { img: "/couch/neuronaut.jpg", title: "Team Neuronaut giving their presentation" },
         { img: "/couch/absu.jpg", title: "Team Absu giving their presentation" },
-        { img: "/couch/ecocircular.jpg", title: "Team EcoCircular labs giving their presentation" },
-        { img: "/couch/teampupindustries.jpg", title: "Team imsu giving their presentation" },
+        { img: "/couch/ecocircular.jpg", title: "Team EcoCircular labs receiving certificate of participation" },
+        { img: "/couch/engrfummi.jpg", title: "Engr Funmi Jemisenia receiving the honors Award as part of the COUCH 2025 mentors" },
       ],
     },
   
