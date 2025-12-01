@@ -23,7 +23,7 @@ export default function Hero() {
 
   return (
     <section className="relative bg-gradient-to-br from-[#f5f3ef] via-[#fef9f0] to-[#f9f6f1] overflow-hidden pt-20 ">
-      <div className="max-w-[130rem] mx-auto px-2 sm:px-6 lg:px-8 xl:px-12 2xl:mt-6">
+      <div className="max-w-[130rem] mx-auto px-2 sm:px-6 lg:px-8  2xl:mt-6">
         <div className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
           {/* Main Content Grid */}
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center">
