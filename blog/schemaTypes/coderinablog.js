@@ -11,6 +11,13 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+  name: 'description',
+  title: 'Description',
+  type: 'text',
+  description: 'A short summary or introduction for this post.',
+}),
+
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -76,6 +83,7 @@ export default defineType({
       title: 'Views',
       type: 'number',
       initialValue: 0,
+      
     }),
 
     defineField({
@@ -87,10 +95,14 @@ export default defineType({
           type: 'string',
           options: {
             list: [
-              {title: 'Championship', value: 'championship'},
               {title: 'Case Study', value: 'case-study'},
+              {title: 'Robotics', value: 'robotics'},
+              {title: 'Innovation', value: 'innovation'},
+              {title: 'Project', value: 'project'},
+               {title: 'Programs', value: 'programs'},
+              {title: 'Workshop', value: 'workshop'},
               {title: 'General', value: 'general'},
-              {title: 'Tech', value: 'tech'},
+              {title: 'Technology', value: 'technology'},
             ],
           },
         },

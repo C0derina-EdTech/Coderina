@@ -56,53 +56,7 @@ export default function Lab() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative bg-black text-white py-24 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#e29818] via-transparent to-[#e29818]"></div>
-        </div>
-        
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 bg-[#e29818]/20 text-[#e29818] px-4 py-2 rounded-full border border-[#e29818]/30">
-                <Sparkles className="w-4 h-4" />
-                <span className="text-sm font-medium">Innovation Hub</span>
-              </div>
-              
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                Coderina <span className="text-[#e29818]">Robotics Lab</span>
-              </h1>
-              
-              <p className="text-xl text-gray-300 leading-relaxed">
-                Empowering the next generation through hands-on experience in 3D printing, 
-                robotics, and cutting-edge automation technology. A non-profit initiative 
-                dedicated to making innovation accessible to all.
-              </p>
-              
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Link href="/programs" className="bg-[#e29818] text-white px-8 py-4 rounded-lg hover:bg-[#c27f0f] transition flex items-center gap-2 font-semibold">
-                  Explore Programs <ChevronRight className="w-5 h-5" />
-                </Link>
-                <Link href="#gallery" className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-black transition font-semibold">
-                  View Gallery
-                </Link>
-              </div>
-            </div>
-
-            <div className="relative h-[500px] lg:h-[600px]">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#e29818]/20 to-transparent rounded-2xl"></div>
-              <Image
-                src="/microscope3.jpg"
-                alt="Coderina Robotics Lab Equipment"
-                className="rounded-2xl shadow-2xl object-cover"
-                fill
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* What We Do Section */}
       <section className="py-20 bg-gray-50">
@@ -313,11 +267,11 @@ export default function Lab() {
               <div className="text-orange-100 text-lg">Projects Completed</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl md:text-6xl font-bold mb-2">50+</div>
+              <div className="text-5xl md:text-6xl font-bold mb-2">30+</div>
               <div className="text-orange-100 text-lg">Expert Members</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl md:text-6xl font-bold mb-2">1000+</div>
+              <div className="text-5xl md:text-6xl font-bold mb-2">200+</div>
               <div className="text-orange-100 text-lg">Students Trained</div>
             </div>
             <div className="text-center">

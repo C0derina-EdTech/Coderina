@@ -1,7 +1,7 @@
 import LabSection from "../../components/landingPages/robotics/LabSection";
 
 export const metadata = {
-  title: "events",
+  title: "Coderina Lab",
   description:
     "Learn more about Coderina Foundation — a nonprofit empowering African youth through STEM education, digital skills, robotics, and community-driven innovation.",
 };
