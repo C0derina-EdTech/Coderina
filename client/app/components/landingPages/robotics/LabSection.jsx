@@ -2,11 +2,16 @@
 
 import React from "react";
 import Lab from "./Lab";
+import LabHero from "./LabHero";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 import TrustedBy from "../home/TrustedBy";
 const LabSection = () => {
   const aboutContents = [
+    {
+      bg: "",
+      section: <LabHero/>,
+    },
     {
       bg: "",
       section: <Lab />,
