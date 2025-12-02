@@ -40,7 +40,37 @@ h6,
     max-width: 130rem;
   }
 }
+/* laptop view hero */
 
+ 
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out;
+        }
+
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+     
 /* contact */
 
 @keyframes scroll {

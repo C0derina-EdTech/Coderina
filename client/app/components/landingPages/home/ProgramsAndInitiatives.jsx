@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ExternalLink } from "lucide-react";
 
-export default function ProgramsProjectsInitiatives() {
+export default function ProgramsProjectsInitiatives({ isLargeScreen }) {
   const programs = [
     {
       id: 1,
@@ -133,13 +133,13 @@ export default function ProgramsProjectsInitiatives() {
 
   return (
     <section className="bg-white py-12 md:py-16 lg:py-20 xl:py-24">
-      <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+      <div className="max-w-520 mx-auto px-2 sm:px-6 lg:px-8 xl:px-10">
         {/* Header */}
         <div className="text-center mb-10 md:mb-14 lg:mb-16 xl:mb-20">
-          <h2 className="text-[#133c55] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6">
+          <h2 className={`text-[#133c55] text-3xl sm:text-4xl font-bold mb-4 md:mb-6 ${isLargeScreen ? "text-7xl" : "md:text-5xl"}`}>
             Our Programs, Projects and Initiatives
           </h2>
-          <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl max-w-4xl mx-auto leading-relaxed">
+          <p className={`text-gray-600 text-sm sm:text-base max-w-4xl mx-auto leading-relaxed ${isLargeScreen ? "text-2xl" : "md:text-lg"}`}>
             Transforming lives across Africa through innovative STEM education, competitive robotics, and comprehensive digital literacy programs
           </p>
         </div>
@@ -152,7 +152,7 @@ export default function ProgramsProjectsInitiatives() {
             </h3>
             <Link 
               href="/programs" 
-              className="text-[#133c55] hover:text-[#f9a826] transition-colors flex items-center gap-2 text-sm md:text-base lg:text-lg font-semibold"
+              className={`text-[#133c55] hover:text-[#f9a826] transition-colors flex items-center gap-2 text-sm font-semibold ${isLargeScreen ? "text-lg" : "md:text-base"}`}
             >
               View All
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
@@ -180,10 +180,10 @@ export default function ProgramsProjectsInitiatives() {
                   <span className="inline-block bg-[#f9a826] text-[#133c55] text-xs md:text-sm lg:text-base font-bold px-4 py-2 rounded-full mb-3 md:mb-4">
                     {program.category}
                   </span>
-                  <h4 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
+                  <h4 className={`text-white text-2xl font-bold mb-3 md:mb-4 ${isLargeScreen ? "text-5xl" : "sm:text-3xl"}`}>
                     {program.title}
                   </h4>
-                  <p className="text-white/90 text-sm md:text-base lg:text-lg xl:text-xl mb-4 md:mb-6 leading-relaxed">
+                  <p className={`text-white/90 text-sm md:text-base mb-4 md:mb-6 leading-relaxed ${isLargeScreen ? "text-xl" : "md:text-base"}`}>
                     {program.description}
                   </p>
                   <div className="flex items-center gap-2 text-[#f9a826] group-hover:gap-4 transition-all">
@@ -196,14 +196,14 @@ export default function ProgramsProjectsInitiatives() {
           </div>
 
           {/* Other Programs Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+          <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 ${isLargeScreen ? "gap-8" : "md:gap-4"}`}>
             {programs.filter(p => !p.featured).map((program) => (
               <Link 
                 key={program.id} 
                 href={program.link}
                 className="group bg-[#133c55] rounded-xl md:rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-500 hover:scale-[1.03]"
               >
-                <div className="relative h-48 md:h-56 lg:h-64 overflow-hidden">
+                <div className={`relative h-48overflow-hidden ${isLargeScreen ? "h-64" : "md:h-56"}`}>
                   <div className="absolute inset-0 bg-gradient-to-t from-[#133c55] to-transparent z-10"></div>
                   <Image
                     src={program.image}
@@ -216,10 +216,10 @@ export default function ProgramsProjectsInitiatives() {
                   <span className="inline-block bg-[#f9a826] text-[#133c55] text-xs md:text-sm font-bold px-3 py-1 rounded-full mb-2 md:mb-3">
                     {program.category}
                   </span>
-                  <h4 className="text-white text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-3">
+                  <h4 className={`text-white text-lg font-bold mb-2 md:mb-3 ${isLargeScreen ? "text-2xl" : "sm:text-lg"}`}>
                     {program.title}
                   </h4>
-                  <p className="text-white/80 text-xs md:text-sm lg:text-base leading-relaxed mb-3 md:mb-4">
+                  <p className={`text-white text-xs leading-relaxed mb-3 md:mb-4 ${isLargeScreen ? "text-base" : "md:text-sm"}`}>
                     {program.description}
                   </p>
                   <div className="flex items-center gap-2 text-[#f9a826] text-sm md:text-base">

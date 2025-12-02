@@ -18,7 +18,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useFormContext } from "../contexts/FormContext";
 
-const Footer = () => {
+const Footer = ({isLargeScreen}) => {
   const {
     subscriberName,
     setSubscriberName,
@@ -132,20 +132,20 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16">
 
           <div className="sm:col-span-2 lg:col-span-5 space-y-6">
-            <div className="relative h-16 w-48 3xl:h-24 3xl:w-64 ">
+            <div className="relative h-16 w-48 ">
               <Image src={profile} alt="Coderina logo" fill className="object-contain" />
             </div>
 
-            <p className={`${subTextColor} text-sm sm:text-base md:text-lg lg:text-base xl:text-lg 2xl:text-xl 3xl:text-2xl leading-relaxed max-w-full`}>
+            <p className={`${subTextColor} text-sm sm:text-base leading-relaxed max-w-full ${isLargeScreen ? "text-xl" : "lg:text-sm"}`}>
               Coderina Education and Technology Foundation is a not-for-profit organization that equips young Africans with 21st-century skills through robotics, AI, coding, and digital learning programs.
             </p>
 
-            <p className={`${subTextColor} text-sm sm:text-base md:text-lg lg:text-base xl:text-lg 2xl:text-xl 3xl:text-2xl leading-relaxed max-w-full`}>
+            <p className={`${subTextColor} text-sm sm:text-base leading-relaxed max-w-full ${isLargeScreen ? "text-xl" : "md:text-base lg:text-sm"}`}>
               Our platforms enable learners to build, create, and solve real-world problems while preparing for global opportunities.
             </p>
 
             <div>
-              <h4 className={`font-semibold ${accentColor} text-base sm:text-lg lg:text-xl 2xl:text-2xl mb-3`}>
+              <h4 className={`font-semibold ${accentColor} text-base  mb-3 ${isLargeScreen ? "text-xl" : "md:text-base lg:text-sm"}`}>
                 Follow Us
               </h4>
 
@@ -168,14 +168,14 @@ const Footer = () => {
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:whitespace-nowrap">
               {[...footerSections, { title: "Programs", items: programs.map((p) => ({ label: p })) }].map((section, idx) => (
                 <div key={idx} className="space-y-3">
-                  <h4 className={`font-semibold ${accentColor} text-base sm:text-lg lg:text-xl 2xl:text-2xl`}>
+                  <h4 className={`font-semibold ${accentColor} text-base sm:text-lg  ${isLargeScreen ? "text-2xl" : "lg:text-lg"}`}>
                     {section.title}
                   </h4>
 
                   <ul className="space-y-2">
                     {section.items.map((item, i) => (
                       <li key={i}>
-                        <p className={`${subTextColor} text-xs sm:text-sm md:text-base lg:text-sm xl:text-base 2xl:text-lg`}>{item.label}</p>
+                        <p className={`${subTextColor} text-xs sm:text-sm ${isLargeScreen ? "text-xl" : "md:text-base lg:text-sm"}`}>{item.label}</p>
                       </li>
                     ))}
                   </ul>
@@ -186,7 +186,7 @@ const Footer = () => {
 
           <div className="sm:col-span-2 lg:col-span-3 space-y-8">
             <div>
-              <h4 className={`font-semibold ${accentColor} text-base sm:text-lg lg:text-xl 2xl:text-2xl mb-4`}>
+              <h4 className={`font-semibold ${accentColor} text-base sm:text-lg  mb-4  ${isLargeScreen ? "text-2xl" : "lg:text-lg"}`}>
                 Contact Info
               </h4>
 
@@ -194,7 +194,7 @@ const Footer = () => {
                 {contactInfo.map((contact, index) => (
                   <div key={index} className="flex gap-3">
                     <span className="[&>svg]:w-4 sm:[&>svg]:w-5 lg:[&>svg]:w-6 2xl:[&>svg]:w-7">{contact.icon}</span>
-                    <p className={`${subTextColor} text-xs sm:text-sm md:text-base lg:text-sm xl:text-base 2xl:text-lg`}>
+                    <p className={`${subTextColor} text-xs sm:text-sm  ${isLargeScreen ? "text-xl" : "md:text-base lg:text-sm"}`}>
                       {contact.value}
                     </p>
                   </div>
@@ -203,11 +203,11 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className={`font-semibold ${accentColor} text-base sm:text-lg lg:text-xl 2xl:text-2xl mb-3`}>
+              <h4 className={`font-semibold ${accentColor} text-base sm:text-lg  ${isLargeScreen ? "text-2xl" : "lg:text:lg"} mb-3`}>
                 Newsletter
               </h4>
 
-              <p className={`${subTextColor} text-xs sm:text-sm md:text-base lg:text-sm xl:text-base 2xl:text-lg mb-3`}>
+              <p className={`${subTextColor} text-xs sm:text-sm md:text-base  ${isLargeScreen ? "text-xl" : "lg:text-sm"} mb-3`}>
                 Subscribe to get the latest updates.
               </p>
 
