@@ -11,40 +11,26 @@ import {
   Globe,
   Calendar,
 } from "lucide-react";
-export default function UpcomingEvents() {
+export default function UpcomingEvents({ isLargeScreen }) {
   const { events = [], loading } = useBlogContext();
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
-  // ✅ Filter only valid upcoming events
-//  const upcomingEvents = events.filter((event) => {
-//   const now = new Date();
-//   const startDate = new Date(event.date);
-//   const endDate = event.endDate ? new Date(event.endDate) : null;
+  const upcomingEvents = events.filter((event) => {
+    const now = new Date();
+    const startDate = event.date ? new Date(event.date) : null;
+    const endDate = event.endDate ? new Date(event.endDate) : null;
 
-//   const isUpcoming =
-//     startDate > now || (endDate && endDate > now);
+    // Always include these even without date
+    if (event.status === "on-hold" || event.status === "postponed") {
+      return true;
+    }
 
-//   return isUpcoming;
-// });
+    if (!startDate) return false;
 
-
-const upcomingEvents = events.filter((event) => {
-  const now = new Date();
-  const startDate = event.date ? new Date(event.date) : null;
-  const endDate = event.endDate ? new Date(event.endDate) : null;
-
-  // Always include these even without date
-  if (event.status === "on-hold" || event.status === "postponed") {
-    return true;
-  }
-
-  if (!startDate) return false;
-
-  return startDate > now || (endDate && endDate > now);
-});
-
+    return startDate > now || (endDate && endDate > now);
+  });
 
   const checkScrollButtons = () => {
     if (scrollRef.current) {
@@ -55,20 +41,19 @@ const upcomingEvents = events.filter((event) => {
   };
 
   useEffect(() => {
-  checkScrollButtons();
-  window.addEventListener("resize", checkScrollButtons);
-  return () => window.removeEventListener("resize", checkScrollButtons);
-}, []);
+    checkScrollButtons();
+    window.addEventListener("resize", checkScrollButtons);
+    return () => window.removeEventListener("resize", checkScrollButtons);
+  }, []);
 
-//  Move this check AFTER hooks
-if (loading) {
-  return <UpcomingEventsSkeletonLoader />;
-}
+  //  Move this check AFTER hooks
+  if (loading) {
+    return <UpcomingEventsSkeletonLoader />;
+  }
 
-if (!upcomingEvents || upcomingEvents.length === 0) {
-  return null;
-}
-
+  if (!upcomingEvents || upcomingEvents.length === 0) {
+    return null;
+  }
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -81,14 +66,12 @@ if (!upcomingEvents || upcomingEvents.length === 0) {
     }
   };
 
- 
-
   return (
     <section
       id="upcoming-events"
       itemScope
       itemType="https://schema.org/EventSeries"
-      className="bg-black text-white py-12 sm:py-16 md:py-20 px-2 sm:px-6 md:px-8"
+      className="bg-black text-white py-12 sm:py-16 md:py-20 px-2 sm:px-6 lg:px-8 xl:px-10"
     >
       <div className="max-w-[130rem] mx-auto">
         {/* Header */}
@@ -163,18 +146,20 @@ if (!upcomingEvents || upcomingEvents.length === 0) {
           <div
             ref={scrollRef}
             onScroll={checkScrollButtons}
-            className="flex gap-4 sm:gap-5 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+            className="flex gap-2 sm:gap-5 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {upcomingEvents.map((event, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[360px] bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 group"
+                className={`flex-shrink-0 w-[240px] sm:w-[320px] md:w-[360px] bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 group ${isLargeScreen ? "w-[360px]" : "lg:w-[300px]"}`}
               >
                 {/* Image */}
-                <div className="relative h-48 sm:h-52 md:h-56 overflow-hidden">
-                  
-                   {event.image ? (
+                <div
+                  className={`relative h-40 sm:h-52 overflow-hidden
+                  ${isLargeScreen ? "h-56" : "lg:h-48"}`}
+                >
+                  {event.image ? (
                     <Image
                       src={urlFor(event.image).url()}
                       alt={event.title}
@@ -191,23 +176,23 @@ if (!upcomingEvents || upcomingEvents.length === 0) {
 
                   {/* Date Badge or on hold or postponed */}
                   <div className="absolute top-4 left-4 bg-white text-black rounded-xl px-3 py-2 text-center shadow-lg">
-                   {event.status === "on-hold" || event.status === "postponed" ? (
-  <div className="text-xs font-bold uppercase leading-tight">
-    {event.status === "on-hold" ? "ON HOLD" : "POSTPONED"}
-  </div>
-) : (
-  <>
-    <div className="text-2xl font-bold leading-none">
-      {new Date(event.date).getDate()}
-    </div>
-    <div className="text-xs font-semibold uppercase tracking-wide mt-0.5">
-      {new Date(event.date).toLocaleString("default", {
-        month: "short",
-      })}
-    </div>
-  </>
-)}
-
+                    {event.status === "on-hold" ||
+                    event.status === "postponed" ? (
+                      <div className="text-xs font-bold uppercase leading-tight">
+                        {event.status === "on-hold" ? "ON HOLD" : "POSTPONED"}
+                      </div>
+                    ) : (
+                      <>
+                        <div className="text-2xl font-bold leading-none">
+                          {new Date(event.date).getDate()}
+                        </div>
+                        <div className="text-xs font-semibold uppercase tracking-wide mt-0.5">
+                          {new Date(event.date).toLocaleString("default", {
+                            month: "short",
+                          })}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -218,29 +203,26 @@ if (!upcomingEvents || upcomingEvents.length === 0) {
                   </h3>
 
                   <div className="space-y-2 mb-4">
-                    
                     <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                      <Calendar className="w-4 h-4"/>
+                      <Calendar className="w-4 h-4" />
                       <span>{event.time}</span>
                     </div>
                     <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                      <MapPin className="w-4 h-4"/>
+                      <MapPin className="w-4 h-4" />
                       <span>{event.location}</span>
                     </div>
-
                   </div>
 
                   {event.registrationLink && (
-  <Link
-    href={event.registrationLink}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-full block text-center bg-[#e29818] hover:bg-[#c88416] text-white font-semibold py-3 rounded-lg transition-colors duration-200"
-  >
-    Join
-  </Link>
-)}
-
+                    <Link
+                      href={event.registrationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full block text-center bg-[#e29818] hover:bg-[#c88416] text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+                    >
+                      Join
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}

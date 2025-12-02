@@ -9,35 +9,18 @@ import { urlFor } from "../../lib/imageUrl";
 import { UpcomingEventsSkeletonLoader } from "../../lib/Loaders";
 import { Eye } from "lucide-react";
 
-export default function Blog() {
+export default function Blog({ isLargeScreen }) {
   const { blogs = [], loading } = useBlogContext();
 
   if (loading) return <p className="text-center py-8">Loading...</p>;
 
-  if (!blogs || blogs?.length === 0)
-    return <p className="text-center py-8 md:py-16">No posts found.</p>;
+  if (!blogs || blogs?.length === 0) {
+    return null;
+  }
   return (
     <>
-      {/* ✅ SEO Meta Tags */}
-      <Head>
-        <title>Coderina Blog | STEM, Robotics & Digital Skills Updates</title>
-        <meta
-          name="description"
-          content="Explore the latest Coderina updates on STEM education, robotics innovation, and digital literacy initiatives across Africa. Empowering youth through technology and education."
-        />
-        <meta
-          name="keywords"
-          content="Coderina, STEM, robotics, digital literacy, education Africa, innovation, technology programs"
-        />
-        <meta
-          name="author"
-          content="Coderina Education and Technology Foundation"
-        />
-      </Head>
-
-      {/* ✅ Blog Section */}
       <section className="py-16 lg:py-24 xl:py-32 bg-[#f9fafb]">
-        <div className="max-w-[130rem] mx-auto px-6 lg:px-12 xl:px-20">
+        <div className="max-w-[130rem] mx-auto px-4 md:px-4 lg:px-8 xl:px-10">
           <div className="text-center mb-12 lg:mb-16 xl:mb-20">
             <p className="text-[#1a3a52] text-xs lg:text-sm font-semibold mb-2 tracking-wide uppercase">
               Our Latest Updates
@@ -53,9 +36,9 @@ export default function Blog() {
             {blogs.slice(0, 3).map((post, index) => (
               <div
                 key={post.id}
-                className="bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300"
+                className="bg-white rounded-xl overflow-hidden hover:shadow-sm transition-all duration-300"
               >
-                <div className="relative w-full h-56 lg:h-[20rem] xl:h-[22rem] overflow-hidden">
+                <div className={`relative w-full h-56 lg:h-[20rem]  overflow-hidden ${isLargeScreen ? "h-[22rem]" : "lg:h-56"}`}>
                   <Image
                     src={urlFor(post.image).url()}
                     alt={post.title}
@@ -78,7 +61,7 @@ export default function Blog() {
                   </div>
 
                   <Link href={`/blog/${post.slug.current}`}>
-                    <h3 className="text-xl font-bold text-[#133c55] mb-2 hover:text-[#f9a826] transition-colors truncate w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                    <h3 className={`text-xs font-bold text-[#133c55] mb-2 hover:text-[#f9a826] transition-colors truncate w-full overflow-hidden text-ellipsis whitespace-nowrap ${isLargeScreen ? "text-xl" : "md:text-sm"}`}>
                       {post.title}
                     </h3>
                   </Link>
