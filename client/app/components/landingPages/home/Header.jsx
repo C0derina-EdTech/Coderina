@@ -1,15 +1,13 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React from "react";
 import ExpandButton from "../../../utils/ExpandButton";
-import Link from "next/link";
 import Banner from "./Banner";
 export default function CoderinaHero() {
  
   return (
     <div className="w-full">
       {/* Hero Section - Dark Background with Yellow Robot */}
-      <section id="home-hero" className="min-h-[500px] md:min-h-[450px] lg:min-h-[400px] 2xl:min-h-[600px] relative flex items-center justify-center overflow-hidden bg-[#0a1621]">
+      <section id="home-hero" className="min-h-[550px] md:min-h-[450px] lg:min-h-[400px] 2xl:min-h-[600px] relative flex items-center justify-center overflow-hidden bg-[#0a1621]">
         {/* Video */}
         <video
           className="absolute inset-0 w-full h-full object-cover"

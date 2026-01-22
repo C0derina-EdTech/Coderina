@@ -3,14 +3,14 @@
 "use client";
 
 import React from "react";
-import Siwes from "./Siwes";
-import SiwesForm from "./SiwesForm";
+import SiwesForms from "./SiwesForms";
 
 const SiwesSection = () => {
   const siwesContents = [
+
     {
         color: "",
-        section: <SiwesForm/>,
+        section: <SiwesForms/>,
       },
        
   ];
@@ -22,7 +22,7 @@ const SiwesSection = () => {
           <div
             key={index}
             className={`scroll-smooth ${
-              isGradient ? "bg-gradient-to-br from-[#321414] to-[#fbeee9]" : ""
+              isGradient ? "bg-linear-to-br from-[#321414] to-[#fbeee9]" : ""
             }`}
             style={{
               background: isGradient ? undefined : color,

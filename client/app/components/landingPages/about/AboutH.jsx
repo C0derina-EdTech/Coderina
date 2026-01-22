@@ -139,7 +139,7 @@ const AboutH = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-4 2xl:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-4 2xl:gap-10">
             {sdgs.map((sdg, i) => (
               <div
                 key={i}
