@@ -2,25 +2,46 @@
 
 import React from "react";
 import AboutH from "./AboutH";
-import Footer from "../Footer";
-import Navbar from "../Navbar";
+import AboutHero from "./AboutHero";
+import Team from "./Team";
+import Mission from "./Mission";
+import Core from "./Core";
 import TrustedBy from "../home/TrustedBy";
+import Press from "../home/Press";
 const AboutSection = () => {
   const aboutContents = [
     {
       bg: "",
-      section: <AboutH />,
+      section: <AboutHero />,
+    },
+    {
+      bg: "",
+      section: <Mission />,
     },
      {
       bg: "",
+      section: <Core />,
+    },
+    {
+      bg: "",
+      section: <AboutH />,
+    },
+    {
+      bg: "",
+      section: <Team />,
+    },
+    {
+      bg: "",
+      section: <Press />,
+    },
+    {
+      bg: "",
       section: <TrustedBy />,
     },
-  
   ];
 
   return (
     <div>
-      <Navbar/>
       <div>
         {aboutContents.map(({ bg, section, color, bgImage }, index) => (
           <div
@@ -33,14 +54,10 @@ const AboutSection = () => {
               backgroundPosition: bgImage ? "center" : undefined,
             }}
           >
-            <div className="">
-              {section}
-            </div>
+            <div className="">{section}</div>
           </div>
         ))}
       </div>
-
-      <Footer />
     </div>
   );
 };

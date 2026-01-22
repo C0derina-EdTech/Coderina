@@ -2,14 +2,17 @@
 
 import React from "react";
 import Events from "./Events";
-import Footer from "../Footer";
-import Navbar from "../Navbar";
 import TrustedBy from "../home/TrustedBy";
+import Press from "../home/Press";
 const EventsSection = () => {
   const contactContents = [
     {
         color: "",
         section: <Events/>,
+      },
+      {
+        color: "",
+        section: <Press/>,
       },
        {
         color: "",
@@ -18,7 +21,7 @@ const EventsSection = () => {
   ];
   return (
     <div className="">
-        <Navbar/>
+     
       <div>
         {contactContents.map(({ color, section, isGradient, bgImage }, index) => (
           <div
@@ -39,8 +42,6 @@ const EventsSection = () => {
           </div>
         ))}
       </div>
-
-      <Footer/>
     </div>
   );
 };

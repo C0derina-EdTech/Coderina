@@ -3,8 +3,8 @@
 import React from "react";
 import Lab from "./Lab";
 import LabHero from "./LabHero";
-import Footer from "../Footer";
-import Navbar from "../Navbar";
+import RoboticsHero from "./RoboticsHero";
+import Features from "./Features";
 import TrustedBy from "../home/TrustedBy";
 const LabSection = () => {
   const aboutContents = [
@@ -12,20 +12,28 @@ const LabSection = () => {
       bg: "",
       section: <LabHero/>,
     },
-    {
-      bg: "",
-      section: <Lab />,
-    },
      {
       bg: "",
-      section: <TrustedBy />,
+      section: <RoboticsHero/>,
     },
+    {
+      bg: "",
+      section: <Features/>,
+    },
+    // {
+    //   bg: "",
+    //   section: <Lab />,
+    // },
+    //  {
+    //   bg: "",
+    //   section: <TrustedBy />,
+    // },
   
   ];
 
   return (
     <div>
-      <Navbar/>
+    
       <div>
         {aboutContents.map(({ bg, section, color, bgImage }, index) => (
           <div
@@ -45,7 +53,7 @@ const LabSection = () => {
         ))}
       </div>
 
-      <Footer />
+   
     </div>
   );
 };

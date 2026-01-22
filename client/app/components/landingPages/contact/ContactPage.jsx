@@ -2,8 +2,6 @@
 
 import React from "react";
 import ContactUs from "./ContactUs";
-import Footer from "../Footer";
-import Navbar from "../Navbar";
 const ContactPage = () => {
   const contactContents = [
     {
@@ -13,7 +11,7 @@ const ContactPage = () => {
   ];
   return (
     <div className="">
-        <Navbar/>
+       
       <div>
         {contactContents.map(({ color, section, isGradient, bgImage }, index) => (
           <div
@@ -34,8 +32,6 @@ const ContactPage = () => {
           </div>
         ))}
       </div>
-
-      <Footer/>
     </div>
   );
 };

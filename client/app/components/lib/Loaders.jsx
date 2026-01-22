@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
- 
- export const EventSkeleton = () => {
+
+export const EventSkeleton = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section Skeleton */}
@@ -11,7 +11,7 @@ import React from "react";
           <div className="absolute inset-0 bg-gradient-to-br from-[#e29818] via-transparent to-[#e29818]"></div>
         </div>
 
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               {/* Featured Badge Skeleton */}
@@ -53,7 +53,7 @@ import React from "react";
 
       {/* Filter and Search Section Skeleton */}
       <section className="py-8 bg-gray-50 border-b border-gray-200">
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Search Skeleton */}
             <div className="w-full md:w-96 h-12 bg-gray-200 rounded-lg animate-pulse"></div>
@@ -77,7 +77,7 @@ import React from "react";
 
       {/* Upcoming Events Grid Skeleton */}
       <section className="py-20 bg-white">
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
             <div className="h-12 bg-gray-200 rounded-lg w-80 mb-4 animate-pulse"></div>
             <div className="h-6 bg-gray-200 rounded w-96 animate-pulse"></div>
@@ -130,7 +130,7 @@ import React from "react";
 
       {/* Stats Section Skeleton */}
       <section className="py-20 bg-[#e29818]">
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="text-center">
@@ -145,12 +145,10 @@ import React from "react";
   );
 };
 
-
-
 export function UpcomingEventsSkeletonLoader() {
   return (
     <section className="bg-black text-white py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8">
-      <div className="max-w-[130rem] mx-auto">
+      <div className="max-w-[100rem] mx-auto">
         {/* Header Skeleton */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8 md:mb-12">
           <div className="w-full sm:w-auto">
@@ -179,7 +177,7 @@ export function UpcomingEventsSkeletonLoader() {
               {/* Image Skeleton */}
               <div className="relative h-48 sm:h-52 md:h-56 bg-gray-800 animate-pulse">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                
+
                 {/* Date Badge Skeleton */}
                 <div className="absolute top-4 left-4 bg-gray-700 rounded-xl px-3 py-2 w-16 h-16 animate-pulse">
                   <div className="bg-gray-600 h-6 w-8 rounded mb-1"></div>
@@ -192,7 +190,7 @@ export function UpcomingEventsSkeletonLoader() {
                 {/* Title skeleton */}
                 <div className="bg-gray-700 h-6 sm:h-7 w-full rounded mb-1 animate-pulse"></div>
                 <div className="bg-gray-700 h-6 sm:h-7 w-3/4 rounded mb-4 animate-pulse"></div>
-                
+
                 {/* Time and Location Skeleton */}
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center">
