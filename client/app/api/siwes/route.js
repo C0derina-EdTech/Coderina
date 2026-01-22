@@ -2,33 +2,56 @@ import { NextResponse } from "next/server";
 import { sanityClient } from "../../components/lib/sanityClient";
 
 /* =====================
-   CREATE APPLICATION
+   CREATE SIWES APPLICATION
 ===================== */
-export async function POST(req) {
+export async function POST(request) {
   try {
-    const body = await req.json();
+    const body = await request.json();
 
     const {
+      // Personal Info
       fullName,
       email,
       phone,
+      gender,
+      address,
+      state,
+      country,
+
+      // Academic Info
       institution,
       course,
+      level,
+      matricNumber,
+
+      // Internship
       siwesDuration,
+      startDate,
+      endDate,
       department,
+
+      // Skills & Motivation
+      skills,
+      experience,
       whyCoderina,
+
+      // Documents (Sanity asset refs)
+      cv,
+      siwesLetter,
+      studentId,
+      headshot,
     } = body;
 
-    // Required field validation
+    /* ========= REQUIRED FIELD VALIDATION ========= */
     if (
-      !fullName ||
-      !email ||
-      !phone ||
-      !institution ||
-      !course ||
-      !siwesDuration ||
-      !department ||
-      !whyCoderina
+      !fullName?.trim() ||
+      !email?.trim() ||
+      !phone?.trim() ||
+      !institution?.trim() ||
+      !course?.trim() ||
+      !siwesDuration?.trim() ||
+      !department?.trim() ||
+      !whyCoderina?.trim()
     ) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -36,7 +59,7 @@ export async function POST(req) {
       );
     }
 
-    // Email validation
+    /* ========= EMAIL VALIDATION ========= */
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -45,17 +68,67 @@ export async function POST(req) {
       );
     }
 
+    /* ========= PREVENT DUPLICATE APPLICATION ========= */
+    const existing = await sanityClient.fetch(
+      `*[_type == "siwesApplication" && email == $email][0]`,
+      { email }
+    );
+
+    if (existing) {
+      return NextResponse.json(
+        { error: "Application already submitted with this email" },
+        { status: 409 }
+      );
+    }
+
+    /* ========= CREATE DOCUMENT ========= */
     await sanityClient.create({
       _type: "siwesApplication",
-      ...body,
+
+      // Personal
+      fullName,
+      email,
+      phone,
+      gender,
+      address,
+      state,
+      country,
+
+      // Academic
+      institution,
+      course,
+      level,
+      matricNumber,
+
+      // Internship
+      siwesDuration,
+      startDate,
+      endDate,
+      department,
+
+      // Skills & Motivation
+      skills,
+      experience,
+      whyCoderina,
+
+      // Documents (optional)
+      cv: cv || undefined,
+      siwesLetter: siwesLetter || undefined,
+      studentId: studentId || undefined,
+      headshot: headshot || undefined,
+
+      // Metadata
       status: "pending",
       createdAt: new Date().toISOString(),
     });
 
-    return NextResponse.json({
-      success: true,
-      message: "SIWES application submitted successfully",
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "SIWES application submitted successfully",
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error("SIWES POST error:", error);
     return NextResponse.json(
@@ -78,13 +151,19 @@ export async function GET() {
         phone,
         institution,
         course,
+        level,
+        siwesDuration,
         department,
         status,
-        createdAt
+        createdAt,
+        cv,
+        siwesLetter,
+        studentId,
+        headshot
       }
     `);
 
-    return NextResponse.json(applications);
+    return NextResponse.json(applications, { status: 200 });
   } catch (error) {
     console.error("SIWES GET error:", error);
     return NextResponse.json(
