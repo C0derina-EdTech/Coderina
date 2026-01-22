@@ -58,11 +58,11 @@ export default function Details() {
             {topCards.map((card) => (
               <article
                 key={card.id}
-                className="flex flex-col"
+                className="flex flex-col lg:px-4"
                 data-aos="fade-up"
                 data-aos-delay={card.delay}
               >
-                <div className="relative w-full aspect-[4/3] mb-6 rounded-lg overflow-hidden shadow-md">
+                <div className="relative w-full aspect-[5/3] mb-6 rounded-lg overflow-hidden shadow-md">
                   <Image
                     src={card.image}
                     alt={card.alt}
@@ -113,7 +113,7 @@ export default function Details() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image */}
             <div
-              className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-sm"
+              className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-sm lg:px-6"
               data-aos="fade-right"
             >
               <Image
@@ -127,7 +127,7 @@ export default function Details() {
               />
             </div>
 
-            {/* Content */}
+         
            {/* Content */}
 <div data-aos="fade-left" data-aos-delay="100">
   <p className="text-sm font-semibold text-teal-600 uppercase tracking-wide mb-4">
