@@ -12,12 +12,7 @@ import {
   Zap,
   Box,
   Layers,
-  MessageCircle,
-  Mail,
-  Phone,
-  MapPin,
   ChevronRight,
-  Sparkles,
   BookOpen,
   Lightbulb,
   Settings,
@@ -48,85 +43,44 @@ export default function Lab() {
     "/skull7.jpg",
   ];
 
-  const filteredImages = activeTab === "all" 
-    ? images 
-    : activeTab === "3dprints"
-    ? images.filter(img => img.includes("skull") || img.includes("print") || img.includes("anatomy"))
-    : images.filter(img => img.includes("microscope") || img.includes("robotarm"));
+  const filteredImages =
+    activeTab === "all"
+      ? images
+      : activeTab === "3dprints"
+        ? images.filter(
+            (img) =>
+              img.includes("skull") ||
+              img.includes("print") ||
+              img.includes("anatomy")
+          )
+        : images.filter(
+            (img) => img.includes("microscope") || img.includes("robotarm")
+          );
 
   return (
     <div className="min-h-screen bg-white">
-      
-
-      {/* What We Do Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              What We Do at the Lab
-            </h2>
-            <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Our state-of-the-art facility provides hands-on learning experiences 
-              in advanced manufacturing and robotics technology
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <article className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition border border-gray-100">
-              <div className="bg-[#e29818]/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
-                <Printer className="w-8 h-8 text-[#e29818]" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">3D Printing Services</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Advanced additive manufacturing with precision prototyping, 
-                educational models, and custom fabrication for projects of all scales.
-              </p>
-            </article>
-
-            <article className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition border border-gray-100">
-              <div className="bg-[#e29818]/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
-                <Cog className="w-8 h-8 text-[#e29818]" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Robotics Development</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Build and program autonomous robots, learn control systems, 
-                and explore automation solutions with industry-standard tools.
-              </p>
-            </article>
-
-            <article className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition border border-gray-100">
-              <div className="bg-[#e29818]/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
-                <BookOpen className="w-8 h-8 text-[#e29818]" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Tech Training</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Comprehensive workshops and courses designed to build practical 
-                skills in engineering, programming, and digital fabrication.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
+     
       {/* Lab Features */}
       <section className="py-20 bg-black text-white">
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <h2 className="text-4xl md:text-5xl font-bold">
                 Why Choose <span className="text-[#e29818]">Our Lab</span>
               </h2>
-              
+
               <div className="space-y-6">
                 <div className="flex gap-4">
                   <div className="bg-[#e29818] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Cpu className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Advanced Equipment</h3>
+                    <h3 className="text-xl font-bold mb-2">
+                      Advanced Equipment
+                    </h3>
                     <p className="text-gray-400">
-                      Professional-grade 3D printers, robotic arms, and automation tools 
-                      for real-world learning experiences.
+                      Professional-grade 3D printers, robotic arms, and
+                      automation tools for real-world learning experiences.
                     </p>
                   </div>
                 </div>
@@ -136,10 +90,13 @@ export default function Lab() {
                     <Users className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Expert Mentorship</h3>
+                    <h3 className="text-xl font-bold mb-2">
+                      Expert Mentorship
+                    </h3>
                     <p className="text-gray-400">
-                      Learn from experienced engineers and technicians passionate 
-                      about nurturing the next generation of innovators.
+                      Learn from experienced engineers and technicians
+                      passionate about nurturing the next generation of
+                      innovators.
                     </p>
                   </div>
                 </div>
@@ -149,9 +106,11 @@ export default function Lab() {
                     <Target className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Non-Profit Mission</h3>
+                    <h3 className="text-xl font-bold mb-2">
+                      Non-Profit Mission
+                    </h3>
                     <p className="text-gray-400">
-                      Accessible education for all. We're committed to breaking 
+                      Accessible education for all. We're committed to breaking
                       barriers and making technology education affordable.
                     </p>
                   </div>
@@ -162,9 +121,11 @@ export default function Lab() {
                     <Lightbulb className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Hands-On Learning</h3>
+                    <h3 className="text-xl font-bold mb-2">
+                      Hands-On Learning
+                    </h3>
                     <p className="text-gray-400">
-                      Project-based curriculum where students build, test, and 
+                      Project-based curriculum where students build, test, and
                       iterate real solutions to real problems.
                     </p>
                   </div>
@@ -174,16 +135,36 @@ export default function Lab() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="relative h-64 rounded-xl overflow-hidden">
-                <Image src="/print6.jpg" alt="3D Print Sample" fill className="object-cover" />
+                <Image
+                  src="/print6.jpg"
+                  alt="3D Print Sample"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="relative h-64 rounded-xl overflow-hidden mt-8">
-                <Image src="/robotarm.jpg" alt="Robotic Arm" fill className="object-cover" />
+                <Image
+                  src="/robotarm.jpg"
+                  alt="Robotic Arm"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="relative h-64 rounded-xl overflow-hidden">
-                <Image src="/skull2.jpg" alt="Anatomical Print" fill className="object-cover" />
+                <Image
+                  src="/skull2.jpg"
+                  alt="Anatomical Print"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="relative h-64 rounded-xl overflow-hidden mt-8">
-                <Image src="/microscope4.jpg" alt="Lab Equipment" fill className="object-cover" />
+                <Image
+                  src="/microscope4.jpg"
+                  alt="Lab Equipment"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
@@ -192,7 +173,7 @@ export default function Lab() {
 
       {/* Gallery Section */}
       <section id="gallery" className="py-20 bg-gray-50">
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Our Lab <span className="text-[#e29818]">Gallery</span>
@@ -260,7 +241,7 @@ export default function Lab() {
 
       {/* Stats Section */}
       <section className="py-20 bg-[#e29818] text-white">
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="text-5xl md:text-6xl font-bold mb-2">500+</div>
@@ -284,14 +265,14 @@ export default function Lab() {
 
       {/* Programs Section */}
       <section id="programs" className="py-20 bg-white">
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Our <span className="text-[#e29818]">Programs</span>
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Structured learning paths designed to build practical skills 
-              and inspire innovation
+              Structured learning paths designed to build practical skills and
+              inspire innovation
             </p>
           </div>
 
@@ -300,10 +281,13 @@ export default function Lab() {
               <div className="bg-[#e29818] w-14 h-14 rounded-xl flex items-center justify-center mb-6">
                 <Box className="w-7 h-7 text-white" />
               </div>
-              <h3 className="text-2xl font-bold mb-3">3D Printing Fundamentals</h3>
+              <h3 className="text-2xl font-bold mb-3">
+                3D Printing Fundamentals
+              </h3>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                Master the basics of additive manufacturing, from design to 
-                print. Learn CAD modeling, slicing software, and printer operation.
+                Master the basics of additive manufacturing, from design to
+                print. Learn CAD modeling, slicing software, and printer
+                operation.
               </p>
               <ul className="space-y-2 mb-6">
                 <li className="flex items-center gap-2 text-sm text-gray-600">
@@ -330,8 +314,8 @@ export default function Lab() {
               </div>
               <h3 className="text-2xl font-bold mb-3">Robotics Engineering</h3>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                Build and program robots from scratch. Explore sensors, actuators, 
-                control systems, and autonomous navigation.
+                Build and program robots from scratch. Explore sensors,
+                actuators, control systems, and autonomous navigation.
               </p>
               <ul className="space-y-2 mb-6">
                 <li className="flex items-center gap-2 text-sm text-gray-600">
@@ -358,7 +342,7 @@ export default function Lab() {
               </div>
               <h3 className="text-2xl font-bold mb-3">Automation Systems</h3>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                Design intelligent automation solutions. Learn PLC programming, 
+                Design intelligent automation solutions. Learn PLC programming,
                 industrial controls, and system integration.
               </p>
               <ul className="space-y-2 mb-6">
@@ -386,7 +370,7 @@ export default function Lab() {
               </div>
               <h3 className="text-2xl font-bold mb-3">Advanced Prototyping</h3>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                Turn ideas into reality with rapid prototyping techniques. 
+                Turn ideas into reality with rapid prototyping techniques.
                 Master iterative design and testing methodologies.
               </p>
               <ul className="space-y-2 mb-6">
@@ -414,7 +398,7 @@ export default function Lab() {
               </div>
               <h3 className="text-2xl font-bold mb-3">Maker Workshops</h3>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                Hands-on sessions for all skill levels. Build practical projects 
+                Hands-on sessions for all skill levels. Build practical projects
                 while learning electronics, mechanics, and coding.
               </p>
               <ul className="space-y-2 mb-6">
@@ -442,7 +426,7 @@ export default function Lab() {
               </div>
               <h3 className="text-2xl font-bold mb-3">Competition Prep</h3>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                Prepare for robotics competitions and hackathons. Team-based 
+                Prepare for robotics competitions and hackathons. Team-based
                 projects with mentorship from industry professionals.
               </p>
               <ul className="space-y-2 mb-6">
@@ -466,27 +450,7 @@ export default function Lab() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-black text-white">
-        <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to Start Your <span className="text-[#e29818]">Innovation Journey?</span>
-          </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Join our vibrant community of makers, innovators, and learners. 
-            Access world-class facilities and expert guidance to bring your ideas to life.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/programs" className="bg-[#e29818] text-white px-10 py-4 rounded-lg hover:bg-[#c27f0f] transition font-semibold text-lg">
-              Explore Programs
-            </Link>
-            <Link href="/contact" className="border-2 border-white text-white px-10 py-4 rounded-lg hover:bg-white hover:text-black transition font-semibold text-lg">
-              Get in Touch
-            </Link>
-          </div>
-        </div>
-      </section>
+     
     </div>
   );
 }

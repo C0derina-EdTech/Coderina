@@ -83,66 +83,62 @@ const Team = () => {
   ];
 
   return (
-    <section 
-      className="w-full bg-white py-16 md:py-20 lg:py-28"
+    <section
+      className="w-full bg-white py-8 md:py-16"
       aria-labelledby="team-heading"
     >
-      <div className="w-full max-w-[130rem] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32">
+      <div className="w-full max-w-400 mx-auto px-2 sm:px-4 md:px-6 lg:px-8 ">
         {/* Section Header */}
-        <div className="mb-12 md:mb-16">
-          <h2 
+        <div className="mb-8">
+          <h2
             id="team-heading"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4"
           >
             Meet Our Team
           </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-3xl">
-            Our dedicated team of education innovators and technology experts working to transform STEAM education across Africa.
-          </p>
+         
         </div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mb-16 md:mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {teamMembers.map((member, i) => (
             <article
               key={i}
-              className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group border border-gray-100"
+              className="bg-white rounded-2xl md:rounded-3xl overflow-hidden hover:shadow-sm transition-all duration-300 h-auto group border border-gray-100"
               data-aos="fade-up"
               data-aos-delay={i * 80}
             >
               {/* Image Container */}
-              <div className="relative h-72 sm:h-80 md:h-96 overflow-hidden bg-gray-100">
+              <div className="relative h-48 sm:h-64 overflow-hidden bg-gray-100">
                 <Image
                   src={member.img}
                   alt={`${member.name} - ${member.role} at Coderina`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading={i < 4 ? "eager" : "lazy"}
-                  quality={90}
+                  quality={75}
                 />
               </div>
 
               {/* Content */}
-              <div className="p-5 md:p-6 space-y-3">
-                <h3 className="text-lg md:text-xl font-bold text-gray-900 leading-tight">
+              <div className="p-3 md:p-4 space-y-2">
+                <h3 className="text-sm md:text-base font-bold text-gray-900 leading-tight">
                   {member.name}
                 </h3>
-                
-                <p className="text-sm md:text-base text-[#7A4F03] font-semibold leading-snug">
+
+                <p className="text-xs text-[#7A4F03] font-semibold leading-snug">
                   {member.role}
                 </p>
-                
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed line-clamp-3">
+
+                <p className="text-xs text-gray-700 leading-relaxed line-clamp-3">
                   {member.description}
                 </p>
-                
-                
               </div>
             </article>
           ))}
         </div>
 
         {/* Team Photo Section */}
-        <div
+        {/* <div
           className="flex flex-col items-center space-y-6"
           data-aos="zoom-in"
           data-aos-delay="200"
@@ -156,16 +152,17 @@ const Team = () => {
               quality={90}
             />
           </div>
-          
+
           <div className="text-center space-y-2">
             <p className="text-xl md:text-2xl font-bold text-gray-900">
               Our Amazing Team
             </p>
             <p className="text-base md:text-lg text-gray-600">
-              United in our mission to empower the next generation through technology education
+              United in our mission to empower the next generation through
+              technology education
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

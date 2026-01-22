@@ -1,7 +1,5 @@
 "use client";
 import { useEffect } from "react";
-import Footer from "../Footer";
-import Navbar from "../Navbar";
 import { useBlogContext } from "../../contexts/BlogContext";
 import BlogContent from "./BlogContent";
 
@@ -18,13 +16,13 @@ export default function PostsPage({ slug }) {
   const postContents = [
     {
       bgColor: "#232323",
-      section: <Footer />,
+      section: "",
     },
   ];
 
   return (
     <div className="bg-background text-color">
-        <Navbar/>
+       
       {loading ? (
         <div className="min-h-screen flex items-center justify-center bg-background text-color">
           <div className="flex flex-col items-center space-y-4">

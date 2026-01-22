@@ -4,8 +4,7 @@ import React from "react";
 import Couch from "./Couch";
 import CouchHero from "./CouchHero";
 import Join from "./Join";
-import Footer from "../Footer";
-import Navbar from "../Navbar";
+
 const CouchPage = () => {
   const couchContents = [
     {
@@ -23,7 +22,7 @@ const CouchPage = () => {
   ];
   return (
     <div className="">
-        <Navbar/>
+       
       <div>
         {couchContents.map(({ color, section, isGradient, bgImage }, index) => (
           <div
@@ -44,8 +43,6 @@ const CouchPage = () => {
           </div>
         ))}
       </div>
-
-      <Footer/>
     </div>
   );
 };

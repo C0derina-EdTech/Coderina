@@ -71,19 +71,19 @@ export default function UpcomingEvents({ isLargeScreen }) {
       id="upcoming-events"
       itemScope
       itemType="https://schema.org/EventSeries"
-      className="bg-black text-white py-12 sm:py-16 md:py-20 px-2 sm:px-6 lg:px-8 xl:px-10"
+      className="bg-black text-white py-12 md:py-14 px-2 sm:px-6 lg:px-8 xl:px-10"
     >
-      <div className="max-w-[130rem] mx-auto">
+      <div className="max-w-400 mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8 md:mb-12">
           <div>
             <div className="inline-block bg-[#e29818] px-3 py-1 rounded-full text-xs font-semibold mb-3">
               UPCOMING
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+            <h2 className="text-lg sm:text-2xl md:text-3xl font-bold">
               Featured Events
             </h2>
-            <p className="text-gray-400 mt-2 text-sm sm:text-base">
+            <p className="text-gray-400 mt-2 text-sm font-poppins sm:text-base">
               Discover and join amazing events happening soon
             </p>
           </div>
@@ -146,18 +146,18 @@ export default function UpcomingEvents({ isLargeScreen }) {
           <div
             ref={scrollRef}
             onScroll={checkScrollButtons}
-            className="flex gap-2 sm:gap-5 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+            className="flex gap-2 sm:gap-5 2xl:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {upcomingEvents.map((event, index) => (
               <div
                 key={index}
-                className={`flex-shrink-0 w-[240px] sm:w-[320px] md:w-[360px] bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 group ${isLargeScreen ? "w-[360px]" : "lg:w-[300px]"}`}
+                className={`shrink-0 w-[240px] sm:w-[320px] md:w-[360px] h-72  bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 group ${isLargeScreen ? "w-[340px]" : "lg:w-[290px]"}`}
               >
                 {/* Image */}
                 <div
-                  className={`relative h-40 sm:h-52 overflow-hidden
-                  ${isLargeScreen ? "h-56" : "lg:h-48"}`}
+                  className={`relative h-40  overflow-hidden
+                  ${isLargeScreen ? "h-40" : "lg:h-34 2xl:h-48"}`}
                 >
                   {event.image ? (
                     <Image
@@ -168,14 +168,14 @@ export default function UpcomingEvents({ isLargeScreen }) {
                       priority
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#e29818] to-[#c27f0f] rounded-2xl flex items-center justify-center">
+                    <div className="w-full h-full bg-linear-to-br from-[#e29818] to-[#c27f0f] rounded-2xl flex items-center justify-center">
                       <Calendar className="w-32 h-32 text-white/30" />
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
 
                   {/* Date Badge or on hold or postponed */}
-                  <div className="absolute top-4 left-4 bg-white text-black rounded-xl px-3 py-2 text-center shadow-lg">
+                  <div className="absolute top-4 left-4 bg-white text-black rounded-xl px-3 py-2 text-center shadow-sm">
                     {event.status === "on-hold" ||
                     event.status === "postponed" ? (
                       <div className="text-xs font-bold uppercase leading-tight">
@@ -183,7 +183,7 @@ export default function UpcomingEvents({ isLargeScreen }) {
                       </div>
                     ) : (
                       <>
-                        <div className="text-2xl font-bold leading-none">
+                        <div className="text-lg lg:text-xl 2xl:text-2xl font-bold leading-none">
                           {new Date(event.date).getDate()}
                         </div>
                         <div className="text-xs font-semibold uppercase tracking-wide mt-0.5">
@@ -197,17 +197,17 @@ export default function UpcomingEvents({ isLargeScreen }) {
                 </div>
 
                 {/* Content */}
-                <div className="p-5 sm:p-6">
-                  <h3 className="text-lg sm:text-xl font-bold mb-2 line-clamp-2 group-hover:text-[#e29818] transition-colors">
+                <div className="p-5">
+                  <h3 className="text-sm sm:text-base font-bold mb-2 line-clamp-2 group-hover:text-[#e29818] transition-colors">
                     {event.title}
                   </h3>
 
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center space-x-2 text-gray-400 text-sm">
+                  <div className="space-y-2 mb-4 text-xs ">
+                    <div className="flex items-center space-x-2 text-gray-400 ">
                       <Calendar className="w-4 h-4" />
                       <span>{event.time}</span>
                     </div>
-                    <div className="flex items-center space-x-2 text-gray-400 text-sm">
+                    <div className="flex items-center space-x-2 text-gray-400 ">
                       <MapPin className="w-4 h-4" />
                       <span>{event.location}</span>
                     </div>
@@ -230,18 +230,18 @@ export default function UpcomingEvents({ isLargeScreen }) {
 
           {/* Gradient Overlays */}
           {canScrollLeft && (
-            <div className="hidden md:block absolute left-0 top-0 bottom-4 w-20 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
+            <div className="hidden md:block absolute left-0 top-0 bottom-4 w-20 bg-linear-to-r from-black to-transparent pointer-events-none"></div>
           )}
           {canScrollRight && (
-            <div className="hidden md:block absolute right-0 top-0 bottom-4 w-20 bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
+            <div className="hidden md:block absolute right-0 top-0 bottom-4 w-20 bg-linear-to-l from-black to-transparent pointer-events-none"></div>
           )}
         </div>
 
         {/* View All Link */}
-        <div className="text-center mt-8 md:mt-10">
+        {/* <div className="text-center mt-8 md:mt-10">
           <Link
             href="/events"
-            className="inline-flex items-center text-white hover:text-[#e29818] font-semibold transition-colors group"
+            className="inline- text-base flex items-center text-white hover:text-[#e29818] font-semibold transition-colors group"
           >
             <span>View All Events</span>
             <svg
@@ -258,7 +258,7 @@ export default function UpcomingEvents({ isLargeScreen }) {
               />
             </svg>
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );

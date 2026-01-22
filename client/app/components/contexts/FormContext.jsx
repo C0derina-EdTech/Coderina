@@ -44,7 +44,7 @@ export function FormProvider({ children }) {
       if (!res.ok) throw new Error(data.error || "Failed to send message");
 
       setContactSuccess("Message sent successfully!");
-       // Auto remove success after 10 seconds
+      // Auto remove success after 10 seconds
       setTimeout(() => setContactSuccess(""), 10000);
       setContactName("");
       setContactEmail("");
@@ -109,8 +109,7 @@ export function FormProvider({ children }) {
     }
   };
 
-
-   // ---------- Subscribers ----------
+  // ---------- Subscribers ----------
   const [subscriberName, setSubscriberName] = useState("");
   const [subscriberEmail, setSubscriberEmail] = useState("");
   const [subscriberSubmitting, setSubscriberSubmitting] = useState(false);
@@ -154,69 +153,178 @@ export function FormProvider({ children }) {
     }
   };
 
-
-
   // ---------- CONTACT COUCH FORM ----------
-const [couchSubmitting, setCouchSubmitting] = useState(false);
-const [universityName, setUniversityName] = useState("");
-const [teamName, setTeamName] = useState("");
-const [universityEmail, setUniversityEmail] = useState("");
-const [universityPhone, setUniversityPhone] = useState("");
-const [country, setCountry] = useState("");
-const [couchError, setCouchError] = useState("");
-const [couchSuccess, setCouchSuccess] = useState("");
+  const [couchSubmitting, setCouchSubmitting] = useState(false);
+  const [universityName, setUniversityName] = useState("");
+  const [teamName, setTeamName] = useState("");
+  const [universityEmail, setUniversityEmail] = useState("");
+  const [universityPhone, setUniversityPhone] = useState("");
+  const [country, setCountry] = useState("");
+  const [couchError, setCouchError] = useState("");
+  const [couchSuccess, setCouchSuccess] = useState("");
 
-const sendCouchContact = async () => {
-  setCouchSubmitting(true);
-  setCouchError("");
-  setCouchSuccess("");
+  const sendCouchContact = async () => {
+    setCouchSubmitting(true);
+    setCouchError("");
+    setCouchSuccess("");
 
-  // ALL FIELDS REQUIRED
-  if (
-    !universityName.trim() ||
-    !teamName.trim() ||
-    !universityEmail.trim() ||
-    !universityPhone.trim() ||
-    !country.trim()
-  ) {
-    setCouchError("All fields are required.");
-    setCouchSubmitting(false);
-    return;
-  }
+    // ALL FIELDS REQUIRED
+    if (
+      !universityName.trim() ||
+      !teamName.trim() ||
+      !universityEmail.trim() ||
+      !universityPhone.trim() ||
+      !country.trim()
+    ) {
+      setCouchError("All fields are required.");
+      setCouchSubmitting(false);
+      return;
+    }
 
-  try {
-    const res = await fetch("/api/contactCouch", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        universityName,
-        teamName,
-        universityEmail,
-        universityPhone,
-        country,
-      }),
-    });
+    try {
+      const res = await fetch("/api/contactCouch", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          universityName,
+          teamName,
+          universityEmail,
+          universityPhone,
+          country,
+        }),
+      });
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Failed to submit");
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to submit");
 
-    setCouchSuccess("Form submitted successfully!");
-    setTimeout(() => setCouchSuccess(""), 10000);
+      setCouchSuccess("Form submitted successfully!");
+      setTimeout(() => setCouchSuccess(""), 10000);
 
-    // Reset
-    setUniversityName("");
-    setTeamName("");
-    setUniversityEmail("");
-    setUniversityPhone("");
-    setCountry("");
-  } catch (err) {
-    console.error("Couch form error:", err);
-    setCouchError(err.message || "Something went wrong.");
-  } finally {
-    setCouchSubmitting(false);
-  }
-};
+      // Reset
+      setUniversityName("");
+      setTeamName("");
+      setUniversityEmail("");
+      setUniversityPhone("");
+      setCountry("");
+    } catch (err) {
+      console.error("Couch form error:", err);
+      setCouchError(err.message || "Something went wrong.");
+    } finally {
+      setCouchSubmitting(false);
+    }
+  };
 
+  // ---------- SIWES APPLICATION ----------
+  const [siwesSubmitting, setSiwesSubmitting] = useState(false);
+  const [siwesError, setSiwesError] = useState("");
+  const [siwesSuccess, setSiwesSuccess] = useState("");
+
+  const [siwesData, setSiwesData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    gender: "",
+    address: "",
+    state: "",
+    institution: "",
+    course: "",
+    level: "",
+    matricNumber: "",
+    siwesDuration: "",
+    startDate: "",
+    endDate: "",
+    department: "",
+    skills: [],
+    experience: "",
+    whyCoderina: "",
+    cv: null,
+    siwesLetter: null,
+    studentId: null,
+  });
+
+  const submitSiwesApplication = async () => {
+    setSiwesSubmitting(true);
+    setSiwesError("");
+    setSiwesSuccess("");
+
+    const {
+      fullName,
+      email,
+      phone,
+      institution,
+      course,
+      siwesDuration,
+      department,
+      whyCoderina,
+    } = siwesData;
+
+    // Required validation
+    if (
+      !fullName ||
+      !email ||
+      !phone ||
+      !institution ||
+      !course ||
+      !siwesDuration ||
+      !department ||
+      !whyCoderina
+    ) {
+      setSiwesError("Please fill all required fields.");
+      setSiwesSubmitting(false);
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/siwes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(siwesData),
+      });
+
+      const data = await res.json();
+      if (!res.ok)
+        throw new Error(data.error || "Failed to submit application");
+
+      setSiwesSuccess("SIWES application submitted successfully!");
+      setTimeout(() => setSiwesSuccess(""), 10000);
+
+      // Reset form
+      setSiwesData({
+        fullName: "",
+        email: "",
+        phone: "",
+        gender: "",
+        address: "",
+        state: "",
+        institution: "",
+        course: "",
+        level: "",
+        matricNumber: "",
+        siwesDuration: "",
+        startDate: "",
+        endDate: "",
+        department: "",
+        skills: [],
+        experience: "",
+        whyCoderina: "",
+        cv: null,
+        siwesLetter: null,
+        studentId: null,
+      });
+    } catch (err) {
+      console.error("SIWES submission error:", err);
+      setSiwesError(err.message || "Something went wrong.");
+    } finally {
+      setSiwesSubmitting(false);
+    }
+  };
+
+  const handleSiwesChange = (field, value) => {
+    setSiwesData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
 
   return (
     <FormContext.Provider
@@ -263,21 +371,27 @@ const sendCouchContact = async () => {
         addSubscriber,
 
         // Couch Contact
-couchSubmitting,
-universityName,
-setUniversityName,
-teamName,
-setTeamName,
-universityEmail,
-setUniversityEmail,
-universityPhone,
-setUniversityPhone,
-country,
-setCountry,
-couchError,
-couchSuccess,
-sendCouchContact,
-
+        couchSubmitting,
+        universityName,
+        setUniversityName,
+        teamName,
+        setTeamName,
+        universityEmail,
+        setUniversityEmail,
+        universityPhone,
+        setUniversityPhone,
+        country,
+        setCountry,
+        couchError,
+        couchSuccess,
+        sendCouchContact,
+        // siwes
+        siwesSubmitting,
+        siwesError,
+        siwesSuccess,
+        siwesData,
+        handleSiwesChange,
+        submitSiwesApplication,
       }}
     >
       {children}

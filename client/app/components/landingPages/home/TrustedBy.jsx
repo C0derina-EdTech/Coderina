@@ -49,42 +49,22 @@ export default function TrustedBy() {
 
   return (
     <>
-      {/* SEO Meta */}
-      <Head>
-        <title>Our Partners | Coderina Education and Technology Foundation</title>
-        <meta
-          name="description"
-          content="Global and local organizations that trust Coderina Foundation — including LEGO Education, FIRST Robotics, SAP, Dow, and Ford — supporting innovation, STEM, and 3D learning across Africa."
-        />
-        <meta
-          name="keywords"
-          content="Coderina partners, LEGO Education, FIRST Robotics, SAP, STEM Africa, Coderina Foundation, 3D printing education, robotics partnership"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-        />
-      </Head>
-
-      {/* Trusted By Section */}
+     
       <section
-        className="py-20 px-4 sm:px-6 md:px-12 lg:px-20 bg-white"
+        className="py-8 px-4 sm:px-4 md:px-8 lg:px-16 bg-white"
         aria-labelledby="trusted-heading"
       >
-        <div className="max-w-[110rem] mx-auto text-center">
+        <div className="max-w-400 mx-auto text-center">
           <h2
             id="trusted-heading"
-            className="text-4xl md:text-5xl font-bold text-[#1a3a52] mb-6"
+            className="text-lg md:text-2xl font-bold text-[#1a3a52] mb-6"
           >
-            Trusted by Global Leaders in Innovation
+            Trusted by leading organizations across Africa
           </h2>
-          <p className="text-gray-600 mb-12 text-lg max-w-2xl mx-auto">
-            Coderina collaborates with world-renowned organizations and educational institutions to empower Africa’s next generation of innovators through robotics, coding, and STEM education.
-          </p>
-
+          
           {/* Tailwind Marquee */}
           <div className="overflow-hidden relative">
-            <div className="flex animate-marquee whitespace-nowrap gap-12">
+            <div className="flex animate-marquee whitespace-nowrap gap-8">
               {logos.concat(logos).map((logo, index) => (
                 <div key={index} className="inline-flex items-center justify-center">
                   <Link
@@ -98,7 +78,7 @@ export default function TrustedBy() {
                       src={logo.src}
                       alt={`${logo.alt} logo`}
                       fill
-                      className="object-contain mx-auto grayscale hover:grayscale-0 transition duration-300"
+                      className="object-contain mx-auto hover:grayscale-0 transition duration-300"
                     />
                   </div>
                   </Link>

@@ -1,15 +1,12 @@
 "use client";
-
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Head from "next/head";
 import { useBlogContext } from "../../contexts/BlogContext";
 import { urlFor } from "../../lib/imageUrl";
-import { UpcomingEventsSkeletonLoader } from "../../lib/Loaders";
 import { Eye } from "lucide-react";
 
-export default function Blog({ isLargeScreen }) {
+const Blog = ({ isLargeScreen })  => {
   const { blogs = [], loading } = useBlogContext();
 
   if (loading) return <p className="text-center py-8">Loading...</p>;
@@ -19,8 +16,8 @@ export default function Blog({ isLargeScreen }) {
   }
   return (
     <>
-      <section className="py-16 lg:py-24 xl:py-32 bg-[#f9fafb]">
-        <div className="max-w-[130rem] mx-auto px-4 md:px-4 lg:px-8 xl:px-10">
+      <section className="py-12 lg:py-16 xl:py-20 bg-[#f9fafb]">
+        <div className="max-w-400 mx-auto px-4 md:px-4 lg:px-8 xl:px-10">
           <div className="text-center mb-12 lg:mb-16 xl:mb-20">
             <p className="text-[#1a3a52] text-xs lg:text-sm font-semibold mb-2 tracking-wide uppercase">
               Our Latest Updates
@@ -38,7 +35,9 @@ export default function Blog({ isLargeScreen }) {
                 key={post.id}
                 className="bg-white rounded-xl overflow-hidden hover:shadow-sm transition-all duration-300"
               >
-                <div className={`relative w-full h-56 lg:h-[20rem]  overflow-hidden ${isLargeScreen ? "h-[22rem]" : "lg:h-56"}`}>
+                <div
+                  className={`relative w-full h-56 2xl:h-80  overflow-hidden ${isLargeScreen ? "h-[22rem]" : "2xl:h-56"}`}
+                >
                   <Image
                     src={urlFor(post.image).url()}
                     alt={post.title}
@@ -61,7 +60,9 @@ export default function Blog({ isLargeScreen }) {
                   </div>
 
                   <Link href={`/blog/${post.slug.current}`}>
-                    <h3 className={`text-xs font-bold text-[#133c55] mb-2 hover:text-[#f9a826] transition-colors truncate w-full overflow-hidden text-ellipsis whitespace-nowrap ${isLargeScreen ? "text-xl" : "md:text-sm"}`}>
+                    <h3
+                      className="text-sm md:text-base font-bold text-[#133c55] mb-2 hover:text-[#f9a826] transition-colors truncate w-full overflow-hidden text-ellipsis whitespace-nowrap"
+                    >
                       {post.title}
                     </h3>
                   </Link>
@@ -78,3 +79,4 @@ export default function Blog({ isLargeScreen }) {
     </>
   );
 }
+export default Blog

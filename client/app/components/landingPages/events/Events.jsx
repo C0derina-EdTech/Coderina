@@ -153,15 +153,14 @@ export default function Events() {
 
   return (
     <>
-      
-      <div className="min-h-screen bg-white">
+      <div className="bg-white">
         {/* Hero Section with Featured Event */}
-        <section className="relative bg-black text-white py-24 overflow-hidden">
+        <section className="relative bg-black text-white py-10 md:py-16 2xl:py-20 overflow-hidden">
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#e29818] via-transparent to-[#e29818]"></div>
+            <div className="absolute inset-0 bg-linear-to-br from-[#e29818] via-transparent to-[#e29818]"></div>
           </div>
 
-          <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-400 mx-auto px-2 sm:px-4 md:px-6 lg:px-8 relative z-10">
             {featuredEvent ? (
               (() => {
                 const featuredBadge = getBadgeContent(featuredEvent);
@@ -170,7 +169,7 @@ export default function Events() {
                     <div className="space-y-6">
                       <div className="inline-flex items-center gap-2 bg-[#e29818]/20 text-[#e29818] px-4 py-2 rounded-full border border-[#e29818]/30">
                         <Sparkles className="w-4 h-4" />
-                        <span className="text-sm font-medium">
+                        <span className="text-xs 2xl:text-sm font-medium">
                           Featured Event
                         </span>
                       </div>
@@ -187,31 +186,31 @@ export default function Events() {
                           )}
                         </div>
                         <div>
-                          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                          <h1 className="text-lg md:text-2xl lg:text-2xl 2xl:text-5xl font-bold leading-tight">
                             {featuredEvent.title}
                           </h1>
                         </div>
                       </div>
 
-                      <p className="text-xl text-gray-300 leading-relaxed">
+                      <p className="text-xs lg:text-sm 2xl:text-base text-gray-300 leading-relaxed">
                         {featuredEvent.description ||
                           "Join us for an exciting learning experience in technology and innovation."}
                       </p>
 
-                      <div className="flex flex-wrap gap-4 text-gray-300">
+                      <div className="flex flex-wrap gap-4 text-sm md:text-sm text-gray-300">
                         <div className="flex items-center gap-2">
-                          <Clock className="w-5 h-5 text-[#e29818]" />
+                          <Clock className="w-4 h-4 text-[#e29818]" />
                           <span>{featuredEvent.time || "TBA"}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           {featuredEvent.isOnline ? (
                             <>
-                              <Globe className="w-5 h-5 text-[#e29818]" />
+                              <Globe className="w-4 h-4 text-[#e29818]" />
                               <span>Online Event</span>
                             </>
                           ) : (
                             <>
-                              <MapPin className="w-5 h-5 text-[#e29818]" />
+                              <MapPin className="w-4 h-4 text-[#e29818]" />
                               <span>
                                 {featuredEvent.location || "Location TBA"}
                               </span>
@@ -226,21 +225,21 @@ export default function Events() {
                             href={featuredEvent.registrationLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-[#e29818] text-white px-8 py-4 rounded-lg hover:bg-[#c27f0f] transition flex items-center gap-2 font-semibold"
+                            className="bg-[#e29818] text-white px-8 py-3 rounded-full hover:bg-[#c27f0f] transition flex items-center gap-2 font-semibold"
                           >
                             Register Now <ArrowRight className="w-5 h-5" />
                           </a>
                         )}
                         <Link
                           href="/contact"
-                          className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-black transition font-semibold"
+                          className="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition font-semibold"
                         >
-                          Contact Us for more Details
+                          Contact Us
                         </Link>
                       </div>
                     </div>
 
-                    <div className="relative h-[400px] lg:h-[600px]">
+                    <div className="relative h-[300px] md:h-[400px] 2xl:h-[500px]">
                       {featuredEvent.image ? (
                         <Image
                           src={urlFor(featuredEvent.image).url()}
@@ -250,7 +249,7 @@ export default function Events() {
                           priority
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-[#e29818] to-[#c27f0f] rounded-2xl flex items-center justify-center">
+                        <div className="w-full h-full bg-linear-to-br from-[#e29818] to-[#c27f0f] rounded-2xl flex items-center justify-center">
                           <Calendar className="w-32 h-32 text-white/30" />
                         </div>
                       )}
@@ -274,23 +273,23 @@ export default function Events() {
 
         {/* Filter and Search Section */}
         <section className="py-8 bg-gray-50 border-b border-gray-200">
-          <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-400 mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
               {/* Search */}
-              <div className="relative w-full md:w-96">
+              <div className="relative w-full md:w-96 text-sm">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Search events..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#e29818] focus:border-transparent outline-none"
+                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-100 focus:border-transparent outline-none"
                 />
               </div>
 
               {/* Category Filter */}
-              <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto">
-                <Filter className="w-5 h-5 text-gray-600 flex-shrink-0" />
+              <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto text-sm">
+                <Filter className="w-5 h-5 text-gray-600 shrink-0" />
 
                 {isMobile ? (
                   <select
@@ -334,12 +333,12 @@ export default function Events() {
 
         {/* Upcoming Events Grid */}
         <section className="py-20 bg-white">
-          <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="max-w-400 mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-10">
+              <h2 className="text-xl md:text-2xl font-bold mb-4">
                 Upcoming <span className="text-[#e29818]">Events</span>
               </h2>
-              <p className="text-gray-600 text-lg">
+              <p className="text-gray-600 text-sm 2xl:text-lg">
                 Join us for exciting learning experiences and innovation
                 showcases
               </p>
@@ -347,17 +346,17 @@ export default function Events() {
 
             {paginatedEvents.length > 0 ? (
               <>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 2xl:gap-8">
                   {paginatedEvents.map((event, index) => {
                     const eventDate = formatDate(event.date);
                     const badge = getBadgeContent(event);
                     return (
                       <article
                         key={event._id || index}
-                        className="bg-white rounded-2xl shadow hover:shadow-sm transition border border-gray-100 overflow-hidden group"
+                        className="bg-white rounded-2xl shadow hover:shadow-sm transition border border-gray-100 h-96 2xl:h-110 overflow-hidden group"
                       >
                         {/* Event Image */}
-                        <div className="relative h-48 md:h-64 2xl:h-80 bg-gradient-to-br from-[#e29818] to-[#c27f0f] overflow-hidden">
+                        <div className="relative h-48 md:h-52 2xl:h-64 bg-linear-to-br from-[#e29818] to-[#c27f0f] overflow-hidden">
                           {event.image ? (
                             <Image
                               src={urlFor(event.image).url()}
@@ -373,7 +372,7 @@ export default function Events() {
 
                           {/* Date Badge / onhold/ posponed*/}
                           <div className="absolute top-4 left-4 bg-black/80 backdrop-blur text-white rounded-lg p-3 text-center min-w-[70px]">
-                            <div className="text-2xl font-bold">
+                            <div className="text-sm lg:text-lg font-bold">
                               {badge.label}
                             </div>
                             {badge.sub && (
@@ -385,25 +384,25 @@ export default function Events() {
 
                           {/* Category Badge */}
                           {event.category && (
-                            <div className="absolute top-4 right-4 bg-[#e29818] text-white px-3 py-1 rounded-full text-xs font-semibold uppercase">
-                              {event.category}
+                            <div className="absolute top-4 right-4 bg-[#e29818] text-white px-3 py-1 rounded-full text-xs font-semibold">
+                              <i>{event.category}</i>
                             </div>
                           )}
                         </div>
 
                         {/* Event Content */}
-                        <div className="p-6 space-y-4">
-                          <h3 className="text-xl font-bold line-clamp-2 group-hover:text-[#e29818] transition">
+                        <div className="p-4 space-y-3 font-poppins">
+                          <h3 className="text-sm md:text-sm 2xl:text-base font-bold line-clamp-2 group-hover:text-[#e29818] transition">
                             {event.title}
                           </h3>
 
                           {event.description && (
-                            <p className="text-gray-600 text-sm line-clamp-2">
+                            <p className="text-gray-600 text-xs 2xl:text-sm  line-clamp-2">
                               {event.description}
                             </p>
                           )}
 
-                          <div className="space-y-2 text-sm text-gray-600">
+                          <div className="space-y-2 text-xs 2xl:text-sm text-gray-600">
                             {event.time && (
                               <div className="flex items-center gap-2">
                                 <Clock className="w-4 h-4 text-[#e29818]" />
@@ -435,7 +434,7 @@ export default function Events() {
                                 href={event.registrationLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 bg-[#e29818] text-white px-4 py-2 rounded-lg hover:bg-[#c27f0f] transition text-center text-sm font-semibold flex items-center justify-center gap-2"
+                                className="flex-1 bg-[#e29818] text-white px-4 py-2 rounded-lg hover:bg-[#c27f0f] transition text-center text-xs 2xl:text-sm font-semibold flex items-center justify-center gap-2"
                               >
                                 Join <ExternalLink className="w-4 h-4" />
                               </a>
@@ -505,25 +504,25 @@ export default function Events() {
         {/* Past Events Section */}
         {pastEvents.length > 0 && (
           <section className="py-20 bg-gray-50">
-            <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-400 mx-auto px-4 sm:px-6 lg:px-8">
               <div className="mb-12">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                  Past <span className="text-[#e29818]">Events</span>
+                <h2 className="text-xl md:text-2xl font-bold mb-2">
+                  Past <span className="text-teal-800">Events</span>
                 </h2>
-                <p className="text-gray-600 text-lg">
+                <p className="text-gray-600 text-sm md:text-base">
                   Explore highlights from our previous programs and activities
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
                 {filteredPast.slice(0, 8).map((event, index) => {
                   const eventDate = formatDate(event.date);
                   return (
                     <article
                       key={event._id || index}
-                      className="bg-white rounded-xl shadow hover:shadow-sm transition overflow-hidden"
+                      className="bg-white rounded-xl hover:shadow-sm transition overflow-hidden h-80 2xl:h-96"
                     >
-                      <div className="relative h-40 2xl:h-72 bg-gradient-to-br from-gray-400 to-gray-600">
+                      <div className="relative h-40 2xl:h-56 bg-linear-to-br from-gray-400 to-gray-600">
                         {event.image ? (
                           <Image
                             src={urlFor(event.image).url()}
@@ -537,8 +536,8 @@ export default function Events() {
                           </div>
                         )}
                       </div>
-                      <div className="p-4">
-                        <div className="text-sm text-gray-500 mb-2">
+                      <div className="p-4 font-Poppins">
+                        <div className="text-xs text-gray-500 mb-2">
                           {eventDate.day} {eventDate.month} {eventDate.year}
                           {event.endDate && (
                             <>
@@ -551,15 +550,18 @@ export default function Events() {
                         </div>
 
                         <div className="flex items-center gap-2 text-sm text-gray-700 mb-2">
-                          <Clock className="w-4 h-4 text-gray-700" />
-                          <h3 className="font-bold line-clamp-2 mb-2">
+                          <span >
+                              <Clock className="w-4 h-4 text-gray-700"/>
+                            </span>
+                          <h3 className="text-xs font-bold line-clamp-2">
+                            
                             {event.time}
                           </h3>
                         </div>
-                        <h3 className="font-bold line-clamp-2 mb-2">
+                        <h3 className="text-sm font-bold line-clamp-2 mb-2">
                           {event.title}
                         </h3>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center text-xs gap-2">
                           {event.isOnline ? (
                             <>
                               <Globe className="w-4 h-4 text-gray-700" />
@@ -567,7 +569,7 @@ export default function Events() {
                             </>
                           ) : (
                             <>
-                              <MapPin className="w-4 h-4 text-gray-700" />
+                              <MapPin className=" w-4 h-4 text-gray-700" />
                               <span>{event.location || "Location TBA"}</span>
                             </>
                           )}
@@ -582,8 +584,8 @@ export default function Events() {
         )}
 
         {/* Stats Section */}
-        <section className="py-20 bg-[#e29818] text-white">
-          <div className="max-w-[130rem] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* <section className="py-20 bg-[#e29818] text-white">
+          <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="text-5xl md:text-6xl font-bold mb-2">
@@ -607,7 +609,7 @@ export default function Events() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
     </>
   );
