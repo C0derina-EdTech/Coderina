@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
-
+import { uploadFileToSanity } from "../lib/sanityhelpers";
 const FormContext = createContext();
 
 export function FormProvider({ children }) {
@@ -219,98 +219,172 @@ export function FormProvider({ children }) {
   const [siwesError, setSiwesError] = useState("");
   const [siwesSuccess, setSiwesSuccess] = useState("");
 
+  // SIWES FORM DATA (matches UI + Sanity schema)
   const [siwesData, setSiwesData] = useState({
+    // Personal
     fullName: "",
     email: "",
     phone: "",
     gender: "",
     address: "",
     state: "",
+    country: "Nigeria",
+
+    // Academic
     institution: "",
     course: "",
     level: "",
     matricNumber: "",
+
+    // Internship
     siwesDuration: "",
     startDate: "",
     endDate: "",
     department: "",
-    skills: [],
+
+    // Skills & Motivation
+    skills: "",
     experience: "",
     whyCoderina: "",
+
+    // Documents
     cv: null,
     siwesLetter: null,
     studentId: null,
+    headshot: null,
   });
+
+  // ---------------- SUBMIT ----------------
+  // const submitSiwesApplication = async () => {
+  //   setSiwesSubmitting(true);
+  //   setSiwesError("");
+  //   setSiwesSuccess("");
+
+  //   const {
+  //     fullName,
+  //     email,
+  //     phone,
+  //     institution,
+  //     course,
+  //     level,
+  //     siwesDuration,
+  //     department,
+  //     whyCoderina,
+  //   } = siwesData;
+
+  //   // Required validation (UI already handles this, but backend-safe)
+  //   if (
+  //     !fullName ||
+  //     !email ||
+  //     !phone ||
+  //     !institution ||
+  //     !course ||
+  //     !level ||
+  //     !siwesDuration ||
+  //     !department ||
+  //     !whyCoderina
+  //   ) {
+  //     setSiwesError("Please fill all required fields.");
+  //     setSiwesSubmitting(false);
+  //     return;
+  //   }
+
+  //   try {
+  //     const res = await fetch("/api/siwes", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(siwesData),
+  //     });
+
+  //     const data = await res.json();
+
+  //     if (!res.ok) {
+  //       throw new Error(data?.error || "Failed to submit SIWES application");
+  //     }
+
+  //     setSiwesSuccess("SIWES application submitted successfully!");
+  //     setTimeout(() => setSiwesSuccess(""), 10000);
+
+  //     // Reset form
+  //     setSiwesData({
+  //       fullName: "",
+  //       email: "",
+  //       phone: "",
+  //       gender: "",
+  //       address: "",
+  //       state: "",
+  //       country: "Nigeria",
+  //       institution: "",
+  //       course: "",
+  //       level: "",
+  //       matricNumber: "",
+  //       siwesDuration: "",
+  //       startDate: "",
+  //       endDate: "",
+  //       department: "",
+  //       skills: "",
+  //       experience: "",
+  //       whyCoderina: "",
+  //       cv: null,
+  //       siwesLetter: null,
+  //       studentId: null,
+  //       headshot: null,
+  //     });
+  //   } catch (err) {
+  //     console.error("SIWES submission error:", err);
+  //     setSiwesError(err.message || "Something went wrong.");
+  //   } finally {
+  //     setSiwesSubmitting(false);
+  //   }
+  // };
 
   const submitSiwesApplication = async () => {
     setSiwesSubmitting(true);
     setSiwesError("");
     setSiwesSuccess("");
 
-    const {
-      fullName,
-      email,
-      phone,
-      institution,
-      course,
-      siwesDuration,
-      department,
-      whyCoderina,
-    } = siwesData;
-
-    // Required validation
-    if (
-      !fullName ||
-      !email ||
-      !phone ||
-      !institution ||
-      !course ||
-      !siwesDuration ||
-      !department ||
-      !whyCoderina
-    ) {
-      setSiwesError("Please fill all required fields.");
-      setSiwesSubmitting(false);
-      return;
-    }
-
     try {
+      // Upload files to Sanity first
+      const cvId = await uploadFileToSanity(siwesData.cv, "file");
+      const siwesLetterId = await uploadFileToSanity(
+        siwesData.siwesLetter,
+        "file",
+      );
+      const studentIdId = await uploadFileToSanity(
+        siwesData.studentId,
+        "image",
+      );
+      const headshotId = await uploadFileToSanity(siwesData.headshot, "image");
+
+      // Send only asset references to your API
+      const payload = {
+        ...siwesData,
+        cv: cvId ? { _type: "file", asset: { _ref: cvId } } : null,
+        siwesLetter: siwesLetterId
+          ? { _type: "file", asset: { _ref: siwesLetterId } }
+          : null,
+        studentId: studentIdId
+          ? { _type: "image", asset: { _ref: studentIdId } }
+          : null,
+        headshot: headshotId
+          ? { _type: "image", asset: { _ref: headshotId } }
+          : null,
+      };
+
       const res = await fetch("/api/siwes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(siwesData),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
       if (!res.ok)
-        throw new Error(data.error || "Failed to submit application");
+        throw new Error(data?.error || "Failed to submit SIWES application");
 
       setSiwesSuccess("SIWES application submitted successfully!");
-      setTimeout(() => setSiwesSuccess(""), 10000);
-
-      // Reset form
-      setSiwesData({
-        fullName: "",
-        email: "",
-        phone: "",
-        gender: "",
-        address: "",
-        state: "",
-        institution: "",
-        course: "",
-        level: "",
-        matricNumber: "",
-        siwesDuration: "",
-        startDate: "",
-        endDate: "",
-        department: "",
-        skills: [],
-        experience: "",
-        whyCoderina: "",
-        cv: null,
-        siwesLetter: null,
-        studentId: null,
-      });
+      // Reset form (optional)
     } catch (err) {
       console.error("SIWES submission error:", err);
       setSiwesError(err.message || "Something went wrong.");
@@ -319,6 +393,7 @@ export function FormProvider({ children }) {
     }
   };
 
+  // ------------- CHANGE HANDLER -------------
   const handleSiwesChange = (field, value) => {
     setSiwesData((prev) => ({
       ...prev,

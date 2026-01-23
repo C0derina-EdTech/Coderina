@@ -147,8 +147,8 @@ export const EventSkeleton = () => {
 
 export function UpcomingEventsSkeletonLoader() {
   return (
-    <section className="bg-black text-white py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8">
-      <div className="max-w-[100rem] mx-auto">
+    <section className="bg-black text-white py-12 sm:py-16  px-4 sm:px-6 md:px-8">
+      <div className="max-w-400 mx-auto">
         {/* Header Skeleton */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8 md:mb-12">
           <div className="w-full sm:w-auto">
@@ -172,11 +172,11 @@ export function UpcomingEventsSkeletonLoader() {
           {[...Array(5)].map((_, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[360px] bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden"
+              className="shrink-0 w-[280px] sm:w-[320px] bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden"
             >
               {/* Image Skeleton */}
               <div className="relative h-48 sm:h-52 md:h-56 bg-gray-800 animate-pulse">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
 
                 {/* Date Badge Skeleton */}
                 <div className="absolute top-4 left-4 bg-gray-700 rounded-xl px-3 py-2 w-16 h-16 animate-pulse">

@@ -1,41 +1,41 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import Image from 'next/image';
-import AOS from 'aos';
+import { useEffect } from "react";
+import Image from "next/image";
+import AOS from "aos";
 import Link from "next/link";
 const topCards = [
   {
     id: 1,
-    title: 'Get Started',
+    title: "Get Started",
     description:
-      'Take the next step and review key details for starting a FIRST LEGO League program.',
+      "Take the next step and review key details for starting a FIRST LEGO League program.",
     cta: "Let's Go",
-    link: '/coderina-first-lego-league',
-    image: '/firstlegoleague.png',
-    alt: 'Students getting started with FIRST LEGO League robotics program',
+    link: "/coderina-first-lego-league",
+    image: "/firstlegoleague.png",
+    alt: "Students getting started with FIRST LEGO League robotics program",
     delay: 0,
   },
   {
     id: 2,
-    title: 'Get Started',
+    title: "Join the AI for Good Competition",
     description:
-      'Understand the associated kits, and materials required to register for the AI FOR GOOD Competition.',
-    cta: 'Register Teams',
-    link: '/coderina-ai-for-good-application',
-    image: '/aiforgood.jpg',
-    alt: 'AI FOR GOOD competition materials',
+      "Understand the associated kits, and materials required to register for the AI FOR GOOD Youth Competition.",
+    cta: "Register Teams",
+    link: "/coderina-ai-for-good-application",
+    image: "/aiforgood.jpg",
+    alt: "AI FOR GOOD competition materials",
     delay: 100,
   },
   {
     id: 3,
-    title: 'Learn About Our Season',
+    title: "Learn About Our Season",
     description:
-      'Each season introduces a global challenge designed to build creativity and problem-solving skills.',
-    cta: 'Get Season Details',
-    link: '/programs',
-    image: '/unearthed.png',
-    alt: 'FIRST LEGO League UNEARTHED season challenge theme',
+      "Each season introduces a global challenge designed to build creativity and problem-solving skills.",
+    cta: "Get Season Details",
+    link: "/programs",
+    image: "/unearthed.png",
+    alt: "FIRST LEGO League UNEARTHED season challenge theme",
     delay: 200,
   },
 ];
@@ -45,15 +45,15 @@ export default function Details() {
     AOS.init({
       duration: 800,
       once: true,
-      easing: 'ease-out',
+      easing: "ease-out",
     });
   }, []);
 
   return (
-    <div className="w-full bg-gray-50">
+    <div className="w-full overflow-hidden bg-gray-50">
       {/* Top Section - Three Cards */}
       <section className="w-full py-16 md:py-20 bg-white">
-        <div className="max-w-[100rem] mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
+        <div className="max-w-400 mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 2xl:gap-12">
             {topCards.map((card) => (
               <article
@@ -109,11 +109,11 @@ export default function Details() {
 
       {/* Bottom Section - New Season Challenge championship competition */}
       <section className="w-full py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-400 mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image */}
             <div
-              className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-sm lg:px-6"
+              className="relative w-full aspect-5/3 rounded-2xl overflow-hidden shadow-sm lg:px-6"
               data-aos="fade-right"
             >
               <Image
@@ -127,33 +127,50 @@ export default function Details() {
               />
             </div>
 
-         
-           {/* Content */}
-<div data-aos="fade-left" data-aos-delay="100">
-  <p className="text-sm font-semibold text-teal-600 uppercase tracking-wide mb-4">
-    National Robotics Championship
-  </p>
+            {/* Content */}
+            <div data-aos="fade-left" data-aos-delay="100">
+              <p className="text-sm font-semibold text-teal-600 uppercase tracking-wide mb-2">
+                National Robotics Championship
+              </p>
 
-  <h1 className="text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold text-gray-900 mb-6">
-    FIRST AGE℠ National Robotics Championship 2026
-  </h1>
+              <h1 className="text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold text-gray-900 mb-4">
+                FIRST AGE℠ National Robotics Championship 2026
+              </h1>
 
-  <p className="text-sm md:text-base text-gray-600 mb-8 leading-relaxed">
-    The FIRST® LEGO® League National Robotics Championship is coming to Abuja.
-    From <strong>5 – 7 February 2026</strong>, teams from across the country will
-    compete in the UNEARTHED™ season challenge, showcasing innovation, teamwork,
-    and real-world problem-solving through robotics.
-    <br /><br />
-    This championship brings together young innovators to decode the past,
-    build the future, and celebrate excellence in STEM as part of the
-    <strong> FIRST AGE℠ season</strong>.
-  </p>
+              <p className="text-sm md:text-base text-gray-600 mb-4 leading-relaxed">
+                The FIRST® LEGO® League National Robotics Championship is coming
+                to Abuja. From <strong>5 – 7 February 2026</strong>, teams from
+                across the country will compete in the UNEARTHED™ season
+                challenge, showcasing innovation, teamwork, and real-world
+                problem-solving through robotics.
+                <br />
+                <br />
+                This championship brings together young innovators to decode the
+                past, build the future, and celebrate excellence in STEM as part
+                of the
+                <strong> FIRST AGE℠ season</strong>.
+              </p>
 
-  <Link href="/events" className="inline-flex items-center px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-    View Championship Details
-  </Link>
-</div>
-
+              <Link
+                href="/events"
+                className="inline-flex text-sm items-center text-teal-800 font-semibold hover:text-blue-700 transition-colors group"
+              >
+                View Championship Details
+                <svg
+                  className="w-5 h-5 ml-2 transform group-hover:translate-x-1 group-hover:scale-110 transition-all duration-300 ease-out"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

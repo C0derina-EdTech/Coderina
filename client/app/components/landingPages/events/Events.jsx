@@ -219,27 +219,27 @@ export default function Events() {
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap gap-4 pt-4">
+                      <div className="flex flex-wrap gap-4 pt-4 text-xs md:text-sm">
                         {featuredEvent.registrationLink && (
                           <a
                             href={featuredEvent.registrationLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-[#e29818] text-white px-8 py-3 rounded-full hover:bg-[#c27f0f] transition flex items-center gap-2 font-semibold"
+                            className="bg-[#e29818] text-white px-8 py-2 rounded-full hover:bg-[#c27f0f] transition flex items-center gap-2 font-semibold"
                           >
                             Register Now <ArrowRight className="w-5 h-5" />
                           </a>
                         )}
                         <Link
                           href="/contact"
-                          className="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition font-semibold"
+                          className="border-2 border-white text-white px-8 py-2 rounded-full hover:bg-white hover:text-black transition font-semibold"
                         >
                           Contact Us
                         </Link>
                       </div>
                     </div>
 
-                    <div className="relative h-[300px] md:h-[400px] 2xl:h-[500px]">
+                    <div className="relative aspect-5/3 2xl:aspect-4/3">
                       {featuredEvent.image ? (
                         <Image
                           src={urlFor(featuredEvent.image).url()}
@@ -346,7 +346,7 @@ export default function Events() {
 
             {paginatedEvents.length > 0 ? (
               <>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 2xl:gap-8">
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 2xl:gap-8">
                   {paginatedEvents.map((event, index) => {
                     const eventDate = formatDate(event.date);
                     const badge = getBadgeContent(event);
@@ -388,6 +388,17 @@ export default function Events() {
                               <i>{event.category}</i>
                             </div>
                           )}
+
+                          {event.registrationLink && (
+                              <a
+                                href={event.registrationLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="absolute bottom-4 right-4 flex-1 bg-black text-white px-4 py-2 rounded-lg hover:bg-[#c27f0f] transition text-center text-xs 2xl:text-sm font-semibold flex items-center justify-center gap-2"
+                              >
+                                Join <ExternalLink className="w-4 h-4" />
+                              </a>
+                            )}
                         </div>
 
                         {/* Event Content */}
@@ -425,21 +436,7 @@ export default function Events() {
                                 </>
                               )}
                             </div>
-                          </div>
-
-                          <div className="flex gap-3 pt-4">
-                            {/* Show JOIN button only if registrationLink exists */}
-                            {event.registrationLink && (
-                              <a
-                                href={event.registrationLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex-1 bg-[#e29818] text-white px-4 py-2 rounded-lg hover:bg-[#c27f0f] transition text-center text-xs 2xl:text-sm font-semibold flex items-center justify-center gap-2"
-                              >
-                                Join <ExternalLink className="w-4 h-4" />
-                              </a>
-                            )}
-                          </div>
+                          </div>               
                         </div>
                       </article>
                     );

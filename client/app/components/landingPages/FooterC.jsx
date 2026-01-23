@@ -83,7 +83,7 @@ const Footer = () => {
   ];
 
   const skillsLinks = [
-    { label: "Digital Skills Training", url: "/programs" },
+    { label: "SIWES 2026 Internship", url: "/coderina-siwes-application" },
     { label: "Robotics & AI Programs", url: "/events" },
     { label: "Checkmate", url: "/programs" },
     { label: "e-STEAM Coderina", url: "https://www.esteamcoderina.org" },

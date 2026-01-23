@@ -194,6 +194,17 @@ export default function UpcomingEvents({ isLargeScreen }) {
                       </>
                     )}
                   </div>
+
+                   {event.registrationLink && (
+                    <Link
+                      href={event.registrationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute top-4 right-4 p-2 block text-center bg-[#e29818] hover:bg-[#c88416] text-white font-semibold text-xs rounded-lg transition-colors duration-200 italic"
+                    >
+                      Register
+                    </Link>
+                  )}
                 </div>
 
                 {/* Content */}
@@ -213,7 +224,7 @@ export default function UpcomingEvents({ isLargeScreen }) {
                     </div>
                   </div>
 
-                  {event.registrationLink && (
+                  {/* {event.registrationLink && (
                     <Link
                       href={event.registrationLink}
                       target="_blank"
@@ -222,7 +233,7 @@ export default function UpcomingEvents({ isLargeScreen }) {
                     >
                       Join
                     </Link>
-                  )}
+                  )} */}
                 </div>
               </div>
             ))}

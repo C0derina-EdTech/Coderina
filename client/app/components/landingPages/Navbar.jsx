@@ -110,13 +110,13 @@ export default function Navbar() {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <button className="p-2 rounded-full hover:bg-gray-100">
+            {/* <button className="p-2 rounded-full hover:bg-gray-100">
               <Search className="w-5 h-5" />
             </button>
 
             <button className="hidden sm:block text-xs font-bold 2xl:text-sm">
               Support
-            </button>
+            </button> */}
 
             <Link
               href="/contact"

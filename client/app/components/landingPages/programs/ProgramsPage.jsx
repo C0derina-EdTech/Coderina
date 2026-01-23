@@ -4,6 +4,7 @@ import React from "react";
 import Programs from "./Programs";
 import TrustedBy from "../home/TrustedBy";
 import ProgramsHero from "./ProgramsHero";
+import Press from "../home/Press";
 const ProgramsPage = () => {
   const contactContents = [
     {
@@ -13,6 +14,10 @@ const ProgramsPage = () => {
     {
       color: "",
       section: <Programs />,
+    },
+    {
+      color: "",
+      section: <Press/>,
     },
     {
       color: "",
