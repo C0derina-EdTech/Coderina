@@ -7,11 +7,11 @@ const AfterHero = () => {
   return (
     <div>
       <div className="bg-white py-12 2xl:py-16">
-        <div className="max-w-400 mx-auto px-2 sm:px-4 lg:px-6 xl:px-8">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 2xl:mb-8">
+        <div className="max-w-400 mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
+          <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 2xl:mb-8">
             Building Africa&apos;s Next Generation of Innovators
           </h1>
-          <p className="text-sm sm:text-base 2xl:text-lg text-gray-600 max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-gray-600 max-w-2xl leading-relaxed">
             Coderina EdTech Foundation delivers inclusive STEAM education programs
             that empower children, youth, and educators with practical technology,
             robotics, and digital innovation skills.
@@ -20,11 +20,11 @@ const AfterHero = () => {
 
         {/* Orbit Section */}
         <section className="py-12 2xl:py-16">
-          <div className="max-w-400 mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+          <div className="max-w-400 mx-auto px-2 sm:px-4 md:px-6 lg:px-8 ">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
               {/* Left Content */}
               <div className="order-2 lg:order-1">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6">
+                <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6">
                   National Robotics & STEAM Programs
                 </h2>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-8">
@@ -42,7 +42,7 @@ const AfterHero = () => {
 
               {/* Right Image */}
               <div className="grid lg:grid-cols-2 gap-4 order-1 lg:order-2">
-                <div className="relative w-full max-w-md  h-120 lg:h-96 rounded-2xl overflow-hidden shadow-sm">
+                <div className="relative w-full lg:h-96 rounded-2xl overflow-hidden shadow-sm">
                   <Image
                     src="/girlrobot.png"
                     alt="Student participating in Coderina robotics and STEAM education program"
@@ -50,7 +50,7 @@ const AfterHero = () => {
                     className="object-cover"
                   />
                 </div>
-                <div className="hidden lg:block relative w-full max-w-sm h-96 rounded-2xl overflow-hidden shadow-sm">
+                <div className="hidden lg:block relative w-full lg:h-96 rounded-2xl overflow-hidden shadow-sm">
                   <Image
                     src="/robotkids.png"
                     alt="Young innovator learning robotics through Coderina EdTech Foundation"
@@ -81,7 +81,7 @@ const AfterHero = () => {
 
               {/* Right Content */}
               <div>
-                <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6">
+                <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6">
                   Education Beyond the Classroom
                 </h2>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-8">

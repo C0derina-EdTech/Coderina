@@ -2,7 +2,14 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Instagram, Facebook, Linkedin, Send, Mail, Loader2  } from "lucide-react";
+import {
+  Instagram,
+  Facebook,
+  Linkedin,
+  Send,
+  Mail,
+  Loader,
+} from "lucide-react";
 import { useFormContext } from "../../contexts/FormContext";
 import { Country } from "country-state-city";
 
@@ -21,51 +28,45 @@ export default function JoinCouch() {
     sendCouchContact,
     couchSubmitting,
     couchError,
-    couchSuccess
+    couchSuccess,
   } = useFormContext();
 
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState(() => Country.getAllCountries());
   const [touched, setTouched] = useState(false);
-const [showSuccess, setShowSuccess] = useState(false);
-
-useEffect(() => {
-  if (couchSuccess) {
-    setShowSuccess(true);
-    const timer = setTimeout(() => {
-      setShowSuccess(false);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }
-}, [couchSuccess]);
-
-const isEmpty = (value) => touched && !value.trim();
-
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-    const allCountries = Country.getAllCountries();
-    setCountries(allCountries);
-  }, []);
+    if (couchSuccess) {
+      const showTimer = setTimeout(() => {
+        setShowSuccess(true);
+      }, 0);
 
+      const hideTimer = setTimeout(() => {
+        setShowSuccess(false);
+      }, 3000);
+
+      return () => {
+        clearTimeout(showTimer);
+        clearTimeout(hideTimer);
+      };
+    }
+  }, [couchSuccess]);
+
+  const isEmpty = (value) => touched && !value.trim();
 
   const handleCountryChange = (e) => {
     const isoCode = e.target.value;
-    const selectedCountry = countries.find(c => c.isoCode === isoCode);
-  
+    const selectedCountry = countries.find((c) => c.isoCode === isoCode);
+
     if (selectedCountry) {
-      setCountry(selectedCountry.name); 
+      setCountry(selectedCountry.name);
       setUniversityPhone(`+${selectedCountry.phonecode}`);
     }
   };
-  
 
   return (
-    <section className="bg-gradient-to-b from-gray-900 to-black text-white relative overflow-hidden">
-      <div className="grid lg:grid-cols-2 min-h-[80vh] 
-                md:min-h-[90vh]
-                lg:min-h-[600px]
-                xl:min-h-[700px]
-                2xl:min-h-[800px] 3xl:min-h-[1200px] ">
-
+    <section className="bg-linear-to-b from-gray-900 to-black text-white relative overflow-hidden">
+      <div className="grid lg:grid-cols-2 min-h-[50vh] md:min-h-[30vh] ">
         {/* IMAGE SIDE - hidden on mobile */}
         <div className="relative hidden lg:block">
           <Image
@@ -79,8 +80,7 @@ const isEmpty = (value) => touched && !value.trim();
         </div>
 
         {/* FORM SIDE */}
-        <div className="relative flex items-center justify-center px-6 sm:px-10 lg:px-20 xl:px-28 py-16">
-
+        <div className="relative flex items-center justify-center px-2 sm:px-6 lg:px-20 xl:px-28 py-16">
           {/* mobile bg image overlay */}
           <div className="absolute inset-0 lg:hidden">
             <Image
@@ -91,16 +91,15 @@ const isEmpty = (value) => touched && !value.trim();
             />
           </div>
 
-          <div className="relative z-10 w-full max-w-xl 3xl:max-w-2xl">
-
+          <div className="relative z-10 w-full max-w-xl lg:max-w-2xl 2xl:max-w-xl">
             {/* SEO HEADER */}
             <header className="text-center mb-10">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl 3xl:text-6xl font-bold mb-4">
+              <h1 className="text-base md:text-xl lg:text-2xl 2xl:text-3xl font-bold mb-4">
                 Join COUCH 2026 Innovation Challenge
               </h1>
-              <p className="text-gray-300 text-sm sm:text-base 3xl:text-lg leading-relaxed max-w-lg mx-auto">
-                Are you ready to showcase your innovation and compete with
-                the brightest university teams across Nigeria? Register your
+              <p className="text-gray-300 text-sm 2xl:text-base leading-relaxed max-w-xl mx-auto">
+                Are you ready to showcase your innovation and compete with the
+                brightest university teams across Nigeria? Register your
                 interest for the next COUCH edition and become part of the
                 national technology revolution.
               </p>
@@ -108,116 +107,115 @@ const isEmpty = (value) => touched && !value.trim();
 
             {/* FORM */}
             <form
-  onSubmit={(e) => {
-    e.preventDefault();
-    setTouched(true);
-    sendCouchContact();
-  }}
-  className="space-y-4"
->
-
-  <input
-    type="text"
-    placeholder="University Name"
-    value={universityName}
-    onChange={(e) => setUniversityName(e.target.value)}
-    className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
+              onSubmit={(e) => {
+                e.preventDefault();
+                setTouched(true);
+                sendCouchContact();
+              }}
+              className="space-y-4 text-xs 2xl:text-sm"
+            >
+              <input
+                type="text"
+                placeholder="University Name"
+                value={universityName}
+                onChange={(e) => setUniversityName(e.target.value)}
+                className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
     ${isEmpty(universityName) ? "border border-red-500/70" : "border border-white/20"}`}
-  />
+              />
 
-  <input
-    type="text"
-    placeholder="Team Name"
-    value={teamName}
-    onChange={(e) => setTeamName(e.target.value)}
-    className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
+              <input
+                type="text"
+                placeholder="Team Name"
+                value={teamName}
+                onChange={(e) => setTeamName(e.target.value)}
+                className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
     ${isEmpty(teamName) ? "border border-red-500/70" : "border border-white/20"}`}
-  />
+              />
 
-  <input
-    type="email"
-    placeholder="Team Email"
-    value={universityEmail}
-    onChange={(e) => setUniversityEmail(e.target.value)}
-    className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
+              <input
+                type="email"
+                placeholder="Team Email"
+                value={universityEmail}
+                onChange={(e) => setUniversityEmail(e.target.value)}
+                className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
     ${isEmpty(universityEmail) ? "border border-red-500/70" : "border border-white/20"}`}
-  />
+              />
 
-  {/* COUNTRY SELECT */}
-  <select
-  value={
-    countries.find(c => c.name === country)?.isoCode || ""
-  }
-  onChange={handleCountryChange}
-  className={`w-full bg-white/5 px-4 py-3 rounded-xl focus:outline-none focus:ring-0
+              {/* COUNTRY SELECT */}
+              <select
+                value={countries.find((c) => c.name === country)?.isoCode || ""}
+                onChange={handleCountryChange}
+                className={`w-full bg-white/5 px-4 py-3 rounded-xl focus:outline-none focus:ring-0
   ${isEmpty(country) ? "border border-red-500/70" : "border border-white/20"}`}
->
+              >
+                <option value="" className="text-gray-400 bg-gray-900">
+                  Select Country
+                </option>
 
-  <option value="" className="text-gray-400 bg-gray-900">
-    Select Country
-  </option>
+                {countries.map((c) => (
+                  <option
+                    key={c.isoCode}
+                    value={c.isoCode}
+                    className="bg-gray-900 text-white"
+                  >
+                    {c.name}
+                  </option>
+                ))}
+              </select>
 
-  {countries.map((c) => (
-    <option key={c.isoCode} value={c.isoCode} className="bg-gray-900 text-white">
-      {c.name}
-    </option>
-  ))}
-</select>
-
-
-  <input
-    type="tel"
-    placeholder="+298"
-    value={universityPhone}
-    onChange={(e) => setUniversityPhone(e.target.value)}
-    className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
+              <input
+                type="tel"
+                placeholder="+298"
+                value={universityPhone}
+                onChange={(e) => setUniversityPhone(e.target.value)}
+                className={`w-full bg-white/5 px-4 py-3 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-0
     ${isEmpty(universityPhone) ? "border border-red-500/70" : "border border-white/20"}`}
-  />
+              />
 
-  {/* ERROR MESSAGE */}
-  {couchError && (
-    <p className="text-red-400 text-sm text-center">
-      {couchError}
-    </p>
-  )}
+              {/* ERROR MESSAGE */}
+              {couchError && (
+                <p className="text-red-400 text-sm text-center">{couchError}</p>
+              )}
 
-  <button
-    type="submit"
-    disabled={couchSubmitting}
-    className="w-full bg-white text-gray-900 py-3 rounded-full font-bold hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
-  >
-    {couchSubmitting ? (
-      <Loader2 className="animate-spin" />
-    ) : showSuccess ? (
-      "✅ Registration Sent!"
-    ) : (
-      <>
-        <Send size={18} />
-        Register Your Interest
-      </>
-    )}
-  </button>
-
-</form>
-
+              <button
+                type="submit"
+                disabled={couchSubmitting}
+                className="w-full bg-white text-gray-900 py-3 rounded-full font-bold hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
+              >
+                {couchSubmitting ? (
+                  <Loader className="animate-spin" />
+                ) : showSuccess ? (
+                  "✅ Registration Sent!"
+                ) : (
+                  <>
+                    <Send size={18} />
+                    Register Your Interest
+                  </>
+                )}
+              </button>
+            </form>
 
             {/* SOCIAL LINKS */}
             <div className="flex justify-center gap-6 mt-10">
               <Link href="https://instagram.com/couch_coderina" target="_blank">
                 <Instagram className="hover:text-[#FFD700] transition" />
               </Link>
-              <Link href="https://facebook.com/coderina university challenge" target="_blank">
+              <Link
+                href="https://facebook.com/coderina university challenge"
+                target="_blank"
+              >
                 <Facebook className="hover:text-[#FFD700] transition" />
               </Link>
-              <Link href="https://linkedin.com/company/coderina" target="_blank">
+              <Link
+                href="https://linkedin.com/company/coderina"
+                target="_blank"
+              >
                 <Linkedin className="hover:text-[#FFD700] transition" />
               </Link>
               <Link href="mailto:couch@coderina.org">
                 <Mail className="hover:text-[#FFD700] transition" />
               </Link>
-
             </div>
-
           </div>
         </div>
       </div>

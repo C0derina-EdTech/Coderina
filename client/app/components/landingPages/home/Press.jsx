@@ -47,7 +47,7 @@ export default function Press() {
   ];
 
   return (
-    <section className="w-full bg-linear-to-br from-teal-700 via-teal-600 to-cyan-600 py-20 px-6">
+    <section className="w-full bg-linear-to-br from-teal-700 via-teal-600 to-cyan-600 py-20 px-2 sm:px-4 md:px-6 lg:px-8">
       <div className="max-w-400 mx-auto">
         <h2 
           className="text-white text-3xl md:text-4xl font-light mb-16"

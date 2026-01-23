@@ -24,7 +24,7 @@ const NAV = [
   { key: "events", label: "Events", href: "/events" },
   { key: "industries", label: "Robotics Lab", href: "/robotics-lab" },
   { key: "company", label: "Company", href: "/about" },
-  { key: "resources", label: "COUCH", href: "/couch" },
+  { key: "resources", label: "COUCH", href: "/coderina-university-challenge" },
 ];
 
 export default function Navbar() {

@@ -2,32 +2,39 @@
 
 import React from "react";
 import Lab from "./Lab";
-import LabHero from "./LabHero";
-import RoboticsHero from "./RoboticsHero";
-import Features from "./Features";
+import Hero from "./Hero";
+import Robotics from "./Robotics";
 import TrustedBy from "../home/TrustedBy";
+import Coderina3D from "./Coderina3D"
+import Solutions from "./Solutions";
 const LabSection = () => {
   const aboutContents = [
+ 
     {
       bg: "",
-      section: <LabHero/>,
+      section: <Hero/>,
+    },
+       {
+      bg:"",
+      section:<Coderina3D/>,
+    },
+       {
+      bg:"",
+      section:<Solutions/>,
     },
      {
       bg: "",
-      section: <RoboticsHero/>,
+      section: <Robotics/>,
     },
-    {
-      bg: "",
-      section: <Features/>,
-    },
+   
     // {
     //   bg: "",
     //   section: <Lab />,
     // },
-    //  {
-    //   bg: "",
-    //   section: <TrustedBy />,
-    // },
+     {
+      bg: "",
+      section: <TrustedBy />,
+    },
   
   ];
 

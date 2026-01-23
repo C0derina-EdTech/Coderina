@@ -49,7 +49,7 @@ const Banner = () => {
     <div>
       {/* Bottom Banner - Blue Background */}
       <div className="absolute bottom-0 left-0 right-0 shadow-lg bg-linear-to-b from-teal-900 via-teal-800 to-teal-900 py-3 z-20">
-        <div className="max-w-[1400px] mx-auto px-2 sm:px-4 md:px-16 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-[1400px] mx-auto px-2 sm:px-4 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-4">
 
           {/* TEXT + COUNTDOWN */}
           <div className="flex flex-col sm:flex-row items-center gap-3 text-white">

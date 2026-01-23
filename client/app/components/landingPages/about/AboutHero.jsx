@@ -19,7 +19,7 @@ export default function AboutHero() {
     { value: "Creativity", icon: Sparkles, color: "text-yellow-400" },
   ];
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200">
         <div className="max-w-400 mx-auto px-2 sm:px-4 md:px-6 lg:px-8 mt-20">

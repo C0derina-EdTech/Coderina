@@ -4,12 +4,16 @@ import React from "react";
 import Couch from "./Couch";
 import CouchHero from "./CouchHero";
 import Join from "./Join";
-
+import AboutCouch from "./AboutCouch"
 const CouchPage = () => {
   const couchContents = [
     {
       color: "",
       section: <CouchHero/>,
+    },
+    {
+      color: "",
+      section: <AboutCouch/>,
     },
     {
         color: "",

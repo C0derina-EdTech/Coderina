@@ -38,7 +38,7 @@ const Footer = () => {
   let buttonBg = "bg-linear-to-b from-teal-900 to-teal-700";
   let buttonHoverBg = "bg-black";
 
-  if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
+  if (pathname?.startsWith("/programs") || pathname?.startsWith("/events") || pathname?.startsWith("/robotics-lab")) {
     bgColor = "bg-black";
     textColor = "text-white";
     subTextColor = "text-gray-300";

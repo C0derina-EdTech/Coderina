@@ -21,13 +21,15 @@ export default function ProgramsProjectsInitiatives() {
             <p className="text-sm md:text-base mb-8">
               Coderina EdTech Foundation is{" "}
               <span className="font-semibold">
-                building future-ready innovators through inclusive STEAM programs.
+                building future-ready innovators through inclusive STEAM
+                programs.
               </span>
             </p>
 
             <p className="text-xs md:text-sm 2xl:text-base text-gray-300 mb-12">
-              Our programs and initiatives reach students, educators, and institutions,
-              fostering creativity, problem-solving, and real-world impact across communities.
+              Our programs and initiatives reach students, educators, and
+              institutions, fostering creativity, problem-solving, and
+              real-world impact across communities.
             </p>
 
             {/* Partner / Program Visuals */}
@@ -50,7 +52,7 @@ export default function ProgramsProjectsInitiatives() {
                   />
                 </div>
 
-                 <div className="relative h-12 w-12 rounded-full">
+                <div className="relative h-12 w-12 rounded-full">
                   <Image
                     src="/firsttech.png"
                     alt="Coderina STEAM Innovation Programs"
@@ -67,7 +69,6 @@ export default function ProgramsProjectsInitiatives() {
                   />
                 </div>
               </div>
-
             </div>
 
             <p className="text-sm font-semibold mt-4">
@@ -89,15 +90,15 @@ export default function ProgramsProjectsInitiatives() {
                 <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </Link>
               <p className="text-gray-300 text-xs md:text-sm 2xl:text-base">
-                Hands-on robotics competitions and innovation challenges that inspire
-                critical thinking, teamwork, and engineering excellence.
+                Hands-on robotics competitions and innovation challenges that
+                inspire critical thinking, teamwork, and engineering excellence.
               </p>
             </article>
 
             {/* Program 2 */}
             <article>
               <Link
-                href="/couch"
+                href="/coderina-university-challenge"
                 className="inline-flex items-center gap-2 group"
               >
                 <h2 className="text-sm md:text-base font-bold mb-4">
@@ -106,8 +107,8 @@ export default function ProgramsProjectsInitiatives() {
                 <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </Link>
               <p className="text-gray-300 text-xs md:text- 2xl:text-base">
-                Flagship championships that bring students together to showcase skills,
-                creativity, and innovation on a national stage.
+                Flagship championships that bring students together to showcase
+                skills, creativity, and innovation on a national stage.
               </p>
             </article>
 
@@ -123,8 +124,8 @@ export default function ProgramsProjectsInitiatives() {
                 <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </Link>
               <p className="text-gray-300 text-xs md:text-sm 2xl:text-base">
-                Structured learning pathways that equip learners with essential digital,
-                coding, and STEAM skills for the future workforce.
+                Structured learning pathways that equip learners with essential
+                digital, coding, and STEAM skills for the future workforce.
               </p>
             </article>
 
@@ -140,8 +141,9 @@ export default function ProgramsProjectsInitiatives() {
                 <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </Link>
               <p className="text-gray-300 text-xs md:text-sm 2xl:text-base">
-                Capacity-building initiatives empowering educators and communities to
-                deliver sustainable, high-quality STEAM education.
+                Capacity-building initiatives empowering educators and
+                communities to deliver sustainable, high-quality STEAM
+                education.
               </p>
             </article>
           </div>

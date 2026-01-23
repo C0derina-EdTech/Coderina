@@ -165,8 +165,8 @@ export default function Events() {
               (() => {
                 const featuredBadge = getBadgeContent(featuredEvent);
                 return (
-                  <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    <div className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <div className="space-y-4 lg:space-y-6">
                       <div className="inline-flex items-center gap-2 bg-[#e29818]/20 text-[#e29818] px-4 py-2 rounded-full border border-[#e29818]/30">
                         <Sparkles className="w-4 h-4" />
                         <span className="text-xs 2xl:text-sm font-medium">
@@ -244,7 +244,7 @@ export default function Events() {
                         <Image
                           src={urlFor(featuredEvent.image).url()}
                           alt={featuredEvent.title}
-                          className="rounded-2xl shadow-2xl object-cover"
+                          className="rounded-2xl shadow-md lg:shadow-2xl   object-cover"
                           fill
                           priority
                         />
@@ -511,7 +511,7 @@ export default function Events() {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {filteredPast.slice(0, 8).map((event, index) => {
                   const eventDate = formatDate(event.date);
                   return (

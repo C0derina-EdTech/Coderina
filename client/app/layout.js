@@ -1,18 +1,18 @@
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
 import "./globals.css";
 import "./styles.css";
 import { Providers } from "./Providers";
+import CookieBanner from "./utils/CookieBanner";
 
-
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: {
     default: "Coderina | Empowering STEAM Education Across Africa",
     template: "%s - Coderina Education and Technology Foundation",
   },
   verification: {
-    google: 'f609400bb46302f9', // Replace with your actual verification code
+    google: "f609400bb46302f9", // Replace with your actual verification code
   },
   description:
     "Coderina Education and Technology Foundation (Coderina EduTech) is a not-for-profit organization empowering young Africans through STEAM, robotics, coding, AI, and digital literacy programs. We build future-ready innovators, educators, and learners equipped to solve global challenges with technology and creativity.",
@@ -219,7 +219,7 @@ export const metadata = {
       "Coderina empowers African students and educators through STEAM, robotics, AI, and coding programs — building innovation, creativity, and global competence.",
     images: [
       {
-        url: "/coderinaLogo.png",
+        url: "https://www.coderina.org/logo.png",
         width: 1200,
         height: 630,
         alt: "Coderina Education and Technology Foundation Banner",
@@ -232,7 +232,11 @@ export const metadata = {
     description:
       "Empowering Africa’s next generation of innovators through robotics, coding, and digital skills education.",
     creator: "@coderinaedu",
-    images: ["/coderinaLogo.png"],
+    twitter: {
+  card: "summary_large_image",
+  images: ["https://www.coderina.org/logo.png"],
+},
+
   },
   icons: {
     icon: "/codelogo.png",
@@ -263,6 +267,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="font-sans">
         <Providers> {children} </Providers>
+        <CookieBanner />
       </body>
     </html>
   );

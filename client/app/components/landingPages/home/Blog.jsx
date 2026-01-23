@@ -18,11 +18,11 @@ const Blog = ({ isLargeScreen })  => {
     <>
       <section className="py-12 lg:py-16 xl:py-20 bg-[#f9fafb]">
         <div className="max-w-400 mx-auto px-4 md:px-4 lg:px-8 xl:px-10">
-          <div className="text-center mb-12 lg:mb-16 xl:mb-20">
+          <div className="text-center mb-12 lg:mb-16 ">
             <p className="text-[#1a3a52] text-xs lg:text-sm font-semibold mb-2 tracking-wide uppercase">
               Our Latest Updates
             </p>
-            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#133c55]">
+            <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-[#133c55]">
               Discover What’s New at{" "}
               <span className="text-[#f9a826]">Coderina</span>
             </h2>

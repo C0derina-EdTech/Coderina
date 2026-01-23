@@ -1,17 +1,15 @@
 "use client";
 import React from "react";
 import "aos/dist/aos.css";
-import Navbar from "./Navbar";
 import PrintingLab from "./PrintingLab";
 import TrustedBy from "./TrustedBy";
-import CoderinaLanding from "./CoderinaLanding";
+import Clip from "./Clip";
 import ProgramsAndInitiatives from "./ProgramsAndInitiatives";
 import CoderinaFacilities from "./CoderinaFacilities";
 import UpcomingEvents from "./UpcomingEvents";
-import useIsLargeScreen from "../../lib/useIsLargeScreen"; // import the hook
+import useIsLargeScreen from "../../lib/useIsLargeScreen";
 import AfterHero from "./AfterHero";
 import Press from "./Press";
-import Siwes from "./Siwes";
 import Header from "./Header";
 import Blog from "./Blog";
 import Details from "./Details";
@@ -32,8 +30,7 @@ const HomePage = () => {
     { color: "#fff", section: Details },
     { color: "#fff", section: CoderinaFacilities },
     { color: "#fff", section: PrintingLab },
-    { color: "#fff", section: CoderinaLanding },
-    { color: "#fff", section: Siwes },
+    { color: "#fff", section: Clip },
     { color: "#fff", section: Blog },
     { color: "#fff", section: Press },
 
