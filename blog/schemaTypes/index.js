@@ -9,4 +9,6 @@ import coderinaevents from './coderinaevents'
 import subscribers from "./subscribers"
 import subscribe from "./subscribe"
 import contactCouch from './contactCouch'
-export const schemaTypes = [post, author, category, blockContent, coderinablog, instagramPost, coderinaevents, contact, subscribers, subscribe, contactCouch]
+import siwesApplication from "./siwesApplication"
+import aiForGoodApplication from "./aiForGoodApplication"
+export const schemaTypes = [post, author, category, blockContent, coderinablog, instagramPost, coderinaevents, contact, subscribers, subscribe, contactCouch, siwesApplication, aiForGoodApplication]
