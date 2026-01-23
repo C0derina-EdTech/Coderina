@@ -11,7 +11,7 @@ export default function CoderinaHero() {
         {/* Video */}
         <video
           className="absolute inset-0 opacity-60 w-full h-full object-cover"
-          src="/introduction.mp4"
+          src="https://res.cloudinary.com/dpfbpdohh/video/upload/v1769189691/introduction_fuqoz5.mp4"
           autoPlay
           loop
           muted

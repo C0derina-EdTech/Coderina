@@ -34,7 +34,7 @@ const Clip = () => {
             <div className="relative aspect-video bg-black border-4 rounded-2xl border-teal-500/30">
               <video
                 className="w-full h-full object-cover rounded-2xl"
-                src="/testimonies/israel.mp4"
+                src="https://res.cloudinary.com/dpfbpdohh/video/upload/v1769189917/israel_ctzlrh.mp4"
                 poster="/logo.png"
                 controls
                 playsInline

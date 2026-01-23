@@ -114,7 +114,7 @@ const CouchHero = () => {
           <div className="absolute inset-0 w-full h-full">
             <video
               className="w-full h-full opacity-60 object-cover"
-              src="/couch/couchclip.mp4"
+              src="https://res.cloudinary.com/dpfbpdohh/video/upload/v1769190591/couchclip1_xw3x7s.mp4"
               autoPlay
               loop
               muted
