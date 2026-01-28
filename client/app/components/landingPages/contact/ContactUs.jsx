@@ -136,19 +136,8 @@ const ContactUs = () => {
 
   return (
     <>
-      <Head>
-        <title>Contact Coderina Education and Technology Foundation</title>
-        <meta
-          name="description"
-          content="Get in touch with Coderina Education and Technology Foundation. Reach us at our Abuja or Lagos offices, send us an email, or connect via LinkedIn, Facebook, Instagram, YouTube, or X (Twitter)."
-        />
-        <meta
-          name="keywords"
-          content="Coderina, Coderina Education, Coderina Foundation, contact Coderina, robotics training, STEM education, coding in Nigeria, FIRST LEGO League, education technology Nigeria"
-        />
-      </Head>
-
-      <div className="min-h-screen bg-gray-50 font-SpaceGrotesk">
+     
+      <div className="bg-gray-50 font-SpaceGrotesk">
         {/* Hero Section */}
         <div className="relative overflow-hidden">
           <Image
@@ -160,48 +149,48 @@ const ContactUs = () => {
           />
           <div className="absolute inset-0 bg-black/80"></div>
 
-          <div className="relative max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 md:py-36 2xl:py-64 2xl:h-[700px] text-center">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6">
+          <div className="relative max-w-400 mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 md:py-36 2xl:py-64 2xl:h-[500px] text-center">
+            <h1 className="text-lg sm:text-xl md:text-3xl 2xl:text-4xl font-bold text-white mb-6">
               Get in <br />
               <span className="text-[#FFD700]">Touch with Coderina</span>
             </h1>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#FFF9F0] text-black rounded-full font-semibold hover:bg-[#8B5A04] hover:text-white transition-all duration-300 text-sm sm:text-base"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-[#FFF9F0] text-black rounded-full font-semibold hover:bg-[#8B5A04] hover:text-white transition-all duration-300 text-sm"
             >
               ← BACK TO HOME
             </Link>
           </div>
 
           {/* Scrolling Services Banner */}
-          <div className="relative bg-[#FFF9F0] py-3 sm:py-4 overflow-hidden">
+          <div className="relative bg-teal-800 text-white py-2 sm:py-3 overflow-hidden">
             <div className="flex items-center gap-4 sm:gap-8 animate-scroll whitespace-nowrap">
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="flex items-center gap-4 sm:gap-8">
-                  <span className="text-black font-semibold text-xs sm:text-sm md:text-base">
+                  <span className="font-semibold text-xs sm:text-sm md:text-base">
                     Teacher Training Programs
                   </span>
-                  <span className="text-black text-xl">✦</span>
-                  <span className="text-black font-semibold text-xs sm:text-sm md:text-base">
+                  <span className=" text-xl">✦</span>
+                  <span className="font-semibold text-xs sm:text-sm md:text-base">
                     Programming
                   </span>
-                  <span className="text-black text-xl">✦</span>
-                  <span className="text-black font-semibold text-xs sm:text-sm md:text-base">
+                  <span className="text-xl">✦</span>
+                  <span className="font-semibold text-xs sm:text-sm md:text-base">
                     3D Printing Workshops
                   </span>
-                  <span className="text-black text-xl">✦</span>
-                  <span className="text-black font-semibold text-xs sm:text-sm md:text-base">
+                  <span className="text-xl">✦</span>
+                  <span className="font-semibold text-xs sm:text-sm md:text-base">
                     Coding & Robotics Training
                   </span>
-                  <span className="text-black text-xl">✦</span>
-                  <span className="text-black font-semibold text-xs sm:text-sm md:text-base">
+                  <span className="text-xl">✦</span>
+                  <span className="font-semibold text-xs sm:text-sm md:text-base">
                     FIRST Tech Challenge (FTC)
                   </span>
-                  <span className="text-black text-xl">✦</span>
-                  <span className="text-black font-semibold text-xs sm:text-sm md:text-base">
+                  <span className=" text-xl">✦</span>
+                  <span className="font-semibold text-xs sm:text-sm md:text-base">
                     Innovative Ideas
                   </span>
-                  <span className="text-black text-xl">✦</span>
+                  <span className="text-xl">✦</span>
                 </div>
               ))}
             </div>
@@ -209,31 +198,31 @@ const ContactUs = () => {
         </div>
 
         {/* Contact Section */}
-        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-16 sm:py-20 md:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left Info */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-4xl sm:text-5xl font-bold text-black mb-4">
+                <h2 className="text-base md:text-3xl 2xl:text-5xl font-bold text-black mb-4">
                   Have any questions?
                 </h2>
-                <p className="text-5xl sm:text-6xl font-bold text-black">
+                <p className="text-base md:text-3xl 2xl:text-5xl font-bold text-black">
                   Get in touch!
                 </p>
               </div>
 
-              <p className="text-base sm:text-lg text-gray-600 max-w-xl">
+              <p className="text-sm 2xl:text-base text-gray-600 max-w-xl">
                 Coderina Education and Technology Foundation is dedicated to
                 empowering African youth through STEM education, robotics, and
                 digital skills. Reach out today and let&apos;s collaborate to
                 build the future.
               </p>
 
-              <div className="space-y-6">
+              <div className="space-y-6 text-sm ">
                 {/* Address 1 */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                    <MapPin className="w-4 h-4 text-white" />
                   </div>
                   <p className="text-gray-700 font-medium">
                     4 Ngozi Okonjo Iweala Way
@@ -244,8 +233,8 @@ const ContactUs = () => {
 
                 {/* Address 2 */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                    <MapPin className="w-4 h-4 text-white" />
                   </div>
                   <p className="text-gray-700 font-medium">
                     4 Oye Balogun St, Lekki Peninsula II,
@@ -256,8 +245,8 @@ const ContactUs = () => {
 
                 {/* Phone */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                    <Phone className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-white" />
                   </div>
                   <a
                     href="tel:+2349093307353"
@@ -269,8 +258,8 @@ const ContactUs = () => {
 
                 {/* Email */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                    <Mail className="w-4 h-4 text-white" />
                   </div>
                   <a
                     href="mailto:hello@coderina.org"
@@ -282,8 +271,8 @@ const ContactUs = () => {
 
                 {/* Hours */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                    <Clock className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                    <Clock className="w-4 h-4 text-white" />
                   </div>
                   <p className="text-gray-700 font-medium">
                     Mon - Fri: 10:00 - 17:00
@@ -292,7 +281,7 @@ const ContactUs = () => {
               </div>
 
               {/* Social Links */}
-              <div className="flex items-center gap-4 pt-6">
+              <div className="flex items-center gap-3 pt-3">
                 {socialLinks.map((link, index) => (
                   <Link
                     key={index}
