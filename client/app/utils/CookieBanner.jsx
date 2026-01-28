@@ -30,7 +30,7 @@ export default function CookieBanner() {
           </button>
           <button
             onClick={acceptCookies}
-            className="bg-teal-500 text-white px-4 py-2 rounded-full font-semibold"
+            className="bg-teal-800 text-white px-4 py-2 rounded-full font-semibold"
           >
             Accept All Cookies
           </button>
