@@ -2,16 +2,20 @@
 
 import React from "react";
 import ContactUs from "./ContactUs";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 const ContactPage = () => {
   const contactContents = [
-    {
+      
+         {
         color: "",
         section: <ContactUs/>,
       },
+   
   ];
   return (
     <div className="">
-       
+       <Navbar/>
       <div>
         {contactContents.map(({ color, section, isGradient, bgImage }, index) => (
           <div
@@ -32,6 +36,7 @@ const ContactPage = () => {
           </div>
         ))}
       </div>
+      <Footer/>
     </div>
   );
 };

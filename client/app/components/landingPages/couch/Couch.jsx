@@ -1,9 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import {
- 
+
+  ChevronDown,
+  ChevronUp,
+  Trophy,
+  Users,
   Lightbulb,
- 
+  ExternalLink,
+  Award,
+  Star,
+  Target,
+  BookOpen,
+  Clock,
+  Gift,
 } from "lucide-react";
 import couchData from "../../lib/couch";
 import Image from "next/image";
@@ -73,11 +83,12 @@ const Couch = () => {
   heading="Expert Mentors"
   description="Guiding teams with real-world experience"
 />
-
+ 
       {/* Gallery - Scattered Masonry Layout */}
       {currentData.gallery.length > 0 && (
         <div className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
           <div className="max-w-400 mx-auto">
+
             <div className="text-center mb-10 sm:mb-12 md:mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
                 Event Highlights

@@ -24,7 +24,11 @@ const NAV = [
   { key: "events", label: "Events", href: "/events" },
   { key: "industries", label: "Robotics Lab", href: "/robotics-lab" },
   { key: "company", label: "Company", href: "/about" },
+
   { key: "resources", label: "COUCH", href: "/coderina-university-challenge" },
+
+  { key: "resources", label: "COUCH", href: "/couch" },
+
 ];
 
 export default function Navbar() {
@@ -145,7 +149,7 @@ export default function Navbar() {
         )}
       </nav>
 
-      {/* ================= MOBILE NAV OVERLAY ================= */}
+      {/* === MOBILE NAV OVERLAY === */}
       <div
         className={`fixed inset-0 z-60 transition-opacity lg:hidden duration-500 ${
           mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"

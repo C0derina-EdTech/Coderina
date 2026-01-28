@@ -4,7 +4,8 @@
 
 import React from "react";
 import SiwesForms from "./SiwesForms";
-
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 const SiwesSection = () => {
   const siwesContents = [
 
@@ -16,7 +17,7 @@ const SiwesSection = () => {
   ];
   return (
     <div className="">
-        
+        <Navbar/>
       <div>
         {siwesContents.map(({ color, section, isGradient, bgImage }, index) => (
           <div
@@ -37,7 +38,7 @@ const SiwesSection = () => {
           </div>
         ))}
       </div>
-
+<Footer/>
    
     </div>
   );

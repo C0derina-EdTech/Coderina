@@ -18,7 +18,10 @@ const Blog = ({ isLargeScreen })  => {
     <>
       <section className="py-12 lg:py-16 xl:py-20 bg-[#f9fafb]">
         <div className="max-w-400 mx-auto px-4 md:px-4 lg:px-8 xl:px-10">
-          <div className="text-center mb-12 lg:mb-16 ">
+
+         
+
+          <div className="text-center mb-12 lg:mb-16 xl:mb-20">
             <p className="text-[#1a3a52] text-xs lg:text-sm font-semibold mb-2 tracking-wide uppercase">
               Our Latest Updates
             </p>

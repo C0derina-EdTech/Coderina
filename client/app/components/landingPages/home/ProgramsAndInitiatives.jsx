@@ -51,8 +51,7 @@ export default function ProgramsProjectsInitiatives() {
                     className="object-cover transition-transform duration-700 rounded-full"
                   />
                 </div>
-
-                <div className="relative h-12 w-12 rounded-full">
+                 <div className="relative h-12 w-12 rounded-full">
                   <Image
                     src="/firsttech.png"
                     alt="Coderina STEAM Innovation Programs"
@@ -124,8 +123,8 @@ export default function ProgramsProjectsInitiatives() {
                 <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </Link>
               <p className="text-gray-300 text-xs md:text-sm 2xl:text-base">
-                Structured learning pathways that equip learners with essential
-                digital, coding, and STEAM skills for the future workforce.
+                Structured learning pathways that equip learners with essential digital,
+                coding, and STEAM skills for the future workforce.
               </p>
             </article>
 
@@ -141,9 +140,8 @@ export default function ProgramsProjectsInitiatives() {
                 <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </Link>
               <p className="text-gray-300 text-xs md:text-sm 2xl:text-base">
-                Capacity-building initiatives empowering educators and
-                communities to deliver sustainable, high-quality STEAM
-                education.
+                Capacity-building initiatives empowering educators and communities to
+                deliver sustainable, high-quality STEAM education.
               </p>
             </article>
           </div>

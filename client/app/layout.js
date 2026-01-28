@@ -1,5 +1,5 @@
-import { Inter } from "next/font/google";
 
+import { Inter } from "next/font/google";
 import "./globals.css";
 import "./styles.css";
 import { Providers } from "./Providers";

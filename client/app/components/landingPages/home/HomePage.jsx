@@ -8,8 +8,11 @@ import ProgramsAndInitiatives from "./ProgramsAndInitiatives";
 import CoderinaFacilities from "./CoderinaFacilities";
 import UpcomingEvents from "./UpcomingEvents";
 import useIsLargeScreen from "../../lib/useIsLargeScreen";
-import AfterHero from "./AfterHero";
 import Press from "./Press";
+import Navbar from "./Navbar";
+import CoderinaLanding from "./CoderinaLanding";
+import AfterHero from "./AfterHero";
+import Siwes from "./Siwes";
 import Header from "./Header";
 import Blog from "./Blog";
 import Details from "./Details";
@@ -31,6 +34,8 @@ const HomePage = () => {
     { color: "#fff", section: CoderinaFacilities },
     { color: "#fff", section: PrintingLab },
     { color: "#fff", section: Clip },
+    { color: "#fff", section: CoderinaLanding },
+    { color: "#fff", section: Siwes },
     { color: "#fff", section: Blog },
     { color: "#fff", section: Press },
 

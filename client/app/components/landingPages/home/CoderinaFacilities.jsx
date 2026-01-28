@@ -93,18 +93,21 @@ export default function CoderinaFacilities() {
       {/* Main Content */}
       <div className="relative z-10 max-w-400 mx-auto px-2 sm:px-4 lg:px-8 py-12 sm:py-10 lg:py-16">
         {/* Header Section */}
-        <div className="text-center mb-8 sm:mb-14 2xl:mb-20">
-          <h1 className="text-lg sm:text-2xl md:text-3xl font-black text-white mb-4 2xl:mb-6 leading-tight">
-            Where Innovation <span className="bg-linear-to-r from-yellow-400 via-orange-500 to-pink-500 bg-clip-text text-transparent">
-              Comes Alive
-            </span>
-          </h1>
 
-          <p className="text-sm lg:text-base text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Experience cutting-edge technology and immersive learning
-            environments designed to unlock your potential
-          </p>
-        </div>
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+  <h1 className="text-2xl sm:text-2xl lg:text-3xl xl:text-5xl font-black text-white mb-4 sm:mb-6 leading-tight">
+    Where Innovation
+    <span className="block bg-linear-to-r from-yellow-400 via-orange-500 to-pink-500 bg-clip-text text-transparent">
+      Comes Alive
+    </span>
+  </h1>
+
+  <p className="text-sm lg:text-base text-slate-300 max-w-3xl mx-auto leading-relaxed">
+    Experience cutting-edge technology and immersive learning
+    environments designed to unlock your potential
+  </p>
+</div>
+
 
         {/* Facilities Grid with Curved Layout */}
         <div className="relative">
@@ -130,7 +133,8 @@ export default function CoderinaFacilities() {
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  <div className="relative h-[350px] 2xl:h-[400px] rounded-[2.5rem] overflow-hidden bg-slate-800/50 backdrop-blur-sm border border-white/10 shadow-2xl">
+                  
+                  <div className="relative h-[350px] lg:h-[400px] 2xl:h-[500px] rounded-[2.5rem] overflow-hidden bg-slate-800/50 backdrop-blur-sm border border-white/10 shadow-2xl">
                     {/* Background Image */}
                     <div className="absolute inset-0">
                       <div className="relative w-full h-full">

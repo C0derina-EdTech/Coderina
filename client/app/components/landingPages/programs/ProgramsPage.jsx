@@ -5,9 +5,12 @@ import Programs from "./Programs";
 import TrustedBy from "../home/TrustedBy";
 import ProgramsHero from "./ProgramsHero";
 import Press from "../home/Press";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 const ProgramsPage = () => {
   const contactContents = [
-    {
+   
+      {
       color: "",
       section: <ProgramsHero />,
     },
@@ -23,9 +26,11 @@ const ProgramsPage = () => {
       color: "",
       section: <TrustedBy />,
     },
+   
   ];
   return (
     <div className="">
+      <Navbar/>
       <div>
         {contactContents.map(
           ({ color, section, isGradient, bgImage }, index) => (
@@ -46,6 +51,7 @@ const ProgramsPage = () => {
           )
         )}
       </div>
+      <Footer/>
     </div>
   );
 };

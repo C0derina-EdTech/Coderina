@@ -5,8 +5,11 @@ import Couch from "./Couch";
 import CouchHero from "./CouchHero";
 import Join from "./Join";
 import AboutCouch from "./AboutCouch"
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 const CouchPage = () => {
   const couchContents = [
+   
     {
       color: "",
       section: <CouchHero/>,
@@ -23,10 +26,11 @@ const CouchPage = () => {
         color: "",
         section: <Join/>,
       },
+    
   ];
   return (
     <div className="">
-       
+       <Navbar/>
       <div>
         {couchContents.map(({ color, section, isGradient, bgImage }, index) => (
           <div
@@ -47,6 +51,7 @@ const CouchPage = () => {
           </div>
         ))}
       </div>
+      <Footer/>
     </div>
   );
 };

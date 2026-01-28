@@ -512,6 +512,7 @@ export default function Events() {
               </div>
 
               <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+
                 {filteredPast.slice(0, 8).map((event, index) => {
                   const eventDate = formatDate(event.date);
                   return (
@@ -580,33 +581,6 @@ export default function Events() {
           </section>
         )}
 
-        {/* Stats Section */}
-        {/* <section className="py-20 bg-[#e29818] text-white">
-          <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-5xl md:text-6xl font-bold mb-2">
-                  {events.length}+
-                </div>
-                <div className="text-orange-100 text-lg">Total Events</div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl md:text-6xl font-bold mb-2">
-                  {upcomingEvents.length}
-                </div>
-                <div className="text-orange-100 text-lg">Upcoming</div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl md:text-6xl font-bold mb-2">5K+</div>
-                <div className="text-orange-100 text-lg">Participants</div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl md:text-6xl font-bold mb-2">98%</div>
-                <div className="text-orange-100 text-lg">Satisfaction</div>
-              </div>
-            </div>
-          </div>
-        </section> */}
       </div>
     </>
   );
