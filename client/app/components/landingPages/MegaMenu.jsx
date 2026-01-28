@@ -14,7 +14,7 @@ const MENU_CONTENT = {
           { title: "Coding Environment", desc: "Browser-based IDE for students", href: "/programs" },
           { title: "Checkmate", desc: "Chess game competitions", href: "/programs" },
           { title: "COUCH", desc: "Coderina University Challenge", href: "/coderina-university-challenge" },
-          { title: "COUCH", desc: "Coderina University Challenge", href: "/couch" },
+          
         ],
       },
       {
@@ -23,7 +23,7 @@ const MENU_CONTENT = {
           { title: "Robotics Kits", desc: "Arduino and Raspberry Pi based", href: "/programs" },
           { title: "Electronics Bundles", desc: "Components for prototyping", href: "/programs" },
           { title: "3D Printing Solutions", desc: "Design and fabrication tools", href: "/robotics-lab" },
-            { title: "SIWES", desc: "Students Industrial Work Experience Scheme", href: "/coderina-swies-application" },
+            { title: "SIWES", desc: "Students Industrial Work Experience Scheme", href: "/coderina-siwes-application" },
         ],
       },
     ],
