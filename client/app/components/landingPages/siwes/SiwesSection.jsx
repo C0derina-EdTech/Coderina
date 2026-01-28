@@ -32,7 +32,7 @@ const SiwesSection = () => {
               backgroundPosition: bgImage ? "center" : undefined,
             }}
           >
-            <div className="">
+            <div className="w-full">
               {section}
             </div>
           </div>
