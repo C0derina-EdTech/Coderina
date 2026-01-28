@@ -20,6 +20,8 @@
     "cloudinary": "^2.9.0",
     "clsx": "^2.1.1",
     "country-state-city": "^3.2.1",
+    "formidable": "^3.5.4",
+    "fs": "^0.0.1-security",
     "heic-convert": "^2.1.0",
     "lucide-react": "^0.553.0",
     "next": "^16.1.4",
@@ -29,7 +31,8 @@
     "react-countup": "^6.5.3",
     "react-dom": "19.2.0",
     "react-hot-toast": "^2.6.0",
-    "react-slick": "^0.31.0"
+    "react-slick": "^0.31.0",
+    "stream": "^0.0.3"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.1.4",

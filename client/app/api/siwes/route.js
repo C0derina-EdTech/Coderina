@@ -1,257 +1,95 @@
+
 import { NextResponse } from "next/server";
 import { sanityClient } from "../../components/lib/sanityClient";
 import cloudinary from "../../components/lib/cloudinary";
+import formidable from "formidable";
+import fs from "fs";
+import { Readable } from "stream";
 
-
-// async function uploadToCloudinary(file, fullName, docType) {
-//   if (!file) return null;
-
-//   const publicId = `${fullName
-//     .toLowerCase()
-//     .replace(/\s+/g, "_")}_${docType}`;
-
-//   const upload = await cloudinary.uploader.upload(file, {
-//     folder: "siwes",
-//     public_id: publicId,
-//     resource_type: "auto", // VERY IMPORTANT for PDFs, images, docs
-//   });
-
-//   return {
-//     url: upload.secure_url,
-//     public_id: upload.public_id,
-//   };
-// }
+export const dynamic = "force-dynamic";
 
 async function uploadToCloudinary(file, fullName, docType) {
-  if (!file) return null;
+  if (!file || typeof file === "string") return null;
 
-  // sanitize applicant name
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes);
+
   const applicantFolder = fullName.toLowerCase().replace(/\s+/g, "_");
 
-  const upload = await cloudinary.uploader.upload(file, {
-    folder: `coderina/siwes/${applicantFolder}`, // nested folders
-    public_id: docType, // just cv, siwes_letter, etc.
-    resource_type: "auto", // supports PDF, images, docs
-  });
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: `coderina/siwes/${applicantFolder}`,
+        public_id: docType,
+        resource_type: "auto",
+      },
+      (error, result) => {
+        if (error) return reject(error);
+        resolve({
+          url: result.secure_url,
+          public_id: result.public_id,
+        });
+      }
+    );
 
-  return {
-    url: upload.secure_url,
-    public_id: upload.public_id,
-  };
+    stream.end(buffer);
+  });
 }
 
 
-/* =====================
-   CREATE SIWES APPLICATION
-===================== */
-// export async function POST(request) {
-//   try {
-//     const body = await request.json();
-
-//     const {
-//       // Personal Info
-//       fullName,
-//       email,
-//       phone,
-//       gender,
-//       address,
-//       state,
-//       country,
-
-//       // Academic Info
-//       institution,
-//       course,
-//       level,
-//       matricNumber,
-
-//       // Internship
-//       siwesDuration,
-//       startDate,
-//       endDate,
-//       department,
-
-//       // Skills & Motivation
-//       skills,
-//       experience,
-//       whyCoderina,
-
-//       // Documents (Sanity asset refs)
-//       cv,
-//       siwesLetter,
-//       studentId,
-//       headshot,
-//     } = body;
-
-//     /* ========= REQUIRED FIELD VALIDATION ========= */
-//     if (
-//       !fullName?.trim() ||
-//       !email?.trim() ||
-//       !phone?.trim() ||
-//       !institution?.trim() ||
-//       !course?.trim() ||
-//       !siwesDuration?.trim() ||
-//       !department?.trim() ||
-//       !whyCoderina?.trim()
-//     ) {
-//       return NextResponse.json(
-//         { error: "Missing required fields" },
-//         { status: 400 }
-//       );
-//     }
-
-//     /* ========= EMAIL VALIDATION ========= */
-//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     if (!emailRegex.test(email)) {
-//       return NextResponse.json(
-//         { error: "Invalid email address" },
-//         { status: 400 }
-//       );
-//     }
-
-//     /* ========= PREVENT DUPLICATE APPLICATION ========= */
-//     const existing = await sanityClient.fetch(
-//       `*[_type == "siwesApplication" && email == $email][0]`,
-//       { email }
-//     );
-
-//     if (existing) {
-//       return NextResponse.json(
-//         { error: "Application already submitted with this email" },
-//         { status: 409 }
-//       );
-//     }
-
-//     /* ========= CREATE DOCUMENT ========= */
-//     await sanityClient.create({
-//       _type: "siwesApplication",
-
-//       // Personal
-//       fullName,
-//       email,
-//       phone,
-//       gender,
-//       address,
-//       state,
-//       country,
-
-//       // Academic
-//       institution,
-//       course,
-//       level,
-//       matricNumber,
-
-//       // Internship
-//       siwesDuration,
-//       startDate,
-//       endDate,
-//       department,
-
-//       // Skills & Motivation
-//       skills,
-//       experience,
-//       whyCoderina,
-
-//       // Documents (optional)
-//       cv: cv || undefined,
-//       siwesLetter: siwesLetter || undefined,
-//       studentId: studentId || undefined,
-//       headshot: headshot || undefined,
-
-//       // Metadata
-//       status: "pending",
-//       createdAt: new Date().toISOString(),
-//     });
-
-//     return NextResponse.json(
-//       {
-//         success: true,
-//         message: "SIWES application submitted successfully",
-//       },
-//       { status: 201 }
-//     );
-//   } catch (error) {
-//     console.error("SIWES POST error:", error);
-//     return NextResponse.json(
-//       { error: "Failed to submit application" },
-//       { status: 500 }
-//     );
-//   }
-// }
-
-export async function POST(request) {
+export async function POST(req) {
   try {
-    const body = await request.json();
+     const formData = await req.formData();
 
-    const {
-      fullName,
-      email,
-      phone,
-      gender,
-      address,
-      state,
-      country,
+    // Fields
+    const fullName = formData.get("fullName");
+    const email = formData.get("email");
+    const phone = formData.get("phone");
+    const gender = formData.get("gender");
+    const address = formData.get("address");
+    const state = formData.get("state");
+    const country = formData.get("country");
+    const institution = formData.get("institution");
+    const course = formData.get("course");
+    const level = formData.get("level");
+    const matricNumber = formData.get("matricNumber");
+    const siwesDuration = formData.get("siwesDuration");
+    const startDate = formData.get("startDate");
+    const endDate = formData.get("endDate");
+    const department = formData.get("department");
+    const skills = formData.get("skills");
+    const experience = formData.get("experience");
+    const whyCoderina = formData.get("whyCoderina");
 
-      institution,
-      course,
-      level,
-      matricNumber,
-
-      siwesDuration,
-      startDate,
-      endDate,
-      department,
-
-      skills,
-      experience,
-      whyCoderina,
-
-      // Documents (base64 or file URLs)
-      cv,
-      siwesLetter,
-      studentId,
-      headshot,
-    } = body;
-
-    /* ========= REQUIRED FIELD VALIDATION ========= */
-    if (
-      !fullName?.trim() ||
-      !email?.trim() ||
-      !phone?.trim() ||
-      !institution?.trim() ||
-      !course?.trim() ||
-      !siwesDuration?.trim() ||
-      !department?.trim() ||
-      !whyCoderina?.trim()
-    ) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
+    // Files
+    const cv = formData.get("cv");
+    const siwesLetter = formData.get("siwesLetter");
+    const studentId = formData.get("studentId");
+    const headshot = formData.get("headshot");
+    // Validation
+    if (!fullName?.trim() || !email?.trim() || !phone?.trim()) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    /* ========= EMAIL VALIDATION ========= */
+    // Check email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "Invalid email address" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    /* ========= PREVENT DUPLICATE ========= */
+    // Prevent duplicates
     const existing = await sanityClient.fetch(
       `*[_type == "siwesApplication" && email == $email][0]`,
       { email }
     );
-
     if (existing) {
       return NextResponse.json(
-        { error: "Application already submitted with this email" },
+        { error: "Application already submitted" },
         { status: 409 }
       );
     }
 
-    /* ========= UPLOAD DOCUMENTS TO CLOUDINARY ========= */
+    // Upload files
     const uploadedCv = await uploadToCloudinary(cv, fullName, "cv");
     const uploadedLetter = await uploadToCloudinary(
       siwesLetter,
@@ -269,11 +107,9 @@ export async function POST(request) {
       "headshot"
     );
 
-    /* ========= SAVE TO SANITY ========= */
+    // Save to Sanity
     await sanityClient.create({
       _type: "siwesApplication",
-
-      // Personal
       fullName,
       email,
       phone,
@@ -281,50 +117,31 @@ export async function POST(request) {
       address,
       state,
       country,
-
-      // Academic
       institution,
       course,
       level,
       matricNumber,
-
-      // Internship
       siwesDuration,
       startDate,
       endDate,
       department,
-
-      // Skills & Motivation
       skills,
       experience,
       whyCoderina,
-
-      // Cloudinary documents
       cv: uploadedCv,
       siwesLetter: uploadedLetter,
       studentId: uploadedStudentId,
       headshot: uploadedHeadshot,
-
-      // Metadata
-      status: "pending",
       createdAt: new Date().toISOString(),
     });
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: "SIWES application submitted successfully",
-      },
-      { status: 201 }
-    );
+    return NextResponse.json({ success: true, message: "SIWES application submitted!" }, { status: 201 });
   } catch (error) {
     console.error("SIWES POST error:", error);
-    return NextResponse.json(
-      { error: "Failed to submit application" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to submit application" }, { status: 500 });
   }
 }
+
 
 /* =====================
    FETCH ALL APPLICATIONS

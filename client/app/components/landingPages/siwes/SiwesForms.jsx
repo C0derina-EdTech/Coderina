@@ -31,6 +31,18 @@ export default function SiwesForms() {
   // Keep track of touched fields for red borders
   const [touched, setTouched] = useState({});
 
+  // File size limits (bytes)
+const FILE_LIMITS = {
+  cv: 5 * 1024 * 1024, // 5MB
+  siwesLetter: 5 * 1024 * 1024, // 5MB
+  studentId: 2 * 1024 * 1024, // 2MB
+  headshot: 2 * 1024 * 1024, // 2MB
+};
+
+// File errors
+const [fileErrors, setFileErrors] = useState({});
+
+
   // List of required fields
   const requiredFields = [
     "fullName",
@@ -83,6 +95,11 @@ export default function SiwesForms() {
       scrollToFirstError();
       return;
     }
+// Block submit if file errors exist
+const hasFileErrors = Object.values(fileErrors).some(Boolean);
+if (hasFileErrors) {
+  return;
+}
 
     // Submit application
     await submitSiwesApplication();
@@ -109,15 +126,31 @@ export default function SiwesForms() {
     };
   }, [siwesData]);
 
-  const handleFileChange = (field, e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    handleSiwesChange(field, file);
-  };
+ const handleFileChange = (field, e) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
 
-  const removeFile = (field) => {
-    handleSiwesChange(field, null);
-  };
+  // Check file size
+  if (file.size > FILE_LIMITS[field]) {
+    setFileErrors((prev) => ({
+      ...prev,
+      [field]: `File too large. Maximum allowed is ${
+        FILE_LIMITS[field] / 1024 / 1024
+      }MB`,
+    }));
+    return;
+  }
+
+  // Clear previous error
+  setFileErrors((prev) => ({ ...prev, [field]: null }));
+
+  handleSiwesChange(field, file);
+};
+const removeFile = (field) => {
+  handleSiwesChange(field, null);
+  setFileErrors((prev) => ({ ...prev, [field]: null }));
+};
+
 
   if (siwesSuccess) {
     return (
@@ -273,10 +306,11 @@ export default function SiwesForms() {
                     <option value="HND">HND</option>
                     <option value="200 Level">200 Level</option>
                     <option value="300 Level">300 Level</option>
-                    <option value="400 Level">400 Level</option>
-                    <option value="400 Level">500 Level</option>
-                    <option value="400 Level">Graduate</option>
-                    <option value="400 Level">others</option>
+                   <option value="400 Level">400 Level</option>
+<option value="500 Level">500 Level</option>
+<option value="Graduate">Graduate</option>
+<option value="others">others</option>
+
                   </select>
 
                   <input
@@ -435,6 +469,10 @@ export default function SiwesForms() {
                         </p>
                       </button>
                     )}
+                    {fileErrors.cv && (
+  <p className="text-xs text-red-600 mt-1">{fileErrors.cv}</p>
+)}
+
                   </div>
                 </div>
 
@@ -489,6 +527,10 @@ export default function SiwesForms() {
                         </p>
                       </button>
                     )}
+                    {fileErrors.siwesLetter && (
+  <p className="text-xs text-red-600 mt-1">{fileErrors.siwesLetter}</p>
+)}
+
                   </div>
                 </div>
 
@@ -547,7 +589,12 @@ export default function SiwesForms() {
                         <p className="text-xs text-gray-500 mt-1">JPG, PNG</p>
                       </button>
                     )}
+                    {fileErrors.studentId && (
+  <p className="text-xs text-red-600 mt-1">{fileErrors.studentId}</p>
+)}
+
                   </div>
+                  
                 </div>
 
                 {/* Headshot */}
@@ -604,6 +651,10 @@ export default function SiwesForms() {
                         <p className="text-xs text-gray-500 mt-1">JPG, PNG</p>
                       </button>
                     )}
+                    {fileErrors.headshot && (
+  <p className="text-xs text-red-600 mt-1">{fileErrors.headshot}</p>
+)}
+
                   </div>
                 </div>
               </div>
@@ -618,7 +669,7 @@ export default function SiwesForms() {
             <button
               onClick={handleSubmit}
               disabled={siwesSubmitting}
-              className="w-full bg-teal-800 text-white rounded-xl py-4 font-semibold text-lg flex items-center justify-center gap-3 hover:bg-black transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="w-full bg-teal-800 text-white rounded-xl py-2 2xl:py-4 font-semibold text-sm 2xl:text-base flex items-center justify-center gap-3 hover:bg-black transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
             >
               {siwesSubmitting ? (
                 <>

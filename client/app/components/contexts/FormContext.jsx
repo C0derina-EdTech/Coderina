@@ -270,73 +270,87 @@ export function FormProvider({ children }) {
     headshot: null,
   });
 
- 
 
-  const submitSiwesApplication = async () => {
-    setSiwesSubmitting(true);
-    setSiwesError("");
-    setSiwesSuccess("");
+const submitSiwesApplication = async () => {
+  setSiwesSubmitting(true);
+  setSiwesError("");
+  setSiwesSuccess("");
 
-    try {
-      
-      // Send only asset references to your API
-      const payload = {
-  ...siwesData,
-  cv: siwesData.cv ? await fileToBase64(siwesData.cv) : null,
-  siwesLetter: siwesData.siwesLetter
-    ? await fileToBase64(siwesData.siwesLetter)
-    : null,
-  studentId: siwesData.studentId
-    ? await fileToBase64(siwesData.studentId)
-    : null,
-  headshot: siwesData.headshot ? await fileToBase64(siwesData.headshot) : null,
+  try {
+    const formData = new FormData();
+
+    // Append text fields ONLY if they have values
+    Object.entries(siwesData).forEach(([key, value]) => {
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        return;
+      }
+
+      // Files handled separately
+      if (value instanceof File) return;
+
+      formData.append(key, String(value));
+    });
+
+    // Append files ONLY if present
+    if (siwesData.cv) formData.append("cv", siwesData.cv);
+    if (siwesData.siwesLetter)
+      formData.append("siwesLetter", siwesData.siwesLetter);
+    if (siwesData.studentId)
+      formData.append("studentId", siwesData.studentId);
+    if (siwesData.headshot)
+      formData.append("headshot", siwesData.headshot);
+
+    const res = await fetch("/api/siwes", {
+      method: "POST",
+      body: formData, // DO NOT set Content-Type manually
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setSiwesError(data.error || "Failed to submit application");
+      return;
+    }
+
+    setSiwesSuccess(data.message || "Application submitted successfully!");
+
+    // Optional reset
+    setSiwesData({
+      fullName: "",
+      email: "",
+      phone: "",
+      gender: "",
+      address: "",
+      state: "",
+      country: "Nigeria",
+      institution: "",
+      course: "",
+      level: "",
+      matricNumber: "",
+      siwesDuration: "",
+      startDate: "",
+      endDate: "",
+      department: "",
+      skills: "",
+      experience: "",
+      whyCoderina: "",
+      cv: null,
+      siwesLetter: null,
+      studentId: null,
+      headshot: null,
+    });
+  } catch (err) {
+    console.error("Submission error:", err);
+    setSiwesError("Something went wrong. Please try again.");
+  } finally {
+    setSiwesSubmitting(false);
+  }
 };
 
-
-      const res = await fetch("/api/siwes", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-      if (!res.ok)
-        throw new Error(data?.error || "Failed to submit SIWES application");
-
-      setSiwesSuccess("SIWES application submitted successfully!");
-      // Reset form (optional)
-      setSiwesData({
-  fullName: "",
-  email: "",
-  phone: "",
-  gender: "",
-  address: "",
-  state: "",
-  country: "Nigeria",
-  institution: "",
-  course: "",
-  level: "",
-  matricNumber: "",
-  siwesDuration: "",
-  startDate: "",
-  endDate: "",
-  department: "",
-  skills: "",
-  experience: "",
-  whyCoderina: "",
-  cv: null,
-  siwesLetter: null,
-  studentId: null,
-  headshot: null,
-});
-
-    } catch (err) {
-      console.error("SIWES submission error:", err);
-      setSiwesError(err.message || "Something went wrong.");
-    } finally {
-      setSiwesSubmitting(false);
-    }
-  };
 
   // ------------- CHANGE HANDLER -------------
   const handleSiwesChange = (field, value) => {
