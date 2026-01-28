@@ -9,13 +9,14 @@ import CoderinaFacilities from "./CoderinaFacilities";
 import UpcomingEvents from "./UpcomingEvents";
 import useIsLargeScreen from "../../lib/useIsLargeScreen";
 import Press from "./Press";
-import Navbar from "./Navbar";
 import CoderinaLanding from "./CoderinaLanding";
 import AfterHero from "./AfterHero";
 import Siwes from "./Siwes";
 import Header from "./Header";
 import Blog from "./Blog";
 import Details from "./Details";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 const HomePage = () => {
   const isLargeScreen = useIsLargeScreen();
 
@@ -24,7 +25,6 @@ const HomePage = () => {
 
   // Store only the component (not JSX)
   const homeContents = [
-    // { color: "#fff", section: Navbar },
       { color: "#fff", section: Header },
      { color: "#fff", section: TrustedBy },
     { color: "#fff", section: UpcomingEvents },
@@ -42,6 +42,8 @@ const HomePage = () => {
   ];
 
   return (
+    <div>
+      <Navbar/>
     <div>
       {homeContents.map(({ color, section: Component, isGradient, bgImage }, index) => (
         <div
@@ -61,6 +63,8 @@ const HomePage = () => {
           </div>
         </div>
       ))}
+    </div>
+    <Footer/>
     </div>
   );
 };
