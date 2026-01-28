@@ -61,7 +61,7 @@ const fetchEvents = async () => {
 
     const data = await sanityClient.fetch(query);
     setEvents(data);
-    console.log("Events fetched:", data);
+    // console.log("Events fetched:", data);
   } catch (error) {
     console.error("Error fetching events from Sanity:", error);
     setError("Failed to load events");
@@ -100,7 +100,7 @@ const fetchEvents = async () => {
       console.error("Error fetching blogs from Sanity:", error); // show full error
       setError("Failed to load blogs");
 
-      console.log("Error fetching blogs from Sanity:", error);
+      // console.log("Error fetching blogs from Sanity:", error);
     } finally {
       setLoading(false);
     }

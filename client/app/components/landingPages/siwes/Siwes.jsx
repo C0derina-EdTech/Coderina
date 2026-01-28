@@ -1,8 +1,12 @@
 import React from 'react'
-
+import SiwesForms from "./SiwesForms";
 const Siwes = () => {
   return (
-    <div>Siwes</div>
+    <div>
+      
+
+      {/* the form */}
+    </div>
   )
 }
 
