@@ -121,7 +121,7 @@ export default function SiwesForms() {
 
   if (siwesSuccess) {
     return (
-      <section className="bg-linear-to-br from-gray-50 to-gray-100 px-2 sm:px-4 md:px-6 lg:px-8 py-20 flex items-center justify-center">
+      <section className="min-h-screen px-2 sm:px-4 md:px-6 lg:px-8 py-20 flex items-center justify-center">
         <div className="max-w-md w-full text-center">
           <div className="bg-white rounded-3xl shadow-sm py-12">
             <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -130,7 +130,7 @@ export default function SiwesForms() {
             <h2 className="text-base 2xl:text-3xl font-bold text-gray-900 mb-4">
               Application Submitted!
             </h2>
-            <p className="text-gray-600 mb-8 text-sm 2xl:text-base">
+            <p className="text-gray-600 mb-8 text-xs md:text-sm 2xl:text-base">
               Thank you for applying to Coderina&apos;s SIWES program.
               We&apos;ll review your application and get back to you soon.
             </p>
@@ -274,6 +274,9 @@ export default function SiwesForms() {
                     <option value="200 Level">200 Level</option>
                     <option value="300 Level">300 Level</option>
                     <option value="400 Level">400 Level</option>
+                    <option value="400 Level">500 Level</option>
+                    <option value="400 Level">Graduate</option>
+                    <option value="400 Level">others</option>
                   </select>
 
                   <input
@@ -335,6 +338,8 @@ export default function SiwesForms() {
                     </option>
                     <option value="UI/UX Design">UI/UX Design</option>
                     <option value="IT Support">IT Support</option>
+                    <option value="Addictive Manufacturing">Addictive Manufacturing</option>
+                    <option value="others">others</option>
                   </select>
                 </div>
                 <input

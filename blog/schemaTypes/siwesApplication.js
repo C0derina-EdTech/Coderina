@@ -104,27 +104,47 @@ export default defineType({
       type: 'text',
     }),
 
-    // Documents
-    defineField({
-      name: 'cv',
-      title: 'Curriculum Vitae (CV)',
-      type: 'file',
-    }),
-    defineField({
-      name: 'siwesLetter',
-      title: 'SIWES Letter',
-      type: 'file',
-    }),
-    defineField({
-      name: 'studentId',
-      title: 'Student ID Card',
-      type: 'image',
-    }),
-    defineField({
-      name: 'headshot',
-      title: 'Professional Headshot',
-      type: 'image',
-    }),
+   // Documents (Cloudinary)
+defineField({
+  name: 'cv',
+  title: 'Curriculum Vitae (CV)',
+  type: 'object',
+  fields: [
+    { name: 'url', title: 'File URL', type: 'url' },
+    { name: 'public_id', title: 'Cloudinary Public ID', type: 'string' },
+  ],
+}),
+
+defineField({
+  name: 'siwesLetter',
+  title: 'SIWES Letter',
+  type: 'object',
+  fields: [
+    { name: 'url', title: 'File URL', type: 'url' },
+    { name: 'public_id', title: 'Cloudinary Public ID', type: 'string' },
+  ],
+}),
+
+defineField({
+  name: 'studentId',
+  title: 'Student ID Card',
+  type: 'object',
+  fields: [
+    { name: 'url', title: 'Image URL', type: 'url' },
+    { name: 'public_id', title: 'Cloudinary Public ID', type: 'string' },
+  ],
+}),
+
+defineField({
+  name: 'headshot',
+  title: 'Professional Headshot',
+  type: 'object',
+  fields: [
+    { name: 'url', title: 'Image URL', type: 'url' },
+    { name: 'public_id', title: 'Cloudinary Public ID', type: 'string' },
+  ],
+}),
+
 
     defineField({
       name: 'createdAt',

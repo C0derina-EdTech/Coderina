@@ -4,6 +4,21 @@ import { uploadFileToSanity } from "../lib/sanityhelpers";
 const FormContext = createContext();
 
 export function FormProvider({ children }) {
+  // convert File to base64
+ const fileToBase64 = (file) => {
+  if (!file) return null;
+  if (!["image/png", "image/jpeg", "application/pdf"].includes(file.type)) {
+    throw new Error("Invalid file type");
+  }
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (err) => reject(err);
+  });
+};
+
+
   // ---------- Contact Form ----------
   const [contactSubmitting, setContactSubmitting] = useState(false);
   const [contactName, setContactName] = useState("");
@@ -214,6 +229,7 @@ export function FormProvider({ children }) {
     }
   };
 
+
   // ---------- SIWES APPLICATION ----------
   const [siwesSubmitting, setSiwesSubmitting] = useState(false);
   const [siwesError, setSiwesError] = useState("");
@@ -254,91 +270,7 @@ export function FormProvider({ children }) {
     headshot: null,
   });
 
-  // ---------------- SUBMIT ----------------
-  // const submitSiwesApplication = async () => {
-  //   setSiwesSubmitting(true);
-  //   setSiwesError("");
-  //   setSiwesSuccess("");
-
-  //   const {
-  //     fullName,
-  //     email,
-  //     phone,
-  //     institution,
-  //     course,
-  //     level,
-  //     siwesDuration,
-  //     department,
-  //     whyCoderina,
-  //   } = siwesData;
-
-  //   // Required validation (UI already handles this, but backend-safe)
-  //   if (
-  //     !fullName ||
-  //     !email ||
-  //     !phone ||
-  //     !institution ||
-  //     !course ||
-  //     !level ||
-  //     !siwesDuration ||
-  //     !department ||
-  //     !whyCoderina
-  //   ) {
-  //     setSiwesError("Please fill all required fields.");
-  //     setSiwesSubmitting(false);
-  //     return;
-  //   }
-
-  //   try {
-  //     const res = await fetch("/api/siwes", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(siwesData),
-  //     });
-
-  //     const data = await res.json();
-
-  //     if (!res.ok) {
-  //       throw new Error(data?.error || "Failed to submit SIWES application");
-  //     }
-
-  //     setSiwesSuccess("SIWES application submitted successfully!");
-  //     setTimeout(() => setSiwesSuccess(""), 10000);
-
-  //     // Reset form
-  //     setSiwesData({
-  //       fullName: "",
-  //       email: "",
-  //       phone: "",
-  //       gender: "",
-  //       address: "",
-  //       state: "",
-  //       country: "Nigeria",
-  //       institution: "",
-  //       course: "",
-  //       level: "",
-  //       matricNumber: "",
-  //       siwesDuration: "",
-  //       startDate: "",
-  //       endDate: "",
-  //       department: "",
-  //       skills: "",
-  //       experience: "",
-  //       whyCoderina: "",
-  //       cv: null,
-  //       siwesLetter: null,
-  //       studentId: null,
-  //       headshot: null,
-  //     });
-  //   } catch (err) {
-  //     console.error("SIWES submission error:", err);
-  //     setSiwesError(err.message || "Something went wrong.");
-  //   } finally {
-  //     setSiwesSubmitting(false);
-  //   }
-  // };
+ 
 
   const submitSiwesApplication = async () => {
     setSiwesSubmitting(true);
@@ -346,32 +278,20 @@ export function FormProvider({ children }) {
     setSiwesSuccess("");
 
     try {
-      // Upload files to Sanity first
-      const cvId = await uploadFileToSanity(siwesData.cv, "file");
-      const siwesLetterId = await uploadFileToSanity(
-        siwesData.siwesLetter,
-        "file",
-      );
-      const studentIdId = await uploadFileToSanity(
-        siwesData.studentId,
-        "image",
-      );
-      const headshotId = await uploadFileToSanity(siwesData.headshot, "image");
-
+      
       // Send only asset references to your API
       const payload = {
-        ...siwesData,
-        cv: cvId ? { _type: "file", asset: { _ref: cvId } } : null,
-        siwesLetter: siwesLetterId
-          ? { _type: "file", asset: { _ref: siwesLetterId } }
-          : null,
-        studentId: studentIdId
-          ? { _type: "image", asset: { _ref: studentIdId } }
-          : null,
-        headshot: headshotId
-          ? { _type: "image", asset: { _ref: headshotId } }
-          : null,
-      };
+  ...siwesData,
+  cv: siwesData.cv ? await fileToBase64(siwesData.cv) : null,
+  siwesLetter: siwesData.siwesLetter
+    ? await fileToBase64(siwesData.siwesLetter)
+    : null,
+  studentId: siwesData.studentId
+    ? await fileToBase64(siwesData.studentId)
+    : null,
+  headshot: siwesData.headshot ? await fileToBase64(siwesData.headshot) : null,
+};
+
 
       const res = await fetch("/api/siwes", {
         method: "POST",
@@ -385,6 +305,31 @@ export function FormProvider({ children }) {
 
       setSiwesSuccess("SIWES application submitted successfully!");
       // Reset form (optional)
+      setSiwesData({
+  fullName: "",
+  email: "",
+  phone: "",
+  gender: "",
+  address: "",
+  state: "",
+  country: "Nigeria",
+  institution: "",
+  course: "",
+  level: "",
+  matricNumber: "",
+  siwesDuration: "",
+  startDate: "",
+  endDate: "",
+  department: "",
+  skills: "",
+  experience: "",
+  whyCoderina: "",
+  cv: null,
+  siwesLetter: null,
+  studentId: null,
+  headshot: null,
+});
+
     } catch (err) {
       console.error("SIWES submission error:", err);
       setSiwesError(err.message || "Something went wrong.");

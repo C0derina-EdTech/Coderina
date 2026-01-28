@@ -4,6 +4,7 @@ import "./globals.css";
 import "./styles.css";
 import { Providers } from "./Providers";
 import CookieBanner from "./utils/CookieBanner";
+import Countdown from "./utils/CountDown";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
@@ -266,8 +267,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="font-sans">
-        <Providers> {children} </Providers>
+        <Providers> 
+          <Countdown/>
+          {children}
+
+           </Providers>
         <CookieBanner />
+
       </body>
     </html>
   );
