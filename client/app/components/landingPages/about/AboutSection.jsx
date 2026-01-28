@@ -8,8 +8,11 @@ import Mission from "./Mission";
 import Core from "./Core";
 import TrustedBy from "../home/TrustedBy";
 import Press from "../home/Press";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 const AboutSection = () => {
   const aboutContents = [
+   
     {
       bg: "",
       section: <AboutHero />,
@@ -38,10 +41,12 @@ const AboutSection = () => {
       bg: "",
       section: <TrustedBy />,
     },
+    
   ];
 
   return (
     <div>
+      <Navbar/>
       <div>
         {aboutContents.map(({ bg, section, color, bgImage }, index) => (
           <div
@@ -58,6 +63,7 @@ const AboutSection = () => {
           </div>
         ))}
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -13,6 +13,7 @@ const MENU_CONTENT = {
           { title: "e-STEAM Coderina", desc: "Complete learning management system", href: "https://esteamcoderina.org" },
           { title: "Coding Environment", desc: "Browser-based IDE for students", href: "/programs" },
           { title: "Checkmate", desc: "Chess game competitions", href: "/programs" },
+          { title: "COUCH", desc: "Coderina University Challenge", href: "/coderina-university-challenge" },
           { title: "COUCH", desc: "Coderina University Challenge", href: "/couch" },
         ],
       },
@@ -283,6 +284,7 @@ export function MegaMenu({ type, onMouseEnter }) {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <p className="text-xs text-gray-600">
+                Need help?
                 Need help choosing the right solution?
               </p>
             </div>

@@ -19,7 +19,7 @@ export default function AboutHero() {
     { value: "Creativity", icon: Sparkles, color: "text-yellow-400" },
   ];
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200">
         <div className="max-w-400 mx-auto px-2 sm:px-4 md:px-6 lg:px-8 mt-20">
@@ -70,38 +70,6 @@ export default function AboutHero() {
             </button>
             </Link>
           </div>
-          {/* <div className="absolute right-8 top-1/2 transform -translate-y-1/2 flex flex-col space-y-4">
-            <button className="bg-[#3DCD58] text-white p-3 rounded-full hover:bg-[#35b84d]">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </button>
-            <button className="bg-[#3DCD58] text-white p-3 rounded-full hover:bg-[#35b84d]">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div> */}
         </div>
       </section>
 
