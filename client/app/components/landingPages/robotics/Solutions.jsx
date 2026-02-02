@@ -3,54 +3,70 @@
 import Image from "next/image";
 import React from "react";
 
+const images = [
+  "/microscope4.jpg", //OpenFlexure Microscope
+  "/microscope5.jpg",
+  "/microscope6.jpg",
+  "/print1.jpg",
+  "/anatomy.jpg",
+  "/print6.jpg",
+  "/robotarm.jpg", //Faze4 Robotic Arm
+  "/microscope2.jpg",
+  "/microscope3.jpg",
+  "/robotarm4.jpg",
+  "/skull.jpg",
+  "/skull2.jpg",
+  "/skull3.jpg",
+  "/skull4.jpg",
+  "/skull5.jpg",
+  "/skull6.jpg",
+  "/skull7.jpg",
+];
+
 const solutions = [
   {
-    title: "Rapid Prototyping",
+    title: "Human Brain",
     description:
-      "Accelerate product development with fast, cost-effective prototyping solutions that bring your designs to life in hours, not weeks.",
-    image:
-      "https://images.unsplash.com/photo-1605647540924-852290f6b0d5?w=600&h=400&fit=crop",
-    alt: "Rapid Prototyping",
+      "Design and fabricate highly detailed anatomical brain models using precision 3D printing to support research, education, and clinical visualization.",
+    image: "/skull.jpg",
+    alt: "3D Printed Brain Model",
   },
   {
-    title: "Production Manufacturing",
+    title: "Human Anatomy",
     description:
-      "Scale your production with industrial-grade 3D printing systems designed for high-volume, repeatable manufacturing excellence.",
-    image:
-      "https://images.unsplash.com/photo-1567789884554-0b844b597180?w=600&h=400&fit=crop",
-    alt: "Production Manufacturing",
+      "Produce accurate full-scale anatomical structures through additive manufacturing for medical training, demonstrations, and advanced learning.",
+    image: "/anatomy.jpg",
+    alt: "3D Printed Human Anatomy",
   },
   {
-    title: "Medical Solutions",
+  title: "Prosthetic Arm",
+  description:
+    "Design and fabricate patient-specific prosthetic arms using durable, lightweight materials and high-resolution 3D printing for improved mobility.",
+  image: "/prostheticarm.jpeg",
+  alt: "3D Printed Prosthetic Arm",
+},
+
+  {
+    title: "Faze4 Robotic Arm",
     description:
-      "Create patient-specific medical devices, surgical guides, and anatomical models with biocompatible materials and precision engineering.",
-    image:
-      "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=600&h=400&fit=crop",
-    alt: "Medical Solutions",
+      "Engineer and manufacture functional robotic components with lightweight, durable 3D printed parts optimized for motion and performance.",
+    image: "/robotarm1.jpg",
+    alt: "3D Printed Robotic Arm",
   },
   {
-    title: "Aerospace Components",
+    title: "OpenFlexure Microscope",
     description:
-      "Manufacture lightweight, complex aerospace parts with certified materials that meet stringent industry standards and regulations.",
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop",
-    alt: "Aerospace Components",
-  },
-  {
-    title: "Tooling & Fixtures",
-    description:
-      "Reduce lead times and costs with on-demand manufacturing tools, jigs, and fixtures customized for your production requirements.",
-    image:
-      "https://images.unsplash.com/photo-1581091870621-191eb8d3d5f6?w=600&h=400&fit=crop",
-    alt: "Tooling & Fixtures",
+      "Create precision scientific instruments using 3D printed components that enable low-cost, customizable, and accessible microscopy systems.",
+    image: "/print1.jpg",
+    alt: "3D Printed Microscope",
   },
   {
     title: "Educational Programs",
     description:
-      "Empower the next generation with comprehensive training programs and educational resources for additive manufacturing excellence.",
+      "Train learners and innovators through hands-on additive manufacturing programs focused on design, printing, and real-world applications.",
     image:
-      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop",
-    alt: "Educational Programs",
+      "/studentwork.jpg",
+    alt: "Additive Manufacturing Education",
   },
 ];
 
@@ -79,7 +95,9 @@ export default function Solutions() {
                 {solution.title}
               </h3>
 
-              <p className="text-xs md:text-sm xl:text-base text-gray-400">{solution.description}</p>
+              <p className="text-xs md:text-sm xl:text-base text-gray-400">
+                {solution.description}
+              </p>
             </div>
           ))}
         </div>
