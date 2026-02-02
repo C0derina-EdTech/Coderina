@@ -44,10 +44,18 @@ const ContactUs = () => {
   const [countries, setCountries] = useState([]);
   const [touched, setTouched] = useState(false);
 
+  // useEffect(() => {
+  //   const allCountries = Country.getAllCountries();
+  //   setCountries(allCountries);
+  // }, []);
+
   useEffect(() => {
+  import("country-state-city").then(({ Country }) => {
     const allCountries = Country.getAllCountries();
     setCountries(allCountries);
-  }, []);
+  });
+}, []);
+
 
   const handleCountryChange = (e) => {
     const isoCode = e.target.value;

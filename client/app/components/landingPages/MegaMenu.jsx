@@ -10,28 +10,57 @@ const MENU_CONTENT = {
       {
         heading: "Learning Platforms",
         links: [
-          { title: "e-STEAM Coderina", desc: "Complete learning management system", href: "https://esteamcoderina.org" },
-          { title: "Coding Environment", desc: "Browser-based IDE for students", href: "/programs" },
-          { title: "Checkmate", desc: "Chess game competitions", href: "/programs" },
-          { title: "COUCH", desc: "Coderina University Challenge", href: "/coderina-university-challenge" },
-          
+          {
+            title: "e-STEAM Coderina",
+            desc: "Complete learning management system",
+            href: "https://esteamcoderina.org",
+          },
+          {
+            title: "Coding Environment",
+            desc: "Browser-based IDE for students",
+            href: "/programs",
+          },
+          {
+            title: "Checkmate",
+            desc: "Chess game competitions",
+            href: "/programs",
+          },
+          {
+            title: "COUCH",
+            desc: "Coderina University Challenge",
+            href: "/coderina-university-challenge",
+          },
         ],
       },
       {
         heading: "Physical Products",
         links: [
-          { title: "Robotics Kits", desc: "Arduino and Raspberry Pi based", href: "/programs" },
-          { title: "Electronics Bundles", desc: "Components for prototyping", href: "/programs" },
-          { title: "3D Printing Solutions", desc: "Design and fabrication tools", href: "/robotics-lab" },
-            { title: "SIWES", desc: "Students Industrial Work Experience Scheme", href: "/coderina-siwes-application" },
+          {
+            title: "Robotics Kits",
+            desc: "Arduino and Raspberry Pi based",
+            href: "/programs",
+          },
+          {
+            title: "Electronics Bundles",
+            desc: "Components for prototyping",
+            href: "/programs",
+          },
+          {
+            title: "3D Printing Solutions",
+            desc: "Design and fabrication tools",
+            href: "/robotics-lab",
+          },
+          {
+            title: "SIWES",
+            desc: "Students Industrial Work Experience Scheme",
+            href: "/coderina-siwes-application",
+          },
         ],
       },
     ],
-    featured: {
-      title: "New: AI Learning Path",
-      desc: "Master artificial intelligence through hands-on projects and real-world applications",
+
+    feature: {
       image: "/checkmate.jpg",
-      cta: "Explore Now",
     },
   },
   solutions: {
@@ -40,26 +69,55 @@ const MENU_CONTENT = {
       {
         heading: "By Institution",
         links: [
-          { title: "Primary Schools", desc: "Foundation STEM curriculum", href: "#" },
-          { title: "Secondary Schools", desc: "Advanced robotics & coding", href: "#" },
-          { title: "Universities", desc: "Research and innovation labs", href: "#" },
-          { title: "Training Centers", desc: "Professional development", href: "#" },
+          {
+            title: "Primary Schools",
+            desc: "Foundation STEM curriculum",
+            href: "#",
+          },
+          {
+            title: "Secondary Schools",
+            desc: "Advanced robotics & coding",
+            href: "#",
+          },
+          {
+            title: "Universities",
+            desc: "Research and innovation labs",
+            href: "#",
+          },
+          {
+            title: "Training Centers",
+            desc: "Professional development",
+            href: "#",
+          },
         ],
       },
       {
         heading: "By Stakeholder",
         links: [
-          { title: "Parents & Guardians", desc: "Home learning resources", href: "#" },
-          { title: "Governments", desc: "National digital programs", href: "#" },
+          {
+            title: "Parents & Guardians",
+            desc: "Home learning resources",
+            href: "#",
+          },
+          {
+            title: "Governments",
+            desc: "National digital programs",
+            href: "#",
+          },
           { title: "NGOs", desc: "Community empowerment", href: "#" },
-          { title: "Corporations", desc: "CSR and workforce development", href: "#" },
+          {
+            title: "Corporations",
+            desc: "CSR and workforce development",
+            href: "#",
+          },
         ],
       },
     ],
     featured: {
       title: "School Deployment Success",
       desc: "Learn how 200+ schools across Africa deployed our solutions with 95% satisfaction rate",
-      image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=250&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=250&fit=crop",
       cta: "View Case Study",
     },
   },
@@ -69,18 +127,47 @@ const MENU_CONTENT = {
       {
         heading: "Upcoming Events",
         links: [
-          { title: "STEM Innovation Summit 2026", desc: "Lagos • March 15-17", href: "/events", badge: "Featured" },
-          { title: "Robotics Championship", desc: "Nairobi • April 22", href: "/events" },
-          { title: "Teacher Training Workshop", desc: "Virtual • Feb 10", href: "/events" },
-          { title: "Hackathon Series", desc: "Multi-city • Ongoing", href: "/events" },
+          {
+            title: "STEM Innovation Summit 2026",
+            desc: "Lagos • March 15-17",
+            href: "/events",
+            badge: "Featured",
+          },
+          {
+            title: "Robotics Championship",
+            desc: "Nairobi • April 22",
+            href: "/events",
+          },
+          {
+            title: "Teacher Training Workshop",
+            desc: "Virtual • Feb 10",
+            href: "/events",
+          },
+          {
+            title: "Hackathon Series",
+            desc: "Multi-city • Ongoing",
+            href: "/events",
+          },
         ],
       },
       {
         heading: "Community",
         links: [
-          { title: "Student Showcase", desc: "Share your projects", href: "/events" },
-          { title: "Webinars", desc: "Weekly learning sessions", href: "/events" },
-          { title: "Partner Events", desc: "Collaborative initiatives", href: "/events" },
+          {
+            title: "Student Showcase",
+            desc: "Share your projects",
+            href: "/events",
+          },
+          {
+            title: "Webinars",
+            desc: "Weekly learning sessions",
+            href: "/events",
+          },
+          {
+            title: "Partner Events",
+            desc: "Collaborative initiatives",
+            href: "/events",
+          },
         ],
       },
     ],
@@ -98,27 +185,48 @@ const MENU_CONTENT = {
       {
         heading: "Education Sector",
         links: [
-          { title: "K-12 Education", desc: "Transform classroom learning", href: "#" },
-          { title: "Higher Education", desc: "Research and development", href: "#" },
-          { title: "EdTech Partners", desc: "Integration solutions", href: "#" },
-          { title: "Online Learning", desc: "Remote education tools", href: "#" },
+          {
+            title: "K-12 Education",
+            desc: "Transform classroom learning",
+            href: "#",
+          },
+          {
+            title: "Higher Education",
+            desc: "Research and development",
+            href: "#",
+          },
+          {
+            title: "EdTech Partners",
+            desc: "Integration solutions",
+            href: "#",
+          },
+          {
+            title: "Online Learning",
+            desc: "Remote education tools",
+            href: "#",
+          },
         ],
       },
       {
         heading: "Industry Applications",
         links: [
           { title: "Manufacturing", desc: "Automation training", href: "#" },
-          { title: "Agriculture Tech", desc: "Smart farming education", href: "#" },
+          {
+            title: "Agriculture Tech",
+            desc: "Smart farming education",
+            href: "#",
+          },
           { title: "Healthcare", desc: "Medical device training", href: "#" },
-          { title: "Renewable Energy", desc: "Sustainable tech programs", href: "#" },
+          {
+            title: "Renewable Energy",
+            desc: "Sustainable tech programs",
+            href: "#",
+          },
         ],
       },
     ],
-    featured: {
-      title: "Industry 4.0 Readiness",
-      desc: "Preparing Africa's workforce for the fourth industrial revolution through practical robotics education",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=250&fit=crop",
-      cta: "Learn More",
+    feature: {
+      image: "/prostheticarm.jpeg",
     },
   },
   company: {
@@ -127,27 +235,53 @@ const MENU_CONTENT = {
       {
         heading: "About Us",
         links: [
-          { title: "Our Story", desc: "How we started and where we're going", href: "/about" },
-          { title: "Mission & Vision", desc: "Empowering Africa through STEM", href: "/about" },
-          { title: "Leadership Team", desc: "Meet the people behind Coderina", href: "/about" },
-          { title: "Awards & Recognition", desc: "Industry accolades", href: "/about" },
+          {
+            title: "Our Story",
+            desc: "How we started and where we're going",
+            href: "/about",
+          },
+          {
+            title: "Mission & Vision",
+            desc: "Empowering Africa through STEM",
+            href: "/about",
+          },
+          {
+            title: "Leadership Team",
+            desc: "Meet the people behind Coderina",
+            href: "/about",
+          },
+          {
+            title: "Awards & Recognition",
+            desc: "Industry accolades",
+            href: "/about",
+          },
         ],
       },
       {
         heading: "Work With Us",
         links: [
           { title: "Careers", desc: "Join our growing team", href: "/about" },
-          { title: "Ethics & Values", desc: "Our principles and commitments", href: "/about" },
-          { title: "Partners", desc: "Strategic collaborations", href: "/about" },
-          { title: "Press & Media", desc: "News and media resources", href: "/events" },
+          {
+            title: "Ethics & Values",
+            desc: "Our principles and commitments",
+            href: "/about",
+          },
+          {
+            title: "Partners",
+            desc: "Strategic collaborations",
+            href: "/about",
+          },
+          {
+            title: "Press & Media",
+            desc: "News and media resources",
+            href: "/events",
+          },
         ],
       },
     ],
-    featured: {
-      title: "Join Team Coderina",
-      desc: "We're hiring passionate educators, engineers, and innovators to shape Africa's tech future",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=250&fit=crop",
-      cta: "View Open Positions",
+    // 
+     feature: {
+      image: "/championship.jpeg",
     },
   },
   resources: {
@@ -156,26 +290,59 @@ const MENU_CONTENT = {
       {
         heading: "Learning Materials",
         links: [
-          { title: "Documentation", desc: "Complete platform guides", href: "#" },
-          { title: "Video Tutorials", desc: "Step-by-step walkthroughs", href: "#" },
-          { title: "Curriculum Library", desc: "Lesson plans and activities", href: "#" },
-          { title: "Project Gallery", desc: "Student work showcase", href: "#" },
+          {
+            title: "Documentation",
+            desc: "Complete platform guides",
+            href: "#",
+          },
+          {
+            title: "Video Tutorials",
+            desc: "Step-by-step walkthroughs",
+            href: "#",
+          },
+          {
+            title: "Curriculum Library",
+            desc: "Lesson plans and activities",
+            href: "#",
+          },
+          {
+            title: "Project Gallery",
+            desc: "Student work showcase",
+            href: "#",
+          },
         ],
       },
       {
         heading: "Support",
         links: [
-          { title: "Help Center", desc: "FAQs and troubleshooting", href: "/contact" },
-          { title: "Technical Support", desc: "Get expert assistance", href: "/contact" },
-          { title: "Community Forum", desc: "Connect with other users", href: "/contact" },
-          { title: "API Documentation", desc: "For developers", href: "/contact" },
+          {
+            title: "Help Center",
+            desc: "FAQs and troubleshooting",
+            href: "/contact",
+          },
+          {
+            title: "Technical Support",
+            desc: "Get expert assistance",
+            href: "/contact",
+          },
+          {
+            title: "Community Forum",
+            desc: "Connect with other users",
+            href: "/contact",
+          },
+          {
+            title: "API Documentation",
+            desc: "For developers",
+            href: "/contact",
+          },
         ],
       },
     ],
     featured: {
       title: "Latest: 2026 STEM Report",
       desc: "Download our annual report on the state of STEM education across Africa with data from 30+ countries",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop",
       cta: "Download Report",
     },
   },
@@ -185,6 +352,9 @@ export function MegaMenu({ type, onMouseEnter }) {
   const data = MENU_CONTENT[type];
   if (!data) return null;
 
+  const featured = data.featured;
+  const featureOnly = data.feature;
+
   return (
     <div
       onMouseEnter={onMouseEnter}
@@ -193,8 +363,6 @@ export function MegaMenu({ type, onMouseEnter }) {
         animation: "fadeInDown 0.3s ease-out forwards",
       }}
     >
-      
-      
       <div className="">
         {/* Header */}
         <div className="mb-8">
@@ -219,7 +387,7 @@ export function MegaMenu({ type, onMouseEnter }) {
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-2">
-                            <span className="font-medium text-sm  text-gray-900 group-hover:text-blue-600 transition-colors">
+                            <span className="font-medium text-sm  text-gray-900 group-hover:text-teal-800 transition-colors">
                               {link.title}
                             </span>
                             {link.badge && (
@@ -228,7 +396,9 @@ export function MegaMenu({ type, onMouseEnter }) {
                               </span>
                             )}
                           </div>
-                          <p className="text-xs text-gray-500 mt-0.5">{link.desc}</p>
+                          <p className="text-xs text-gray-500 mt-0.5">
+                            {link.desc}
+                          </p>
                         </div>
                         <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all shrink-0 mt-1" />
                       </div>
@@ -240,41 +410,57 @@ export function MegaMenu({ type, onMouseEnter }) {
           </div>
 
           {/* Right Side - Featured Content */}
+          {/* Right Side */}
           <div className="lg:col-span-5">
             <div className="sticky top-8">
-              <div className="max-w-[16rem] mx-auto bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden border border-gray-200 hover:border-gray-300 transition-all duration-300 group cursor-pointer">
-                <div className="relative w-full h-28 overflow-hidden">
-                  <Image
-                    src={data.featured.image}
-                    alt={data.featured.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {data.featured.hasPlayIcon && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:bg-white group-hover:scale-110 transition-all duration-300 shadow-lg">
-                        <Play className="w-7 h-7 text-gray-900 ml-1" />
+              {/* IMAGE ONLY (feature) */}
+              {featureOnly && !featured && (
+                <div className="max-w-[16rem] mx-auto rounded-2xl overflow-hidden border border-gray-200">
+                  <div className="relative w-full h-40 2xl:h-64">
+                    <Image
+                      src={featureOnly.image}
+                      alt="Feature image"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* FULL FEATURED CARD */}
+              {featured && (
+                <div className="max-w-[16rem] mx-auto bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden border border-gray-200 hover:border-gray-300 transition-all duration-300 group cursor-pointer">
+                  <div className="relative w-full h-28 overflow-hidden">
+                    <Image
+                      src={featured.image}
+                      alt={featured.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+
+                    {featured.hasPlayIcon && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                          <Play className="w-7 h-7 text-gray-900 ml-1" />
+                        </div>
                       </div>
+                    )}
+                  </div>
+
+                  <div className="p-6">
+                    <h3 className="text-sm font-bold text-gray-900 mb-2">
+                      {featured.title}
+                    </h3>
+                    <p className="text-gray-600 text-xs mb-4">
+                      {featured.desc}
+                    </p>
+                    <div className="flex items-center text-teal-800 font-medium text-xs">
+                      <span>{featured.cta}</span>
+                      <ArrowRight className="w-3 h-3 ml-1" />
                     </div>
-                  )}
-                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full text-xs font-medium text-gray-700 flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>New</span>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-sm font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                    {data.featured.title}
-                  </h3>
-                  <p className="text-gray-600 text-xs leading-relaxed mb-4">
-                    {data.featured.desc}
-                  </p>
-                  <div className="flex items-center text-blue-600 font-medium text-xs group-hover:gap-2 transition-all">
-                    <span>{data.featured.cta}</span>
-                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -284,8 +470,7 @@ export function MegaMenu({ type, onMouseEnter }) {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <p className="text-xs text-gray-600">
-                Need help?
-                Need help choosing the right solution?
+                Need help? Need help choosing the right solution?
               </p>
             </div>
             <div className="text-xs">
@@ -295,7 +480,6 @@ export function MegaMenu({ type, onMouseEnter }) {
               >
                 Become a Volunteer
               </Link>
-             
             </div>
           </div>
         </div>

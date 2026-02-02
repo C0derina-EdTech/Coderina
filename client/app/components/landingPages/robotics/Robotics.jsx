@@ -12,7 +12,6 @@ export default function Robotics() {
             <div className="order-2 md:order-1">
               <h1 className="text-base md:text-xl lg:text-2xl 2xl:text-3xl font-bold text-gray-900 leading-tight mb-6">
                 Built to assist. Designed to inspire.
-                
               </h1>
               <p className="text-sm sm:text-base text-gray-600 mb-8 max-w-md leading-relaxed font-poppins">
                 Our intelligent robotics systems are built to transform learning
@@ -20,7 +19,10 @@ export default function Robotics() {
                 required, enabling safer environments, and unlocking hands-on
                 exploration without limits.
               </p>
-               <Link href="/" className="bg-teal-700 hover:bg-teal-600 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-sm font-medium transition-colors inline-flex items-center gap-2 border border-teal-600">
+              <Link
+                href="/"
+                className="bg-teal-700 hover:bg-teal-600 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-sm font-medium transition-colors inline-flex items-center gap-2 border border-teal-600"
+              >
                 Discover Our Prints →
               </Link>
             </div>
@@ -68,15 +70,18 @@ export default function Robotics() {
             {/* Right Content */}
             <div className="order-1 md:order-2">
               <h2 className="text-base md:text-xl lg:text-2xl 2xl:text-3xl font-bold text-white leading-tight mb-6">
-                The Future of Warehouse Automation
+                The Future of Additive Manufacturing
               </h2>
               <p className="text-sm sm:text-base text-teal-100 mb-8 max-w-md leading-relaxed">
-                Use Stretch to streamline case handling and trailer unloading
-                operations. Easy to deploy and reconfigure, Stretch keeps your
-                operations moving.
+                Explore how advanced 3D printing transforms design, prototyping,
+                and production workflows. Flexible, scalable, and precise,
+                additive manufacturing accelerates innovation.
               </p>
-              <Link href="/" className="bg-teal-700 hover:bg-teal-600 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-sm font-medium transition-colors inline-flex items-center gap-2 border border-teal-600">
-                Learn About Stretch →
+              <Link
+                href="/"
+                className="bg-teal-700 hover:bg-teal-600 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-sm font-medium transition-colors inline-flex items-center gap-2 border border-teal-600"
+              >
+                Learn About Additive Manufacturing →
               </Link>
             </div>
           </div>

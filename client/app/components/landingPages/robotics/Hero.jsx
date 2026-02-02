@@ -28,7 +28,7 @@ const Hero = () => {
               Industrial 3D Printing
             </h1>
             <p className="text-base md:text-lg lg:text-xl  text-gray-300 mb-8">
-              Tailored additive manufacturing solutions for industry,
+              Tailored additive manufacturing solutions for research industries,
               healthcare, aerospace, and innovation.
             </p>
             <div className="flex flex-wrap gap-4 text-white">
@@ -36,7 +36,7 @@ const Hero = () => {
                 href="/"
                 className="bg-teal-700 hover:bg-teal-600 text-white px-5 sm:px-6 py-2 rounded-full text-xs md:text-sm font-medium transition-colors inline-flex items-center gap-2 border border-teal-600"
               >
-                Buyer&apos;s Guide →
+                Robotics Guide →
               </Link>
               <Link
                 href="/about"

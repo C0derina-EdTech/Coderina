@@ -9,12 +9,12 @@ import { MegaMenu } from "./MegaMenu";
 import AOS from "aos";
 
 const NAV_ITEMS = [
+  { label: "Home", href: "/" }, // ✅ no key
   { key: "programs", label: "Programs", href: "/programs" },
   { key: "solutions", label: "Solutions", href: "/solutions" },
   { key: "events", label: "Events", href: "/events" },
   { key: "industries", label: "Industries", href: "/industries" },
   { key: "company", label: "Company", href: "/about" },
-  { key: "resources", label: "Resources", href: "/resources" },
 ];
 
 const NAV = [
@@ -66,8 +66,7 @@ export default function Navbar() {
     if (pathname === "/") return "bg-white";
     if (pathname.startsWith("/programs")) return "bg-[#F5F5F5]";
     if (pathname.startsWith("/events")) return "bg-white";
-    if (pathname.startsWith("/about"))
-      return "bg-white";
+    if (pathname.startsWith("/about")) return "bg-white";
     return "bg-white";
   })();
 
@@ -93,20 +92,43 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <ul className="hidden lg:flex items-center gap-8 font-semibold">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.key}>
-                <button
-                  onMouseEnter={() => openMenu(item.key)}
-                  className={`relative text-xs font-bold 2xl:text-sm transition-colors ${
-                    activeMenu === item.key
-                      ? "text-teal-900"
-                      : "text-gray-700 hover:text-gray-900"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              // HOME LINK
+              if (!item.key) {
+                const isActive = pathname === "/";
+
+                return (
+                  <li key="home">
+                    <Link
+                      href="/"
+                      className={`relative text-xs font-bold 2xl:text-sm transition-colors ${
+                        isActive
+                          ? "text-teal-900 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:bg-teal-900"
+                          : "text-gray-700 hover:text-gray-900"
+                      }`}
+                    >
+                      Home
+                    </Link>
+                  </li>
+                );
+              }
+
+              // MEGA MENU ITEMS
+              return (
+                <li key={item.key}>
+                  <button
+                    onMouseEnter={() => openMenu(item.key)}
+                    className={`relative text-xs font-bold 2xl:text-sm transition-colors ${
+                      activeMenu === item.key || pathname.startsWith(item.href)
+                        ? "text-teal-900"
+                        : "text-gray-700 hover:text-gray-900"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Actions */}
@@ -165,14 +187,14 @@ export default function Navbar() {
           aria-label="Mobile Navigation"
         >
           <div className="flex items-center justify-between px-6 h-14 border-b">
-           <div className="relative h-16 w-16">
-             <Image
-              src="/coderinaLogo.png"
-              alt="Coderina"
-              fill
-              className="object-contain"
-            />
-           </div>
+            <div className="relative h-16 w-16">
+              <Image
+                src="/coderinaLogo.png"
+                alt="Coderina"
+                fill
+                className="object-contain"
+              />
+            </div>
             <button
               onClick={() => setMobileOpen(false)}
               className="p-2 rounded-full hover:bg-gray-100"
