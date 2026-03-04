@@ -164,14 +164,14 @@ const GallerySection = ({ images, title }) => {
       : images.length === 2
         ? "grid-cols-2"
         : images.length === 3
-          ? "grid-cols-2 sm:grid-cols-3"
-          : "grid-cols-2 sm:grid-cols-3";
+          ? "grid-cols-2 md:grid-cols-4"
+          : "grid-cols-2 md:grid-cols-4";
 
   return (
     <section className="mt-10">
       <div className="flex items-center gap-3 mb-4">
         <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
-          Gallery
+          More Photos
         </p>
         <div className="flex-1 h-px bg-gray-100" />
         <span className="text-[10px] text-gray-400">
@@ -188,7 +188,7 @@ const GallerySection = ({ images, title }) => {
               key={idx}
               onClick={() => setLightboxIndex(idx)}
               className={`relative rounded-lg overflow-hidden bg-gray-100 cursor-zoom-in group
-                ${images.length === 1 ? "aspect-video" : "aspect-[4/3]"}
+                ${images.length === 1 ? "aspect-video" : "aspect-4/3"}
                 ${isFeature ? "sm:col-span-2 sm:aspect-video" : ""}
               `}
             >
@@ -261,7 +261,7 @@ const BlogContent = ({ post }) => {
 
       {/* Portable Text body */}
       {post?.content && (
-        <div className="mt-2">
+        <div className="mt-2 xl:mt-4">
           <PortableText value={post.content} components={ptComponents} />
         </div>
       )}
