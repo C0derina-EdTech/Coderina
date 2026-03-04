@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { sanityClient as client } from "../../../utils/sanityClient";
 import { groq } from "next-sanity";
 import SlugContent from "../../../components/landingPages/blog/SlugContent";
-import { urlFor } from "../../../components/lib/imageUrl";
 
 export const revalidate = 60; // ISR - revalidate every 60 seconds
 
@@ -55,17 +54,93 @@ export async function generateStaticParams() {
 
 // ─── Metadata (Next 16 compatible) ─────────────────────
 
+// export async function generateMetadata({ params }) {
+//   const { slug } = await params; // ✅ REQUIRED in Next 16
+
+//   const post = await client.fetch(slugQuery, { slug });
+
+//   if (!post) return {};
+
+//   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+//   const url = `${baseUrl}/newsroom/${slug}`;
+
+//   const imageUrl = post?.featuredImage || null;
+
+//   return {
+//     title: `${post.title} | Newsroom`,
+//     description: post.description,
+//     alternates: {
+//       canonical: url,
+//     },
+//     openGraph: {
+//       title: post.title,
+//       description: post.description,
+//       url,
+//       siteName: "Coderina",
+//       type: "article",
+//       publishedTime: post.publishedAt,
+//       images: imageUrl
+//         ? [
+//             {
+//               url: imageUrl,
+//               width: 1200,
+//               height: 630,
+//             },
+//           ]
+//         : [],
+//       videos: post?.featuredVideo
+//         ? [
+//             {
+//               url: post.featuredVideo,
+//               type: "video/mp4",
+//             },
+//           ]
+//         : [],
+//     },
+//     twitter: {
+//       card: imageUrl ? "summary_large_image" : "summary",
+//       title: post.title,
+//       description: post.description,
+//       images: imageUrl ? [imageUrl] : [],
+//     },
+//   };
+// }
+
 export async function generateMetadata({ params }) {
-  const { slug } = await params; // ✅ REQUIRED in Next 16
+  const { slug } = await params;
 
   const post = await client.fetch(slugQuery, { slug });
-
   if (!post) return {};
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.coderina.org";
+
   const url = `${baseUrl}/newsroom/${slug}`;
 
-  const imageUrl = post?.featuredImage || null;
+  // ✅ Ensure image is absolute
+  let imageUrl = null;
+
+  if (post?.featuredImage) {
+    imageUrl = post.featuredImage.startsWith("http")
+      ? post.featuredImage
+      : `${baseUrl}${post.featuredImage}`;
+  }
+
+  // ✅ Cloudinary auto sizing (forces 1200x630)
+  if (imageUrl && imageUrl.includes("cloudinary")) {
+    imageUrl = imageUrl.replace(
+      "/upload/",
+      "/upload/w_1200,h_630,c_fill,q_auto,f_auto/",
+    );
+  }
+
+  // ✅ Fallback to video thumbnail if no image
+  if (!imageUrl && post?.featuredVideo) {
+    if (post.featuredVideo.includes("cloudinary")) {
+      imageUrl = post.featuredVideo
+        .replace("/upload/", "/upload/so_0,w_1200,h_630,c_fill,q_auto,f_auto/")
+        .replace(".mp4", ".jpg");
+    }
+  }
 
   return {
     title: `${post.title} | Newsroom`,
@@ -75,9 +150,8 @@ export async function generateMetadata({ params }) {
     },
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description: post.description,
       url,
-      siteName: "Coderina",
       type: "article",
       publishedTime: post.publishedAt,
       images: imageUrl
@@ -86,14 +160,7 @@ export async function generateMetadata({ params }) {
               url: imageUrl,
               width: 1200,
               height: 630,
-            },
-          ]
-        : [],
-      videos: post?.featuredVideo
-        ? [
-            {
-              url: post.featuredVideo,
-              type: "video/mp4",
+              alt: post.title,
             },
           ]
         : [],
@@ -101,7 +168,7 @@ export async function generateMetadata({ params }) {
     twitter: {
       card: imageUrl ? "summary_large_image" : "summary",
       title: post.title,
-      description: post.excerpt,
+      description: post.description,
       images: imageUrl ? [imageUrl] : [],
     },
   };
@@ -128,7 +195,7 @@ export default async function Page({ params }) {
             "@context": "https://schema.org",
             "@type": "NewsArticle",
             headline: post.title,
-            description: post.excerpt,
+            description: post.description,
             datePublished: post.publishedAt,
             author: {
               "@type": "Person",

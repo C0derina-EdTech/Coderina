@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePost } from "../../contexts/PostContext";
 import { useEffect, useState } from "react";
+import { Eye } from "lucide-react";
 
 // ─── Trending Card ─────────────────────────────────────────────
 function TrendingCard({ topic }) {
@@ -48,11 +49,11 @@ function TrendingCard({ topic }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Category pill */}
-        {topic.category?.[0]?.title && (
+        {/* {topic.category?.[0]?.title && (
           <span className="absolute top-2.5 left-2.5 text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/90 text-red-700">
-             {topic.category[0].title}
+            {topic.category[0].title}
           </span>
-        )}
+        )} */}
       </div>
 
       {/* Content */}
@@ -65,15 +66,34 @@ function TrendingCard({ topic }) {
             {topic.description}
           </p>
         )}
-        {topic.publishedAt && (
-          <p className="text-[10px] text-gray-300 mt-0.5">
-            {new Date(topic.publishedAt).toLocaleDateString("en-GB", {
-              day: "numeric",
-              month: "short",
-              year: "numeric",
-            })}
-          </p>
-        )}
+<div className="flex items-center flex-wrap text-[10px] text-gray-300 mt-1">
+  {topic.publishedAt && (
+    <>
+      <span>
+        {new Date(topic.publishedAt).toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })}
+      </span>
+      {(topic.views != null || topic.readTime) && (
+        <span className="mx-2">•</span>
+      )}
+    </>
+  )}
+
+  {topic.views != null && (
+    <>
+      <span className="flex items-center gap-1">
+        <Eye className="w-3 h-3" />
+        {topic.views || 0}
+      </span>
+      {topic.readTime && <span className="mx-2">•</span>}
+    </>
+  )}
+
+  {topic.readTime && <span>{topic.readTime} min read</span>}
+</div>
       </div>
     </Link>
   );
@@ -143,7 +163,13 @@ export default function News() {
 
   // Smart slice: 6 for 3-col, 4 for everything else
   const trendingCount = cols >= 3 ? 6 : 4;
-  const trending = sorted.slice(0, trendingCount);
+  // Sort all posts by views (descending)
+  const sortedByViews = [...posts].sort(
+    (a, b) => (b.views || 0) - (a.views || 0),
+  );
+
+  // Take top trendingCount
+  const trending = sortedByViews.slice(0, trendingCount);
   const latest = sorted.slice(0, 5);
 
   return (
@@ -203,8 +229,8 @@ export default function News() {
                     item={{
                       title: post.title,
                       tag:
+                       post.category?.[0]?.title ||
                         post.tags?.[0]?.title ||
-                        post.category?.[0]?.title ||
                         "News",
                       readTime: `${post.readTime || 3} min read`,
                       href: `/newsroom/${post.slug.current}`,

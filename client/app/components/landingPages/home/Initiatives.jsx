@@ -57,7 +57,7 @@ export default function Initiatives() {
               Our Initiatives
             </span>
             <h2 className="text-base sm:text-lg md:text-xl font-extrabold text-gray-900 mt-1 tracking-tight">
-              Programmes shaping Nigeria's next generation
+              Programmes shaping Nigeria&apos;s next generation
             </h2>
           </div>
 

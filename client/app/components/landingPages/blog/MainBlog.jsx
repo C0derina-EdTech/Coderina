@@ -10,7 +10,7 @@ import BlogHero from "./BlogHero";
 import Footer from "../Footer";
 import LatestAndPopular from "./LatestAndPopular";
 import FeaturedSection from "./FeaturedSection";
-import Navbar from "../home/Nav";
+import Navbar from "../Navbar";
 
 const MainBlog = () => {
     
