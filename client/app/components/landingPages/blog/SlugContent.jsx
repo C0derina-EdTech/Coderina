@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import BlogContent from "./BlogContent";
-import Navbar from "../home/Nav";
+import Navbar from "../Navbar";
 import { usePost } from "../../contexts/PostContext";
 import Footer from "../Footer";
 import { Eye } from "lucide-react";
@@ -74,7 +74,7 @@ const SidebarPostCard = ({ post }) => (
     className="group flex gap-3 items-start py-3 border-b border-gray-100 last:border-0 hover:bg-gray-50 -mx-2 px-2 rounded-md transition-colors"
   >
     {post.featuredImage && (
-      <div className="relative w-16 h-14 flex-shrink-0 rounded overflow-hidden bg-gray-100">
+      <div className="relative w-16 h-14 shrink-0 rounded overflow-hidden bg-gray-100">
         <Image
           src={post.featuredImage}
           alt={post?.title || "Untitled"}

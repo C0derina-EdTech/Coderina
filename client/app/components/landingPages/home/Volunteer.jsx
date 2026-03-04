@@ -16,8 +16,11 @@ const Volunteer = () => {
     { id: 4, src: "/heresteam/event.jpg", alt: "Community digital literacy program" },
     { id: 5, src: "/heresteam/girlchild5.jpg", alt: "Community digital literacy program" },
     { id: 6, src: "/heresteam/girlchild4.jpg", alt: "Community digital literacy program" },
-     { id: 7, src: "/2026/chessplay2.jpg", alt: "student playing chess game" },
-      { id: 8, src: "/2026/lovesmile.jpg", alt: "smile of happiness at the 2026 National competition" },
+    { id: 7, src: "/2026/chessplay2.jpg", alt: "student playing chess game" },
+    { id: 8, src: "/2026/lovesmile.jpg", alt: "smile of happiness at the 2026 National competition" },
+    { id: 9, src: "/2026/ftc1.jpg", alt: "A picture of Fist Tech Challenge Robot on the play pool" },
+    { id: 10, src: "/2026/ftc2.jpg", alt: "A picture of a student setting his robot" },
+    { id: 11, src: "/2026/ftc4.jpg", alt: "A picture of a student walking with his robot" },
   ];
 
   useEffect(() => {

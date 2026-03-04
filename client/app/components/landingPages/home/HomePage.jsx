@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import "aos/dist/aos.css";
-import Hero from "./HeroL";
+import Hero from "./Hero";
 import PrintingLab from "./PrintingLab";
 import Clip from "./Clip";
 import About from "./About";
