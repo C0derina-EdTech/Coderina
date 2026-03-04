@@ -1,487 +1,369 @@
 "use client";
-import { useState } from "react";
+
 import Link from "next/link";
-import { ChevronRight, ArrowRight, Calendar, Play } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, ExternalLink, Newspaper } from "lucide-react";
+
+/* ─── Press items ─────────────────────────────────────────────── */
+const pressItems = [
+  {
+    publication: "TechBuild.Africa",
+    date: "Nov 13, 2025",
+    title: "Top 10 Finalists to Unveil Groundbreaking Student Innovations at COUCH 2025 Grand Finale",
+    link: "https://techbuild.africa/10-finalists-student-innovation-couch-2025-finale/",
+  },
+  {
+    publication: "PUNCH.ng",
+    date: "Nov 12, 2025",
+    title: "Top 10 student innovators set for COUCH 2025 finale",
+    link: "https://punchng.com/top-10-student-innovators-set-for-couch-2025-finale/",
+  },
+  {
+    publication: "Independent.ng",
+    date: "Nov 11, 2025",
+    title: "Top 10 Finalists set to showcase Groundbreaking Student innovations at COUCH 2025 Grand Finale",
+    link: "https://independent.ng/top-10-finalists-set-to-showcase-groundbreaking-student-innovations-at-couch-2025-grand-finale/",
+  },
+  {
+    publication: "Vanguard",
+    date: "Nov 12, 2025",
+    title: "Coderina university challenge produces 10 student-led innovator teams",
+    link: "https://www.vanguardngr.com/2025/11/coderina-university-challenge-produces-10-student-led-innovator-teams/",
+  },
+];
+
+/* ─── Menu data ───────────────────────────────────────────────── */
 const MENU_CONTENT = {
   programs: {
-    title: "Our Programs",
-    sections: [
+    tagline: "Tools built to spark curiosity and create change.",
+    cols: [
       {
-        heading: "Learning Platforms",
+        heading: "Platforms",
         links: [
-          {
-            title: "e-STEAM Coderina",
-            desc: "Complete learning management system",
-            href: "https://esteamcoderina.org",
-          },
-          {
-            title: "Coding Environment",
-            desc: "Browser-based IDE for students",
-            href: "/programs",
-          },
-          {
-            title: "Checkmate",
-            desc: "Chess game competitions",
-            href: "/programs",
-          },
-          {
-            title: "COUCH",
-            desc: "Coderina University Challenge",
-            href: "/coderina-university-challenge",
-          },
+          { title: "e-STEAM Coderina",    desc: "Full learning management system",    href: "https://esteamcoderina.org", external: true },
+          { title: "Coding Environment",  desc: "Browser-based IDE for students",     href: "/programs" },
+          { title: "Checkmate",           desc: "Chess game competitions",            href: "/programs" },
+          { title: "COUCH",               desc: "University challenge hub",           href: "/coderina-university-challenge" },
         ],
       },
       {
-        heading: "Physical Products",
+        heading: "Products",
         links: [
-          {
-            title: "Robotics Kits",
-            desc: "Arduino and Raspberry Pi based",
-            href: "/programs",
-          },
-          {
-            title: "Electronics Bundles",
-            desc: "Components for prototyping",
-            href: "/programs",
-          },
-          {
-            title: "3D Printing Solutions",
-            desc: "Design and fabrication tools",
-            href: "/robotics-lab",
-          },
-          {
-            title: "SIWES",
-            desc: "Students Industrial Work Experience Scheme",
-            href: "/coderina-siwes-application",
-          },
+          { title: "Robotics Kits",  desc: "Arduino & Raspberry Pi based",  href: "/programs" },
+          { title: "3D Printing",    desc: "Design and fabrication tools",   href: "/robotics-lab" },
+          { title: "SIWES",          desc: "Industrial work experience",     href: "/coderina-siwes-application", badge: "Open" },
         ],
       },
     ],
-
-    feature: {
-      image: "/checkmate.jpg",
+    cta: { label: "All Programs", href: "/programs" },
+    highlight: {
+      label: "New",
+      title: "SIWES 2026 Applications",
+      desc: "Industrial training placements now open for university students.",
+      href: "/coderina-siwes-application",
     },
   },
+
   solutions: {
-    title: "Solutions",
-    sections: [
+    tagline: "Tailored STEM for every institution and stakeholder.",
+    cols: [
       {
         heading: "By Institution",
         links: [
-          {
-            title: "Primary Schools",
-            desc: "Foundation STEM curriculum",
-            href: "#",
-          },
-          {
-            title: "Secondary Schools",
-            desc: "Advanced robotics & coding",
-            href: "#",
-          },
-          {
-            title: "Universities",
-            desc: "Research and innovation labs",
-            href: "#",
-          },
-          {
-            title: "Training Centers",
-            desc: "Professional development",
-            href: "#",
-          },
+          { title: "Primary Schools",   desc: "Foundation STEM curriculum",    href: "#" },
+          { title: "Secondary Schools", desc: "Advanced robotics & coding",    href: "#" },
+          { title: "Universities",      desc: "Research and innovation labs",  href: "#" },
         ],
       },
       {
         heading: "By Stakeholder",
         links: [
-          {
-            title: "Parents & Guardians",
-            desc: "Home learning resources",
-            href: "#",
-          },
-          {
-            title: "Governments",
-            desc: "National digital programs",
-            href: "#",
-          },
-          { title: "NGOs", desc: "Community empowerment", href: "#" },
-          {
-            title: "Corporations",
-            desc: "CSR and workforce development",
-            href: "#",
-          },
+          { title: "Governments",  desc: "National digital programs",      href: "#" },
+          { title: "NGOs",         desc: "Community empowerment",          href: "#" },
+          { title: "Corporations", desc: "CSR and workforce development",  href: "#" },
         ],
       },
     ],
-    featured: {
-      title: "School Deployment Success",
-      desc: "Learn how 200+ schools across Africa deployed our solutions with 95% satisfaction rate",
-      image:
-        "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=250&fit=crop",
-      cta: "View Case Study",
+    cta: { label: "View Solutions", href: "#solutions" },
+    highlight: {
+      label: "Featured",
+      title: "Government Partnerships",
+      desc: "Helping ministries integrate STEAM into national education policy.",
+      href: "/contact",
     },
   },
+
   events: {
-    title: "Events & Community",
-    sections: [
+    tagline: "Where Africa's brightest STEM minds connect and compete.",
+    cols: [
       {
-        heading: "Upcoming Events",
+        heading: "Upcoming",
         links: [
-          {
-            title: "STEM Innovation Summit 2026",
-            desc: "Lagos • March 15-17",
-            href: "/events",
-            badge: "Featured",
-          },
-          {
-            title: "Robotics Championship",
-            desc: "Nairobi • April 22",
-            href: "/events",
-          },
-          {
-            title: "Teacher Training Workshop",
-            desc: "Virtual • Feb 10",
-            href: "/events",
-          },
-          {
-            title: "Hackathon Series",
-            desc: "Multi-city • Ongoing",
-            href: "/events",
-          },
+          { title: "STEM Innovation Summit",  desc: "Lagos · March 2026",       href: "/events", badge: "Soon" },
+          { title: "Robotics Championship",   desc: "Abuja · April 2026",       href: "/events" },
+          { title: "Hackathon Series",         desc: "Multi-city · Ongoing",     href: "/events" },
         ],
       },
       {
         heading: "Community",
         links: [
-          {
-            title: "Student Showcase",
-            desc: "Share your projects",
-            href: "/events",
-          },
-          {
-            title: "Webinars",
-            desc: "Weekly learning sessions",
-            href: "/events",
-          },
-          {
-            title: "Partner Events",
-            desc: "Collaborative initiatives",
-            href: "/events",
-          },
+          { title: "Student Showcase",  desc: "Share your projects",          href: "/events" },
+          { title: "Weekly Webinars",   desc: "Live learning sessions",       href: "/events" },
+          { title: "Partner Events",    desc: "Collaborative initiatives",    href: "/events" },
         ],
       },
     ],
-    featured: {
-      title: "National Robotics Championship 2026",
-      desc: "Join 5,000+ students, educators, and innovators at Africa's largest STEM event",
-      image: "/championship.jpeg",
-      cta: "Register Now",
-      hasPlayIcon: true,
+    cta: { label: "All Events", href: "/events" },
+    highlight: {
+      label: "Live",
+      title: "2025/2026 National Robotics Championship",
+      desc: "116 teams, one stage. Results and highlights now available.",
+      href: "/newsroom",
     },
   },
+
   industries: {
-    title: "Industries We Serve",
-    sections: [
+    tagline: "STEM innovation across every sector of Africa's economy.",
+    cols: [
       {
-        heading: "Education Sector",
+        heading: "Education",
         links: [
-          {
-            title: "K-12 Education",
-            desc: "Transform classroom learning",
-            href: "#",
-          },
-          {
-            title: "Higher Education",
-            desc: "Research and development",
-            href: "#",
-          },
-          {
-            title: "EdTech Partners",
-            desc: "Integration solutions",
-            href: "#",
-          },
-          {
-            title: "Online Learning",
-            desc: "Remote education tools",
-            href: "#",
-          },
+          { title: "K-12 Education",    desc: "Transform classroom learning",  href: "#" },
+          { title: "Higher Education",  desc: "Research & development",         href: "#" },
+          { title: "Online Learning",   desc: "Remote education tools",         href: "#" },
         ],
       },
       {
-        heading: "Industry Applications",
+        heading: "Industry",
         links: [
-          { title: "Manufacturing", desc: "Automation training", href: "#" },
-          {
-            title: "Agriculture Tech",
-            desc: "Smart farming education",
-            href: "#",
-          },
-          { title: "Healthcare", desc: "Medical device training", href: "#" },
-          {
-            title: "Renewable Energy",
-            desc: "Sustainable tech programs",
-            href: "#",
-          },
+          { title: "Manufacturing",      desc: "Automation training",            href: "#" },
+          { title: "Agriculture Tech",   desc: "Smart farming education",        href: "#" },
+          { title: "Renewable Energy",   desc: "Sustainable tech programs",      href: "#" },
         ],
       },
     ],
-    feature: {
-      image: "/prostheticarm.jpeg",
+    cta: { label: "Explore Industries", href: "#industries" },
+    highlight: {
+      label: "Impact",
+      title: "36 States Reached",
+      desc: "Coderina programmes now active in every geopolitical zone in Nigeria.",
+      href: "/about",
     },
   },
+
   company: {
-    title: "Company",
-    sections: [
+    tagline: "Built in Africa, for Africa — a mission-driven STEM force.",
+    cols: [
       {
-        heading: "About Us",
+        heading: "About",
         links: [
-          {
-            title: "Our Story",
-            desc: "How we started and where we're going",
-            href: "/about",
-          },
-          {
-            title: "Mission & Vision",
-            desc: "Empowering Africa through STEM",
-            href: "/about",
-          },
-          {
-            title: "Leadership Team",
-            desc: "Meet the people behind Coderina",
-            href: "/about",
-          },
-          {
-            title: "Awards & Recognition",
-            desc: "Industry accolades",
-            href: "/about",
-          },
+          { title: "Our Story",       desc: "How we started in 2015",          href: "/about" },
+          { title: "Leadership Team", desc: "Meet the people behind Coderina",  href: "/about" },
+          { title: "Awards",          desc: "Industry accolades & recognition", href: "/about" },
         ],
       },
       {
         heading: "Work With Us",
         links: [
-          { title: "Careers", desc: "Join our growing team", href: "/about" },
-          {
-            title: "Ethics & Values",
-            desc: "Our principles and commitments",
-            href: "/about",
-          },
-          {
-            title: "Partners",
-            desc: "Strategic collaborations",
-            href: "/about",
-          },
-          {
-            title: "Press & Media",
-            desc: "News and media resources",
-            href: "/events",
-          },
+          { title: "Careers",       desc: "Join our growing team",         href: "/about" },
+          { title: "Partners",      desc: "Strategic collaborations",      href: "/contact" },
+          { title: "Press & Media", desc: "News and media resources",      href: "/newsroom" },
         ],
       },
     ],
-    // 
-     feature: {
-      image: "/championship.jpeg",
+    cta: { label: "About Coderina", href: "/about" },
+    highlight: {
+      label: "Est. 2015",
+      title: "A Decade of STEM Impact",
+      desc: "From a single classroom to a pan-African movement in STEAM education.",
+      href: "/about",
     },
   },
-  resources: {
-    title: "Resources",
-    sections: [
+
+  newsroom: {
+    tagline: "Stories, press coverage, and resources from Coderina.",
+    cols: [
       {
-        heading: "Learning Materials",
+        heading: "Explore",
         links: [
-          {
-            title: "Documentation",
-            desc: "Complete platform guides",
-            href: "#",
-          },
-          {
-            title: "Video Tutorials",
-            desc: "Step-by-step walkthroughs",
-            href: "#",
-          },
-          {
-            title: "Curriculum Library",
-            desc: "Lesson plans and activities",
-            href: "#",
-          },
-          {
-            title: "Project Gallery",
-            desc: "Student work showcase",
-            href: "#",
-          },
-        ],
-      },
-      {
-        heading: "Support",
-        links: [
-          {
-            title: "Help Center",
-            desc: "FAQs and troubleshooting",
-            href: "/contact",
-          },
-          {
-            title: "Technical Support",
-            desc: "Get expert assistance",
-            href: "/contact",
-          },
-          {
-            title: "Community Forum",
-            desc: "Connect with other users",
-            href: "/contact",
-          },
-          {
-            title: "API Documentation",
-            desc: "For developers",
-            href: "/contact",
-          },
+          { title: "Latest News",       desc: "Announcements & updates",       href: "/newsroom" },
+          { title: "Events Coverage",   desc: "Championship highlights",       href: "/newsroom?category=events" },
+          { title: "Innovation Stories", desc: "Student & alumni spotlights",  href: "/newsroom?category=innovation" },
+          { title: "All Articles",       desc: "Browse the full newsroom",     href: "/newsroom" },
         ],
       },
     ],
-    featured: {
-      title: "Latest: 2026 STEM Report",
-      desc: "Download our annual report on the state of STEM education across Africa with data from 30+ countries",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop",
-      cta: "Download Report",
-    },
+    cta: { label: "Visit Newsroom", href: "/newsroom" },
+    press: true, // renders press panel instead of standard right col + highlight
   },
 };
 
-export function MegaMenu({ type, onMouseEnter }) {
+/* ─── Sub-components ──────────────────────────────────────────── */
+function LinkCol({ col, isLast, onClose }) {
+  return (
+    <div className={`flex-1 min-w-0 ${!isLast ? "border-r border-gray-100 pr-6" : ""}`}>
+      <p className="text-[9px] font-bold text-gray-300 uppercase tracking-[2.5px] mb-3">
+        {col.heading}
+      </p>
+      <ul className="space-y-0.5">
+        {col.links.map((link) => (
+          <li key={link.title}>
+            <Link
+              href={link.href}
+              onClick={onClose}
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="group flex items-center justify-between gap-2 px-2.5 py-2 -mx-2.5 rounded-lg hover:bg-red-50 transition-colors duration-150"
+            >
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="text-[11px] font-semibold text-gray-700 group-hover:text-red-700 transition-colors leading-snug">
+                    {link.title}
+                  </span>
+                  {link.badge && (
+                    <span className="px-1.5 py-px text-[8px] font-bold bg-red-600 text-white rounded uppercase tracking-wide">
+                      {link.badge}
+                    </span>
+                  )}
+                  {link.external && <ExternalLink className="w-2.5 h-2.5 text-gray-300 group-hover:text-red-400 flex-shrink-0" />}
+                </div>
+                <p className="text-[10px] text-gray-400 mt-px leading-snug truncate">{link.desc}</p>
+              </div>
+              <ArrowRight className="w-3 h-3 text-gray-200 group-hover:text-red-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function HighlightCard({ item, onClose }) {
+  return (
+    <div className="w-48 shrink-0 flex flex-col gap-3 pl-4 border-l border-gray-100">
+      <p className="text-[9px] font-bold text-gray-300 uppercase tracking-[2.5px]">Featured</p>
+      <Link
+        href={item.href}
+        onClick={onClose}
+        className="group flex flex-col gap-1.5 p-3 rounded-xl bg-gray-50 hover:bg-red-50 border border-gray-100 hover:border-red-100 transition-all duration-200"
+      >
+        <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-red-100 text-red-700 w-fit">
+          {item.label}
+        </span>
+        <p className="text-[11px] font-bold text-gray-800 group-hover:text-red-700 transition-colors leading-snug">
+          {item.title}
+        </p>
+        <p className="text-[10px] text-gray-400 leading-relaxed">{item.desc}</p>
+        <span className="text-[10px] font-bold text-red-600 group-hover:text-red-700 flex items-center gap-1 mt-1">
+          Learn more <ArrowRight className="w-2.5 h-2.5 group-hover:translate-x-0.5 transition-transform" />
+        </span>
+      </Link>
+    </div>
+  );
+}
+
+function PressPanel({ onClose }) {
+  return (
+    <div className="w-64 shrink-0 flex flex-col gap-3 pl-4 border-l border-gray-100">
+      <div className="flex items-center gap-1.5">
+        <Newspaper className="w-3 h-3 text-gray-300" />
+        <p className="text-[9px] font-bold text-gray-300 uppercase tracking-[2.5px]">Coderina in the Press</p>
+      </div>
+      <div className="flex flex-col gap-0.5">
+        {pressItems.map((item, i) => (
+          <a
+            key={i}
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+            className="group flex flex-col gap-0.5 px-2.5 py-2 -mx-2.5 rounded-lg hover:bg-red-50 transition-colors duration-150"
+          >
+            <div className="flex items-center gap-2">
+              <span className="text-[9px] font-bold text-red-700 uppercase tracking-wide shrink-0">
+                {item.publication}
+              </span>
+              <span className="text-[9px] text-gray-300">{item.date}</span>
+            </div>
+            <p className="text-[10px] text-gray-600 group-hover:text-red-700 leading-snug line-clamp-2 transition-colors">
+              {item.title}
+            </p>
+          </a>
+        ))}
+      </div>
+      <Link
+        href="/newsroom"
+        onClick={onClose}
+        className="text-[10px] font-bold text-red-600 hover:text-red-700 flex items-center gap-1 mt-1 transition-colors"
+      >
+        All news <ArrowRight className="w-3 h-3" />
+      </Link>
+    </div>
+  );
+}
+
+/* ─── Main MegaMenu ───────────────────────────────────────────── */
+export function MegaMenu({ type, onClose }) {
   const data = MENU_CONTENT[type];
   if (!data) return null;
 
-  const featured = data.featured;
-  const featureOnly = data.feature;
-
   return (
+    /* Positioned container — NOT full width, floats under nav */
     <div
-      onMouseEnter={onMouseEnter}
-      className="absolute left-0 right-0 top-full bg-white border-t border-gray-200 shadow-xl animate-fadeInDown z-50 max-w-5xl mx-auto px-6 py-8"
-      style={{
-        animation: "fadeInDown 0.3s ease-out forwards",
-      }}
+      className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[92vw] max-w-3xl bg-white border border-gray-100 rounded-xl z-50 overflow-hidden"
+      style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)" }}
     >
-      <div className="">
-        {/* Header */}
-        <div className="mb-8">
-          <h2 className="text-lg font-bold text-gray-900">{data.title}</h2>
+      {/* Top accent line */}
+      <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-red-600/50 to-transparent" />
+
+      <div className="px-6 py-5">
+        {/* Tagline */}
+        <p className="text-[10px] text-gray-400 uppercase tracking-[2px] font-medium mb-4">
+          {data.tagline}
+        </p>
+
+        {/* Columns */}
+        <div className="flex gap-6">
+          {data.cols.map((col, i) => (
+            <LinkCol
+              key={col.heading}
+              col={col}
+              isLast={i === data.cols.length - 1 && !data.highlight && !data.press}
+              onClose={onClose}
+            />
+          ))}
+
+          {/* Right panel: press or highlight */}
+          {data.press
+            ? <PressPanel onClose={onClose} />
+            : data.highlight
+            ? <HighlightCard item={data.highlight} onClose={onClose} />
+            : null}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* Left Side - Navigation Links */}
-          <div className="lg:col-span-7 grid md:grid-cols-2 gap-10">
-            {data.sections.map((section) => (
-              <div key={section.heading}>
-                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
-                  {section.heading}
-                </h3>
-                <div className="space-y-1">
-                  {section.links.map((link) => (
-                    <Link
-                      key={link.title}
-                      href={link.href}
-                      className="group block p-3 -mx-3 rounded-lg hover:bg-gray-50 transition-all duration-200"
-                    >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <span className="font-medium text-sm  text-gray-900 group-hover:text-teal-800 transition-colors">
-                              {link.title}
-                            </span>
-                            {link.badge && (
-                              <span className="px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-700 rounded">
-                                {link.badge}
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-xs text-gray-500 mt-0.5">
-                            {link.desc}
-                          </p>
-                        </div>
-                        <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all shrink-0 mt-1" />
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
+        {/* Bottom bar */}
+        <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-50">
+          <div className="flex items-center gap-4">
+            <Link
+              href="/contact"
+              onClick={onClose}
+              className="text-[10px] text-gray-400 hover:text-gray-700 font-medium transition-colors"
+            >
+              Become a Volunteer
+            </Link>
+            <Link
+              href={data.cta.href}
+              onClick={onClose}
+              className="text-[10px] font-bold text-red-600 hover:text-red-700 flex items-center gap-1 transition-colors"
+            >
+              {data.cta.label} <ArrowRight className="w-3 h-3" />
+            </Link>
           </div>
-
-          {/* Right Side - Featured Content */}
-          {/* Right Side */}
-          <div className="lg:col-span-5">
-            <div className="sticky top-8">
-              {/* IMAGE ONLY (feature) */}
-              {featureOnly && !featured && (
-                <div className="max-w-[16rem] mx-auto rounded-2xl overflow-hidden border border-gray-200">
-                  <div className="relative w-full h-40 2xl:h-64">
-                    <Image
-                      src={featureOnly.image}
-                      alt="Feature image"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* FULL FEATURED CARD */}
-              {featured && (
-                <div className="max-w-[16rem] mx-auto bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden border border-gray-200 hover:border-gray-300 transition-all duration-300 group cursor-pointer">
-                  <div className="relative w-full h-28 overflow-hidden">
-                    <Image
-                      src={featured.image}
-                      alt={featured.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-
-                    {featured.hasPlayIcon && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
-                          <Play className="w-7 h-7 text-gray-900 ml-1" />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="text-sm font-bold text-gray-900 mb-2">
-                      {featured.title}
-                    </h3>
-                    <p className="text-gray-600 text-xs mb-4">
-                      {featured.desc}
-                    </p>
-                    <div className="flex items-center text-teal-800 font-medium text-xs">
-                      <span>{featured.cta}</span>
-                      <ArrowRight className="w-3 h-3 ml-1" />
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Footer CTA */}
-        <div className="mt-10 pt-8 border-t border-gray-200">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <p className="text-xs text-gray-600">
-                Need help? Need help choosing the right solution?
-              </p>
-            </div>
-            <div className="text-xs">
-              <Link
-                href="/contact"
-                className="px-5 py-2.5 font-medium text-gray-700 hover:text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all"
-              >
-                Become a Volunteer
-              </Link>
-            </div>
-          </div>
+          <Link
+            href="/contact"
+            onClick={onClose}
+            className="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-[9px] font-bold px-3 py-1.5 uppercase tracking-widest rounded-md transition-colors active:scale-95"
+          >
+            Get Involved <ArrowRight className="w-3 h-3" />
+          </Link>
         </div>
       </div>
     </div>

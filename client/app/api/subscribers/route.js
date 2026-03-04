@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import { sanityClient } from "../../components/lib/sanityClient";
+import { sanityClient } from "../../utils/sanityClient";
 
 // =======================
 // GET → Fetch subscribers
 // =======================
 export async function GET() {
   try {
-    const query = `*[_type == "subscriber"] | order(_createdAt desc){
+    const query = `*[_type == "subscribers"] | order(_createdAt desc){
       _id,
       name,
       email
@@ -48,7 +48,7 @@ export async function POST(req) {
 
     // Check if email exists already
     const existing = await sanityClient.fetch(
-      `*[_type == "subscriber" && email == $email][0]`,
+      `*[_type == "subscribers" && email == $email][0]`,
       { email }
     );
 
@@ -61,7 +61,7 @@ export async function POST(req) {
 
     // Save to Sanity
     const newSubscriber = await sanityClient.create({
-      _type: "subscriber",
+      _type: "subscribers",
       name: name || "",
       email,
     });

@@ -11,16 +11,6 @@
  font-family: 'Inter', 'Proxima Nova', system-ui, sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.heading-font {
-  font-family: 'Space Grotesk', 'Proxima Nova', system-ui, sans-serif;
-}
-
 .timeline-line {
   background: linear-gradient(180deg, #1e293b 0%, #64748b 50%, #1e293b 100%);
 }
