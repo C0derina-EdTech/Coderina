@@ -68,26 +68,40 @@ export async function generateMetadata({ params }) {
   const imageUrl = post?.featuredImage || null;
 
   return {
-    title: `${post.title || "News"} | Newsroom`,
-    description: post.description || "",
-    alternates: { canonical: url },
+    title: `${post.title} | Newsroom`,
+    description: post.description,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
-      title: post.title || "Newsroom",
-      description: post.description || "",
+      title: post.title,
+      description: post.excerpt,
       url,
       siteName: "Coderina",
       type: "article",
-      publishedTime: post.publishedAt || undefined,
-      images: imageUrl ? [{ url: imageUrl, width: 1200, height: 630 }] : [],
-      videos:
-        !imageUrl && post.featuredVideo
-          ? [{ url: post.featuredVideo, type: "video/mp4" }]
-          : [],
+      publishedTime: post.publishedAt,
+      images: imageUrl
+        ? [
+            {
+              url: imageUrl,
+              width: 1200,
+              height: 630,
+            },
+          ]
+        : [],
+      videos: post?.featuredVideo
+        ? [
+            {
+              url: post.featuredVideo,
+              type: "video/mp4",
+            },
+          ]
+        : [],
     },
     twitter: {
       card: imageUrl ? "summary_large_image" : "summary",
-      title: post.title || "",
-      description: post.description || "",
+      title: post.title,
+      description: post.excerpt,
       images: imageUrl ? [imageUrl] : [],
     },
   };
@@ -102,6 +116,8 @@ export default async function Page({ params }) {
 
   if (!post) return notFound();
 
+  const imageUrl = post?.featuredImage || null;
+
   return (
     <>
       {/* ─── Structured Data (JSON-LD) ───────────────── */}
@@ -111,22 +127,21 @@ export default async function Page({ params }) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "NewsArticle",
-            headline: post.title || "",
-            description: post.description || "",
-            datePublished: post.publishedAt || undefined,
+            headline: post.title,
+            description: post.excerpt,
+            datePublished: post.publishedAt,
             author: {
               "@type": "Person",
-              name: post.author?.name || "",
+              name: post.author?.name,
             },
-            image: post.featuredImage || undefined,
-            video:
-              !post.featuredImage && post.featuredVideo
-                ? {
-                    "@type": "VideoObject",
-                    contentUrl: post.featuredVideo,
-                    name: post.title || "",
-                  }
-                : undefined,
+            image: imageUrl || undefined,
+            video: post?.featuredVideo
+              ? {
+                  "@type": "VideoObject",
+                  contentUrl: post.featuredVideo,
+                  name: post.title,
+                }
+              : undefined,
             mainEntityOfPage: {
               "@type": "WebPage",
               "@id": `${process.env.NEXT_PUBLIC_BASE_URL}/newsroom/${slug}`,
