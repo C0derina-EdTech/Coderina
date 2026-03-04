@@ -21,12 +21,15 @@ function TrendingCard({ topic }) {
               className="w-full h-full object-cover"
               muted
               playsInline
-              
               preload="metadata"
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black/30">
               <div className="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-4 h-4 text-red-700 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-4 h-4 text-red-700 ml-0.5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </div>
@@ -45,9 +48,9 @@ function TrendingCard({ topic }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Category pill */}
-        {topic.category?.[0] && (
+        {topic.category?.[0]?.title && (
           <span className="absolute top-2.5 left-2.5 text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/90 text-red-700">
-            {topic.category[0]}
+             {topic.category[0].title}
           </span>
         )}
       </div>
@@ -65,7 +68,9 @@ function TrendingCard({ topic }) {
         {topic.publishedAt && (
           <p className="text-[10px] text-gray-300 mt-0.5">
             {new Date(topic.publishedAt).toLocaleDateString("en-GB", {
-              day: "numeric", month: "short", year: "numeric",
+              day: "numeric",
+              month: "short",
+              year: "numeric",
             })}
           </p>
         )}
@@ -103,44 +108,50 @@ export default function News() {
 
   useEffect(() => {
     const update = () => {
-      if (window.innerWidth >= 1280) setCols(3);      // xl → 3 cols → show 6
-      else if (window.innerWidth >= 768) setCols(2);  // md → 2 cols → show 4
-      else setCols(1);                                // mobile → show 4
+      if (window.innerWidth >= 1280)
+        setCols(3); // xl → 3 cols → show 6
+      else if (window.innerWidth >= 768)
+        setCols(2); // md → 2 cols → show 4
+      else setCols(1); // mobile → show 4
     };
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  if (loading) return (
-    <section className="w-full bg-[#fafafa] py-16">
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="rounded-xl bg-gray-100 animate-pulse aspect-[4/3]" />
-          ))}
+  if (loading)
+    return (
+      <section className="w-full bg-[#fafafa] py-16">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+            {[...Array(4)].map((_, i) => (
+              <div
+                key={i}
+                className="rounded-xl bg-gray-100 animate-pulse aspect-[4/3]"
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
 
   if (!posts?.length) return null;
 
-  const sorted = [...posts].sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+  const sorted = [...posts].sort(
+    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt),
+  );
 
   // Smart slice: 6 for 3-col, 4 for everything else
   const trendingCount = cols >= 3 ? 6 : 4;
   const trending = sorted.slice(0, trendingCount);
-  const latest   = sorted.slice(0, 5);
+  const latest = sorted.slice(0, 5);
 
   return (
     <section className="w-full bg-[#fafafa] py-12 md:py-16">
       <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-8 xl:gap-10 items-start">
-
           {/* ── LEFT: Trending ── */}
           <div className="hidden sm:block flex-1 min-w-0">
-
             {/* Section header */}
             <div className="flex items-end gap-4 mb-6">
               <div>
@@ -171,7 +182,6 @@ export default function News() {
           {/* ── RIGHT: Latest News ── */}
           <aside className="w-full lg:w-72 xl:w-80 flex-shrink-0 lg:sticky lg:top-6">
             <div className="bg-white border border-gray-100 rounded-sm p-5 ">
-
               {/* Header */}
               <div className="mb-5">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-red-700">
@@ -181,7 +191,7 @@ export default function News() {
                   Latest News
                 </h2>
                 <p className="text-[11px] text-gray-400 mt-0.5 leading-relaxed">
-                  Coderina's latest milestones and stories.
+                  Coderina&apos;s latest milestones and stories.
                 </p>
               </div>
 
@@ -192,7 +202,10 @@ export default function News() {
                     key={post._id}
                     item={{
                       title: post.title,
-                      tag: post.tags?.[0] || post.category?.[0] || "News",
+                      tag:
+                        post.tags?.[0]?.title ||
+                        post.category?.[0]?.title ||
+                        "News",
                       readTime: `${post.readTime || 3} min read`,
                       href: `/newsroom/${post.slug.current}`,
                     }}
@@ -206,13 +219,18 @@ export default function News() {
                 className="mt-5 flex items-center justify-between text-xs font-bold text-gray-800 hover:text-red-700 transition-colors pt-4 border-t border-gray-100 group"
               >
                 View all news
-                <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <svg
+                  className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </Link>
             </div>
           </aside>
-
         </div>
       </div>
     </section>

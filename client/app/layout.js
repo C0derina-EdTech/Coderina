@@ -10,9 +10,6 @@ export const metadata = {
     default: "Coderina | Empowering STEAM Education Across Africa",
     template: "%s - Coderina Education and Technology Foundation",
   },
-  verification: {
-    google: "f609400bb46302f9", // Replace with your actual verification code
-  },
   description:
     "Coderina Education and Technology Foundation (Coderina EduTech) is a not-for-profit organization empowering young Africans through STEAM, robotics, coding, AI, and digital literacy programs. We build future-ready innovators, educators, and learners equipped to solve global challenges with technology and creativity.",
   keywords: [

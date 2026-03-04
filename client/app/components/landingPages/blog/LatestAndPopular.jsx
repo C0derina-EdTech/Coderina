@@ -3,8 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { urlFor } from "../../lib/imageUrl";
-import { Link as LinkIcon } from "lucide-react";
+import { Eye, Link as LinkIcon } from "lucide-react";
 
 const WORD_LIMIT_TITLE = 12;
 const WORD_LIMIT_EXCERPT = 18;
@@ -28,8 +27,6 @@ const calculateReadTime = (content) => {
 };
 
 const LatestAndPopular = ({ posts = [] }) => {
- 
-
   if (!posts.length) return null;
 
   // Sort latest
@@ -50,7 +47,6 @@ const LatestAndPopular = ({ posts = [] }) => {
   return (
     <section>
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_320px] gap-8 lg:gap-10">
-        
         {/* ───────────── Latest Posts ───────────── */}
         <div>
           <div className="mb-4">
@@ -63,46 +59,43 @@ const LatestAndPopular = ({ posts = [] }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
             {latestPosts.map((post) => (
               <article key={post._id} className="group cursor-pointer">
-                
                 <Link href={`/newsroom/${post.slug?.current}`}>
-                  <div className="relative w-full aspect-[16/10] rounded-sm overflow-hidden mb-3">
-                   
-
+                  <div className="relative w-full aspect-16/10 rounded-sm overflow-hidden mb-3">
                     {post?.featuredVideo ? (
-    <>
-      {/* Static video preview (no autoplay) */}
-      <video
-        src={post.featuredVideo}
-        className="h-full w-full object-cover"
-        muted
-        playsInline
-        preload="metadata"
-      />
+                      <>
+                        {/* Static video preview (no autoplay) */}
+                        <video
+                          src={post.featuredVideo}
+                          className="h-full w-full object-cover"
+                          muted
+                          playsInline
+                          preload="metadata"
+                        />
 
-      {/* Play Icon Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300 group-hover:bg-black/40">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-300 group-hover:scale-110">
-          <svg
-            className="h-6 w-6 text-red-700 ml-1"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M8 5v14l11-7z" />
-          </svg>
-        </div>
-      </div>
-    </>
-  ) : (
-    <Image
-     src={post?.featuredImage || "/placeholder.jpg"}
-                     alt={post.title}
-                      fill
-                      unoptimized
-                      className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      priority={false}
-    />
-  )}
+                        {/* Play Icon Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300 group-hover:bg-black/40">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-300 group-hover:scale-110">
+                            <svg
+                              className="h-6 w-6 text-red-700 ml-1"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <Image
+                        src={post?.featuredImage || "/placeholder.jpg"}
+                        alt={post?.title || "Untitled"}
+                        fill
+                        unoptimized
+                        className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        priority={false}
+                      />
+                    )}
                   </div>
                 </Link>
 
@@ -123,7 +116,7 @@ const LatestAndPopular = ({ posts = [] }) => {
                       <div className="relative w-5 h-5 rounded-full overflow-hidden">
                         <Image
                           src={post.author.image}
-                          alt={post.author.name}
+                          alt={post?.author?.name || "Anonymous"}
                           fill
                           className="object-cover"
                           sizes="20px"
@@ -135,13 +128,13 @@ const LatestAndPopular = ({ posts = [] }) => {
                     </span>
                     <span className="text-gray-300 text-[10px]">·</span>
                     <span className="text-[10px] text-gray-400">
-                      {formatDate(post.publishedAt)} ·{" "}
-                      {post.readTime} min read
+                      {formatDate(post.publishedAt)} · {post.readTime} min read
+                      · {post.views || 0} Views
                     </span>
                   </div>
 
                   {/* Copy Link */}
-                  <LinkIcon 
+                  <LinkIcon
                     onClick={() => copyLink(post.slug)}
                     className="w-4 h-4 text-gray-400 hover:text-red-700 transition-colors cursor-pointer"
                   />
@@ -166,7 +159,7 @@ const LatestAndPopular = ({ posts = [] }) => {
                 key={post._id}
                 className="flex gap-3 items-start py-3 group cursor-pointer"
               >
-                <span className="text-[22px] font-extrabold text-gray-100 leading-none select-none mt-0.5 w-7 flex-shrink-0">
+                <span className="text-[22px] font-extrabold text-gray-100 leading-none select-none mt-0.5 w-7 shrink-0">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
@@ -191,7 +184,6 @@ const LatestAndPopular = ({ posts = [] }) => {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

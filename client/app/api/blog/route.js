@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { sanityClient } from "../../utils/sanityClient";
 
-
 export async function GET() {
   try {
     const query = `
@@ -13,8 +12,16 @@ export async function GET() {
         publishedAt,
         readTime,
         views,
-        category,
-        tags,
+         category[]->{
+    _id,
+    title,
+    slug
+  },
+  tags[]->{
+    _id,
+    title,
+    slug
+  },
         featuredImage,
         featuredVideo,
         gallery,
@@ -36,13 +43,12 @@ export async function GET() {
       count: blogs.length,
       data: blogs,
     });
-
   } catch (error) {
     console.error("❌ Blog API Error:", error);
 
     return NextResponse.json(
       { success: false, message: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
