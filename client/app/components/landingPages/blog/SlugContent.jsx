@@ -523,6 +523,7 @@ const tags = (post.tags || [])
                   src={post.author.image}
                   alt={post.author.name || ""}
                   fill
+                  unoptimized
                   className="object-cover"
                 />
               </div>
@@ -628,29 +629,7 @@ const tags = (post.tags || [])
               <BlogContent post={post} />
             </div>
 
-            {/* Gallery */}
-            {post.gallery?.length > 0 && (
-              <div className="mt-10">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">
-                  Gallery
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {post.gallery.map((img, i) => (
-                    <div
-                      key={i}
-                      className="relative aspect-video rounded-lg overflow-hidden bg-gray-100 group"
-                    >
-                      <Image
-                        src={img}
-                        alt={`Gallery ${i + 1}`}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            
 
             {/* Tags + Share footer */}
             <div className="mt-10 pt-6 border-t border-gray-100 space-y-4">
