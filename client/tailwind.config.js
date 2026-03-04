@@ -17,7 +17,7 @@ const config = {
       Playfair: ["Playfair Display", "serif"],
       SpaceGrotesk: ["Space Grotesk", "sans-serif"],
       Lato: ["Lato", "sans-serif"],
-      sans: ['Inter', 'Proxima Nova', 'system-ui', 'sans-serif'],
+      sans: ['DM Sans', 'sans-serif'],
     },
     extend: {
       screens: {

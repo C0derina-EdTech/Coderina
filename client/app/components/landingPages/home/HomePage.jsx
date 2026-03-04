@@ -1,22 +1,20 @@
 "use client";
 import React from "react";
 import "aos/dist/aos.css";
+import Hero from "./HeroL";
 import PrintingLab from "./PrintingLab";
-import TrustedBy from "./TrustedBy";
 import Clip from "./Clip";
-import ProgramsAndInitiatives from "./ProgramsAndInitiatives";
-import CoderinaFacilities from "./CoderinaFacilities";
+import About from "./About";
+import Facilities from "./Facilities";
 import UpcomingEvents from "./UpcomingEvents";
 import useIsLargeScreen from "../../lib/useIsLargeScreen";
 import Press from "./Press";
-import CoderinaLanding from "./CoderinaLanding";
-import AfterHero from "./AfterHero";
-import Siwes from "./Siwes";
-import Header from "./Header";
+import Volunteer from "./Volunteer";
 import Blog from "./Blog";
-import Details from "./Details";
-import Navbar from "../Navbar";
+import Initiatives from "./Initiatives";
+import Partners from "./Partners";
 import Footer from "../Footer";
+import News from "./News";
 const HomePage = () => {
   const isLargeScreen = useIsLargeScreen();
 
@@ -25,25 +23,23 @@ const HomePage = () => {
 
   // Store only the component (not JSX)
   const homeContents = [
-      { color: "#fff", section: Header },
-     { color: "#fff", section: TrustedBy },
-    { color: "#fff", section: UpcomingEvents },
-     { color: "#fff", section: AfterHero},
-    { color: "#fff", section: ProgramsAndInitiatives },
-    { color: "#fff", section: Details },
-    { color: "#fff", section: CoderinaFacilities },
+    { color: "#fff", section: Hero },
+     { color: "#fff", section: Partners },
+     { color: "#000", section: About },
+     { color: "#fff", section: UpcomingEvents },
+     { color: "#fff", section: Volunteer },
+     { color: "#fff", section: News},
+    { color: "#fff", section: Initiatives },
+    { color: "#fff", section: Facilities },
     { color: "#fff", section: PrintingLab },
     { color: "#fff", section: Clip },
-    { color: "#fff", section: CoderinaLanding },
-    { color: "#fff", section: Siwes },
-    { color: "#fff", section: Blog },
+    // { color: "#fff", section: Blog },
     { color: "#fff", section: Press },
-
+   
   ];
 
   return (
-    <div>
-      <Navbar/>
+    <div className="overflow-hidden">
     <div>
       {homeContents.map(({ color, section: Component, isGradient, bgImage }, index) => (
         <div
@@ -58,7 +54,7 @@ const HomePage = () => {
             backgroundPosition: bgImage ? "center" : undefined,
           }}
         >
-          <div className="bg-white">
+          <div className="bg-white font-sans">
             <Component isLargeScreen={isLargeScreen} />
           </div>
         </div>

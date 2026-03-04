@@ -35,8 +35,8 @@ let inputBg = "bg-gray-800";
 let inputBorder = "border-gray-600";
 let inputText = "text-white";
 let borderColor = "border-gray-700";
-let buttonBg = "bg-teal-700 hover:bg-teal-600";
-let buttonHoverBg = "bg-teal-600";
+let buttonBg = "bg-red-700 hover:bg-red-600";
+let buttonHoverBg = "bg-red-600";
 
   // Dynamic color configuration based on pathname
 if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
@@ -47,8 +47,8 @@ if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
   inputBorder = "border-gray-600";
   inputText = "text-white";
   borderColor = "border-gray-700";
-  buttonBg = "bg-teal-700";
-  buttonHoverBg = "bg-teal-600";
+  buttonBg = "bg-red-700";
+  buttonHoverBg = "bg-red-600";
 } else if (pathname?.startsWith("/about")) {
   bgColor = "bg-gray-50";
   textColor = "text-gray-900";
@@ -111,6 +111,7 @@ if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
     },
     { label: "Partners & Sponsors", url: "/contact" },
     { label: "Contact Us", url: "/contact" },
+    { label: "Newsroom", url: "/newsroom" },
   ];
 
   const contactInfo = [
@@ -145,7 +146,7 @@ if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
     >
       {/* Newsletter Section */}
       <div className={`border-t border-b ${borderColor}`}>
-        <div className="max-w-400 mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-12">
+        <div className="max-w-400 mx-auto px-4 md:px-6 lg:px-8 py-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
               <h3 className="text-2xl font-semibold mb-2">
@@ -210,7 +211,7 @@ if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
                 <li key={idx}>
                   <Link
                     href={link.url}
-                    className={`${subTextColor} hover:text-teal-700 transition-colors text-sm`}
+                    className={`${subTextColor} hover:text-red-700 transition-colors text-sm`}
                   >
                     {link.label}
                   </Link>
@@ -226,7 +227,7 @@ if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
                 <li key={idx}>
                   <Link
                     href={link.url}
-                    className={`${subTextColor} hover:text-teal-700 transition-colors text-sm`}
+                    className={`${subTextColor} hover:text-red-700 transition-colors text-sm`}
                   >
                     {link.label}
                   </Link>
@@ -242,7 +243,7 @@ if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
                 <li key={idx}>
                   <Link
                     href={link.url}
-                    className={`${subTextColor} hover:text-teal-700 transition-colors text-sm`}
+                    className={`${subTextColor} hover:text-red-700 transition-colors text-sm`}
                   >
                     {link.label}
                   </Link>
@@ -259,7 +260,7 @@ if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
                   {item.href ? (
                     <Link
                       href={item.href}
-                      className={`${subTextColor} hover:text-teal-700 transition-colors text-sm`}
+                      className={`${subTextColor} hover:text-red-700 transition-colors text-sm`}
                     >
                       {item.value}
                     </Link>
@@ -279,16 +280,16 @@ if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
               {socialLinks.map((social, idx) => {
                 const Icon = social.icon;
                 return (
-                  <a
+                  <Link
                     key={idx}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className={`${subTextColor} hover:text-teal-600 transition-colors`}
+                    className={`${subTextColor} hover:text-red-600 transition-colors`}
                   >
                     <Icon className="w-5 h-5" />
-                  </a>
+                  </Link>
                 );
               })}
             </div>
@@ -305,7 +306,7 @@ if (pathname?.startsWith("/programs") || pathname?.startsWith("/events")) {
           <div className="flex gap-6">
             <Link
               href="/contact"
-              className={`${subTextColor} hover:text-teal-600 text-sm transition-colors`}
+              className={`${subTextColor} hover:text-red-600 text-sm transition-colors`}
             >
              Become a Volunteer
             </Link>

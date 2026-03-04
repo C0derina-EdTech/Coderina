@@ -188,8 +188,8 @@ const removeFile = (field) => {
           <div className="space-y-10 text-sm">
             {/* Personal Information */}
             <div>
-              <h2 className="text-base lg:text-xl 2xl:text-2xl font-semibold text-teal-800 mb-6 flex items-center gap-2">
-                <div className="w-4 md:w-8 h-4 md:h-8 bg-teal-800 text-white rounded-lg flex items-center justify-center text-sm font-bold">
+              <h2 className="text-base lg:text-xl 2xl:text-2xl font-semibold text-red-800 mb-6 flex items-center gap-2">
+                <div className="w-4 md:w-8 h-4 md:h-8 bg-red-800 text-white rounded-lg flex items-center justify-center text-sm font-bold">
                   1
                 </div>
                 Personal Information
@@ -266,8 +266,8 @@ const removeFile = (field) => {
 
             {/* Academic Information */}
             <div>
-              <h2 className="text-base lg:text-xl 2xl:text-2xl font-semibold text-teal-800 mb-6 flex items-center gap-2">
-                <div className="w-4 md:w-8 h-4 md:h-8 bg-teal-800 text-white rounded-lg flex items-center justify-center text-sm font-bold">
+              <h2 className="text-base lg:text-xl 2xl:text-2xl font-semibold text-red-800 mb-6 flex items-center gap-2">
+                <div className="w-4 md:w-8 h-4 md:h-8 bg-red-800 text-white rounded-lg flex items-center justify-center text-sm font-bold">
                   2
                 </div>
                 Academic Information
@@ -328,8 +328,8 @@ const removeFile = (field) => {
 
             {/* Internship Details */}
             <div>
-              <h2 className="text-base lg:text-xl 2xl:text-2xl font-semibold text-teal-900 mb-6 flex items-center gap-2">
-                <div className="w-4 md:w-8 h-4 md:h-8 bg-teal-900 text-white rounded-lg flex items-center justify-center text-sm font-bold">
+              <h2 className="text-base lg:text-xl 2xl:text-2xl font-semibold text-red-900 mb-6 flex items-center gap-2">
+                <div className="w-4 md:w-8 h-4 md:h-8 bg-red-900 text-white rounded-lg flex items-center justify-center text-sm font-bold">
                   3
                 </div>
                 Internship Details
@@ -411,8 +411,8 @@ const removeFile = (field) => {
 
             {/* Document Uploads */}
             <div>
-              <h2 className="text-base lg:text-xl 2xl:text-2xl font-semibold text-teal-900 mb-6 flex items-center gap-2">
-                <div className="w-4 md:w-8 h-4 md:h-8 bg-teal-800 text-white rounded-lg flex items-center justify-center text-sm font-bold">
+              <h2 className="text-base lg:text-xl 2xl:text-2xl font-semibold text-red-900 mb-6 flex items-center gap-2">
+                <div className="w-4 md:w-8 h-4 md:h-8 bg-red-800 text-white rounded-lg flex items-center justify-center text-sm font-bold">
                   4
                 </div>
                 Document Uploads
@@ -669,7 +669,7 @@ const removeFile = (field) => {
             <button
               onClick={handleSubmit}
               disabled={siwesSubmitting}
-              className="w-full bg-teal-800 text-white rounded-xl py-2 2xl:py-4 font-semibold text-sm 2xl:text-base flex items-center justify-center gap-3 hover:bg-black transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="w-full bg-red-700 text-white rounded-xl py-2 2xl:py-4 font-semibold text-sm 2xl:text-base flex items-center justify-center gap-3 hover:bg-black transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
             >
               {siwesSubmitting ? (
                 <>

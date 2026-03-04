@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
-
+import { sanityClient } from "../../../utils/sanityClient";
 export async function POST(req, { params }) {
   const { slug } = params;
 
-  const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID;
+  const SANITY_PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID0;
   const SANITY_DATASET = process.env.SANITY_DATASET;
-  const SANITY_TOKEN = process.env.SANITY_API_TOKEN;
+  const SANITY_TOKEN = process.env.SANITY_API_TOKEN0;
 
   // ✅ Inject slug directly in the GROQ query string
-  const query = `*[_type == "coderinablog" && slug.current == "${slug}"][0]`;
+  const query = `*[_type == "blog" && slug.current == "${slug}"][0]`;
 
   const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${SANITY_DATASET}?query=${encodeURIComponent(query)}`;
 

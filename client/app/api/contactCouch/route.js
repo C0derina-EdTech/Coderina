@@ -95,7 +95,7 @@
 
 
 import { NextResponse } from "next/server";
-import { sanityClient } from "../../components/lib/sanityClient";
+import { sanityClient } from "../../utils/sanityClient";
 
 export async function POST(req) {
   try {

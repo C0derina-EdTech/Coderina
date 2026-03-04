@@ -35,7 +35,7 @@ const Blog = ({ isLargeScreen })  => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogs.slice(0, 3).map((post, index) => (
               <div
-                key={post.id}
+                key={post._id}
                 className="bg-white rounded-xl overflow-hidden hover:shadow-sm transition-all duration-300"
               >
                 <div
