@@ -15,16 +15,16 @@ export default function PostsSidebar({ post, slug }) {
     if (!allPosts?.length) return;
 
     let related = allPosts.filter(
-      (p) =>
-        p.category === currentCategory &&
-        p.slug?.current !== currentSlug
+      (p) => p.category === currentCategory && p.slug?.current !== currentSlug,
     );
 
     if (!related.length) {
       related = allPosts.filter(
         (p) =>
-          p.title.toLowerCase().includes(currentCategory?.toLowerCase() || "") &&
-          p.slug?.current !== currentSlug
+          p.title
+            .toLowerCase()
+            .includes(currentCategory?.toLowerCase() || "") &&
+          p.slug?.current !== currentSlug,
       );
     }
 
@@ -32,9 +32,8 @@ export default function PostsSidebar({ post, slug }) {
       related = allPosts.filter(
         (p) =>
           ["coderina", "education", "technology", "programs"].some((word) =>
-            p.title.toLowerCase().includes(word)
-          ) &&
-          p.slug?.current !== currentSlug
+            p.title.toLowerCase().includes(word),
+          ) && p.slug?.current !== currentSlug,
       );
     }
 
@@ -65,14 +64,16 @@ export default function PostsSidebar({ post, slug }) {
                 <div className="relative w-20 h-16 flex-shrink-0">
                   <Image
                     src={urlFor(p.image).url()}
-                    alt={p.title}
+                    alt={p?.title || "Untitled"}
                     fill
                     className="object-cover rounded-md"
                   />
                 </div>
               )}
               <div>
-                <h3 className="font-medium text-sm">{p.title}</h3>
+                <h3 className="font-medium text-sm">
+                  {p?.title || "Untitled"}
+                </h3>
                 <p className="text-xs text-gray-500 capitalize">{p.category}</p>
               </div>
             </div>

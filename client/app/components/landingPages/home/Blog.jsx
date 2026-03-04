@@ -43,7 +43,7 @@ const Blog = ({ isLargeScreen })  => {
                 >
                   <Image
                     src={urlFor(post.image).url()}
-                    alt={post.title}
+                    alt={post?.title || "Untitled"}
                     fill
                     className="object-cover"
                   />
@@ -66,7 +66,7 @@ const Blog = ({ isLargeScreen })  => {
                     <h3
                       className="text-sm md:text-base font-bold text-[#133c55] mb-2 hover:text-[#f9a826] transition-colors truncate w-full overflow-hidden text-ellipsis whitespace-nowrap"
                     >
-                      {post.title}
+                      {post?.title || "Untitled"}
                     </h3>
                   </Link>
 

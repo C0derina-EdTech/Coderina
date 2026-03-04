@@ -128,7 +128,10 @@ const Lightbox = ({ images, index, onClose }) => {
         </>
       )}
 
-      <div className="relative max-w-4xl w-full max-h-[85vh] rounded-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="relative max-w-4xl w-full max-h-[85vh] rounded-xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
         <Image
           src={images[current]}
           alt={`Gallery image ${current + 1}`}
@@ -159,10 +162,10 @@ const GallerySection = ({ images, title }) => {
     images.length === 1
       ? "grid-cols-1"
       : images.length === 2
-      ? "grid-cols-2"
-      : images.length === 3
-      ? "grid-cols-2 sm:grid-cols-3"
-      : "grid-cols-2 sm:grid-cols-3";
+        ? "grid-cols-2"
+        : images.length === 3
+          ? "grid-cols-2 sm:grid-cols-3"
+          : "grid-cols-2 sm:grid-cols-3";
 
   return (
     <section className="mt-10">
@@ -171,7 +174,9 @@ const GallerySection = ({ images, title }) => {
           Gallery
         </p>
         <div className="flex-1 h-px bg-gray-100" />
-        <span className="text-[10px] text-gray-400">{images.length} photos</span>
+        <span className="text-[10px] text-gray-400">
+          {images.length} photos
+        </span>
       </div>
 
       <div className={`grid gap-2 ${gridClass}`}>
@@ -279,8 +284,12 @@ const BlogContent = ({ post }) => {
             </div>
           )}
           <div>
-            <p className="text-xs font-semibold text-gray-800">{post.author.name}</p>
-            <p className="text-[11px] text-gray-500 mt-0.5 leading-relaxed">{post.author.bio}</p>
+            <p className="text-xs font-semibold text-gray-800">
+              {post?.author?.name || "Anonymous"}
+            </p>
+            <p className="text-[11px] text-gray-500 mt-0.5 leading-relaxed">
+              {post.author.bio}
+            </p>
           </div>
         </div>
       )}

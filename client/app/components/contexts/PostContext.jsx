@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, useCallback } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import toast from "react-hot-toast";
 
 const PostContext = createContext();
@@ -26,9 +32,7 @@ export function PostProvider({ children }) {
       ];
 
       const responses = await Promise.allSettled(
-        endpoints.map((ep) =>
-          fetch(ep.url).then((res) => res.json())
-        )
+        endpoints.map((ep) => fetch(ep.url).then((res) => res.json())),
       );
 
       responses.forEach((result, index) => {
@@ -76,6 +80,17 @@ export function PostProvider({ children }) {
     await fetchData();
   };
 
+  // ✅ Track post view
+  const trackView = useCallback(async (slug) => {
+    if (!slug) return;
+
+    try {
+      await fetch(`/api/views/${slug}`, { method: "POST" });
+    } catch (err) {
+      console.error("Failed to track view:", err);
+    }
+  }, []);
+
   return (
     <PostContext.Provider
       value={{
@@ -84,6 +99,7 @@ export function PostProvider({ children }) {
         loading,
         error,
         refetch,
+        trackView,
       }}
     >
       {children}

@@ -1,46 +1,43 @@
+
 import { NextResponse } from "next/server";
 import { sanityClient } from "../../../utils/sanityClient";
-export async function POST(req, { params }) {
-  const { slug } = params;
 
-  const SANITY_PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID0;
-  const SANITY_DATASET = process.env.SANITY_DATASET;
-  const SANITY_TOKEN = process.env.SANITY_API_TOKEN0;
+export async function POST(req, context) {
+  try {
+    // await the params object
+    const params = await context.params;
+    const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
 
-  // ✅ Inject slug directly in the GROQ query string
-  const query = `*[_type == "blog" && slug.current == "${slug}"][0]`;
+    if (!slug) {
+      return NextResponse.json({ message: "Slug missing" }, { status: 400 });
+    }
 
-  const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${SANITY_DATASET}?query=${encodeURIComponent(query)}`;
+    // Fetch post by slug
+    const post = await sanityClient.fetch(
+      `*[_type == "blog" && slug.current == $slug][0]`,
+      { slug },
+    );
 
-  const docRes = await fetch(url);
-  const { result } = await docRes.json();
+    if (!post?._id) {
+      return NextResponse.json({ message: "Post not found" }, { status: 404 });
+    }
 
-  if (!result?._id) {
-    return NextResponse.json({ message: "Post not found" }, { status: 404 });
+    // Increment views
+    const updatedPost = await sanityClient
+      .patch(post._id)
+      .setIfMissing({ views: 0 })
+      .inc({ views: 1 })
+      .commit();
+
+    return NextResponse.json({
+      success: true,
+      views: updatedPost.views, // the latest count
+    });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: "Error updating views" },
+      { status: 500 },
+    );
   }
-
-  const patchUrl = `https://${SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/mutate/${SANITY_DATASET}`;
-
-  const patchBody = {
-    mutations: [
-      {
-        patch: {
-          id: result._id,
-          inc: { views: 1 },
-        },
-      },
-    ],
-  };
-
-  const patchRes = await fetch(patchUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${SANITY_TOKEN}`,
-    },
-    body: JSON.stringify(patchBody),
-  });
-
-  const data = await patchRes.json();
-  return NextResponse.json(data);
 }

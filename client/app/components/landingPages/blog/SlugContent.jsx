@@ -7,6 +7,7 @@ import BlogContent from "./BlogContent";
 import Navbar from "../home/Nav";
 import { usePost } from "../../contexts/PostContext";
 import Footer from "../Footer";
+import { Eye } from "lucide-react";
 // ── tiny helpers ────────────────────────────────────────────────
 const fmt = (iso) =>
   new Date(iso).toLocaleDateString("en-GB", {
@@ -29,7 +30,7 @@ const TableOfContents = ({ headings }) => {
           if (e.isIntersecting) setActive(e.target.id);
         });
       },
-      { rootMargin: "-20% 0% -60% 0%" }
+      { rootMargin: "-20% 0% -60% 0%" },
     );
     headings.forEach((h) => {
       const el = document.getElementById(h.id);
@@ -76,16 +77,18 @@ const SidebarPostCard = ({ post }) => (
       <div className="relative w-16 h-14 flex-shrink-0 rounded overflow-hidden bg-gray-100">
         <Image
           src={post.featuredImage}
-          alt={post.title}
+          alt={post?.title || "Untitled"}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-300"
         />
       </div>
     )}
     <div className="flex-1 min-w-0">
-      <p className="text-[11px] text-gray-400 mb-0.5">{fmt(post.publishedAt)}</p>
+      <p className="text-[11px] text-gray-400 mb-0.5">
+        {fmt(post.publishedAt)}
+      </p>
       <p className="text-xs font-medium text-gray-700 group-hover:text-red-700 transition-colors leading-snug line-clamp-2">
-        {post.title}
+        {post?.title || "Untitled"}
       </p>
     </div>
   </Link>
@@ -167,11 +170,25 @@ const ShareBar = ({ title, url }) => {
         aria-label="Copy link"
       >
         {copied ? (
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
             <path d="M20 6L9 17l-5-5" />
           </svg>
         ) : (
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
             <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
           </svg>
@@ -222,8 +239,16 @@ const Sidebar = ({ post, allPosts, headings }) => {
   const related = allPosts
     ?.filter((p) => {
       if (p._id === post._id) return false;
-      const sharedTag = p.tags?.some((t) => post.tags?.includes(t));
-      const sharedCat = p.category?.some((c) => post.category?.includes(c));
+
+      const sharedTag = (p.tags || []).some(
+        (pt) => pt?._id && (post.tags || []).some((ct) => ct?._id === pt._id),
+      );
+
+      const sharedCat = (p.category || []).some(
+        (pc) =>
+          pc?._id && (post.category || []).some((cc) => cc?._id === pc._id),
+      );
+
       return sharedTag || sharedCat;
     })
     .slice(0, 4);
@@ -236,7 +261,12 @@ const Sidebar = ({ post, allPosts, headings }) => {
 
   // all unique categories
   const allCats = [
-    ...new Set(allPosts?.flatMap((p) => p.category || [])),
+    ...new Map(
+      allPosts
+        ?.flatMap((p) => p.category || [])
+        .filter((c) => c && c.slug) // ensure valid category & slug
+        .map((c) => [c.slug, c]),
+    ).values(),
   ].slice(0, 12);
 
   return (
@@ -257,18 +287,27 @@ const Sidebar = ({ post, allPosts, headings }) => {
           <div className="flex items-center gap-3">
             {post.author.image && (
               <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-red-100">
-                <Image src={post.author.image} alt={post.author.name} fill className="object-cover" />
+                <Image
+                  src={post.author.image}
+                  alt={post?.author?.name || "Anonymous"}
+                  fill
+                  className="object-cover"
+                />
               </div>
             )}
             <div>
-              <p className="text-xs font-semibold text-gray-800">{post.author.name}</p>
+              <p className="text-xs font-semibold text-gray-800">
+                {post?.author?.name || "Anonymous"}
+              </p>
               {post.author.role && (
                 <p className="text-[10px] text-gray-400">{post.author.role}</p>
               )}
             </div>
           </div>
           {post.author.bio && (
-            <p className="text-[11px] text-gray-500 mt-2 leading-relaxed">{post.author.bio}</p>
+            <p className="text-[11px] text-gray-500 mt-2 leading-relaxed">
+              {post.author.bio}
+            </p>
           )}
         </div>
       )}
@@ -314,7 +353,9 @@ const Sidebar = ({ post, allPosts, headings }) => {
                 href={`/newsroom?year=${yr}`}
                 className="flex items-center justify-between py-1.5 px-2 rounded-lg text-xs text-gray-600 hover:bg-red-50 hover:text-red-700 transition-colors group"
               >
-                <span className="font-medium group-hover:font-semibold transition-all">{yr}</span>
+                <span className="font-medium group-hover:font-semibold transition-all">
+                  {yr}
+                </span>
                 <span className="text-[10px] bg-gray-100 group-hover:bg-red-100 text-gray-400 group-hover:text-red-600 px-2 py-0.5 rounded-full transition-colors">
                   {archive[yr]} {archive[yr] === 1 ? "post" : "posts"}
                 </span>
@@ -332,7 +373,7 @@ const Sidebar = ({ post, allPosts, headings }) => {
           </p>
           <div className="flex flex-wrap gap-1.5">
             {allCats.map((cat) => (
-              <CategoryBadge key={cat} cat={cat} />
+              <CategoryBadge key={cat.slug} cat={cat.title} />
             ))}
           </div>
         </div>
@@ -341,7 +382,9 @@ const Sidebar = ({ post, allPosts, headings }) => {
       {/* Newsletter / CTA */}
       <div
         className="rounded-xl p-4 text-white relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)" }}
+        style={{
+          background: "linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)",
+        }}
       >
         <div
           className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-10"
@@ -370,28 +413,54 @@ const Sidebar = ({ post, allPosts, headings }) => {
 
 // ── Main Component ───────────────────────────────────────────────
 const SlugContent = ({ post, allPosts = [] }) => {
-    const { posts = [], loading } = usePost();
+  const { posts = [], trackView } = usePost();
   const [headings, setHeadings] = useState([]);
 
   // extract headings from rendered article for TOC
   useEffect(() => {
+    if (typeof window === "undefined") return; // extra safety for SSR
     const article = document.getElementById("article-body");
     if (!article) return;
+
     const els = article.querySelectorAll("h2, h3");
-    const list = [];
-    els.forEach((el, i) => {
+    const list = Array.from(els).map((el, i) => {
       if (!el.id) el.id = `heading-${i}`;
-      list.push({ id: el.id, text: el.textContent, level: parseInt(el.tagName[1]) });
+      return {
+        id: el.id,
+        text: el.textContent,
+        level: parseInt(el.tagName[1], 10),
+      };
     });
+
     setHeadings(list);
   }, [post]);
 
+  const [views, setViews] = useState(post.views || 0);
+
+  useEffect(() => {
+    if (post?.slug?.current) {
+      trackView(post.slug.current)
+        .then(() => setViews((prev) => prev + 1))
+        .catch(console.error);
+    }
+  }, [post?.slug?.current, trackView]);
   // categories & tags
-  const categories = post.category || [];
-  const tags = post.tags || [];
+  const categories = (post.category || [])
+  .filter(Boolean) // remove null/undefined
+  .map(c => ({
+    title: c.title || "Untitled",
+    slug: c.slug?.current || "",
+  }));
+
+const tags = (post.tags || [])
+  .filter(Boolean)
+  .map(t => ({
+    title: t.title || "Untitled",
+    slug: t.slug?.current || "",
+  }));
 
   // breadcrumb label
-  const primaryCat = categories[0] || "newsroom";
+  // const primaryCat = categories[0] || "newsroom";
 
   return (
     <>
@@ -403,37 +472,40 @@ const SlugContent = ({ post, allPosts = [] }) => {
         <div className="max-w-[90rem] mx-auto px-4 lg:px-6 2xl:px-10 py-8 md:py-12">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 text-[11px] text-gray-400 mb-4 flex-wrap">
-            <Link href="/" className="hover:text-red-700 transition-colors">Home</Link>
-            <span>/</span>
-            <Link href="/newsroom" className="hover:text-red-700 transition-colors">Newsroom</Link>
-            <span>/</span>
-            {/* <Link
-              href={`/newsroom?category=${primaryCat}`}
-              className="capitalize hover:text-red-700 transition-colors"
-            >
-              {primaryCat}
+            <Link href="/" className="hover:text-red-700 transition-colors">
+              Home
             </Link>
-            <span>/</span> */}
-            <span className="text-gray-500 truncate max-w-[200px]">{post.title}</span>
+            <span>/</span>
+            <Link
+              href="/newsroom"
+              className="hover:text-red-700 transition-colors"
+            >
+              Newsroom
+            </Link>
+            <span>/</span>
+           
+            <span className="text-gray-500 truncate max-w-[200px]">
+              {post?.title || "Untitled"}
+            </span>
           </nav>
 
           {/* Categories row */}
           <div className="flex flex-wrap gap-1.5 mb-4">
             {categories.map((cat) => (
               <Link
-                key={cat}
-                href={`/newsroom?category=${cat}`}
+                key={cat.slug}
+                href={`/newsroom?category=${cat.slug}`}
                 className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded"
                 style={{ background: "#fef2f2", color: readColor }}
               >
-                {cat}
+                {cat.title}
               </Link>
             ))}
           </div>
 
           {/* Title */}
           <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight mb-4 max-w-4xl tracking-tight">
-            {post.title}
+            {post?.title || "Untitled"}
           </h1>
 
           {/* Description */}
@@ -447,11 +519,18 @@ const SlugContent = ({ post, allPosts = [] }) => {
           <div className="flex flex-wrap items-center gap-3 text-[11px] text-gray-400">
             {post.author?.image && (
               <div className="relative w-7 h-7 rounded-full overflow-hidden ring-2 ring-white shadow">
-                <Image src={post.author.image} alt={post.author.name || ""} fill className="object-cover" />
+                <Image
+                  src={post.author.image}
+                  alt={post.author.name || ""}
+                  fill
+                  className="object-cover"
+                />
               </div>
             )}
             {post.author?.name && (
-              <span className="font-medium text-gray-600">{post.author.name}</span>
+              <span className="font-medium text-gray-600">
+                {post?.author?.name || "Anonymous"}
+              </span>
             )}
             {post.publishedAt && (
               <>
@@ -465,41 +544,64 @@ const SlugContent = ({ post, allPosts = [] }) => {
                 <span>{post.readTime} min read</span>
               </>
             )}
+
+            {post.views !== undefined && (
+              <>
+                <span className="text-gray-300">·</span>
+                <span className="flex items-center gap-1">
+                  <Eye className="w-3 h-3 text-gray-400" />
+                  {views || 0}
+                </span>
+              </>
+            )}
+
             <span className="text-gray-300">·</span>
-            <ShareBar title={post.title} url="" />
+            <ShareBar title={post?.title || "Untitled"} url="" />
           </div>
         </div>
       </div>
 
       {/* ── Featured Image ── */}
       {post.featuredImage && (
-        <div className="w-full bg-gray-900" style={{ maxHeight: "520px", overflow: "hidden" }}>
+        <div
+          className="w-full bg-gray-900"
+          style={{ maxHeight: "520px", overflow: "hidden" }}
+        >
           <div className=" mx-auto">
-            <div className="w-full bg-gray-900" style={{ maxHeight: "520px", overflow: "hidden" }}>
-        <div className="max-w-[90rem] mx-auto">
-         {post.featuredVideo && !post.featuredImage ? (
-      <div className="relative w-full" style={{ paddingTop: "min(42%, 520px)" }}>
-        <video
-          src={post.featuredVideo}
-          controls
-          preload="metadata"
-          className="w-full h-full object-cover rounded-lg"
-        />
-      </div>
-    ) : post.featuredImage ? (
-      <div className="relative w-full" style={{ paddingTop: "min(42%, 520px)" }}>
-        <Image
-          src={post.featuredImage}
-          alt={post.title}
-          fill
-          unoptimized
-          className="object-cover"
-          priority
-        />
-      </div>
-    ) : null}
-  </div>
-</div>
+            <div
+              className="w-full bg-gray-900"
+              style={{ maxHeight: "520px", overflow: "hidden" }}
+            >
+              <div className="mx-auto">
+                {post.featuredImage ? (
+                  <div
+                    className="relative w-full"
+                    style={{ paddingTop: "min(42%, 520px)" }}
+                  >
+                    <Image
+                      src={post.featuredImage}
+                      alt={post?.title || ""}
+                      fill
+                      unoptimized
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                ) : post.featuredVideo ? (
+                  <div
+                    className="relative w-full"
+                    style={{ paddingTop: "min(42%, 520px)" }}
+                  >
+                    <video
+                      src={post.featuredVideo}
+                      controls
+                      preload="metadata"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
+                ) : null}
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -507,10 +609,11 @@ const SlugContent = ({ post, allPosts = [] }) => {
       {/* ── Body + Sidebar ── */}
       <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start">
-
           {/* ── Article ── */}
           <article className="flex-1 min-w-0">
-            <div id="article-body" className="prose prose-sm max-w-none
+            <div
+              id="article-body"
+              className="prose prose-sm max-w-none
               prose-headings:font-extrabold prose-headings:text-gray-900 prose-headings:tracking-tight
               prose-h2:text-lg prose-h2:mt-8 prose-h2:mb-3
               prose-h3:text-base prose-h3:mt-6 prose-h3:mb-2
@@ -520,7 +623,8 @@ const SlugContent = ({ post, allPosts = [] }) => {
               prose-li:text-gray-600 prose-li:text-sm
               prose-img:rounded-xl prose-img:shadow-md
               prose-blockquote:border-l-red-700 prose-blockquote:text-gray-500 prose-blockquote:italic
-            ">
+            "
+            >
               <BlogContent post={post} />
             </div>
 
@@ -532,7 +636,10 @@ const SlugContent = ({ post, allPosts = [] }) => {
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {post.gallery.map((img, i) => (
-                    <div key={i} className="relative aspect-video rounded-lg overflow-hidden bg-gray-100 group">
+                    <div
+                      key={i}
+                      className="relative aspect-video rounded-lg overflow-hidden bg-gray-100 group"
+                    >
                       <Image
                         src={img}
                         alt={`Gallery ${i + 1}`}
@@ -554,18 +661,25 @@ const SlugContent = ({ post, allPosts = [] }) => {
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {tags.map((tag) => (
-                      <TagBadge key={tag} tag={tag} />
+                      <TagBadge key={tag.slug} tag={tag.title} />
                     ))}
                   </div>
                 </div>
               )}
               <div className="flex items-center justify-between flex-wrap gap-3">
-                <ShareBar title={post.title} url="" />
+                <ShareBar title={post?.title || "Untitled"} url="" />
                 <Link
                   href="/newsroom"
                   className="text-xs text-gray-400 hover:text-red-700 transition-colors flex items-center gap-1"
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <path d="M19 12H5M12 19l-7-7 7-7" />
                   </svg>
                   Back to Newsroom
@@ -590,7 +704,7 @@ const SlugContent = ({ post, allPosts = [] }) => {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
               {allPosts
-                .filter((p) => p._id !== post._id)
+                ?.filter((p) => p && p._id !== post._id)
                 .slice(0, 4)
                 .map((p) => (
                   <Link
@@ -598,11 +712,11 @@ const SlugContent = ({ post, allPosts = [] }) => {
                     href={`/newsroom/${p.slug?.current || p.slug}`}
                     className="group bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                   >
-                    {p.featuredImage && (
+                    {p?.featuredImage && (
                       <div className="relative w-full aspect-video bg-gray-100 overflow-hidden">
                         <Image
                           src={p.featuredImage}
-                          alt={p.title}
+                          alt={p.title || "Untitled"}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
@@ -614,13 +728,15 @@ const SlugContent = ({ post, allPosts = [] }) => {
                           className="text-[9px] font-bold uppercase tracking-widest"
                           style={{ color: readColor }}
                         >
-                          {p.category[0]}
+                          {p.category[0].title}
                         </span>
                       )}
                       <p className="text-xs font-semibold text-gray-800 mt-1 leading-snug line-clamp-2 group-hover:text-red-700 transition-colors">
-                        {p.title}
+                        {p?.title || "Untitled"}
                       </p>
-                      <p className="text-[10px] text-gray-400 mt-2">{fmt(p.publishedAt)}</p>
+                      <p className="text-[10px] text-gray-400 mt-2">
+                        {fmt(p.publishedAt)}
+                      </p>
                     </div>
                   </Link>
                 ))}
@@ -629,7 +745,7 @@ const SlugContent = ({ post, allPosts = [] }) => {
         </div>
       )}
 
-      <Footer/>
+      <Footer />
     </>
   );
 };
