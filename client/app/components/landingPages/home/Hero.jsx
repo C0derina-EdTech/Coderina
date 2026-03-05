@@ -13,7 +13,7 @@ const SLIDES = [
     poster: null,
     eyebrow: "Innovation & Education",
     headline: "Empowering Africa's Next Generation of Innovators",
-    body: "Coderina drives STEM education, robotics, and tech entrepreneurship across Africa — building skills and communities that shape tomorrow.",
+    body: "Coderina drives STEM education, robotics, and tech entrepreneurship across Africa, building skills and communities that shape tomorrow.",
     primaryCta: { label: "Explore Our Programs", href: "/programs" },
     secondaryCta: { label: "Read our latest report", href: "/newsroom" },
     duration: 8000,
@@ -37,7 +37,7 @@ const SLIDES = [
     poster: null,
     eyebrow: "2026 STEM Bootcamp",
     headline: "Launching Across 6 Countries in Africa",
-    body: "Coderina's 2025 STEM Bootcamp equips thousands of young Africans with cutting-edge digital skills from AI and coding to engineering design.",
+    body: "Coderina's 2026 STEM Bootcamp equips thousands of young Africans with cutting-edge digital skills from AI and coding to engineering design.",
     primaryCta: { label: "Register Now", href: "#bootcamp" },
     secondaryCta: { label: "Learn more", href: "#about-bootcamp" },
     duration: 8000,
@@ -85,7 +85,7 @@ const SLIDES = [
     poster: null,
     eyebrow: "FIRST LEGO League",
     headline: "Competing on the World Stage",
-    body: "Coderina's FLL teams represent Nigeria globally — solving real-world problems through robotics, research, and teamwork on an international platform.",
+    body: "Coderina's FLL teams represent Nigeria globally by solving real-world problems through robotics, research, and teamwork on an international platform.",
     primaryCta: { label: "See Our Teams", href: "#fll" },
     secondaryCta: { label: "Sponsor a team", href: "#sponsor" },
     duration: 8000,
@@ -221,7 +221,7 @@ export default function Hero() {
             {/* Headline */}
             <h1
               key={`headline-${current}`}
-              className="slide-enter text-5xl lg:text-5xl 2xl:text-7xl font-normal text-white leading-[1.06] mb-5 sm:mb-6"
+              className="slide-enter text-4xl lg:text-5xl 2xl:text-7xl font-normal text-white leading-[1.06] mb-5 sm:mb-6"
               style={{
                 fontFamily: "'Bebas Neue', sans-serif",
                 letterSpacing: "0.015em",
@@ -234,7 +234,7 @@ export default function Hero() {
             {/* Body */}
             <p
               key={`body-${current}`}
-              className="slide-enter text-base sm:text-sm text-white/70 max-w-md xl:max-w-lg leading-relaxed mb-8 sm:mb-10 font-light"
+              className="slide-enter text-sm sm:text-base text-white/70 max-w-md xl:max-w-lg leading-relaxed mb-8 sm:mb-10 font-light"
               style={{ animationDelay: "160ms" }}
             >
               {slide.body}

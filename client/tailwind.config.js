@@ -7,24 +7,26 @@ const config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontFamily: {
-      Roboto: ["Roboto", "sans-serif"],
-      mulish: ["Mulish", "sans-serif"],
-      Poppins: ["Poppins", "sans-serif"],
-      Montserrat: ["Montserrat", "sans-serif"],
-      Inter: ["Inter", "sans-serif"],
-      Geist: ["Geist Mono", "monospace"],
-      Playfair: ["Playfair Display", "serif"],
-      SpaceGrotesk: ["Space Grotesk", "sans-serif"],
-      Lato: ["Lato", "sans-serif"],
-      sans: ['DM Sans', 'sans-serif'],
-    },
     extend: {
+      fontFamily: {
+        fontFamily: {
+          roboto: ["Roboto", "sans-serif"],
+          mulish: ["Mulish", "sans-serif"],
+          poppins: ["Poppins", "sans-serif"],
+          montserrat: ["Montserrat", "sans-serif"],
+          inter: ["Inter", "sans-serif"],
+          geist: ["Geist Mono", "monospace"],
+          playfair: ["Playfair Display", "serif"],
+          spacegrotesk: ["Space Grotesk", "sans-serif"],
+          lato: ["Lato", "sans-serif"],
+          sans: ["DM Sans", "sans-serif"],
+          garamond: ["Cormorant Garamond", "serif"],
+        },
+      },
       screens: {
         "3xl": "1900px",
         "4xl": "2200px",
       },
-     
     },
   },
   plugins: [],
