@@ -52,59 +52,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// ─── Metadata (Next 16 compatible) ─────────────────────
-
-// export async function generateMetadata({ params }) {
-//   const { slug } = await params; // ✅ REQUIRED in Next 16
-
-//   const post = await client.fetch(slugQuery, { slug });
-
-//   if (!post) return {};
-
-//   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-//   const url = `${baseUrl}/newsroom/${slug}`;
-
-//   const imageUrl = post?.featuredImage || null;
-
-//   return {
-//     title: `${post.title} | Newsroom`,
-//     description: post.description,
-//     alternates: {
-//       canonical: url,
-//     },
-//     openGraph: {
-//       title: post.title,
-//       description: post.description,
-//       url,
-//       siteName: "Coderina",
-//       type: "article",
-//       publishedTime: post.publishedAt,
-//       images: imageUrl
-//         ? [
-//             {
-//               url: imageUrl,
-//               width: 1200,
-//               height: 630,
-//             },
-//           ]
-//         : [],
-//       videos: post?.featuredVideo
-//         ? [
-//             {
-//               url: post.featuredVideo,
-//               type: "video/mp4",
-//             },
-//           ]
-//         : [],
-//     },
-//     twitter: {
-//       card: imageUrl ? "summary_large_image" : "summary",
-//       title: post.title,
-//       description: post.description,
-//       images: imageUrl ? [imageUrl] : [],
-//     },
-//   };
-// }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

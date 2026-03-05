@@ -47,6 +47,7 @@ const PATH_THEMES = {
    "/robotics-lab": { initial: "text-gray-900", bg: "bg-white/95", logoInvert: false },
    "/contact": { initial: "text-gray-900", bg: "bg-white/95", logoInvert: false },
     "/coderina-siwes-application": { initial: "text-gray-900", bg: "bg-white/95", logoInvert: false },
+    "/checkmate": { initial: "text-gray-900", bg: "bg-white/95", logoInvert: false },
   // Default (all other paths): transparent with white text → white bg on scroll
 };
 
