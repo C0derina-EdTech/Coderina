@@ -201,9 +201,12 @@ export const metadata = {
     "education transformation Africa",
     "Coderina STEAM Nigeria",
   ],
-   verification: {
-    google: "saYZh5vgm-alXgVqnenceyEtiRr--M5kHkJXvgysJ3g",
-  },
+  verification: {
+  google: [
+    "saYZh5vgm-alXgVqnenceyEtiRr--M5kHkJXvgysJ3g",
+    "xW58rNljxpK71RozOx7FTFTh-7MbqWv_TeMeg-Bu2tl",
+  ],
+},
   authors: [{ name: "Coderina Team" }],
   creator: "Coderina Education and Technology Foundation",
   publisher: "Coderina Education and Technology Foundation",
