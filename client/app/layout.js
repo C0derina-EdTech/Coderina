@@ -201,6 +201,9 @@ export const metadata = {
     "education transformation Africa",
     "Coderina STEAM Nigeria",
   ],
+   verification: {
+    google: "saYZh5vgm-alXgVqnenceyEtiRr--M5kHkJXvgysJ3g",
+  },
   authors: [{ name: "Coderina Team" }],
   creator: "Coderina Education and Technology Foundation",
   publisher: "Coderina Education and Technology Foundation",
@@ -223,17 +226,13 @@ export const metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Coderina Education and Technology Foundation",
-    description:
-      "Empowering Africa’s next generation of innovators through robotics, coding, and digital skills education.",
-    creator: "@coderinaedu",
-    twitter: {
   card: "summary_large_image",
+  title: "Coderina Education and Technology Foundation",
+  description:
+    "Empowering Africa’s next generation of innovators through robotics, coding, and digital skills education.",
+  creator: "@coderinaedu",
   images: ["https://www.coderina.org/logo.png"],
 },
-
-  },
   icons: {
     icon: "/codelogo.png",
     shortcut: "/codelogo.png",
@@ -261,13 +260,9 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="font-sans">
-      
-          
-          {children}
-
+      <body className={inter.className}>
+        {children}
         <CookieBanner />
-
       </body>
     </html>
   );
